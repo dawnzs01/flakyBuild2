@@ -1,65 +1,150 @@
-# GAppsMod (ex GoogleDialerMod)
-The ultimate All-In-One Utility to tweak Google applications.
+### Quiltflower
 
+Quiltflower is a modern, general purpose decompiler focused on improving code quality, speed, and usability. Quiltflower is a fork of Fernflower and Forgeflower.
 
-## Downloads:
- - Please visit the [GAppsMod Release Page](https://github.com/jacopotediosi/GAppsMod/releases)
+Changes include:
+- New language features (Try with resources, switch expressions, pattern matching, and more)
+- Better control flow generation (loops, try-catch, and switch, etc.)
+- More configurability
+- Better error messages
+- Javadoc application
+- Multithreading
+- Optimization
+- Many other miscellaneous features and fixes
 
+### Use
+Want to use Quiltflower? There are a few ways! For Fabric and Architectury projects, [Loom Quiltflower](https://github.com/Juuxel/LoomQuiltflower) allows you to run genSources with Quiltflower.
+The [Quiltflower Intellij IDEA plugin](https://plugins.jetbrains.com/plugin/18032-quiltflower) replaces Fernflower in IDEA with Quiltflower, and allows you to modify its settings.
+Or, if you want to run Quiltflower from the commandline, head over to the [Releases tab](https://github.com/QuiltMC/quiltflower/releases) and grab the latest, and then follow the instructions further down the readme.
+Make sure to report any issues to the [Issues tab!](https://github.com/QuiltMC/quiltflower/issues)
 
-## How do I use it?
-- Always make sure you're using the latest beta version of the Google apps you want to tweak to take advantage of the latest features
-- Allow root access to GAppsMod, apply any mods you want, then force close and reopen Google apps a few times for them to take effect
-- There is no need to keep GAppsMod installed after applying the desired mods, because they (should) survive Google applications updates / reinstalls over time
+For support or questions, please join the [Quilt toolchain discord.](https://discord.quiltmc.org/toolchain)
 
+### Contributing
+To contribute, please check out [CONTRIBUTING.md](./CONTRIBUTING.md) and [ARCHITECTURE.md](./ARCHITECTURE.md)!
 
-## How does it work?
-In every Android device there is a database, called Phenotype.db, managed by Google Play Services, containing "flags" that affect the behavior of all installed Google applications.
+When pulling from upstream, use https://github.com/fesh0r/fernflower
 
-Some of those flags concern applications core functionalities, while others pertain to hidden or upcoming features that have not yet been released.
+#### Special Thanks
+* Jetbrains- For maintaining Fernflower
+* Forge Team- For maintaining ForgeFlower
+* CFR- For it's large suite of very useful tests
 
-What GAppsMod does is execute SQLite queries on that database and override the configuration files of Google applications to enable or modify their functionality at will.
+Fernflower's readme is preserved below:
+### About Fernflower
 
+Fernflower is the first actually working analytical decompiler for Java and 
+probably for a high-level programming language in general. Naturally it is still 
+under development, please send your bug reports and improvement suggestions to the
+[issue tracker](https://github.com/QuiltMC/quiltflower/issues).
 
-## Features:
-- Supports all arm / arm64 / x86 / x86_64 devices and all Android versions from 5.0 (Lollipop)
-- Enable / disable hidden features for all users at once when Android "multiple users" mode is in use
-- Allows users to list and change all Phenotype DB boolean flags for all installed Google applications
-- A convenient home screen brings together the suggested mods for the most used Google applications
+### Licence
 
+Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-## Currently suggested mods
-- For the **Phone** application ([link](https://play.google.com/store/apps/details?id=com.google.android.dialer)):
-    - Force **enable call recording** feature, even on unsupported devices or in unsupported countries ([ref](https://support.google.com/phoneapp/answer/9803950))
-        - Enable also **automatic call recording** ("always record") feature based on caller (otherwise only available in India)
-    - Silence the annoying "registration has started / ended" **call recording announcements** (only on Phone version <= 94.x)
-    - Force **enable call screening** and "revelio" (advanced automatic call screening) features, even on unsupported devices or in unsupported countries ([ref](https://support.google.com/phoneapp/answer/9118387))
-        - Allows users to choose the language for call screening
-- For the **Messages** application ([link](https://play.google.com/store/apps/details?id=com.google.android.apps.messaging)):
-    - Force **enable debug menu** (it can also be enabled without mods by entering `*xyzzy*` in the application's search field)
-    - Force **enable message organization** ("supersort")
-    - Force **enable marking conversations as unread**
-    - Force **enable verified SMS** settings menu ([ref](https://support.google.com/messages/answer/9326240))
-    - Force **enable always sending images by Google Photos links in SMS** ([ref](https://9to5google.com/2022/02/19/messages-google-photos/))
-    - Force **enable nudges and birthday reminders** ([ref](https://support.google.com/messages/answer/11555591))
-    - Force **enable Bard AI draft suggestions** ("magic compose") ([ref](https://9to5google.com/2023/05/05/google-messages-magic-compose-ai/))
-    - Force enable smart features: **spotlights suggestions** ([ref](https://9to5google.com/2023/02/02/google-messages-assistant/)), **stickers suggestions**, **smart compose** ([ref](https://9to5google.com/2020/06/30/gboard-android-smart-compose-google-messages/)), **smart actions (smart reply) in notifications**
+### Running from command line
 
-And much more coming soon :)
+`java -jar quiltflower.jar [-<option>=<value>]* [<source>]+ <destination>`
 
+\* means 0 or more times\
+\+ means 1 or more times
 
-## Demo
-![Demo GIF](https://github.com/jacopotediosi/GAppsMod/assets/20026524/5b13c935-4b12-46ac-b67d-0182004c8ac0)
+\<source>: file or directory with files to be decompiled. Directories are recursively scanned. Allowed file extensions are class, zip and jar.
+          Sources prefixed with -e= mean "library" files that won't be decompiled, but taken into account when analysing relationships between 
+          classes or methods. Especially renaming of identifiers (s. option 'ren') can benefit from information about external classes.          
 
+\<destination>: destination directory 
 
-## Troubleshooting:
-- After enabling / disabling any mod, please force close and reopen a few times the Google application you are trying to mod. You may also need to reboot for the changes to take effect.
-- Before to report an issue try to delete Google apps data, to reboot your phone and to try again what didn't work
+\<option>, \<value>: a command-line option with the corresponding value (see "Command-line options" below).
 
+##### Examples:
 
-## Donations
-If you really like my work, please consider a donation via [Paypal](https://paypal.me/jacopotediosi) or [Github Sponsor](https://github.com/sponsors/jacopotediosi). Even a small amount will be appreciated.
+`java -jar quiltflower.jar -hes=0 -hdc=0 c:\Temp\binary\ -e=c:\Java\rt.jar c:\Temp\source\`
 
+`java -jar quiltflower.jar -dgs=1 c:\Temp\binary\library.jar c:\Temp\binary\Boot.class c:\Temp\source\`
 
-## Credits:
-- Thanks to [Gabriele Rizzo aka shmykelsa](https://github.com/shmykelsa), [Jen94](https://github.com/jen94) and [SAAX by agentdr8](https://gitlab.com/agentdr8/saax) for their [AA-Tweaker](https://github.com/shmykelsa/AA-Tweaker) app, which inspired me making GAppsMod
-- [Libsu](https://github.com/topjohnwu/libsu) by [topjohnwu](https://github.com/topjohnwu)
+### Command-line options
+To force saving as a file or folder, `--file` and `--folder` can be provided. If not specified, Quiltflower will try to guess based on the file name.
+
+With the exception of mpm, urc, ind, thr and log, the value of 1 means the option is activated, 0 - deactivated. Default 
+value, if any, is given between parentheses.
+
+Typically, the following options will be changed by user, if any: hes, hdc, dgs, mpm, ren, urc, ind, thr, tlf, tco
+The rest of options can be left as they are: they are aimed at professional reverse engineers.
+
+- rbr (1): Hide bridge methods
+- rsy (1): Hide synthetic class members
+- din (1): Decompile inner classes
+- dc4 (1): Collapse 1.4 class references
+- das (1): Decompile assertions
+- hes (1): Hide empty super invocation
+- hdc (1): Hide empty default constructor
+- dgs (1): Decompile generic signatures
+- ner (1): Assume return not throwing exceptions
+- esm (1): Ensure synchronized ranges are complete
+- den (1): Decompile enumerations
+- rgn (1): Remove getClass() invocation, when it is part of a qualified new statement
+- lit (0): Output numeric literals "as-is"
+- bto (1): Interpret int 1 as boolean true (workaround to a compiler bug)
+- asc (0): Encode non-ASCII characters in string and character literals as Unicode escapes
+- nns (0): Allow for not set synthetic attribute (workaround to a compiler bug)
+- uto (1): Consider nameless types as java.lang.Object (workaround to a compiler architecture flaw)
+- udv (1): Reconstruct variable names from debug information, if present
+- ump (1): Use method parameter names from the MethodParameter attribute.
+- rer (1): Remove empty exception ranges
+- fdi (1): De-inline finally structures
+- inn (1): Check for IntelliJ IDEA-specific `@NotNull` annotation and remove inserted code if found
+- lac (0): Decompile lambda expressions to anonymous classes
+- bsm (0): Add mappings for source bytecode instructions to decompiled code lines
+- dcl (0): Dump line mappings to output archive zip entry extra data
+- iib (0): Ignore invalid bytecode
+- vac (0): Verify that anonymous classes can be anonymous
+- tcs (0): Simplify boolean constants in ternary operations
+- pam (1): Decompile pattern matching
+- tlf (1): loop-in-try fixes
+- tco (1): Allow ternaries to be generated in if and loop conditions
+- swe (1): Decompile Switch Expressions in modern Java
+- shs (0): Display code blocks hidden, for debugging purposes
+- ovr (1): Show override annotations for methods known to the decompiler.
+- ssp (1): Second-Pass Stack Simplficiation
+- vvm (0): Verify variable merges before remapping them
+- iec (0): Give the decompiler information about every jar on the classpath.
+- jrt (0/if running from CLI, `current`): The path to a java runtime to add to the classpath, or `1` or `current` to add the java runtime of the active JVM to the classpath.
+- ega (0): Explicit Generic Arguments
+- isl (1): Inline simple lambdas
+- log (INFO): A logging level, possible values are TRACE, INFO, WARN, ERROR
+- mpm (0): [DEPRECATED] max processing time per decompiled method, in seconds. 0 means no upper limit
+- ren (0): Rename ambiguous (resp. obfuscated) classes and class elements
+- urc (-): Full name of a user-supplied class implementing IIdentifierRenamer interface. It is used to determine which class identifiers
+           should be renamed and provides new identifier names (see "Renaming identifiers")
+- nls (0): define new line character to be used for output. 0 - '\r\n' (Windows), 1 - '\n' (Unix), default is OS-dependent
+- ind (3 spaces): Indentation string
+- pll (160): Max line length before formatting
+- ban (-): Banner to display before every root class definition
+- erm (-): Message to display when a decomplication error occurs
+- thr: maximum number of threads (default is number of threads available to the JVM)
+- jvn (0): Use jad variable naming for local variables
+- sef (0): Skip copying non-class files from the input folder or file to the output
+- win (1): Warn about inconsistent inner class attributes
+- dbe (1): Dump bytecode on errors
+- dee (1): Dump exceptions on errors
+- dec (1): Decompiler error comments
+- sfc (0): Debug comments showing the class SourceFile attribute if present
+- dcc (0): Decompile complex constant-dynamic bootstraps, that might have different or slower run-time behaviour when recompiled
+- dpr (1): Decompile preview features in latest Java versions
+
+### Renaming identifiers
+
+Some obfuscators give classes and their member elements short, meaningless and above all ambiguous names. Recompiling of such
+code leads to a great number of conflicts. Therefore it is advisable to let the decompiler rename elements in its turn, 
+ensuring uniqueness of each identifier.
+
+Option 'ren' (i.e. -ren=1) activates renaming functionality. Default renaming strategy goes as follows:
+- rename an element if its name is a reserved word or is shorter than 3 characters
+- new names are built according to a simple pattern: (class|method|field)_\<consecutive unique number>  
+You can overwrite this rules by providing your own implementation of the 4 key methods invoked by the decompiler while renaming. Simply 
+pass a class that implements org.jetbrains.java.decompiler.main.extern.IIdentifierRenamer in the option 'urc'
+(e.g. -urc=com.example.MyRenamer) to Fernflower. The class must be available on the application classpath.
+
+The meaning of each method should be clear from naming: toBeRenamed determine whether the element will be renamed, while the other three
+provide new names for classes, methods and fields respectively.  

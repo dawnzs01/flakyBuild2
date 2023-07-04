@@ -1,0 +1,59 @@
+package pkg;
+
+import ext.Direction;
+
+public class TestInlineSwitchExpression1 {
+   public void test(Direction direction) {
+      System.out.println(switch(direction) {// 7
+         case NORTH -> Direction.SOUTH;// 9
+         case SOUTH -> Direction.NORTH;// 11
+         case EAST -> Direction.WEST;// 13
+         case WEST -> Direction.EAST;// 15
+         case UP -> Direction.DOWN;// 17
+         case DOWN -> Direction.UP;// 19
+      });
+   }// 21
+}
+
+class 'pkg/TestInlineSwitchExpression1' {
+   method 'test (Lext/Direction;)V' {
+      0      6
+      1      6
+      2      6
+      6      6
+      a      6
+      b      6
+      30      7
+      31      7
+      32      7
+      36      8
+      37      8
+      38      8
+      3c      9
+      3d      9
+      3e      9
+      42      10
+      43      10
+      44      10
+      48      11
+      49      11
+      4a      11
+      4e      12
+      4f      12
+      50      12
+      5c      6
+      5d      6
+      5e      6
+      5f      14
+   }
+}
+
+Lines mapping:
+7 <-> 7
+9 <-> 8
+11 <-> 9
+13 <-> 10
+15 <-> 11
+17 <-> 12
+19 <-> 13
+21 <-> 15

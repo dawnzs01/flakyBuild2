@@ -1,0 +1,405 @@
+package pkg;
+
+import kotlin.DeprecationLevel;
+import kotlin.Metadata;
+import kotlin.NoWhenBranchMatchedException;
+
+@Metadata(
+   mv = {1, 6, 0},
+   k = 1,
+   xi = 48,
+   d1 = {"\u0000\u0014\n\u0002\u0018\u0002\n\u0002\u0010\u0010\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0002\b\b\b\u0086\u0001\u0018\u00002\b\u0012\u0004\u0012\u00020\u00000\u0001B\u0007\b\u0002¢\u0006\u0002\u0010\u0002J\u0006\u0010\u0003\u001a\u00020\u0004J\u0006\u0010\u0005\u001a\u00020\u0004J\u0006\u0010\u0006\u001a\u00020\u0004J\u0006\u0010\u0007\u001a\u00020\u0004J\u0006\u0010\b\u001a\u00020\u0004j\u0002\b\tj\u0002\b\nj\u0002\b\u000b¨\u0006\f"},
+   d2 = {"Lpkg/TestKotlinEnumWhen;", "", "(Ljava/lang/String;I)V", "testAnotherEnum", "", "testConsecutive", "testConsecutiveMixed", "testExpression", "testStatement", "FIRST", "SECOND", "THIRD", "quiltflower_testDataKotlin"}
+)
+public enum TestKotlinEnumWhen {
+   FIRST,
+   SECOND,
+   THIRD;
+
+   public final void testStatement() {
+      switch(this) {// 7
+         case FIRST:
+            System.out.println("first!");// 8
+            break;
+         case SECOND:
+            System.out.println("second!");// 9
+            break;
+         case THIRD:
+            System.out.println("third!");// 10
+      }
+   }// 12
+
+   public final void testExpression() {
+      String var10000;
+      switch(this) {// 16
+         case FIRST:
+            var10000 = "first!";// 17
+            break;
+         case SECOND:
+            var10000 = "second!";// 18
+            break;
+         case THIRD:
+            var10000 = "third!";// 19
+            break;
+         default:
+            throw new NoWhenBranchMatchedException();
+      }
+
+      String var1 = var10000;
+      System.out.println(var1);// 15
+   }// 22
+
+   public final void testAnotherEnum() {
+      DeprecationLevel level = testAnotherEnum$getLevel();// 28
+      switch(level) {
+         case WARNING:
+            System.out.println("warning " + level);// 29
+            break;
+         case ERROR:
+            System.out.println("error " + level);// 30
+            break;
+         case HIDDEN:
+            System.out.println("hidden " + level);// 31
+      }
+   }// 33
+
+   public final void testConsecutive() {
+      switch(this) {// 36
+         case FIRST:
+            System.out.println("first!");// 37
+            break;
+         case SECOND:
+            System.out.println("second!");// 38
+            break;
+         case THIRD:
+            System.out.println("third!");// 39
+      }
+
+      switch(this) {// 42
+         case FIRST:
+            System.out.println("first, again!");// 43
+            break;
+         case SECOND:
+            System.out.println("second, again!");// 44
+            break;
+         case THIRD:
+            System.out.println("third, again!");// 45
+      }
+   }// 47
+
+   public final void testConsecutiveMixed() {
+      DeprecationLevel level = testConsecutiveMixed$getLevel-0();// 53
+      switch(level) {
+         case WARNING:
+            System.out.println("warning " + level);// 54
+            break;
+         case ERROR:
+            System.out.println("error " + level);// 55
+            break;
+         case HIDDEN:
+            System.out.println("hidden " + level);// 56
+      }
+
+      switch(this) {// 59
+         case FIRST:
+            System.out.println("first!");// 60
+            break;
+         case SECOND:
+            System.out.println("second!");// 61
+            break;
+         case THIRD:
+            System.out.println("third!");// 62
+      }
+   }// 64
+
+   private static final DeprecationLevel testAnotherEnum$getLevel() {
+      throw new Exception();// 26
+   }
+
+   private static final DeprecationLevel testConsecutiveMixed$getLevel_0/* $QF was: testConsecutiveMixed$getLevel-0*/() {
+      throw new Exception();// 51
+   }
+}
+
+class 'pkg/TestKotlinEnumWhen' {
+   method 'testStatement ()V' {
+      0      19
+      8      19
+      9      19
+      24      21
+      25      21
+      26      21
+      27      21
+      28      21
+      2a      21
+      2b      21
+      2c      21
+      2d      22
+      30      24
+      31      24
+      32      24
+      33      24
+      34      24
+      36      24
+      37      24
+      38      24
+      39      25
+      3c      27
+      3d      27
+      3e      27
+      3f      27
+      40      27
+      42      27
+      45      29
+   }
+
+   method 'testExpression ()V' {
+      0      33
+      8      33
+      9      33
+      24      35
+      25      35
+      26      36
+      29      38
+      2a      38
+      2b      39
+      2e      41
+      2f      41
+      30      42
+      3a      44
+      3b      47
+      3c      48
+      3d      48
+      3e      48
+      3f      48
+      40      48
+      41      48
+      42      48
+      43      49
+   }
+
+   method 'testAnotherEnum ()V' {
+      0      52
+      1      52
+      2      52
+      3      52
+      7      53
+      b      53
+      c      53
+      28      55
+      29      55
+      2a      55
+      2b      55
+      2c      55
+      2d      55
+      2e      55
+      2f      55
+      30      55
+      32      55
+      33      55
+      34      55
+      35      56
+      38      58
+      39      58
+      3a      58
+      3b      58
+      3c      58
+      3d      58
+      3e      58
+      3f      58
+      40      58
+      42      58
+      43      58
+      44      58
+      45      59
+      48      61
+      49      61
+      4a      61
+      4b      61
+      4c      61
+      4d      61
+      4e      61
+      4f      61
+      50      61
+      52      61
+      55      63
+   }
+
+   method 'testConsecutive ()V' {
+      0      66
+      8      66
+      9      66
+      24      68
+      25      68
+      26      68
+      27      68
+      28      68
+      2a      68
+      2b      68
+      2c      68
+      2d      69
+      30      71
+      31      71
+      32      71
+      33      71
+      34      71
+      36      71
+      37      71
+      38      71
+      39      72
+      3c      74
+      3d      74
+      3e      74
+      3f      74
+      40      74
+      42      74
+      45      77
+      4d      77
+      4e      77
+      68      79
+      69      79
+      6a      79
+      6b      79
+      6c      79
+      6e      79
+      6f      79
+      70      79
+      71      80
+      74      82
+      75      82
+      76      82
+      77      82
+      78      82
+      7a      82
+      7b      82
+      7c      82
+      7d      83
+      80      85
+      81      85
+      82      85
+      83      85
+      84      85
+      86      85
+      89      87
+   }
+
+   method 'testConsecutiveMixed ()V' {
+      0      90
+      1      90
+      2      90
+      3      90
+      7      91
+      b      91
+      c      91
+      28      93
+      29      93
+      2a      93
+      2b      93
+      2c      93
+      2d      93
+      2e      93
+      2f      93
+      30      93
+      32      93
+      33      93
+      34      93
+      35      94
+      38      96
+      39      96
+      3a      96
+      3b      96
+      3c      96
+      3d      96
+      3e      96
+      3f      96
+      40      96
+      42      96
+      43      96
+      44      96
+      45      97
+      48      99
+      49      99
+      4a      99
+      4b      99
+      4c      99
+      4d      99
+      4e      99
+      4f      99
+      50      99
+      52      99
+      55      102
+      5d      102
+      5e      102
+      78      104
+      79      104
+      7a      104
+      7b      104
+      7c      104
+      7e      104
+      7f      104
+      80      104
+      81      105
+      84      107
+      85      107
+      86      107
+      87      107
+      88      107
+      8a      107
+      8b      107
+      8c      107
+      8d      108
+      90      110
+      91      110
+      92      110
+      93      110
+      94      110
+      96      110
+      99      112
+   }
+
+   method 'testAnotherEnum$getLevel ()Lkotlin/DeprecationLevel;' {
+      7      115
+   }
+
+   method 'testConsecutiveMixed$getLevel-0 ()Lkotlin/DeprecationLevel;' {
+      7      119
+   }
+}
+
+Lines mapping:
+7 <-> 20
+8 <-> 22
+9 <-> 25
+10 <-> 28
+12 <-> 30
+15 <-> 49
+16 <-> 34
+17 <-> 36
+18 <-> 39
+19 <-> 42
+22 <-> 50
+26 <-> 116
+28 <-> 53
+29 <-> 56
+30 <-> 59
+31 <-> 62
+33 <-> 64
+36 <-> 67
+37 <-> 69
+38 <-> 72
+39 <-> 75
+42 <-> 78
+43 <-> 80
+44 <-> 83
+45 <-> 86
+47 <-> 88
+51 <-> 120
+53 <-> 91
+54 <-> 94
+55 <-> 97
+56 <-> 100
+59 <-> 103
+60 <-> 105
+61 <-> 108
+62 <-> 111
+64 <-> 113

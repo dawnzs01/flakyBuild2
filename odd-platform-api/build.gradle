@@ -1,0 +1,162 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'com.google.cloud.tools.jib' version '3.2.1'
+    id 'checkstyle'
+    id "org.sonarqube" version "3.3"
+    id "org.opendatadiscovery.internal.plugin.jooq-generate"
+    id "com.google.protobuf" version "0.9.2"
+}
+
+group = 'org.opendatadiscovery'
+version = "${version != 'unspecified' ? version : '0.0.1-SNAPSHOT'}"
+
+dependencies {
+    if (bundleUI == true) {
+        implementation project(':odd-platform-ui')
+    }
+
+    implementation project(':odd-platform-api-contract')
+
+    implementation libs.bundles.spring
+    implementation libs.bundles.spring.redis.session
+    implementation libs.bundles.internal
+    implementation libs.bundles.apache.commons
+    implementation libs.bundles.r2dbc
+    implementation libs.bundles.opentelemetry
+    implementation libs.bundles.flyway
+    implementation libs.micrometer.registry.prometheus
+    implementation libs.jooq
+    implementation libs.jakarta.validation
+    implementation libs.jackson.datatype.jsr310
+    implementation libs.jackson.databind.nullable
+    implementation libs.jackson.annotations
+    implementation libs.jackson.yaml
+    implementation libs.jetbrains.annotations
+    implementation libs.mapstruct
+    implementation libs.slack.api
+    implementation libs.slack.api.model
+    implementation libs.uuid.generator
+    implementation libs.shedlock
+    implementation libs.shedlock.jdbc.lock.provider
+    implementation libs.json.schema.validator
+    implementation libs.caffeine
+    implementation libs.protobuf.java
+    implementation libs.snappy.java
+    implementation libs.minio
+    implementation libs.okhttp
+
+    compileOnly libs.lombok
+
+    annotationProcessor libs.lombok
+    annotationProcessor libs.mapstruct.processor
+
+    testCompileOnly libs.lombok
+    testAnnotationProcessor libs.lombok
+
+    testImplementation libs.bundles.testcontainers
+    testImplementation(libs.spring.boot.test) {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation libs.reactor.test
+    testImplementation libs.easy.random.core
+
+    jooqGenerationContainer libs.testcontainers.postgresql
+}
+
+springBoot {
+    buildInfo()
+}
+
+jooqGenerate {
+    basePackageName = "org.opendatadiscovery.oddplatform.model"
+    includeMatches = ".*"
+    excludes = "(FLYWAY_SCHEMA_HISTORY | shedlock)"
+    inputSchema = "public"
+    generate {
+        daos = false
+        pojos = true
+        fluentSetters = true
+        validationAnnotations = true
+        pojosEqualsAndHashCode = true
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.21.12"
+    }
+}
+
+jibDockerBuild.dependsOn test
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+            srcDirs 'build/generated-jooq/src/main/java'
+        }
+    }
+}
+
+jib {
+    from {
+        image = 'openjdk:17.0.2'
+        platforms {
+            if (amdBuild == true) {
+                platform {
+                    architecture = 'amd64'
+                    os = 'linux'
+                }
+            }
+            if (armBuild == true) {
+                platform {
+                    architecture = 'arm64'
+                    os = 'linux'
+                }
+            }
+        }
+    }
+    to {
+        image = 'opendatadiscovery/odd-platform'
+        tags = ['latest', project.version]
+    }
+    container {
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+        appRoot = '/app'
+        ports = ['8080']
+        workingDirectory = '/app'
+    }
+    allowInsecureRegistries = false
+}
+
+checkstyle {
+    configFile = project(':').file('config/checkstyle/checkstyle.xml')
+    configProperties = ["suppressionFile": project(':').file('config/checkstyle/suppressions.xml')]
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.setRequired(false)
+        html.setRequired(false)
+    }
+}
+
+compileJava.dependsOn jooqDockerGenerate
+
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "odd-platform_backend"
+        property "sonar.organization", "opendatadiscovery"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}

@@ -1,30 +1,20 @@
 plugins {
-    id 'java-gradle-plugin' // so we can assign and ID to our plugin
-}
-
-dependencies {
-    implementation 'org.ow2.asm:asm:8.0.1'
-    implementation 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
-    implementation 'org.javamodularity:moduleplugin:1.8.12'
+    id 'groovy-gradle-plugin'
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
+}
+
+dependencies {
+    implementation libs.bundles.jooq.codegen
 }
 
 gradlePlugin {
     plugins {
-        // here we register our plugin with an ID
-        register("extra-java-module-info") {
-            id = "extra-java-module-info"
-            implementationClass = "org.gradle.sample.transform.javamodules.ExtraModuleInfoPlugin"
-        }
-        register("org-openjfx-javafxplugin") {
-            id = "org-openjfx-javafxplugin"
-            implementationClass = "org.openjfx.gradle.JavaFXPlugin"
+        GeneratorPlugin {
+            id = "org.opendatadiscovery.internal.plugin.jooq-generate"
+            implementationClass = "org.opendatadiscovery.internal.plugin.JooqGeneratePlugin"
         }
     }
 }

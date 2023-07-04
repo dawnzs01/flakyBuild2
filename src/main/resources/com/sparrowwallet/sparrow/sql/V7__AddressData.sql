@@ -1,1 +1,0 @@
-alter table walletNode add column addressData varbinary(32) after parent;

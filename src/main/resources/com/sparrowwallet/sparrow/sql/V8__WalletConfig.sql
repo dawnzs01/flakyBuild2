@@ -1,1 +1,0 @@
-create table walletConfig (id identity not null, iconData varbinary(4096), userIcon boolean, usePayNym boolean, wallet bigint not null);

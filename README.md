@@ -1,107 +1,250 @@
-# Sparrow Bitcoin Wallet
 
-Sparrow is a modern desktop Bitcoin wallet application supporting most hardware wallets and built on common standards such as PSBT, with an emphasis on transparency and usability.
+<div align="center">
+<img src="./images/open-data-discovery-platform-odd-logo.png" width="600px" alt="open-data-discovery-logo"/>&nbsp;
+</div>
 
-More information (and release binaries) can be found at https://sparrowwallet.com. Release binaries are also available directly from [GitHub](https://github.com/sparrowwallet/sparrow/releases).
+<h1 align="center" style="border-bottom: none">
+    Next-Gen Data Discovery and Data Observability Platform <br>
+</h1>
 
-![Sparrow Wallet](https://sparrowwallet.com/assets/images/control-your-sends.png)
+<div align="center">
+    <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache2-green.svg?style=for-the-badge" alt="Apache2"></a>
+    <img src="https://img.shields.io/maintenance/yes/2023?style=for-the-badge" alt="Maintenance">
+    <a href="https://github.com/opendatadiscovery/odd-platform/graphs/contributors"><img src="https://img.shields.io/github/contributors/opendatadiscovery/odd-platform?style=for-the-badge" alt="GitHub contributors"></a>
+    <a href="https://github.com/opendatadiscovery/odd-platform/contribute"><img src="https://img.shields.io/github/issues/opendatadiscovery/odd-platform/good%20first%20issue?style=for-the-badge" alt="GitHub issues by-label"></a>        
+</div>
 
-## Building
+<p align="center">
+    <a href="https://opendatadiscovery.org/"><b>Website</b></a> •
+    <a href="https://www.linkedin.com/company/opendatadiscovery/"><b>LinkedIn</b></a> •
+    <a href="https://go.opendatadiscovery.org/slack"><b>Slack</b></a> •
+    <a href="https://docs.opendatadiscovery.org/"><b>Documentation</b></a> •
+    <a href="https://blog.opendatadiscovery.org/"><b>Blog</b></a> •
+    <a href="https://demo.oddp.io/"><b>Demo</b></a>
+</p>
 
-To clone this project, use
+<p align="center"><img src="https://opendatadiscovery.org/overview.gif" alt="Next-Gen Data Discovery and Data Observability Platform" /></p>
 
-`git clone --recursive git@github.com:sparrowwallet/sparrow.git`
+## Demo
 
-or for those without SSH credentials:
+Play with our [demo app](https://demo.oddp.io)!
 
-`git clone --recursive https://github.com/sparrowwallet/sparrow.git`
+## Introduction
 
-In order to build, Sparrow requires Java 18 or higher to be installed. 
-The release binaries are built with [Eclipse Temurin 18.0.1+10](https://github.com/adoptium/temurin18-binaries/releases/tag/jdk-18.0.1%2B10).
+ODD is an open-source data discovery and observability tool for data teams that helps to efficiently democratise data, power collaboration and reduce time on data discovery through modern user-friendly environment. 
 
-Other packages may also be necessary to build depending on the platform. On Debian/Ubuntu systems:
+### Key wins
 
-`sudo apt install -y rpm fakeroot binutils`
+* Shorten data discovery phase
+* Have transparency on how and by whom the data is used
+* Foster data culture by continuous compliance and data quality monitoring
+* Accelerate data insights
+* Know the sources of your dashboards and ad hoc reports
+* Deprecate outdated objects responsibly by assessing and mitigating the risks
 
 
-The Sparrow binaries can be built from source using
+* :point_right: ODD Platform is a reference implementation of **[Open Data Discovery Spec](https://github.com/opendatadiscovery/opendatadiscovery-specification)**.
 
-`./gradlew jpackage`
+## Features
 
-Note that to build the Windows installer, you will need to install [WiX](https://github.com/wixtoolset/wix3/releases).
+### Data Discovery and Observability
 
-When updating to the latest HEAD
+* Accumulate scattered data insights in Federated Data catalogue
+* Gain observability through E2E Data objects Lineage
+* Benefit from cutting-edge E2E microservices Lineage feature in tracking your data flow through the whole data landscape
+* Be warned and alerted by Pipeline Monitoring tools
+* Store your metadata 
+* Use ODD-native modern lightweight UI
 
-`git pull --recurse-submodules`
 
-The release binaries are reproducible from v1.5.0 onwards (pre codesigning and installer packaging). More detailed [instructions on reproducing the binaries](docs/reproducible.md) are provided.
+### ML First citizen
 
-> Video documentation of your build process uploaded to [bitcoinbinary.org](https://bitcoinbinary.org/) is appreciated. Alternatively check the site if you wish to see if someone else already verified the provided binaries. 
+* Save results of your ML Experiments by automatically logging its parameters  
 
-## Running
 
-If you prefer to run Sparrow directly from source, it can be launched from within the project directory with
+### Data Security & Compliance
 
-`./sparrow`
+* Manage Tags and Labels to prevent any abuse of the data
+* Refer to Tags and Labels to stay compliant with data security standards
+* Have full transparency on how and by whom the data is used
 
-Java 18 or higher must be installed. 
 
-## Configuration
+### Data Quality 
 
-Sparrow has a number of command line options, for example to change its home folder or use testnet:
+* Simplify DQ processes by using ODD and Great Expectations compatibility 
+* Integrate ODD with any custom DQ framework
 
-```
-./sparrow -h
 
-Usage: sparrow [options]
-  Options:
-    --dir, -d
-      Path to Sparrow home folder
-    --help, -h
-      Show usage
-    --level, -l
-      Set log level
-      Possible Values: [ERROR, WARN, INFO, DEBUG, TRACE]      
-    --network, -n
-      Network to use
-      Possible Values: [mainnet, testnet, regtest, signet]
-```
+## Getting Started 
 
-As a fallback, the network (mainnet, testnet, regtest or signet) can also be set using an environment variable `SPARROW_NETWORK`. For example:
+### Running Locally with Docker Compose
 
-`export SPARROW_NETWORK=testnet`
+**```docker-compose -f docker/demo.yaml up -d odd-platform-enricher```** 
 
-A final fallback which can be useful when running the Sparrow binary is to create a file called ``network-testnet`` in the Sparrow home folder (see below) to configure the testnet network.
+* :point_right: **[QUICKSTART](./docker/README.md)** 
 
-Note that if you are connecting to an Electrum server when using testnet, that server will need to be running on testnet configuration as well.
+### Deploying to Kubernetes with Helm Charts
 
-When not explicitly configured using the command line argument above, Sparrow stores its mainnet config file, log file and wallets in a home folder location appropriate to the operating system:
+* :point_right: **[QUICKSTART](https://github.com/opendatadiscovery/charts/blob/master/QUICKSTART.md)**
 
-| Platform | Location |
-|----------| -------- |
-| OSX      | ~/.sparrow |
-| Linux    | ~/.sparrow |
-| Windows  | %APPDATA%/Sparrow |
+### Example configurations
 
-Testnet, regtest and signet configurations (along with their wallets) are stored in subfolders to allow easy switching between networks.
+There are various example configurations (via docker-compose) within **[docker/examples directory](https://github.com/opendatadiscovery/odd-platform/tree/main/docker/examples)**.
 
-## Reporting Issues
+## Contributing
 
-Please use the [Issues](https://github.com/sparrowwallet/sparrow/issues) tab above to report an issue. If possible, look in the sparrow.log file in the configuration directory for information helpful in debugging. 
+Contributing to ODD Platform is very welcome. For basic contributions, all you need is being comfortable with GitHub and Git. The best ways to contribute are: 
+* Work on new adapters 
+* Work on documentation
 
+To ensure equal and positive communication, we adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md). Before starting any interactions with this repository, please read it and make sure to follow. 
+
+Please before contributing check out our [Contributing Guide](./CONTRIBUTING.md) and issues labeled "good first issue": 
+
+[![GitHub issues by-label](https://img.shields.io/github/issues/opendatadiscovery/odd-platform/good%20first%20issue?style=for-the-badge)](https://github.com/opendatadiscovery/odd-platform/contribute)
+
+<br>
+
+## Integrations
+OpenDataDiscovery Platform offers comprehensive data source support to meet your needs.
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="3">Existing integrations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#odd-adapter">Proxy Adapter</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-airflow-adapter">Airflow</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#druid">Apache Druid</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#cassandra">Cassandra</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#clickhouse">Clickhouse</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#elasticsearch">Elasticsearch </a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#hive">Hive</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#kafka">Kafka</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#feast">Feast </a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mssql">MSSQL</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mysql">MySQL</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#odbc">Microsoft ODBC</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mongodb">MongoDB </a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#neo4j">Neo4j </a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mariadb">MariaDB</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#oracle">Oracle</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#postgresql">PostgreSQL</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#redshift">Redshift</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#snowflake">Snowflake</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#vertica">Vertica</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#tarantool">Tarantool</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#athena">Athena</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#dynamodb">DynamoDB</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#glue">Glue</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#kinesis">Kinesis</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#quicksight">Quicksight </a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#s3">S3</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#sagemaker">SageMaker</a> </td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#sagemaker-featurestore">SageMaker Featurestore</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#sqs">SQS</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-aws#s3_delta">Delta lake S3</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#tableau">Tableau </a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#cubejs">Cube</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#superset">SuperSet</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-azure#powerbi">PowerBi</a>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#trino">Trino</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#presto">Presto</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#dbt">DBT</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#redash">Redash</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-spark-adapter">Spark</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mlflow">MLflow</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#kubeflow">Kubeflow</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#databricks">Databricks Unity Catalog</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-great-expectations">Great Expectations</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#sqlite">SQLite</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#couchbase">Couchbase</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#cockroachdb">Cockroachdb</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#fivetran">Fivetran</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#airbyte">Airbyte</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#metabase">Metabase</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#mode">Mode</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector-gcp#biquery">BigQuery</a></td>
+            <td><a href="https://github.com/opendatadiscovery/odd-collector#singlestore">Singlestore</a></td>
+        </tr>
+    </tbody>
+</table>
+
+## ODD Data Model
+
+ODD operates the following high-level types of entities:
+
+<ol>
+<li><b>Datasets </b>(collections of data: tables, topics, files, feature groups)</li>
+<li><b>Transformers </b>(transformers of data: ETL or ML training jobs, experiments)</li> 
+<li><b>Data Consumers </b>(data consumers: ML models or BI dashboards)</li> 
+<li><b>Data Quality Tests </b>(data quality tests for datasets)</li> 
+<li><b>Data Inputs </b>(sources of data)</li>
+<li><b>Transformer Runs </b>(executions of ETL or ML training jobs)</li>
+<li><b>Quality Test Runs </b>executions of data quality tests</li> 
+</ol>
+
+For more information, please check **[specification.md](https://github.com/opendatadiscovery/opendatadiscovery-specification/blob/main/specification/specification.md)**.
+
+
+## Community Support
+
+Join our community if you need help, want to chat or have any other questions for us:
+
+- [GitHub](https://github.com/opendatadiscovery/odd-platform/discussions) - Discussion forums and issues
+- [Slack](https://go.opendatadiscovery.org/slack) - Join the conversation! Get all the latest updates and chat to the devs
+
+
+## Contacts
+
+If you have any questions or ideas, please don't hesitate to drop a line to any of us. 
+
+
+| Team Member      | LinkedIn                                                           | GitHub                                              |
+| ---------------- | ------------------------------------------------------------------ | --------------------------------------------------- |
+| German Osin      | [LinkedIn](https://www.linkedin.com/in/german-osin-47a9339/)       | [germanosin](https://github.com/germanosin)         |
+| Nikita Dementev  | [LinkedIn](https://www.linkedin.com/in/nikita-dementev/)           | [DementevNikita](https://github.com/DementevNikita) |
+| Damir Abdullin   | [LinkedIn](https://www.linkedin.com/in/dabdullin/)                 | [damirabdul](https://github.com/damirabdul)         |
+| Alexey Kozyurov  | [LinkedIn](https://www.linkedin.com/in/aleksei-koziurov/)          | [Leshe4ka](https://github.com/Leshe4ka)             |
+| Pavel Makarichev | [LinkedIn](https://www.linkedin.com/in/pavel-makarichev-8a8730a4/) | [vixtir](https://github.com/vixtir)                 |
+| Roman Zabaluev   | [LinkedIn](https://www.linkedin.com/in/haarolean/)                 | [Haarolean](https://github.com/haarolean)           |
 ## License
 
-Sparrow is licensed under the Apache 2 software licence.
-
-## GPG Key
-
-The Sparrow release binaries here and on [sparrowwallet.com](https://sparrowwallet.com/download/) are signed using [craigraw's GPG key](https://keybase.io/craigraw):  
-Fingerprint: D4D0D3202FC06849A257B38DE94618334C674B40  
-64-bit: E946 1833 4C67 4B40
-
-## Credit
-
-![Yourkit](https://www.yourkit.com/images/yklogo.png)
-
-Sparrow Wallet uses the [Yourkit Java Profiler](https://www.yourkit.com/java/profiler/) to profile and improve performance. 
-YourKit supports open source projects with useful tools for monitoring and profiling Java and .NET applications.
+ODD Platform uses the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.txt).

@@ -1,1 +1,0 @@
-UPDATE test_steps SET condition_if = '["SUCCESS"]' WHERE JSON_UNQUOTE(`condition_if`)='["Passed"]';

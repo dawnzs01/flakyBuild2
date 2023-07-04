@@ -1,1 +1,0 @@
-ALTER TABLE test_steps ADD COLUMN max_iterations BIGINT(3) default null;

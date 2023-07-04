@@ -1,1 +1,0 @@
-ALTER TABLE `uploads` ADD COLUMN supported_device VARCHAR(256) DEFAULT NULL;

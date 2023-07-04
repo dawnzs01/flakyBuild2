@@ -1,1 +1,0 @@
-UPDATE `test_steps` SET test_data_type = 'global' WHERE test_data_type = 'environment';

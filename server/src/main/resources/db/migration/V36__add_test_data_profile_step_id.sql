@@ -1,1 +1,0 @@
-alter table test_steps add column test_data_profile_step_id bigint(20);

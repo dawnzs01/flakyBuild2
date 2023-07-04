@@ -1,292 +1,517 @@
-# OpenHuFu: An Open-Sourced Data Federation System
 
-[![codecov](https://codecov.io/gh/BUAA-BDA/OpenHuFu/branch/main/graph/badge.svg?token=QJBEGGNL2P)](https://codecov.io/gh/BUAA-BDA/OpenHuFu)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Total Lines](https://tokei.rs/b1/github/BUAA-BDA/OpenHuFu?category=lines)](https://github.com/BUAA-BDA/OpenHuFu)
+# Data Faker
 
-Data isolation has become an obstacle to scale up query processing over big data, since sharing raw data among data owners is often prohibitive due to security concerns. A promising solution is to perform secure queries and analytics over a federation of multiple data owners leveraging techiniques like secure multi-party computation (SMC) and differential privacy, as evidenced by recent work on data federation and federated learning. 
+[![Maven Status](https://maven-badges.herokuapp.com/maven-central/net.datafaker/datafaker/badge.svg?style=flat)](http://mvnrepository.com/artifact/net.datafaker/datafaker)
+[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![codecov](https://codecov.io/gh/datafaker-net/datafaker/branch/main/graph/badge.svg?token=FJ6EXMUTFD)](https://codecov.io/gh/datafaker-net/datafaker)
+[![Qodana](https://github.com/datafaker-net/datafaker/actions/workflows/qodana.yml/badge.svg)](https://qodana.cloud/projects/AbQnV)
 
-OpenHuFu is an open-sourced system for efficient and secure query processing on a data federation.
-It provides flexibility for researchers to quickly implement their algorithms for processing federated queries with SMC techniques, such as secret sharing, garbled circuit and oblivious transfer.
-With its help, we can quickly conduct the experimental evaluation and obtain the performance of the designed algorithms over benchmark datasets.
+This library is a modern fork of [java-faker](https://github.com/DiUS/java-faker) with up to date libraries and several newly added Fake Generators. 
 
-## Compile OpenHuFu from Source Code
+Datafaker 2.x has Java 17 as the minimum requirement. 
 
-### Prerequisites:
+*If Java 17 is not an option for you, you can choose to use Datafaker 1.x. Datafaker 1.x is built on Java 8, but this version is no longer maintained. We recommend all users to upgrade to Datafaker 2.x.*
 
-- Linux or MacOS
-- Java 11
-- Maven (version at least 3.5.2)
-- C++ (generate TPC-H data)
-- Python3 (generate spatial data)
-- Git & Git LFS (Git Large File Storage)
+This library generates fake data, similar to other fake data generators, such as:
 
-### Build OpenHuFu
+* Ruby's [faker](https://github.com/stympy/faker) gem
+* Perl's [Data::Faker](https://metacpan.org/pod/Data::Faker) library
+* Python [faker](https://faker.readthedocs.io/en/master/) package
+* PHP [faker](https://fakerphp.github.io/) library
+* Javascript [Faker.js](https://github.com/faker-js/faker) library
 
-Run the following commands:
+It's useful when you're developing a new project and need some pretty data for showcase.
 
-1. Clone OpenHuFu repository:
+## Usage
 
-``` shell
-git clone https://github.com/BUAA-BDA/OpenHuFu.git
+In the pom.xml, add the following fragment to the `dependencies` section:
+
+```xml
+<dependency>
+    <groupId>net.datafaker</groupId>
+    <artifactId>datafaker</artifactId>
+    <version>2.0.1</version>
+</dependency>
 ```
 
-2. Download big files from Git LFS(Large File Storage)
+For Gradle users, add the following to your build.gradle file.
 
-``` shell
-cd OpenHuFu
-git lfs install --skip-smudge
-git lfs pull 
+```groovy
+dependencies {
+    implementation 'net.datafaker:datafaker:2.0.1'
+}
+
 ```
 
-3. Build:
+You can also use the snapshot version (`2.1.0-SNAPSHOT`), which automatically gets published
+after every push to the main branch of this repository. Binary repository URL for snapshots download is
+https://s01.oss.sonatype.org/content/repositories/snapshots/.
 
-``` shell
-cd OpenHuFu
-bash scripts/build/package.sh
+### Get started
+
+In your Java code:
+
+```java
+Faker faker = new Faker();
+
+String name = faker.name().fullName(); // Miss Samanta Schmidt
+String firstName = faker.name().firstName(); // Emory
+String lastName = faker.name().lastName(); // Barton
+
+String streetAddress = faker.address().streetAddress(); // 60018 Sawayn Brooks Suite 449
 ```
 
-OpenHuFu is now installed in `release`
+Or in your Kotlin code:
 
-### Notes
+```kotlin
+val faker = Faker()
 
-If you use MacsOS, you need to add this to `settings.xml`(maven settings file):
+val name = faker.name().fullName() // Miss Samanta Schmidt
+val firstName = faker.name().firstName() // Emory
+val lastName = faker.name().lastName() // Barton
 
-``` xml
-<profiles>
-    <profile>
-      <id>macos</id>
-      <properties>
-        <os.detected.classifier>osx-x86_64</os.detected.classifier>
-      </properties>
-    </profile>
-</profiles>
-<activeProfiles>
-    <activeProfile>macos</activeProfile>
-</activeProfiles>
+val streetAddress = faker.address().streetAddress() // 60018 Sawayn Brooks Suite 449
 ```
 
-## Data Generation
+JShell
+```
+# from project root folder
+jshell --class-path $(ls -d target/*.jar | tr '\n' ':')
+|  Welcome to JShell -- Version 17.0.4
+|  For an introduction type: /help intro
 
-### Relational data: [TCP-H](https://www.tpc.org/tpch/)
+jshell> import net.datafaker.Faker;
 
-#### How to use it:
+jshell> var faker = new Faker();
+faker ==> net.datafaker.Faker@c4437c4
 
-```shell
-bash scripts/test/extract_tpc_h.sh
+jshell> faker.address().city();
+$3 ==> "Brittneymouth"
 
-cd dataset/TPC-H\ V3.0.1/dbgen
-cp makefile.suite makefile
-# If you use MacOS, you need to replace '#include <malloc.h>' with #include <sys/malloc.h> in dbgen
-make
-
-# Go to the root folder
-cd ../../..
-# x is the number of database，y is the volume of each database(MB)
-bash scripts/test/generateData.sh x y
+jshell> faker.name().fullName();
+$5 ==> "Vernie Schmidt"
 ```
 
-### Spatial data
+### Expressions
 
-Spatial sample data: `dataset/newyork-taxi-sample.data`:
+```java
+Faker faker = new Faker();
+faker.expression("#{letterify 'test????test'}"); // testqwastest
+faker.expression("#{numerify '#test#'}"); // 3test5
+faker.expression("#{templatify 'test','t','q','@'}"); // @esq
+faker.expression("#{examplify 'test'}"); // ghjk
+faker.expression("#{regexify '[a-z]{4,10}'}"); // wbevoa
+faker.expression("#{options.option '23','2','5','$','%','*'}"); // *
+faker.expression("#{date.birthday 'yy DDD hh:mm:ss'}"); // 61 327 08:11:45
+faker.expression("#{csv '1','name_column','#{Name.first_name}','last_name_column','#{Name.last_name}'}");
+// "name_column","last_name_column"
+// "Sabrina","Kihn"
+faker.expression("#{json 'person','#{json ''first_name'',''#{Name.first_name}'',''last_name'',''#{Name.last_name}''}','address','#{json ''country'',''#{Address.country}'',''city'',''#{Address.city}''}'}");
+// {"person": {"first_name": "Barbie", "last_name": "Durgan"}, "address": {"country": "Albania", "city": "East Catarinahaven"}}
+```
+also more examples at https://www.datafaker.net/documentation/expressions/
 
-#### How to use it
+### Collections
+```java
+Faker faker = new Faker();
+List<String> names = faker.collection(
+                              () -> faker.name().firstName(),
+                              () -> faker.name().lastName())
+                         .len(3, 5)
+                         .generate();
+System.out.println(names);
+// [Skiles, O'Connell, Lorenzo, West]
+```
+more examples about that at https://www.datafaker.net/documentation/sequences/
 
-Generate spatial data:
-
-``` shell
-pip3 install numpy
-python3 scripts/test/genSyntheticData.py databaseNum dataSize [distribution name] [params]
+### Streams
+```java
+Faker faker = new Faker();
+// generate an infinite stream
+Stream<String> names = faker.stream(
+                              () -> faker.name().firstName(),
+                              () -> faker.name().lastName())
+                         .generate();
 ```
 
-The distributions we support and their params are as follow:
+### Formats
 
-| Distribution |        param1        |        param2         |
-| :----------: | :------------------: | :-------------------: |
-|     uni      | low (default = -1e7) | high (default = 1e7)  |
-|     nor      |   mu (default = 0)   | sigma (default = 1e5) |
-|     exp      |  mu (default = 5e6)  |                       |
+#### Schema
+There are 2 ways of data generation in specific formats
+1. Generate it from scratch
+2. There is already a sequence of objects and we could extract from them some values and return it in specific format
 
-(If needed, you can modify `scripts/test/genSyntheticData.py`)
+For both cases we need a `Schema` which could describe fields and a way of data generation.
+In case of generation from scratch `Suppliers` are enough, in case of transformation `Functions` are required
+#### CSV
 
-### Notes
-Each table is defined by two files in CSV and SCM format, and the names of the files serve as the actual names of the tables. <br/>
-The CSV file contains the column names and the data of the table, while the SCM file contains the column names and column types. The delimiter is used to separate different column fields, and it can be specified in the owner's configuration file.
-
-## Configuration File
-
-### OwnerSide
-
-### UserSide
-
-## Development procedure
-
-1. Develop your algorithms
-
-* Aggregate:
-
-``` java
-  class extends com.hufudb.openhufu.owner.implementor.aggregate.OwnerAggregateFunction
-  /** 
-   *  The class must contains a constructor function with parameters:
-   *  (OpenHuFuPlan.Expression agg, Rpc rpc, ExecutorService threadPool, OpenHuFuPlan.TaskInfo taskInfo)
-   */ 
+```java
+// transformer could be the same for both
+CsvTransformer<Name> transformer =
+        CsvTransformer.<Name>builder().header(true).separator(",").build();
+// Schema for from scratch
+Schema<Name, String> fromScratch =
+    Schema.of(field("firstName", () -> faker.name().firstName()),
+        field("lastname", () -> faker.name().lastName()));
+System.out.println(transformer.generate(fromScratch, 2));
+// POSSIBLE OUTPUT
+// "first_name" ; "last_name"
+// "Kimberely" ; "Considine"
+// "Mariela" ; "Krajcik"
+// ----------------------
+// Schema for transformations
+Schema<Name, String> schemaForTransformations =
+    Schema.of(field("firstName", Name::firstName),
+        field("lastname", Name::lastName));
+// Here we pass a collection of Name objects and extract first and lastnames from each element
+System.out.println(
+    transformer.generate(
+        faker.collection(faker::name).maxLen(2).generate(), schemaForTransformations));
+// POSSIBLE OUTPUT
+// "first_name" ; "last_name"
+// "Kimberely" ; "Considine"
+// "Mariela" ; "Krajcik"
 ```
 
-* Join:
+#### JShell
 
-``` java
-  class implements com.hufudb.openhufu.owner.implementor.join.OwnerJoin
+```
+# from project root folder
+jshell --class-path $(ls -d target/*.jar | tr '\n' ':')
+|  Welcome to JShell -- Version 17.0.4
+|  For an introduction type: /help intro
+
+jshell> import net.datafaker.Faker;
+
+jshell> import net.datafaker.providers.base.Name;
+
+jshell> import net.datafaker.transformations.Schema;
+
+jshell> import net.datafaker.transformations.CsvTransformer;
+
+jshell> import static net.datafaker.transformations.Field.field;
+
+jshell> var faker = new Faker();
+faker ==> net.datafaker.Faker@c4437c4
+
+jshell> Schema fromScratch =
+   ...>     Schema.of(field("firstName", () -> faker.name().firstName()),
+   ...>         field("lastname", () -> faker.name().lastName()));
+fromScratch ==> net.datafaker.transformations.Schema@306a30c7
+
+jshell> CsvTransformer<Name> transformer =
+   ...>     CsvTransformer.<Name>builder().header(false).separator(",").build();
+transformer ==> net.datafaker.transformations.CsvTransformer@506c589e
+
+jshell> System.out.println(transformer.generate(fromScratch, 2));
+"firstName","lastname"
+"Darcel","Schuppe"
+"Noelle","Smitham"
 ```
 
-2. Set the algorithm for the query(example in owner.yaml):
+#### JSON
 
-``` yaml
-openhufu:
-    implementor:
-      aggregate:
-        sum: com.hufudb.openhufu.owner.implementor.aggregate.sum.SecretSharingSum
-        count: null
-        max: null
-        min: null
-        avg: null
-      join: com.hufudb.openhufu.owner.implementor.join.HashJoin
+```java
+Schema<Object, ?> schema = Schema.of(
+    field("firstName", () -> faker.name().firstName()),
+    field("lastName", () -> faker.name().lastName())
+    );
+
+JsonTransformer<Object> transformer = JsonTransformer.builder().build();
+String json = transformer.generate(schema, 2);
+// [{"firstName": "Oleta", "lastName": "Toy"},
+// {"firstName": "Gerard", "lastName": "Windler"}]
 ```
-3. Build OpenHuFu
-    
-    Follow the instructions in Section `Build OpenHuFu` to build the project.
+More complex examples and other formats like YAML, XML could be found at https://www.datafaker.net/documentation/formats/
+
+### Unique Values
+
+```java
+Faker faker = new Faker();
+
+// The values returned in the following lines will never be the same.
+String firstUniqueInstrument = faker.unique().fetchFromYaml("music.instruments"); // "Flute"
+String secondUniqueInstrument = faker.unique().fetchFromYaml("music.instruments"); // "Clarinet"
+```
+More examples can be found in https://www.datafaker.net/documentation/unique-values
+
+### Custom provider
+
+Add your own custom provider in your app following steps from https://www.datafaker.net/documentation/custom-providers/
+
+Documentation
+-----
+[Getting started](https://www.datafaker.net/documentation/getting-started/).
 
 
-4. Run OpenHuFu
+Contributions
+-------------
+See [CONTRIBUTING.md](https://github.com/datafaker-net/datafaker/blob/main/CONTRIBUTING.md)
 
-    We provide sample configurations for 3 owners in `release/config` folder. <br/> 
-You can use the configuration to run our demo on a single machine, or modify the configuration files to deploy OpenHuFu on multiple machines. <br/>
+If this is your first time contributing then you may find it helpful to read [FIRST_TIME_CONTRIBUTOR.md](https://github.com/datafaker-net/datafaker/blob/main/FIRST_TIME_CONTRIBUTOR.md)
 
-    Please note that since the configuration files use relative paths, we need to `cd release` before running the command.
+Providers
+-----
+The list below is not complete and shows only a part of available providers. To view the full list of providers, please follow the link: [Full list of providers](https://www.datafaker.net/documentation/providers/).
 
-    Run demo on a single machine:
-    ```shell
-    bash owner_all.sh
-    ```
-    Run OpenHuFu on multiple machines:
-    ```shell
-    bash owner.sh start ./config/owner{i}.json
-    ``` 
-    Stop OpeHuFu:
-    ```shell
-    bash owner.sh stop
-    ```
 
-4. Run benchmarks
+* Address
+* Ancient
+* Animal
+* App
+* Appliance
+* Aqua Teen Hunger Force
+* Artist
+* Australia
+* Avatar
+* Aviation
+* AWS
+* Azure
+* Babylon 5
+* Back To The Future
+* Barcode
+* Baseball
+* Basketball
+* Battlefield 1  
+* Beer
+* Big Bang Theory
+* Blood Type
+* Bojack Horseman
+* Book
+* Bool
+* Bossa Nova
+* Brand
+* Breaking Bad
+* Brooklyn Nine-Nine
+* Buffy
+* Business
+* CNPJ ([Brazilian National Registry of Legal Entities](https://en.wikipedia.org/wiki/CNPJ))
+* CPF ([Brazilian individual taxpayer registry identification](https://en.wikipedia.org/wiki/CPF_number))
+* Camera
+* Cat
+* Chuck Norris
+* Clash of Clans
+* Code
+* Coin
+* Color
+* Commerce
+* Community
+* Company
+* Compass
+* Computer
+* Control
+* Country
+* Credit Card Type
+* Cricket
+* Crypto
+* Currency
+* Date and Time
+* DC Comics
+* Demographic
+* Departed
+* Dessert
+* Device
+* Disease
+* Doctor Who
+* Dog
+* Domain
+* Doraemon
+* Dragon Ball
+* Driving License
+* Dumb and Dumber
+* Dune
+* Durations
+* Educator
+* Elden Ring
+* Elder Scrolls
+* Electrical Components
+* Emoji
+* England Football
+* Esports
+* Fallout
+* Family Guy
+* Famous Last Words
+* File
+* Final Space
+* Finance
+* Food
+* Formula 1 (:racing_car:)
+* Friends
+* Fullmetal Alchemist: Brotherhood
+* Funny Name
+* Futurama
+* Game Of Thrones
+* Garment Size
+* Gender
+* Ghostbusters
+* Grateful Dead
+* Greek Philosopher
+* Hacker
+* Harry Potter
+* Hashing
+* Hearthstone
+* Heroes of the Storm
+* Hey Arnold
+* Hipster
+* Hitchhiker's Guide To The Galaxy
+* Hobbit
+* Hobby
+* Horse
+* House
+* How I Met Your Mother
+* IdNumber
+* Industry Segments
+* Internet
+* Job
+* K-pop (Korean popular music)
+* Kaamelott
+* League Of Legends
+* Lebowski
+* Locality
+* Lord Of The Rings
+* Lorem
+* Marketing
+* Marvel Snap
+* Mass Effect
+* Matz
+* MBTI
+* Measurement
+* Medical
+* Military
+* Minecraft
+* Money
+* Money Heist
+* Mood
+* Mountaineering
+* Mountains
+* Movie
+* Music
+* Name
+* Naruto
+* Nation
+* Nato Phonetic Alphabet
+* Nigeria
+* Number
+* One Piece
+* Options
+* Oscar Movie
+* Overwatch
+* Passport
+* Password
+* Phone Number
+* Photography
+* Pokemon
+* Princess Bride
+* Programming Language
+* Red Dead Redemption 2
+* Relationship Terms
+* Resident Evil
+* Restaurant
+* Rick and Morty
+* Robin
+* Rock Band
+* RuPaul's Drag Race
+* Science
+* Seinfeld
+* Shakespeare
+* Silicon Valley
+* Simpsons
+* Sip
+* Size
+* Slack Emoji
+* Soul Knight
+* Space
+* StarCraft
+* StarTrek
+* Stock
+* Studio Ghibli
+* Subscription
+* Super Mario
+* Superhero
+* Tea
+* Team
+* The IT Crowd
+* Time
+* Touhou
+* Tron
+* Twin Peaks
+* Twitter
+* University
+* Vehicle
+* Verb
+* Volleyball
+* Weather
+* Witcher
+* Yoda
+* Zelda
 
-```shell
-bash benchmark.sh
+Usage with Locales
+-----
+
+```java
+Faker faker = new Faker(new Locale("YOUR_LOCALE"));
 ```
 
-5. Evaluating communication cost
+For example:
 
-Before running benchmarks on OpenHuFu, you can follow the instructions to evaluate communication cost of the query:
-
-* Monitoring the port
-
-``` shell
-# run the shell script as root
-# 8888 is the port number 
-sudo bash scripts/test/network_mmonitor/start.sh 8888
+```java
+new Faker(new Locale("en", "US")).address().zipCodeByState("CA"));
 ```
 
-* Calculating the communication cost
+Supported Locales
+-----
+* ar
+* bg
+* ca
+* ca-CAT
+* cs
+* da-DK
+* de
+* de-AT
+* de-CH
+* en
+* en-AU
+* en-au-ocker
+* en-BORK
+* en-CA
+* en-GB
+* en-IND
+* en-MS
+* en-NEP
+* en-NG
+* en-NZ
+* en-PAK
+* en-SG
+* en-UG
+* en-US
+* en-ZA
+* en-PH
+* es
+* es-MX
+* fa
+* fi-FI
+* fr
+* he
+* hu
+* in-ID
+* it
+* ja
+* ko
+* nb-NO
+* nl
+* pl
+* pt
+* pt-BR
+* ru
+* sk
+* sv
+* sv-SE
+* tr
+* uk
+* vi
+* zh-CN
+* zh-TW
 
-``` shell
-# run the shell script as root
-sudo bash scripts/test/network_mmonitor/monitor.sh
-```
-
-## Data Query Language
-
-1. Plan
-2. Function Call
-
-## Supported Query Types
-
-* Filter
-* Projection
-* Join
-  * equi join
-  * theta join
-* Cross products
-* Aggregate(inc. group-by)
-* Limited window aggs
-* Distinct
-* Sort
-* Limit
-* Common table expressions
-* Spatial Queries:
-  * range query
-  * range counting
-  * knn query
-  * distance join
-  * knn join
-
-## Evaluation Metrics
-
-* Communication Cost
-* Running Time
-  * Total Query Time
-  * Local Query Time
-  * Encryption Time
-  * Decryption Time
-
-## Related Work
-
-**If you find OpenHuFu helpful in your research, please consider citing our papers and the bibtex are listed below:**
-
-1. **Hu-Fu: Efficient and Secure Spatial Queries over Data Federation.**
-   *Yongxin Tong, Xuchen Pan, Yuxiang Zeng, Yexuan Shi, Chunbo Xue, Zimu Zhou, Xiaofei Zhang, Lei Chen, Yi Xu, Ke Xu, Weifeng Lv.* Proc. VLDB Endow. 15(6): 1159-1172 (2022). \[[paper](https://www.vldb.org/pvldb/vol15/p1159-tong.pdf)\] \[[slides](http://yongxintong.group/static/paper/2018/VLDB2018_A%20Unified%20Approach%20to%20Route%20Planning%20for%20Shared%20Mobility_Slides.pptx)\] \[[bibtex](https://dblp.org/rec/journals/pvldb/TongPZSXZZCXXL22.html?view=bibtex)\]
-
-**Other helpful related work from our group is listed below:**
-
-1. **Efficient Approximate Range Aggregation Over Large-Scale Spatial Data Federation.**
-   *Yexuan Shi, Yongxin Tong, Yuxiang Zeng, Zimu Zhou, Bolin Ding, Lei Chen.* IEEE Trans. Knowl. Data Eng. 35(1): 418-430 (2023). \[[paper](https://hufudb.com/static/paper/2022/TKDE2022_Efficient%20Approximate%20Range%20Aggregation%20over%20Large-scale%20Spatial%20Data%20Federation.pdf)\] \[[bibtex](https://dblp.org/rec/journals/tkde/ShiTZZDC23.html?view=bibtex)\]
-
-2. **Hu-Fu: A Data Federation System for Secure Spatial Queries.**
-   *Xuchen Pan, Yongxin Tong, Chunbo Xue, Zimu Zhou, Junping Du, Yuxiang Zeng, Yexuan Shi, Xiaofei Zhang, Lei Chen, Yi Xu, Ke Xu, Weifeng Lv.* Proc. VLDB Endow. 15(12): 3582-3585 (2022). \[[paper](https://www.vldb.org/pvldb/vol15/p3582-tong.pdf)\] \[[bibtex](https://dblp.org/rec/journals/pvldb/PanTXZDZSZCXXL22.html?view=bibtex)\]
-
-3. **Data Source Selection in Federated Learning: A Submodular Optimization Approach.**
-   *Ruisheng Zhang, Yansheng Wang, Zimu Zhou, Ziyao Ren, Yongxin Tong, Ke Xu.* DASFAA 2022. \[[paper](https://doi.org/10.1007/978-3-031-00126-0_43)\] \[[bibtex](https://dblp.org/rec/conf/dasfaa/ZhangWZRTX22.html?view=bibtex)\]
-
-4. **Fed-LTD: Towards Cross-Platform Ride Hailing via Federated Learning to Dispatch.**
-   *Yansheng Wang, Yongxin Tong, Zimu Zhou, Ziyao Ren, Yi Xu, Guobin Wu, Weifeng Lv.* KDD 2022. \[[paper](https://doi.org/10.1145/3534678.3539047)\] \[[bibtex](https://dblp.org/rec/conf/kdd/WangTZRXWL22.html?view=bibtex)\]
-
-5. **Efficient and Secure Skyline Queries over Vertical Data Federation.**
-   *Yuanyuan Zhang, Yexuan Shi, Zimu Zhou, Chunbo Xue, Yi Xu, Ke Xu, Junping Du.* IEEE Trans. Knowl. Data Eng. (2022). \[[paper](https://doi.org/10.1109/TKDE.2022.3222415)\] \[[bibtex](https://ieeexplore.ieee.org/document/9950625)\]
-
-6. **Federated Topic Discovery: A Semantic Consistent Approach.**
-   *Yexuan Shi, Yongxin Tong, Zhiyang Su, Di Jiang, Zimu Zhou, Wenbin Zhang.* IEEE Intell. Syst. 36(5): 96-103 (2021). \[[paper](https://doi.org/10.1109/MIS.2020.3033459)\] \[[bibtex](https://dblp.org/rec/journals/expert/ShiTSJZZ21.html?view=bibtex)\]
-
-7. **Industrial Federated Topic Modeling.**
-   *Di Jiang, Yongxin Tong, Yuanfeng Song, Xueyang Wu, Weiwei Zhao, Jinhua Peng, Rongzhong Lian, Qian Xu, Qiang Yang.* ACM Trans. Intell. Syst. Technol. 12(1): 2:1-2:22 (2021). \[[paper](https://doi.org/10.1145/3418283)\] \[[bibtex](https://dblp.org/rec/journals/tist/JiangTSWZPLXY21.html?view=bibtex)\]
-
-8. **A GDPR-compliant Ecosystem for Speech Recognition with Transfer, Federated, and Evolutionary Learning.**
-   *Di Jiang, Conghui Tan, Jinhua Peng, Chaotao Chen, Xueyang Wu, Weiwei Zhao, Yuanfeng Song, Yongxin Tong, Chang Liu, Qian Xu, Qiang Yang, Li Deng.* ACM Trans. Intell. Syst. Technol. 12(3): 30:1-30:19 (2021). \[[paper](https://doi.org/10.1145/3447687)\] \[[bibtex](https://dblp.org/rec/journals/tist/JiangTPCWZSTLXY21.html?view=bibtex)\]
-
-9. **An Efficient Approach for Cross-Silo Federated Learning to Rank.**
-   *Yansheng Wang, Yongxin Tong, Dingyuan Shi, Ke Xu.* ICDE 2021. \[[paper](https://doi.org/10.1109/ICDE51399.2021.00102)\] \[[slides](https://hufudb.com/static/paper/2021/ICDE2021_An%20Efficient%20Approach%20for%20Cross-Silo%20Federated%20Learning%20to%20Rank.pptx)\] \[[bibtex](https://dblp.org/rec/conf/icde/WangTS021.html?view=bibtex)\]
-
-10. **Federated Learning in the Lens of Crowdsourcing.**
-    *Yongxin Tong, Yansheng Wang, Dingyuan Shi.* IEEE Data Eng. Bull. 43(3): 26-36 (2020). \[[paper](http://sites.computer.org/debull/A20sept/p26.pdf)\] \[[bibtex](https://dblp.org/rec/journals/debu/TongWS20.html?view=bibtex)\]
-
-11. **Federated Latent Dirichlet Allocation: A Local Differential Privacy Based Framework.**
-    *Yansheng Wang, Yongxin Tong, Dingyuan Shi.* AAAI 2020. \[[paper](https://ojs.aaai.org/index.php/AAAI/article/view/6096)\] \[[bibtex](https://dblp.org/rec/conf/aaai/WangTS20.html?view=bibtex)\]
-
-12. **Federated Acoustic Model Optimization for Automatic Speech Recognition.**
-    *Conghui Tan, Di Jiang, Huaxiao Mo, Jinhua Peng, Yongxin Tong, Weiwei Zhao, Chaotao Chen, Rongzhong Lian, Yuanfeng Song, Qian Xu.* DASFAA 2020. \[[paper](https://doi.org/10.1007/978-3-030-59419-0_54)\] \[[bibtex](https://dblp.org/rec/conf/dasfaa/TanJMPTZCLSX20.html?view=bibtex)\]
-
-13. **Efficient and Fair Data Valuation for Horizontal Federated Learning.**
-    *Shuyue Wei, Yongxin Tong, Zimu Zhou, Tianshu Song.* Federated Learning 2020. \[[paper](https://doi.org/10.1007/978-3-030-63076-8_10)\] \[[bibtex](https://dblp.org/rec/series/lncs/WeiTZS20.html?view=bibtex)\]
-
-14. **Profit Allocation for Federated Learning.**
-    *Tianshu Song, Yongxin Tong, Shuyue Wei.* IEEE BigData 2019. \[[paper](https://doi.org/10.1109/BigData47090.2019.9006327)\] \[[slides](https://hufudb.com/static/paper/2019/BigData2019_Profit%20Allocation%20for%20Federated%20Learning_Slides.pptx)\] \[[bibtex](https://dblp.org/rec/conf/bigdataconf/SongTW19.html?view=bibtex)\]
-
-15. **Federated Machine Learning: Concept and Applications.**
-    *Qiang Yang, Yang Liu, Tianjian Chen, Yongxin Tong.* ACM Trans. Intell. Syst. Technol. 10(2): 12:1-12:19 (2019). \[[paper](https://doi.org/10.1145/3298981)\] \[[bibtex](https://dblp.org/rec/journals/tist/YangLCT19.html?view=bibtex)\]
+LICENSE
+-------
+Copyright (c) 2023 Datafaker.net See the LICENSE file for license rights and limitations.

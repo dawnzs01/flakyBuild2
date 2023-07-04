@@ -1,2 +1,0 @@
-id,location
-INT, GEOMETRY

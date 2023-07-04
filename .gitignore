@@ -1,93 +1,14 @@
-# Compiled class file
-*.class
-target
-
-# STS #
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-# IntelliJ IDEA #
-.idea
-*.iws
-*.iml
-*.ipr
-
-# NetBeans #
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
 .DS_Store
-node_modules
-/dist
-
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor directories and files
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# template files
-proto/bin/
-docker/owner/cert/
-release/demo/log/
-release/demo/cert/
-release/demo/stty.exe.stackdump
-release/log
-
-# vscode
-.vscode/
-
-# Log files
-
-# benchmark files
-benchmark/jmh.out
-docker/benchmark/database/data
-
-# dataset
-dataset/TPC-H V3.0.1
-dataset/SynData
-dataset/databases
-!dataset/newyork-taxi.zip
-!dataset/newyork-taxi-sample.txt
-``
+target
+.project
+.classpath
+.settings
+.idea/*
+!.idea/vcs.xml
+!.idea/icon.png
+*.iml
+/dependency-reduced-pom.xml
+META-INF/
+bin/
+site
+.mvn/wrapper/maven-wrapper.jar

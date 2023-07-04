@@ -1,230 +1,86 @@
-# SeedCrackerX [![Github All Releases](https://img.shields.io/github/downloads/19MisterX98/SeedCrackerX/total.svg)]
+<div align="center">
+  <img src="https://raw.githubusercontent.com/haveno-dex/haveno-meta/721e52919b28b44d12b6e1e5dac57265f1c05cda/logo/haveno_logo_landscape.svg" alt="Haveno logo">
 
-## Readme Language
+  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/505405b43cb74d5a996f106a3371588e)](https://app.codacy.com/gh/haveno-dex/haveno/dashboard)
+  ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/haveno-dex/haveno/build.yml?branch=master)
+  [![GitHub issues with bounty](https://img.shields.io/github/issues-search/haveno-dex/haveno?color=%23fef2c0&label=Issues%20with%20bounties&query=project%3Ahaveno-dex%2F2)](https://github.com/orgs/haveno-dex/projects/2) |
+  [![Twitter Follow](https://img.shields.io/twitter/follow/HavenoDEX?style=social)](https://twitter.com/havenodex)
+  [![Matrix rooms](https://img.shields.io/badge/Matrix%20room-%23haveno-blue)](https://matrix.to/#/#haveno:monero.social) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/haveno-dex/.github/blob/master/CODE_OF_CONDUCT.md)
+</div>
 
-[中文](./READMEzh.md)
-[Русский](./READMEru.md)
-[Українська](./READMEuk.md)
-[Türkçe](./READMEtr.md)
+## What is Haveno?
 
-## I'm active on:
+Haveno (pronounced ha‧ve‧no) is a platform for people who want to exchange [Monero](https://getmonero.org) for fiat currencies like EUR, GBP, and USD or other cryptocurrencies like BTC, ETH, and BCH.
 
-- [My Discord](https://discord.gg/JRmHzqQYfp)
-- [Youtube](https://www.youtube.com/channel/UCby9ZxEjJCqmccQGF3GSYlA)
+Main features:
 
-# Version Tab
+- All communications are routed through **Tor**, to preserve your privacy
 
-| Minecraft Version | SeedCrackerX version                                                                                       | Dependencies                                                                                                                                                                                   |
-|-------------------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1.20.x             | [2.14.4](https://github.com/19MisterX98/SeedcrackerX/releases/download/prerelease/seedcrackerX-2.14.4.jar) | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
-| 1.19.4            | [2.14.2](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.14.2/seedcrackerX-2.14.2.jar)     | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
-| 1.19.3            | [2.13.1](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.13.1/seedcrackerX-2.13.1.jar)     | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
-| 1.19-1.19.2       | [2.13](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.13/seedcrackerX-2.13.jar)           | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
-| 1.18.2            | [2.12](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.12/seedcrackerX-2.12.jar)           | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 | 
-| 1.18-1.18.1       | [2.11.4](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.11.4/seedcrackerX-2.11.4.jar)     | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 |
-| 1.17-1.17.1       | [2.10.1](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.10.1/seedcrackerX-2.10.1.jar)     | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 |
-| 1.16.5            | [2.7](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.7.1/seedcrackerX-0.2.7.jar)          | [Fabric mod loader](https://fabricmc.net/use/), [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api),  [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu/files) |
+- Trades are **peer-to-peer**: trades on Haveno will happen between people only, there is no central authority.
 
-## Installation
+- Trades are **non-custodial**: Haveno provides arbitration in case something goes wrong during the trade, but we will never have access to your funds.
 
-Download and install the [fabric mod loader](https://fabricmc.net/use/)
- 
-Download the latest [release or pre-release](https://github.com/19MisterX98/SeedCrackerX/releases) of SeedCrackerX
-  
-put the .jar file in your mod directory, either %appdata%/.minecraft/mods/ folder for the vanilla launcher or your own instance folder.
-  
-#### Optional
-  
-Download the latest release of [Multiconnect](https://github.com/Earthcomputer/multiconnect/releases) or [ViaFabric](https://modrinth.com/mod/viafabric) to connect to servers on lower MC versions
-  
-## Database
+- There is **No token**, because we don't need it. Transactions between traders are secured by non-custodial multisignature transactions on the Monero network.
 
-Since the mod is used by many people, I have decided to create a Google sheet for server seeds.
-If you enable the database option in the config gui the mod will send cracked seeds from 10+ player servers directly to the Google sheet.
-You also need a minecraft license
+- The revenue generated by Haveno will be managed by an entity called Council (more info soon), composed by members of the Monero/Haveno community, not the Haveno Core Team and will be used to **fund Haveno and Monero** development.
 
-[The Sheet](https://docs.google.com/spreadsheets/d/1tuQiE-0leW88em9OHbZnH-RFNhVqgoHhIt9WQbeqqWw/edit?usp=sharing)
+See the [FAQ on our website](https://haveno.exchange/faq/) for more information.
 
-# Usage
+## Status of the project
 
-## 1.17.X and below
+A live test network is online and users can already run Haveno and make test trades between each others using Monero's stagenet. See the [instructions to build Haveno and connect to the network](https://github.com/haveno-dex/haveno/blob/master/docs/installing.md). Note that Haveno is still very much in development. If you find issues or bugs, please let us know.
 
-### Overworld
+Main repositories:
 
-Run around in the world until the mod finds a dungeon. After the mod found one the cracking process starts automatically.
-If it doesn't give you a world seed, you may need to find another dungeon.
+- **[haveno](https://github.com/haveno-dex/haveno)** - This repository. The core of Haveno.
+- **[haveno-ui](https://github.com/haveno-dex/haveno-ui)** - The user interface.
+- **[haveno-ts](https://github.com/haveno-dex/haveno-ts)** - TypeScript library for using Haveno.
+- **[haveno-meta](https://github.com/haveno-dex/haveno-meta)** - For project-wide discussions and proposals.
 
-### The Nether
+If you wish to help, take a look at the repositories above and look for open issues. We run a bounty program to incentivize development. See [Bounties](#bounties)
 
-Run around in the warped fungus biome until the mod finds big fungus and starts cracking.
+The PGP keys of the core team members are in `gpg_keys/`.
 
-### The End
+## Keep in touch and help out!
 
-You have to find 5 (or more) end cities or end gateways and then return to the center of the end dimension to obtain the pillar seed, after that cracking should begin.
+Haveno is a community-driven project. For it to be successful it's fundamental to have the support and help of the community. Join the community rooms on our Matrix server:
 
-#### Video guides:
-- [Structures and Endpillars](https://youtu.be/aUuPSZVPH8E?t=462)
-- [warped fungus](https://www.youtu.be/HKjwgofhKs4)
+- General discussions: **Haveno** ([#haveno:monero.social](https://matrix.to/#/#haveno:monero.social)) relayed on IRC/Libera (`#haveno`)
+- Development discussions: **Haveno Development** ([#haveno-dev:monero.social](https://matrix.to/#/#haveno-dev:monero.social)) relayed on IRC/Libera (`#haveno-dev`)
 
-  ### Supported Decorators
-    - Dungeon
-    - End Gateway
-    - Desert Well
-    - Emerald Ore
-    - Warped Fungus
+Email: contact@haveno.exchange
+Website: [haveno.exchange](https://haveno.exchange)
 
-## 1.18.X and higher
+## Running a local Haveno test network
 
-Dungeon cracking, fungus cracking don't work anymore.
+See [docs/installing.md](docs/installing.md)
 
-### Overworld
+## Contributing to Haveno
 
-Go to the config menu via "/seedcracker gui" (1.19.3+) or "/seed gui" (before 1.19.3) and make sure that Emeralds, Gateways, Biomes, Desert wells and Warped fungi are disabled since they aren't updated and can give wrong data.
+See the [developer guide](docs/developer-guide.md) to get started developing for Haveno.
 
-For cracking, you now need to get 40 bits of liftable structures and 32 regular bits from the listed ones:
+See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for our styling guides.
 
-  ### Supported Structures
-  
-    - Igloo - 9 regular and liftable bits
-    - Desert Pyramid - 9 regular and liftable bits
-    - Jungle Temple - 9 regular and liftable bits
-    - Swamp Hut - 9 regular and liftable bits
-    - Shipwreck - 8 regular and liftable bits
-    - Pillager Outpost - 9 lifable bits
-    - Ocean Monument - 9 regular bits
+If you are not able to contribute code and want to contribute development resources, [donations](#support) fund development bounties.
 
-Any combination is valid. For example: 3 shipwrecks, 1 pyramid and 1 igloo.
-You can track your process with "/seed data bits" (look at the bits count for liftable structures)
-A structure is found when there is an outline around it.
-After you get enough, the cracking process starts automatically. This process takes around 1-5 mins.
-The mod may ask you to find additional structures after this.
-It's more likely to happen with fewer bits and structures of the same type.
-After reducing your structure seeds, the mod will brute force your world seed via dungeon positions or hashed seed.
+## Bounties
 
-### The Nether
+To incentivize development and reward contributors we adopt a simple bounty system. Contributors may be awarded bounties after completing a task (resolving an issue). Take a look at the issues eligible for a bounty on the [dedicated Kanban board](https://github.com/orgs/haveno-dex/projects/2) or look for [issues labelled '💰bounty'](https://github.com/haveno-dex/haveno/issues?q=is%3Aissue+is%3Aopen+label%3A%F0%9F%92%B0bounty) in the main `haveno` repository. [Details and conditions for receiving a bounty](docs/bounties.md).
 
-Fungus cracking don't work anymore, so there are no way to find nether seed using SeedcrackerX, however you can try to crack it yourself by using [Nether_Bedrock_Cracker](https://github.com/19MisterX98/Nether_Bedrock_Cracker)
-    
-### The End
+## Support and sponsorships
 
-You have to find 5 (or more) end cities (fill up regular bits) and then return to the center of the end dimension to obtain the pillar seed, after that cracking should begin.
+To bring Haveno to life, we need resources. If you have the possibility, please consider [becoming a sponsor](https://haveno.exchange/sponsors/) or donating to the project:
 
-- You need to disable end gateways!
+### Monero
 
-## Commands
+`42sjokkT9FmiWPqVzrWPFE5NCJXwt96bkBozHf4vgLR9hXyJDqKHEHKVscAARuD7in5wV1meEcSTJTanCTDzidTe2cFXS1F`
 
-If version of your mod is older than 2.13.1, use prefix
- - `/seed` instead of `/seedcracker`
+<!-- ![Qr code](https://raw.githubusercontent.com/haveno-dex/haveno/master/media/qrhaveno.png) -->
 
-  ### GUI Command
-  - `/seedcracker gui`
-  
-  Opens the config gui where you can modify settings like the server mc-version, all finders, database and rendermode.
-  There are command alternatives for most of this, but they should'nt be used anymore.
-  
-  ### Finder Reload Command
-  - `/seedcracker finder reload`
+If you are using a wallet that supports OpenAlias (like the 'official' CLI and GUI wallets), you can simply put `fund@haveno.exchange` as the "receiver" address.
 
-  Rescans the loaded Chunks to find structures that weren't found before.
+### Bitcoin
 
-  ### Data Command
-  - `/seedcracker data clear`
-  
-  Clears all the collected data without requiring a relog. This is useful for multi-world servers.
-  
-  - `/seedcracker data bits`
-  
-  Display how many bits of information have been collected.
-  Normal bits are used for end pillar + structure cracking. Cracking starts at 32 bits.
-  Lifting bits are used for liftable structure cracking. Cracking starts at 40 bits.
-  
-  - `/seed data restore`
-  
-  When you leave a world, the mod will save currently collected structure information in a file of the .minecraft/config directory.
-  After rejoining, you can restore it with this command.
-  
-  
-  ### Debug Command
-  - `/seedcracker cracker debug`
+`1AKq3CE1yBAnxGmHXbNFfNYStcByNDc5gQ`
 
-  Additional info is shown
-  
-  ### Database Command
-  - `/seedcracker database`
-  
-  Opens a [google sheet](https://docs.google.com/spreadsheets/d/1tuQiE-0leW88em9OHbZnH-RFNhVqgoHhIt9WQbeqqWw/edit?usp=sharing) that is maintained by the mod
-  
-## Video Tutorials
-
-Neil's:
-- [1.15](https://youtu.be/1ChmLi9og8Q)
-- [1.16](https://youtu.be/aUuPSZVPH8E)
-
-Dyiing's
-- [1.18](https://www.youtube.com/watch?v=tKeEyx7jIE4)
-
-Mine:
-- [Dungeon cracking & end pillar cracking](https://youtu.be/8ytfZ2MXosY)
-- [Nether cracking](https://youtu.be/HKjwgofhKs4)
-- [Structure cracking](https://www.youtu.be/UXVrBaOR8H0)
-
-
-## Setting up the Workspace
-
--Clone the repository.
-
--Run `gradlew genSources <idea|eclipse>`.
-
-## Building the Mod
-
--Update the version in `build.gradle` and `fabric.mod.json`.
-
--Run `gradlew build`.
-
-## API for other mods
-
-- Include seedcracker-api and jitpack in your build.gradle
-
-      repositories {
-          mavenCentral()
-          maven { url "https://jitpack.io" }
-      }
-      
-      dependencies {
-          implementation (include('com.github.19MisterX98.SeedcrackerX:seedcrackerx-api:master-SNAPSHOT')) {transitive = false}
-      }
-
-- Add a class that implements the api interface
-
-      package misterx.myMod.seedManagemnet.SeedCrackerEP
-      
-      import kaptainwutax.seedcrackerX.api.SeedCrackerAPI;
-    
-      public class SeedCrackerEP implements SeedCrackerAPI {
-          @Override
-          public void pushWorldSeed(long seed) {
-              //do something
-              Foo.bar(seed)
-          }
-      }
-
-- Tell fabric.mod.json where your entrypoint is
-
-      "entrypoints": {
-        "main": [...],
-        "client": [...],
-        "server": [...],
-        "seedcrackerx": [
-          "misterx.myMod.seedManagemnet.SeedCrackerEP"
-        ]
-      },
-
-## Contributors
-
-[KaptainWutax](https://github.com/KaptainWutax) - Author of the original mod
-
-[neil](https://www.youtube.com/watch?v=aUuPSZVPH8E) - Video Tutorials
-
-[Nekzuris](https://github.com/Nekzuris) and [ItzSkyReed](https://github.com/ItzSkyReed)  - README
-
-[19MisterX98](https://www.youtube.com/channel/UCby9ZxEjJCqmccQGF3GSYlA) - Author of SeedCrackerX
+<!-- ![Qr code](https://raw.githubusercontent.com/haveno-dex/haveno/master/media/qrbtc.png) -->

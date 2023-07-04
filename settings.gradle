@@ -1,10 +1,16 @@
-pluginManagement {
-    repositories {
-        jcenter()
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        gradlePluginPortal()
-    }
-}
+include 'proto'
+include 'assets'
+include 'common'
+include 'p2p'
+include 'core'
+include 'cli'
+include 'daemon'
+include 'desktop'
+include 'monitor'
+include 'relay'
+include 'seednode'
+include 'statsnode'
+include 'inventory'
+include 'apitest'
+
+rootProject.name = 'haveno'

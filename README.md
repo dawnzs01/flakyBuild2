@@ -1,200 +1,292 @@
-# open-pdf-sign
+# OpenHuFu: An Open-Sourced Data Federation System
 
-The `open-pdf-sign` CLI application allows to easily sign PDF files from the command line. 
-Signatures can be invisible (default) or visible (can be customized). 
+[![codecov](https://codecov.io/gh/BUAA-BDA/OpenHuFu/branch/main/graph/badge.svg?token=QJBEGGNL2P)](https://codecov.io/gh/BUAA-BDA/OpenHuFu)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Total Lines](https://tokei.rs/b1/github/BUAA-BDA/OpenHuFu?category=lines)](https://github.com/BUAA-BDA/OpenHuFu)
 
-## Features
+Data isolation has become an obstacle to scale up query processing over big data, since sharing raw data among data owners is often prohibitive due to security concerns. A promising solution is to perform secure queries and analytics over a federation of multiple data owners leveraging techiniques like secure multi-party computation (SMC) and differential privacy, as evidenced by recent work on data federation and federated learning. 
 
-* Visible PDF signature in PDF (multi language support)
-* Invoke via CLI or via starting a server
-* Supported signature type: PAdES
-* Supported signature profiles: 
-  * BASELINE-B
-  * BASELINE-T
-  * BASELINE-LT
-  * BASELINE-LTA
+OpenHuFu is an open-sourced system for efficient and secure query processing on a data federation.
+It provides flexibility for researchers to quickly implement their algorithms for processing federated queries with SMC techniques, such as secret sharing, garbled circuit and oblivious transfer.
+With its help, we can quickly conduct the experimental evaluation and obtain the performance of the designed algorithms over benchmark datasets.
 
-## Get Started
+## Compile OpenHuFu from Source Code
 
-Download the latest JAR from the [GitHub releases page](https://github.com/open-pdf-sign/open-pdf-sign/releases) or in your terminal:
+### Prerequisites:
+
+- Linux or MacOS
+- Java 11
+- Maven (version at least 3.5.2)
+- C++ (generate TPC-H data)
+- Python3 (generate spatial data)
+- Git & Git LFS (Git Large File Storage)
+
+### Build OpenHuFu
+
+Run the following commands:
+
+1. Clone OpenHuFu repository:
+
+``` shell
+git clone https://github.com/BUAA-BDA/OpenHuFu.git
+```
+
+2. Download big files from Git LFS(Large File Storage)
+
+``` shell
+cd OpenHuFu
+git lfs install --skip-smudge
+git lfs pull 
+```
+
+3. Build:
+
+``` shell
+cd OpenHuFu
+bash scripts/build/package.sh
+```
+
+OpenHuFu is now installed in `release`
+
+### Notes
+
+If you use MacsOS, you need to add this to `settings.xml`(maven settings file):
+
+``` xml
+<profiles>
+    <profile>
+      <id>macos</id>
+      <properties>
+        <os.detected.classifier>osx-x86_64</os.detected.classifier>
+      </properties>
+    </profile>
+</profiles>
+<activeProfiles>
+    <activeProfile>macos</activeProfile>
+</activeProfiles>
+```
+
+## Data Generation
+
+### Relational data: [TCP-H](https://www.tpc.org/tpch/)
+
+#### How to use it:
 
 ```shell
-curl --location --output open-pdf-sign.jar \
-  https://github.com/open-pdf-sign/open-pdf-sign/releases/latest/download/open-pdf-sign.jar
+bash scripts/test/extract_tpc_h.sh
+
+cd dataset/TPC-H\ V3.0.1/dbgen
+cp makefile.suite makefile
+# If you use MacOS, you need to replace '#include <malloc.h>' with #include <sys/malloc.h> in dbgen
+make
+
+# Go to the root folder
+cd ../../..
+# x is the number of database，y is the volume of each database(MB)
+bash scripts/test/generateData.sh x y
 ```
 
-Alternatively, open-pdf-sign is also available on [nix](https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/misc/open-pdf-sign),
-a wrapper is available on [npm](https://www.npmjs.com/package/open-pdf-sign), and alongside a installer for [nginx](https://github.com/open-pdf-sign/open-pdf-sign-configurator).
+### Spatial data
 
-Make sure that Java is installed in at least version 8.
+Spatial sample data: `dataset/newyork-taxi-sample.data`:
 
-### Run
+#### How to use it
+
+Generate spatial data:
+
+``` shell
+pip3 install numpy
+python3 scripts/test/genSyntheticData.py databaseNum dataSize [distribution name] [params]
+```
+
+The distributions we support and their params are as follow:
+
+| Distribution |        param1        |        param2         |
+| :----------: | :------------------: | :-------------------: |
+|     uni      | low (default = -1e7) | high (default = 1e7)  |
+|     nor      |   mu (default = 0)   | sigma (default = 1e5) |
+|     exp      |  mu (default = 5e6)  |                       |
+
+(If needed, you can modify `scripts/test/genSyntheticData.py`)
+
+### Notes
+Each table is defined by two files in CSV and SCM format, and the names of the files serve as the actual names of the tables. <br/>
+The CSV file contains the column names and the data of the table, while the SCM file contains the column names and column types. The delimiter is used to separate different column fields, and it can be specified in the owner's configuration file.
+
+## Configuration File
+
+### OwnerSide
+
+### UserSide
+
+## Development procedure
+
+1. Develop your algorithms
+
+* Aggregate:
+
+``` java
+  class extends com.hufudb.openhufu.owner.implementor.aggregate.OwnerAggregateFunction
+  /** 
+   *  The class must contains a constructor function with parameters:
+   *  (OpenHuFuPlan.Expression agg, Rpc rpc, ExecutorService threadPool, OpenHuFuPlan.TaskInfo taskInfo)
+   */ 
+```
+
+* Join:
+
+``` java
+  class implements com.hufudb.openhufu.owner.implementor.join.OwnerJoin
+```
+
+2. Set the algorithm for the query(example in owner.yaml):
+
+``` yaml
+openhufu:
+    implementor:
+      aggregate:
+        sum: com.hufudb.openhufu.owner.implementor.aggregate.sum.SecretSharingSum
+        count: null
+        max: null
+        min: null
+        avg: null
+      join: com.hufudb.openhufu.owner.implementor.join.HashJoin
+```
+3. Build OpenHuFu
+    
+    Follow the instructions in Section `Build OpenHuFu` to build the project.
+
+
+4. Run OpenHuFu
+
+    We provide sample configurations for 3 owners in `release/config` folder. <br/> 
+You can use the configuration to run our demo on a single machine, or modify the configuration files to deploy OpenHuFu on multiple machines. <br/>
+
+    Please note that since the configuration files use relative paths, we need to `cd release` before running the command.
+
+    Run demo on a single machine:
+    ```shell
+    bash owner_all.sh
+    ```
+    Run OpenHuFu on multiple machines:
+    ```shell
+    bash owner.sh start ./config/owner{i}.json
+    ``` 
+    Stop OpeHuFu:
+    ```shell
+    bash owner.sh stop
+    ```
+
+4. Run benchmarks
 
 ```shell
-java -jar open-pdf-sign.jar \
-  --input input.pdf --output output.pdf \
-  --certificate certificate.crt --key keyfile.pem --passphrase key_passphrase \
-  --page -1 --locale de-AT
+bash benchmark.sh
 ```
 
-Usage:
+5. Evaluating communication cost
 
-```text
-Options:
-  --baseline-lt
-    use PAdES profile with long-term validation material
-  --baseline-lta
-    use PAdES profile with long term availability and integrity of validation material
-  -b, --binary
-    binary output of PDF
-    Default: false
-  -c, --certificate
-    certificate (chain) to be used
-  --config
-    use a configuration file
-  -h, --help
-    prints this page
-  --hint
-    text to be displayed in signature field
-  --host
-    run as server with the given hostname
-  --image
-    Image to be placed in signature block
-  -i, --input
-    input pdf file
-  -k, --key
-    signature key file or keystore
-  --label-hint
-    label for the 'hint' row
-  --label-signee
-    label for the 'signee' row
-  --label-timestamp
-    label for the 'timestamp' row
-  --left
-    X coordinate of the signature block in cm
-    Default: 1.0
-  -l, --locale
-    Locale, e.g. de-AT
-  --no-hint
-    don't display a hint row
-  -o, --output
-    output pdf file
-  --page
-    Page where the signature block should be placed. [-1] for last page
-  -p, --passphrase
-    passphrase for the signature key or keystore
-  --port
-    run as server with the given port
-  --timestamp
-    include signed timestamp
-    Default: false
-  --timezone
-    use specific timezone for time info, e.g. Europe/Vienna
-  --top
-    Y coordinate of the signature block in cm
-    Default: 1.0
-  --tsa
-    use specific time stamping authority as source (if multiple given, will
-    be used in given order as fallback)
-    Default: []
-  --version
-    prints version of this program
-  --width
-    width of the signature block in cm
-    Default: 10.0
+Before running benchmarks on OpenHuFu, you can follow the instructions to evaluate communication cost of the query:
+
+* Monitoring the port
+
+``` shell
+# run the shell script as root
+# 8888 is the port number 
+sudo bash scripts/test/network_mmonitor/start.sh 8888
 ```
 
-### Usage with Let's Encrypt certificates
+* Calculating the communication cost
 
-PDFs can also be signed using your existing Let's Encrypt certificate.
-
-```shell
-java -jar open-pdf-sign.jar --input input.pdf --output output.pdf \
-  --certificate /etc/letsencrypt/live/openpdfsign.org/fullchain.pem \
-  --key /etc/letsencrypt/live/openpdfsign.org/privkey.pem
+``` shell
+# run the shell script as root
+sudo bash scripts/test/network_mmonitor/monitor.sh
 ```
 
-### Signing documents with long-term validation info (PAdES-LT)
+## Data Query Language
 
-Sign documents with signatures that provides the long-term availability 
-of the validation material by incorporating all the material 
-or references to material required for validating the signature.  
-For this, using a timestamp is needed.
+1. Plan
+2. Function Call
 
-```shell
-java -jar open-pdf-sign.jar --input input.pdf --output output.pdf \
-  --certificate /etc/letsencrypt/live/openpdfsign.org/fullchain.pem \
-  --key /etc/letsencrypt/live/openpdfsign.org/privkey.pem \
-  --timestamp --tsa http://timestamp.digicert.com
-  --baseline-lt
-```
+## Supported Query Types
 
+* Filter
+* Projection
+* Join
+  * equi join
+  * theta join
+* Cross products
+* Aggregate(inc. group-by)
+* Limited window aggs
+* Distinct
+* Sort
+* Limit
+* Common table expressions
+* Spatial Queries:
+  * range query
+  * range counting
+  * knn query
+  * distance join
+  * knn join
 
-### Visible signatures
+## Evaluation Metrics
 
-If the `page` parameter is specified, a visible signature will be placed on the specified page. 
-For example, running
+* Communication Cost
+* Running Time
+  * Total Query Time
+  * Local Query Time
+  * Encryption Time
+  * Decryption Time
 
-```shell
-java -jar open-pdf-sign.jar --input input.pdf --output output.pdf \
-     --certificate certificate.crt \
-     --key key.pem \
-     --page -1 --image mylogo.png \
-     --hint "You can check the validity at https://www.signaturpruefung.gv.at"
-```
+## Related Work
 
-will place a visible signature looking similar to the image below on the last page (`-1`) of the PDF document.
+**If you find OpenHuFu helpful in your research, please consider citing our papers and the bibtex are listed below:**
 
-![signature image](https://www.openpdfsign.org/images/signature.png)
+1. **Hu-Fu: Efficient and Secure Spatial Queries over Data Federation.**
+   *Yongxin Tong, Xuchen Pan, Yuxiang Zeng, Yexuan Shi, Chunbo Xue, Zimu Zhou, Xiaofei Zhang, Lei Chen, Yi Xu, Ke Xu, Weifeng Lv.* Proc. VLDB Endow. 15(6): 1159-1172 (2022). \[[paper](https://www.vldb.org/pvldb/vol15/p1159-tong.pdf)\] \[[slides](http://yongxintong.group/static/paper/2018/VLDB2018_A%20Unified%20Approach%20to%20Route%20Planning%20for%20Shared%20Mobility_Slides.pptx)\] \[[bibtex](https://dblp.org/rec/journals/pvldb/TongPZSXZZCXXL22.html?view=bibtex)\]
 
+**Other helpful related work from our group is listed below:**
 
-### Usage in server mode
+1. **Efficient Approximate Range Aggregation Over Large-Scale Spatial Data Federation.**
+   *Yexuan Shi, Yongxin Tong, Yuxiang Zeng, Zimu Zhou, Bolin Ding, Lei Chen.* IEEE Trans. Knowl. Data Eng. 35(1): 418-430 (2023). \[[paper](https://hufudb.com/static/paper/2022/TKDE2022_Efficient%20Approximate%20Range%20Aggregation%20over%20Large-scale%20Spatial%20Data%20Federation.pdf)\] \[[bibtex](https://dblp.org/rec/journals/tkde/ShiTZZDC23.html?view=bibtex)\]
 
-You can also run open-pdf-sign as a server application in order to only load certificates once and easily integrate it in applications where CLI invocations are not possible. 
-Simply add the `port` or `host` parameters, e.g.
+2. **Hu-Fu: A Data Federation System for Secure Spatial Queries.**
+   *Xuchen Pan, Yongxin Tong, Chunbo Xue, Zimu Zhou, Junping Du, Yuxiang Zeng, Yexuan Shi, Xiaofei Zhang, Lei Chen, Yi Xu, Ke Xu, Weifeng Lv.* Proc. VLDB Endow. 15(12): 3582-3585 (2022). \[[paper](https://www.vldb.org/pvldb/vol15/p3582-tong.pdf)\] \[[bibtex](https://dblp.org/rec/journals/pvldb/PanTXZDZSZCXXL22.html?view=bibtex)\]
 
-```shell
-java -jar open-pdf-sign.jar --input input.pdf --output output.pdf \
-  --certificate /etc/letsencrypt/live/openpdfsign.org/fullchain.pem \
-  --key /etc/letsencrypt/live/openpdfsign.org/privkey.pem
-  --port 8090 --host 127.0.0.1
-```
+3. **Data Source Selection in Federated Learning: A Submodular Optimization Approach.**
+   *Ruisheng Zhang, Yansheng Wang, Zimu Zhou, Ziyao Ren, Yongxin Tong, Ke Xu.* DASFAA 2022. \[[paper](https://doi.org/10.1007/978-3-031-00126-0_43)\] \[[bibtex](https://dblp.org/rec/conf/dasfaa/ZhangWZRTX22.html?view=bibtex)\]
 
-Then, PDFs can be signed via the [specified](src/main/resources/openapi.yml) POST request:
+4. **Fed-LTD: Towards Cross-Platform Ride Hailing via Federated Learning to Dispatch.**
+   *Yansheng Wang, Yongxin Tong, Zimu Zhou, Ziyao Ren, Yi Xu, Guobin Wu, Weifeng Lv.* KDD 2022. \[[paper](https://doi.org/10.1145/3534678.3539047)\] \[[bibtex](https://dblp.org/rec/conf/kdd/WangTZRXWL22.html?view=bibtex)\]
 
-```shell
-curl --location 'http://localhost:8090/' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"input":"/path/to/pdf.pdf"}'
-```
+5. **Efficient and Secure Skyline Queries over Vertical Data Federation.**
+   *Yuanyuan Zhang, Yexuan Shi, Zimu Zhou, Chunbo Xue, Yi Xu, Ke Xu, Junping Du.* IEEE Trans. Knowl. Data Eng. (2022). \[[paper](https://doi.org/10.1109/TKDE.2022.3222415)\] \[[bibtex](https://ieeexplore.ieee.org/document/9950625)\]
 
-### Using a config file
+6. **Federated Topic Discovery: A Semantic Consistent Approach.**
+   *Yexuan Shi, Yongxin Tong, Zhiyang Su, Di Jiang, Zimu Zhou, Wenbin Zhang.* IEEE Intell. Syst. 36(5): 96-103 (2021). \[[paper](https://doi.org/10.1109/MIS.2020.3033459)\] \[[bibtex](https://dblp.org/rec/journals/expert/ShiTSJZZ21.html?view=bibtex)\]
 
-Instead of specifying everything via CLI parameters, you can also use a configuration file (e.g. [this one](src/test/resources/test-config.yml)):
+7. **Industrial Federated Topic Modeling.**
+   *Di Jiang, Yongxin Tong, Yuanfeng Song, Xueyang Wu, Weiwei Zhao, Jinhua Peng, Rongzhong Lian, Qian Xu, Qiang Yang.* ACM Trans. Intell. Syst. Technol. 12(1): 2:1-2:22 (2021). \[[paper](https://doi.org/10.1145/3418283)\] \[[bibtex](https://dblp.org/rec/journals/tist/JiangTSWZPLXY21.html?view=bibtex)\]
 
-```shell
-java -jar open-pdf-sign.jar --config /path/to/config.yaml
-```
+8. **A GDPR-compliant Ecosystem for Speech Recognition with Transfer, Federated, and Evolutionary Learning.**
+   *Di Jiang, Conghui Tan, Jinhua Peng, Chaotao Chen, Xueyang Wu, Weiwei Zhao, Yuanfeng Song, Yongxin Tong, Chang Liu, Qian Xu, Qiang Yang, Li Deng.* ACM Trans. Intell. Syst. Technol. 12(3): 30:1-30:19 (2021). \[[paper](https://doi.org/10.1145/3447687)\] \[[bibtex](https://dblp.org/rec/journals/tist/JiangTPCWZSTLXY21.html?view=bibtex)\]
 
-This way, you could also configure multiple (virtual) hosts.
+9. **An Efficient Approach for Cross-Silo Federated Learning to Rank.**
+   *Yansheng Wang, Yongxin Tong, Dingyuan Shi, Ke Xu.* ICDE 2021. \[[paper](https://doi.org/10.1109/ICDE51399.2021.00102)\] \[[slides](https://hufudb.com/static/paper/2021/ICDE2021_An%20Efficient%20Approach%20for%20Cross-Silo%20Federated%20Learning%20to%20Rank.pptx)\] \[[bibtex](https://dblp.org/rec/conf/icde/WangTS021.html?view=bibtex)\]
 
-## Development
+10. **Federated Learning in the Lens of Crowdsourcing.**
+    *Yongxin Tong, Yansheng Wang, Dingyuan Shi.* IEEE Data Eng. Bull. 43(3): 26-36 (2020). \[[paper](http://sites.computer.org/debull/A20sept/p26.pdf)\] \[[bibtex](https://dblp.org/rec/journals/debu/TongWS20.html?view=bibtex)\]
 
-### Requirements
+11. **Federated Latent Dirichlet Allocation: A Local Differential Privacy Based Framework.**
+    *Yansheng Wang, Yongxin Tong, Dingyuan Shi.* AAAI 2020. \[[paper](https://ojs.aaai.org/index.php/AAAI/article/view/6096)\] \[[bibtex](https://dblp.org/rec/conf/aaai/WangTS20.html?view=bibtex)\]
 
-* [Maven](https://maven.apache.org/)
-* JDK 8
+12. **Federated Acoustic Model Optimization for Automatic Speech Recognition.**
+    *Conghui Tan, Di Jiang, Huaxiao Mo, Jinhua Peng, Yongxin Tong, Weiwei Zhao, Chaotao Chen, Rongzhong Lian, Yuanfeng Song, Qian Xu.* DASFAA 2020. \[[paper](https://doi.org/10.1007/978-3-030-59419-0_54)\] \[[bibtex](https://dblp.org/rec/conf/dasfaa/TanJMPTZCLSX20.html?view=bibtex)\]
 
-### Build
+13. **Efficient and Fair Data Valuation for Horizontal Federated Learning.**
+    *Shuyue Wei, Yongxin Tong, Zimu Zhou, Tianshu Song.* Federated Learning 2020. \[[paper](https://doi.org/10.1007/978-3-030-63076-8_10)\] \[[bibtex](https://dblp.org/rec/series/lncs/WeiTZS20.html?view=bibtex)\]
 
-```shell
-mvn package
-```
+14. **Profit Allocation for Federated Learning.**
+    *Tianshu Song, Yongxin Tong, Shuyue Wei.* IEEE BigData 2019. \[[paper](https://doi.org/10.1109/BigData47090.2019.9006327)\] \[[slides](https://hufudb.com/static/paper/2019/BigData2019_Profit%20Allocation%20for%20Federated%20Learning_Slides.pptx)\] \[[bibtex](https://dblp.org/rec/conf/bigdataconf/SongTW19.html?view=bibtex)\]
 
-## License
-
-This project is licensed under the [Apache 2.0-License](LICENSE).  
-The code contained in the [org/openpdfsign/dss subfolder](https://github.com/open-pdf-sign/open-pdf-sign/tree/master/src/main/java/org/openpdfsign/dss)
-extends and modifies code from the [dss project](https://github.com/esig/dss/) which is licensed under the [LGPL-2.1 license](https://github.com/esig/dss/blob/master/LICENSE).  
-
-This project received financial support from [netidee](https://www.netidee.at/open-pdf-sign).
+15. **Federated Machine Learning: Concept and Applications.**
+    *Qiang Yang, Yang Liu, Tianjian Chen, Yongxin Tong.* ACM Trans. Intell. Syst. Technol. 10(2): 12:1-12:19 (2019). \[[paper](https://doi.org/10.1145/3298981)\] \[[bibtex](https://dblp.org/rec/journals/tist/YangLCT19.html?view=bibtex)\]

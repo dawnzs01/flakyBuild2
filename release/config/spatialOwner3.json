@@ -1,0 +1,31 @@
+{
+  "id": 3,
+  "port": 12347,
+  "hostname": "localhost",
+  "implementorconfigpath": "./config/owner.yml",
+  "adapterconfig": {
+    "datasource": "CSV",
+    "url": "../dataset/sample/spatial/database2",
+    "delimiter": "|"
+  },
+  "tables": [
+    {
+      "actualName": "spatial",
+      "publishedName": "spatial",
+      "publishedColumns": [
+        {
+          "name": "S_ID",
+          "type": "LONG",
+          "modifier": "public",
+          "columnId": 0
+        },
+        {
+          "name": "S_POINT",
+          "type": "GEOMETRY",
+          "modifier": "protected",
+          "columnId": 1
+        }
+      ]
+    }
+  ]
+}

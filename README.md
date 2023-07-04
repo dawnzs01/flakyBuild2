@@ -1,65 +1,36 @@
-# GAppsMod (ex GoogleDialerMod)
-The ultimate All-In-One Utility to tweak Google applications.
+<p align="center"><img src="https://i.imgur.com/SXaePW6.png" alt="Logo" width="200"></p>
+<h1 align="center">Create  <br>
+	<a href="https://www.patreon.com/simibubi"><img src="https://img.shields.io/badge/Supporters-80-ff5733" alt="Patreon"></a>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/create-fabric/files"><img src="https://img.shields.io/badge/Available%20for-MC%201.18%20to%20MC%201.19-c70039" alt="Supported Versions"></a>
+	<a href="https://github.com/Creators-of-Create/Create/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Creators-of-Create/Create?style=flat&color=900c3f" alt="License"></a>
+	<a href="https://discord.gg/hmaD7Se"><img src="https://img.shields.io/discord/620934202875183104?color=5865f2&label=Discord&style=flat" alt="Discord"></a>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/create-fabric"><img src="http://cf.way2muchnoise.eu/624165.svg" alt="CF"></a>
+    <a href="https://modrinth.com/mod/create-fabric"><img src="https://img.shields.io/modrinth/dt/create-fabric?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
+    <br><br>
+    <a href="https://fabricmc.net/"><img
+        src="https://cdn.discordapp.com/attachments/705864145169416313/969720133998239794/fabric_supported.png"
+        alt="Supported on Fabric"
+        width="200"
+    ></a>
+    <a href="https://quiltmc.org/"><img
+        src="https://cdn.discordapp.com/attachments/705864145169416313/969716884482183208/quilt_supported.png"
+        alt="Supported on Quilt"
+        width="200"
+    ></a>
+</h1>
 
+<p>Welcome to Create, a mod offering a variety of tools and blocks for Building, Decoration, and Aesthetic Automation.</p>
+<p>The added elements of tech are designed to leave as many design choices to the player as possible. With Create, the game isn't played inside a bunch of UIs, it challenges you to set up contraptions of animated components working together in many possible arrangements.</p>
+<p>Create's visual in-game documentation called 'Ponder' will guide you through all added mechanics and gadgets.</p>
+<p>&nbsp;</p>
+<p align="center"><a href="https://github.com/Fabricators-of-Create/Create/issues"><img src="https://i.imgur.com/qPmjSXy.png" width="160" /></a> <a href="https://www.youtube.com/channel/UCrKV2QTuyGcv4E3eSJpBiYA/playlists"><img src="https://i.imgur.com/L1bU9mr.png" width="160" /></a><a href="https://discord.gg/hmaD7Se"><img src="https://i.imgur.com/uf6V9ZX.png" width="160" /></a> <a href="https://github.com/Creators-of-Create/Create/wiki/Supporting-the-Project"><img src="https://i.imgur.com/fHQ45KR.png" width="227" /></a></p>
 
-## Downloads:
- - Please visit the [GAppsMod Release Page](https://github.com/jacopotediosi/GAppsMod/releases)
+<h4 align="center">Find out more about Create on our <a href="https://www.curseforge.com/minecraft/mc-mods/create-fabric">CurseForge</a> or <a href="https://modrinth.com/mod/create-fabric">Modrinth</a> page</h4>
+<h4 align="center">Looking for the Forge version? <a href="https://github.com/Creators-of-Create/Create">Find it here</a></h4>
 
+<h3 align="center">Development</h3>
 
-## How do I use it?
-- Always make sure you're using the latest beta version of the Google apps you want to tweak to take advantage of the latest features
-- Allow root access to GAppsMod, apply any mods you want, then force close and reopen Google apps a few times for them to take effect
-- There is no need to keep GAppsMod installed after applying the desired mods, because they (should) survive Google applications updates / reinstalls over time
-
-
-## How does it work?
-In every Android device there is a database, called Phenotype.db, managed by Google Play Services, containing "flags" that affect the behavior of all installed Google applications.
-
-Some of those flags concern applications core functionalities, while others pertain to hidden or upcoming features that have not yet been released.
-
-What GAppsMod does is execute SQLite queries on that database and override the configuration files of Google applications to enable or modify their functionality at will.
-
-
-## Features:
-- Supports all arm / arm64 / x86 / x86_64 devices and all Android versions from 5.0 (Lollipop)
-- Enable / disable hidden features for all users at once when Android "multiple users" mode is in use
-- Allows users to list and change all Phenotype DB boolean flags for all installed Google applications
-- A convenient home screen brings together the suggested mods for the most used Google applications
-
-
-## Currently suggested mods
-- For the **Phone** application ([link](https://play.google.com/store/apps/details?id=com.google.android.dialer)):
-    - Force **enable call recording** feature, even on unsupported devices or in unsupported countries ([ref](https://support.google.com/phoneapp/answer/9803950))
-        - Enable also **automatic call recording** ("always record") feature based on caller (otherwise only available in India)
-    - Silence the annoying "registration has started / ended" **call recording announcements** (only on Phone version <= 94.x)
-    - Force **enable call screening** and "revelio" (advanced automatic call screening) features, even on unsupported devices or in unsupported countries ([ref](https://support.google.com/phoneapp/answer/9118387))
-        - Allows users to choose the language for call screening
-- For the **Messages** application ([link](https://play.google.com/store/apps/details?id=com.google.android.apps.messaging)):
-    - Force **enable debug menu** (it can also be enabled without mods by entering `*xyzzy*` in the application's search field)
-    - Force **enable message organization** ("supersort")
-    - Force **enable marking conversations as unread**
-    - Force **enable verified SMS** settings menu ([ref](https://support.google.com/messages/answer/9326240))
-    - Force **enable always sending images by Google Photos links in SMS** ([ref](https://9to5google.com/2022/02/19/messages-google-photos/))
-    - Force **enable nudges and birthday reminders** ([ref](https://support.google.com/messages/answer/11555591))
-    - Force **enable Bard AI draft suggestions** ("magic compose") ([ref](https://9to5google.com/2023/05/05/google-messages-magic-compose-ai/))
-    - Force enable smart features: **spotlights suggestions** ([ref](https://9to5google.com/2023/02/02/google-messages-assistant/)), **stickers suggestions**, **smart compose** ([ref](https://9to5google.com/2020/06/30/gboard-android-smart-compose-google-messages/)), **smart actions (smart reply) in notifications**
-
-And much more coming soon :)
-
-
-## Demo
-![Demo GIF](https://github.com/jacopotediosi/GAppsMod/assets/20026524/5b13c935-4b12-46ac-b67d-0182004c8ac0)
-
-
-## Troubleshooting:
-- After enabling / disabling any mod, please force close and reopen a few times the Google application you are trying to mod. You may also need to reboot for the changes to take effect.
-- Before to report an issue try to delete Google apps data, to reboot your phone and to try again what didn't work
-
-
-## Donations
-If you really like my work, please consider a donation via [Paypal](https://paypal.me/jacopotediosi) or [Github Sponsor](https://github.com/sponsors/jacopotediosi). Even a small amount will be appreciated.
-
-
-## Credits:
-- Thanks to [Gabriele Rizzo aka shmykelsa](https://github.com/shmykelsa), [Jen94](https://github.com/jen94) and [SAAX by agentdr8](https://gitlab.com/agentdr8/saax) for their [AA-Tweaker](https://github.com/shmykelsa/AA-Tweaker) app, which inspired me making GAppsMod
-- [Libsu](https://github.com/topjohnwu/libsu) by [topjohnwu](https://github.com/topjohnwu)
+Looking to make an addon for Create? A template mod for a Fabric addon can be found
+[here](https://github.com/Fabricators-of-Create/create-fabric-addon-template),
+and a template for a multi-loader addon with Architectury can be found
+[here](https://github.com/Fabricators-of-Create/create-multiloader-addon-template).

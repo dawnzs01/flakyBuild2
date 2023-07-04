@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "create",
+  "version": "${version}",
+
+  "name": "Create",
+  "description": "Technology that empowers the player.",
+  "authors": [
+    "Fabricators of Create",
+    "Creators of Create"
+  ],
+  "contact": {
+    "issues": "https://github.com/Fabricators-of-Create/Create/issues",
+    "sources": "https://github.com/Fabricators-of-Create/Create"
+  },
+
+  "license": "MIT",
+  "icon": "logo.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.simibubi.create.Create"
+    ],
+    "client": [
+      "com.simibubi.create.CreateClient"
+    ],
+    "fabric-datagen": [
+      "com.simibubi.create.CreateData"
+    ],
+    "fabric-gametest": [
+      "com.simibubi.create.infrastructure.gametest.CreateGameTests"
+    ],
+    "emi": [
+      "com.simibubi.create.compat.emi.CreateEmiPlugin"
+    ],
+    "rei_client": [
+      "com.simibubi.create.compat.rei.CreateREI"
+    ],
+    "jei_mod_plugin": [
+      "com.simibubi.create.compat.jei.CreateJEI"
+    ],
+    "modmenu": [
+      "com.simibubi.create.compat.modmenu.CreateModMenuIntegration"
+    ]
+  },
+
+  "mixins": [ "create.mixins.json" ],
+  "accessWidener": "create.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": ">=${fabric_version}",
+    "minecraft": "${minecraft_version}"
+  },
+
+  "breaks": {
+    "optifabric": "*",
+    "colormatic": "<=3.1.1",
+    "iris": "<=1.2.5"
+  },
+
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/class_1688": [ "com/simibubi/create/foundation/utility/fabric/AbstractMinecartExtensions" ]
+    }
+  }
+}

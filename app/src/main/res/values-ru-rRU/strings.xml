@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Snapdrop</string>
+    <string name="err_no_browser">Не удаётся открыть браузер</string>
+    <string name="err_no_app">Нет установленных приложений для открытия этого файла</string>
+    <string name="open_url">Открыть URL</string>
+    <!-- Onboarding -->
+    <!-- Download -->
+    <string name="download_save_pending">Сохранение файла. Пожалуйста, подождите…</string>
+    <string name="download_successful">Загрузка завершена</string>
+    <string name="notification_channel_name">Загрузка завершена</string>
+    <!-- Action Buttons -->
+    <string name="open">открыть</string>
+    <string name="reset">сброс</string>
+    <string name="copy">скопировать</string>
+    <!-- Settings / About -->
+    <string name="pref_category_settings">Настройки</string>
+    <string name="logs">Отладочный журнал</string>
+    <string name="components_summary">Коснитесь для отображения</string>
+    <string name="version">Версия</string>
+    <string name="pref_device_name_title">Имя устройства</string>
+    <string name="pref_device_name_summary">Задать имя устройства, определенного пользователем</string>
+    <string name="keep_on_summary">(Рекомендуется) На многих устройствах наблюдаются проблемы с прерыванием передачи при выключенном экране</string>
+    <string name="keep_on_title">Не выключать экран</string>
+    <string name="floating_text_selection_title">Поделиться выделенным текстом</string>
+    <string name="floating_text_selection_summary">При выборе текста в других приложениях, будет предложено \"Отправить в Snapdrop\"</string>
+    <string name="floating_text_selection_activity_label">Отправить в Snapdrop</string>
+    <string name="settings_theme_title">Тема</string>
+    <string-array name="darkmode_entries">
+        <item>Системные настройки</item>
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </string-array>
+    <string name="save_location">Сохранить расположение</string>
+    <!-- File sharing -->
+    <string name="intent_file">Файл выбран для передачи</string>
+    <string name="intent_files">Файлы выбраны для передачи</string>
+    <string name="intent_content">Содержимое выбрано для передачи</string>
+    <string name="error_filechooser">Не удаётся выбрать файл</string>
+    <string name="error_network">Пожалуйста, убедитесь, что вы подключены к сети WiFi</string>
+    <string name="ignore_error_network">Всё равно попробовать</string>
+    <string name="error_not_reachable_title">Извините!</string>
+    <!-- Website Localization -->
+    <string name="website_instruction">Нажмите для отправки файлов или удерживайте для отправки сообщения</string>
+    <string name="website_file_received">Файл получен</string>
+    <string name="website_file_ask_before_download">Всегда спрашивать перед сохранением файла</string>
+    <string name="website_file_download">Сохранить</string>
+    <string name="website_footer_discovery">Вы можете быть обнаружены всеми в этой сети</string>
+    <string name="website_footer_known_as">Вы известны как %s</string>
+    <string name="website_about_subheading">Самый простой способ передачи файлов между устройствами</string>
+</resources>

@@ -1,143 +1,85 @@
-name: Bug Report
-description: Create a bug report to help us improve Create
-labels: [ "bug" ]
+name: Bug report
+description: Create a bug report for the "Snapdrop for Android" app.
+labels: bug
 body:
-    -   type: textarea
-        attributes:
-            label: Describe the Bug
-            description: A clear and concise description of what the bug is
-        validations:
-            required: true
-    -   type: textarea
-        attributes:
-            label: Reproduction Steps
-            description: Tell us about the steps to reproduce the bug.
-            value: |
-                1.
-                2.
-                3.
-                ...
-        validations:
-            required: true
-    -   type: textarea
-        attributes:
-            label: Expected Result
-            description: A clear and concise description of what you expected to happen
-        validations:
-            required: true
-    -   type: textarea
-        attributes:
-            label: Screenshots and Videos
-            description: If applicable, add screenshots or videos to help explain your problem.
-        validations:
-            required: false
-    -   type: input
-        attributes:
-            label: Crash Report or Log
-            description: If applicable, please add a **link** to the crash report or log that was created when this issue occured. You can upload the crash report to a site like Pastebin or GitHub Gist. Please **do not** paste the whole crash report in this issue.
-        validations:
-            required: false
-    -   type: input
-        attributes:
-            label: Operating System
-            description: The operating system you were using when the bug occured
-            placeholder: Windows 11
-        validations:
-            required: true
-    -   type: dropdown
-        attributes:
-            label: Mod Version
-            description: The version of the mod you were using when the bug occured
-            options:
-                - "0.5.1b"
-                - "0.5.1a"
-                - "0.5.0i"
-                - "0.5.0h"
-                - "0.5.0g"
-                - "0.5.0f"
-                - "0.5.0e"
-                - "0.5.0d"
-                - "0.5.0c"
-                - "0.5.0b"
-                - "0.5.0a"
-                - "0.5.0"
-                - "0.4.1"
-                - "0.4.0f"
-                - "0.4.0e"
-                - "0.4.0d"
-                - "0.4.0c"
-                - "0.4.0b"
-                - "0.4.0a"
-                - "0.4.0"
-                - "0.3.2g"
-                - "0.3.2f"
-                - "0.3.2e"
-                - "0.3.2d"
-                - "0.3.2c"
-                - "0.3.2b"
-                - "0.3.2a"
-                - "0.3.2"
-                - "0.3.1c"
-                - "0.3.1b"
-                - "0.3.1a"
-                - "0.3.1"
-                - "0.3.0e"
-                - "0.3.0d"
-                - "0.3.0c"
-                - "0.3.0b"
-                - "0.3.0a"
-                - "0.3.0"
-                - "0.2.4e"
-                - "0.2.4d"
-                - "0.2.4c"
-                - "0.2.4b"
-                - "0.2.4a"
-                - "0.2.4"
-                - "0.2.3"
-                - "0.2.2b"
-                - "0.2.2a"
-                - "0.2.2"
-                - "0.2.1"
-                - "0.2.0"
-                - "0.1.1a"
-                - "0.1.1"
-                - "0.1.0"
-                - "0.0.5"
-                - "0.0.4"
-                - "0.0.3"
-                - "0.0.2"
-                - "0.0.1"
-        validations:
-            required: true
-    -   type: dropdown
-        attributes:
-            label: Minecraft Version
-            description: The version of Minecraft you were using when the bug occured
-            options:
-                - "1.19.2"
-                - "1.18.2"
-                - "1.18.1"
-                - "1.18"
-                - "1.17.1"
-                - "1.16.5"
-                - "1.16.4"
-                - "1.16.3"
-                - "1.15.2"
-                - "1.14.4"
-        validations:
-            required: true
-    -   type: textarea
-        attributes:
-            label: Other Mods
-            description: Please list any other mods that were running when the crash happened.
-        validations:
-            required: false
-    -   type: textarea
-        attributes:
-            label: Additional Context
-            description: Add any extra context about the bug here
-        validations:
-            required: false
-    -   type: markdown
-        attributes:
-            value: "Thank you for taking the time to make this bug report and help improve Create!"
+  - type: markdown
+    attributes:
+      value: |
+        Welcome! Thanks for taking the time to submit a bug report.
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: What version of "Snapdrop for Android" are you using? The version can be found as the last entery inside the Settings of the app.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: android_version
+    attributes:
+      label: Android version
+      multiple: false
+      description: What version of Android are you running? This can usually be found in your device's settings in the "About" section.
+      options:
+        - newer
+        - 12
+        - 11
+        - 10
+        - 9
+        - 8.1
+        - 8.0
+        - 7.1
+        - 7.0
+        - 6
+        - 5.1
+        - 5.0
+        - I don't know
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Describe the bug
+      description: Write a clear and concise description of the bug.
+      placeholder: What went wrong? 
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_steps
+    attributes:
+      label: Steps to reproduce the bug
+      description: |
+        A clear and concise description of what the bug is. Bugs that are not reproducible cannot be investigated.
+      placeholder: |
+        Steps to reproduce the bug (e.g.):
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+      
+  - type: textarea
+    id: bug_crash
+    attributes:
+      label: Stacktrace
+      description: |
+        Is this bug a crash? If yes, please attach a log...
+      placeholder: |
+        You can create a log via `Settings > Debug Log`
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots and additional context
+      description: |
+        If applicable, add screenshots to help explain your problem. You can also use this section to write any further context about the problem here.
+      placeholder: |
+        Drag the screenshot files here to attach them.
+    validations:
+      required: false

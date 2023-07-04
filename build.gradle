@@ -1,225 +1,29 @@
-//file:noinspection GrMethodMayBeStatic
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
 plugins {
-    id "fabric-loom" version "1.2.+"
-
-    id "io.github.juuxel.loom-quiltflower" version "1.+" // Quiltflower, a better decompiler
-    id "io.github.p03w.machete" version "1.1.4" // automatic jar compressing on build
-
-    id "com.modrinth.minotaur" version "2.+" // modrinth publishing
-    id "com.matthewprenger.cursegradle" version "1.+" // curseforge publishing
-    id "maven-publish" // maven publishing
+    id 'com.mikepenz.aboutlibraries.plugin' version '10.7.0'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-String runNumber = System.getenv("GITHUB_RUN_NUMBER")
-String build = runNumber != null ? "build.$runNumber" : "local"
-version = "$mod_version-$build+mc$minecraft_version"
-
-group = project.maven_group
-archivesBaseName = "create-fabric"
-
-repositories {
-    maven { url = "https://maven.quiltmc.org/repository/release" } // QM
-    maven { url = "https://maven.parchmentmc.org" } // Parchment
-
-    maven { url = "https://maven.fabricmc.net/" } // FAPI, Loader
-    maven { url = "https://mvn.devos.one/snapshots/" } // Registrate, Porting Lib, Forge Tags, Milk Lib
-    maven { url = "https://jitpack.io/" } // for Porting Lib: Mixin Extras, Fabric ASM
-    maven { url = "https://cursemaven.com" } // Forge Config API Port
-    maven { url = "https://maven.tterrag.com/" } // Flywheel
-    maven { url = "https://maven.shedaniel.me/" } // REI and deps
-    maven { url = "https://api.modrinth.com/maven" } // LazyDFU, Sodium, Sandwichable
-    maven { url = "https://maven.terraformersmc.com/" } // Mod Menu, Trinkets
-    maven { url = "https://ladysnake.jfrog.io/artifactory/mods" } // CCA, for Trinkets
-    maven { url = "https://modmaven.dev" } // Botania
-    maven { // Reach Entity Attributes
-        url = "https://maven.jamieswhiteshirt.com/libs-release"
-        content { includeGroup("com.jamieswhiteshirt") }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
 
-configurations.configureEach {
-    resolutionStrategy.eachDependency {
-        if (requested.module.name == "fabric-loader") {
-            useVersion(loader_version)
-        }
-    }
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
-
-dependencies {
-    setup(dependencies)
-    devEnv(dependencies)
-    compat(dependencies)
-    dependencies(dependencies)
-}
-
-// actual dependencies for Create
-def dependencies(DependencyHandler deps) {
-    deps.modImplementation("net.fabricmc.fabric-api:fabric-api:$fabric_version")
-
-    deps.modApi(deps.include("io.github.fabricators_of_create:Porting-Lib:$port_lib_version+$minecraft_version"))
-
-    deps.modApi(deps.include("com.tterrag.registrate_fabric:Registrate:$registrate_version")) {
-        exclude(group: "io.github.fabricators_of_create") // avoid duplicate Porting Lib
-    }
-
-    deps.modApi(deps.include("me.alphamode:ForgeTags:$forge_tags_version"))
-    deps.modApi(deps.include("com.electronwill.night-config:core:$night_config_version"))
-    deps.modApi(deps.include("com.electronwill.night-config:toml:$night_config_version"))
-    deps.modApi(deps.include("curse.maven:forge-config-api-port-fabric-547434:$config_api_id"))
-    deps.modApi(deps.include("com.jozufozu.flywheel:flywheel-fabric-$flywheel_minecraft_version:$flywheel_version"))
-    deps.modApi(deps.include("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version"))
-    deps.modApi(deps.include("io.github.tropheusj:milk-lib:$milk_lib_version"))
-    deps.api(deps.include("com.google.code.findbugs:jsr305:$jsr305_version"))
-}
-
-// initial project setup
-def setup(DependencyHandler deps) {
-    deps.minecraft("com.mojang:minecraft:$minecraft_version")
-    deps.mappings(loom.layered {
-        it.mappings("org.quiltmc:quilt-mappings:$minecraft_version+build.$qm_version:intermediary-v2")
-        it.parchment("org.parchmentmc.data:parchment-$minecraft_version:$parchment_version@zip")
-        it.officialMojangMappings { nameSyntheticMembers = false }
-    })
-    deps.modImplementation("net.fabricmc:fabric-loader:$loader_version")
-}
-
-// setup mods that enhance development
-def devEnv(DependencyHandler deps) {
-    deps.modLocalRuntime("maven.modrinth:lazydfu:$lazy_dfu_version")
-    deps.modLocalRuntime("com.terraformersmc:modmenu:$modmenu_version")
-    deps.modLocalRuntime("dev.emi:trinkets:$trinkets_version")
-    if (cc_enabled) {
-        deps.modLocalRuntime("maven.modrinth:cc-restitched:$cc_version")
-        deps.modLocalRuntime("maven.modrinth:cloth-config:$cloth_version")
-    }
-}
-
-// setup mods that are available for compatibility reasons
-def compat(DependencyHandler deps) {
-    deps.modCompileOnly("maven.modrinth:cc-restitched:$cc_version")
-
-    deps.modCompileOnly("vazkii.botania:Botania:$botania_version") { transitive = false }
-    deps.modCompileOnly("com.terraformersmc:modmenu:$modmenu_version")
-    deps.modCompileOnly("maven.modrinth:sandwichable:$sandwichable_version")
-    deps.modCompileOnly("maven.modrinth:sodium:$sodium_version")
-
-    deps.modCompileOnly("dev.emi:trinkets:$trinkets_version") { exclude(group: "com.terraformersmc") }
-    deps.modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:$cca_version")
-    deps.modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:$cca_version")
-
-    recipeViewers(deps)
-}
-
-// setup the three recipe viewer mods
-def recipeViewers(DependencyHandler deps) {
-    // EMI
-    deps.modCompileOnly("dev.emi:emi:$emi_version") { transitive = false }
-    // JEI
-    deps.modCompileOnly("mezz.jei:jei-$minecraft_version-fabric:$jei_version") { transitive = false }
-    // REI
-    deps.modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version")
-    deps.modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
-
-    switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
-        case "jei": deps.modLocalRuntime("mezz.jei:jei-$minecraft_version-fabric:$jei_version"); break
-        case "rei": deps.modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"); break
-        case "emi": deps.modLocalRuntime("dev.emi:emi:$emi_version"); break
-        case "disabled": break
-        default: println("Unknown recipe viewer specified: $recipe_viewer. Must be JEI, REI, EMI, or disabled.")
-    }
-}
-
-machete {
-    enabled = Boolean.getBoolean("PUBLISHING") // only optimize published releases
-}
-
-task buildOrPublish {
-    group = "build"
-    String mavenUser = System.getenv("MAVEN_USER")
-    if (mavenUser != null && !mavenUser.isEmpty()) {
-        dependsOn(tasks.getByName("publish"))
-        println("prepared for publish")
-    } else {
-        dependsOn(tasks.getByName("build"))
-        println("prepared for build")
-    }
-}
-
-loom {
-    accessWidenerPath = file("src/main/resources/create.accesswidener")
-    sourceSets {
-        main {
-            resources {
-                srcDir("src/generated/resources")
-                exclude("src/generated/resources/.cache")
-            }
-        }
-    }
-
-    runs {
-        datagen {
-            client()
-
-            name "Data Generation"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}"
-            vmArg "-Dfabric-api.datagen.modid=create"
-            vmArg "-Dporting_lib.datagen.existing_resources=${file("src/main/resources")}"
-        }
-
-        server {
-            runDir "run/server"
-        }
-
-        gametestServer {
-            server()
-            name "Headlesss GameTests"
-            vmArg "-Dfabric-api.gametest"
-            vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
-            runDir "run/gametest"
-        }
-    }
-}
-
-processResources {
-    exclude("**/*.bbmodel", "**/*.lnk")
-
-    Map<String, String> properties = new HashMap<>()
-    properties.put("version", version)
-    properties.put("loader_version", loader_version)
-    properties.put("fabric_version", fabric_version)
-    properties.put("minecraft_version", minecraft_version)
-
-    properties.forEach((k, v) -> inputs.property(k, v))
-
-    filesMatching("fabric.mod.json") {
-        expand properties
-    }
-
-    filesMatching("create.mixins.json") {
-        expand "archivesBaseName": archivesBaseName
-    }
-
-    duplicatesStrategy = DuplicatesStrategy.WARN
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = Integer.parseInt(sourceCompatibility)
-}
-
-java {
-    withSourcesJar()
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_$archivesBaseName" }
-    }
-}
-
-// see gradle/publishing.gradle for publishing
-apply from: "gradle/publishing/publishing.gradle"
-apply from: "gradle/compat/compat.gradle"

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Snapdrop</string>
+    <string name="err_no_browser">Browser kan niet worden geopend</string>
+    <string name="err_no_app">Geen app gevonden om dit bestand te openen</string>
+    <string name="open_url">URL openen</string>
+    <!-- Onboarding -->
+    <!-- Download -->
+    <string name="download_save_pending">Het bestand opslaan. Even geduld…</string>
+    <string name="download_successful">Download geslaagd</string>
+    <string name="notification_channel_name">Download voltooid</string>
+    <!-- Action Buttons -->
+    <string name="open">openen</string>
+    <string name="install">installeren</string>
+    <string name="reset">resetten</string>
+    <string name="copy">kopiëren</string>
+    <!-- Settings / About -->
+    <string name="pref_category_settings">Instellingen</string>
+    <string name="logs">Foutopsporingslogboek</string>
+    <string name="components_summary">Tik om weer te geven</string>
+    <string name="version">Versie</string>
+    <string name="pref_device_name_title">Apparaatnaam</string>
+    <string name="pref_device_name_summary">Stel een apparaatnaam in</string>
+    <string name="keep_on_summary">(Aanbevolen) Veel apparaten hebben problemen met onderbroken overdrachten waneer het scherm wordt uitgeschakeld</string>
+    <string name="keep_on_title">Houd het scherm aan tijdens de overdracht</string>
+    <string name="floating_text_selection_title">Zwevende-tekstselectie</string>
+    <string name="floating_text_selection_summary">Bij het selecteren van tekst in andere apps wordt een optie \"Verstuur met Snapdrop\" getoond</string>
+    <string name="floating_text_selection_activity_label">Verstuur met Snapdrop</string>
+    <string name="settings_theme_title">Thema</string>
+    <string-array name="darkmode_entries">
+        <item>Systeeminstelling</item>
+        <item>Licht</item>
+        <item>Donker</item>
+    </string-array>
+    <string name="baseurl_unofficial_instances">Bekijk de <a href="">FAQ</a> voor een lijst met niet-officiële instanties. Houd er rekening mee dat sommige instanties mogelijk niet goed werken in de app.</string>
+    <string name="save_location">Locatie opslaan</string>
+    <!-- File sharing -->
+    <string name="intent_file">Een bestand is geselecteerd om te delen</string>
+    <string name="intent_files">Bestanden zijn geselecteerd om te delen</string>
+    <string name="intent_content">Inhoud is geselecteerd om te delen</string>
+    <string name="error_filechooser">Kan bestandskiezer niet openen</string>
+    <string name="error_network">Controleer of u verbonden bent met een WiFi-netwerk</string>
+    <string name="ignore_error_network">Toch proberen</string>
+    <string name="error_not_reachable_title">Oeps, sorry!</string>
+    <!-- Website Localization -->
+    <string name="website_instruction">Tik om bestanden te delen of houd ingedrukt om een bericht te sturen</string>
+    <string name="website_file_received">Bestand ontvangen</string>
+    <string name="website_file_ask_before_download">Altijd vragen voordat een bestand wordt opgeslagen</string>
+    <string name="website_file_download">Opslaan</string>
+    <string name="website_footer_discovery">Je kunt door iedereen op dit netwerk worden ontdekt</string>
+    <string name="website_footer_known_as">Jij bent %s</string>
+    <string name="website_about_subheading">De makkelijkste manier om bestanden te verplaatsen tussen apparaten</string>
+</resources>

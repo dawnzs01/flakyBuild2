@@ -1,0 +1,18 @@
+version: '3'
+services:
+  aliyundrive-webdav:
+    image: eritpchy/aliyundrive-webdav
+    container_name: aliyundrive-webdav
+    restart: always
+    volumes:
+      - /dev/null:/webdav.log
+      - /etc/localtime:/etc/localtime
+      - ./conf:/conf
+    ports:
+      - "8080:8080"
+    tty: true
+    environment:
+      - TZ=Asia/Shanghai
+      - ALIYUNDRIVE_DOWNLOAD_PROXY_MODE=Auto
+      - ALIYUNDRIVE_REFRESH_TOKEN=${REFRESH_TOKEN}
+      - ALIYUNDRIVE_AUTH_PASSWORD=${AUTH_PASSWORD}

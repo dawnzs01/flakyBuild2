@@ -1,0 +1,23 @@
+logging:
+  file:
+    path: /var/log/
+    name: webdav.log
+#    max-size: 200MB
+  level:
+    okhttp3: warn
+    root: info
+#  level:
+#    net:
+#      sf:
+#        webdav: trace
+
+aliyundrive:
+  auth:
+    enable: true
+    username: admin
+    password: admin
+
+server:
+  tomcat:
+    connection-timeout: 1d
+  port: 8080

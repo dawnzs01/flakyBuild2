@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:fillViewport="true"
+    tools:context=".ui.activities.UiRoundness">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/container_marginTopBottom"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/content_marginTop">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/container_marginSide"
+                android:layout_marginEnd="@dimen/container_marginSide"
+                android:layout_marginBottom="@dimen/container_margin"
+                android:background="@drawable/container"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/container_paddingSide"
+                android:paddingTop="@dimen/container_padding"
+                android:paddingEnd="@dimen/container_paddingSide"
+                android:paddingBottom="@dimen/container_padding"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/corner_radius_title"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="@dimen/cont_title_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/corner_radius_output"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorSecondary"
+                    android:textSize="@dimen/cont_desc_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/container_padding"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1.0">
+
+                        <ImageView
+                            android:id="@+id/brightness_bar_bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/qs_shape_preview_disabled"
+                            android:minHeight="48.0dip"
+                            tools:ignore="ContentDescription" />
+
+                        <ImageView
+                            android:id="@+id/brightness_bar_fg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="120dp"
+                            android:background="@drawable/qs_shape_preview_enabled"
+                            android:minHeight="48.0dip"
+                            tools:ignore="ContentDescription" />
+
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/auto_brightness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16.0dip"
+                        android:background="@drawable/qs_shape_preview_enabled"
+                        android:contentDescription="@null"
+                        android:padding="12.0dp"
+                        android:src="@drawable/ic_brightness_off"
+                        app:tint="@color/textColorPrimaryInverse" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/qs_tile_orientation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="-4dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/qs_tile_preview1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/qs_shape_preview_enabled"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="18dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="18dp"
+                            tools:ignore="NestedWeights">
+
+                            <ImageView
+                                android:id="@+id/qs_icon1"
+                                android:layout_width="20dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:contentDescription="@string/icon"
+                                android:src="@drawable/ic_qs_internet"
+                                app:tint="@color/textColorPrimaryInverse" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn1_title"
+                                    android:textColor="@color/textColorPrimaryInverse"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn1_desc"
+                                    android:textColor="@color/textColorSecondaryInverse" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/qs_tile_preview2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/qs_shape_preview_disabled"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="18dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="18dp"
+                            tools:ignore="RtlSymmetry">
+
+                            <ImageView
+                                android:id="@+id/qs_icon2"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="10dp"
+                                android:contentDescription="@string/icon"
+                                android:src="@drawable/ic_qs_airplane"
+                                app:tint="@color/textColorPrimary" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn2_title"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn2_desc"
+                                    android:textColor="@color/textColorSecondary" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/qs_tile_preview3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/qs_shape_preview_disabled"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="18dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="18dp"
+                            tools:ignore="NestedWeights,RtlHardcoded,RtlSymmetry">
+
+                            <ImageView
+                                android:id="@+id/qs_icon3"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="10dp"
+                                android:contentDescription="@string/icon"
+                                android:src="@drawable/ic_qs_location"
+                                app:tint="@color/textColorPrimary" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn3_title"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn3_desc"
+                                    android:textColor="@color/textColorSecondary" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/qs_tile_preview4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:background="@drawable/qs_shape_preview_enabled"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="16dp"
+                            android:paddingTop="18dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="18dp">
+
+                            <ImageView
+                                android:id="@+id/qs_icon4"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="10dp"
+                                android:contentDescription="@string/icon"
+                                android:src="@drawable/ic_qs_bluetooth"
+                                app:tint="@color/textColorPrimaryInverse" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn4_title"
+                                    android:textColor="@color/textColorPrimaryInverse"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-3dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@string/qstile_btn4_desc"
+                                    android:textColor="@color/textColorSecondaryInverse" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/corner_radius_seekbar"
+                    style="@style/customSeekBar"
+                    android:max="44"
+                    android:min="0"
+                    android:progress="28" />
+
+                <Button
+                    android:id="@+id/apply_radius"
+                    style="@style/buttonMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/container_padding"
+                    android:text="@string/btn_apply" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/view_header" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

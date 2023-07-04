@@ -1,142 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.tvbox.osc">
-
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-    <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Notification service on boot -->
+    <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> -->
+    <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- To notify about new iconify updates -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Access phone storage for installation of overlays in temporary folder -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Access phone storage for installation of overlays in temporary folder -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" /> <!-- Access phone storage for installation of overlays in temporary folder -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- For checking new updates -->
 
     <queries>
-        <intent>
-            <action android:name=".ui.activity.AppsActivity" />
-        </intent>
+        <package android:name="com.maxmpz.audioplayer" />
+        <package android:name="code.name.monkey.retromusic" />
+        <package android:name="com.awedea.nyx" />
+        <package android:name="com.kapp.youtube.final" />
+        <package android:name="com.shadow.blackhole" />
+        <package android:name="in.krosbits.musicolet" />
+        <package android:name="com.google.android.youtube" />
+        <package android:name="com.google.android.apps.youtube.music" />
+        <package android:name="app.revanced.android.youtube" />
+        <package android:name="app.revanced.android.apps.youtube.music" />
     </queries>
 
     <application
-        android:name=".base.App"
-        android:allowBackup="true"
-        android:configChanges="orientation|keyboardHidden|screenSize"
-        android:hardwareAccelerated="true"
-        android:icon="@drawable/app_icon"
-        android:banner="@drawable/app_banner"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:networkSecurityConfig="@xml/network_security_config"
+        android:name=".Iconify"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:extractNativeLibs="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/derived_app_name"
+        android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true">
-
+        android:theme="@style/Theme.Iconify"
+        tools:replace="android:allowBackup"
+        tools:targetApi="tiramisu">
         <activity
-            android:name=".ui.activity.HomeActivity"
-            android:screenOrientation="sensorLandscape"
-            android:exported="true">
+            android:name=".ui.activities.Switch"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.OnBoardingScreen3"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.OnBoardingScreen2"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.OnBoardingScreen1"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ProgressBar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedBatteryStyle"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ToastFrame"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.QsTileSize"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.NotificationPixel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.IconShape"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.SettingsIcons"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Statusbar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedOthers"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ColoredBattery"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedQuickSettings"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedBackgroundChip"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedHeaderClock"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedHeaderImage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedTransparencyBlur"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.XposedLockscreenClock"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Miscellaneous"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.AppUpdates"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Changelog"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Experimental"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MonetEngine"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.NavigationBar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.VolumePanel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.BrightnessBarPixel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.QsPanelTilePixel"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.QsIconLabel"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.QsRowColumn"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.BasicColors"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.UiRoundness"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Info"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MediaPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.MediaIcons"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.Notification"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.QsPanelTile"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.BrightnessBar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.IconPack"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:theme="@style/Theme.Iconify.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.PlayActivity"
-            android:screenOrientation="sensorLandscape"
-            android:supportsPictureInPicture="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
-        <activity
-            android:name=".ui.activity.DetailActivity"
-            android:screenOrientation="sensorLandscape"
-            android:supportsPictureInPicture="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
-        <activity
-            android:name=".ui.activity.HistoryActivity"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.LivePlayActivity"
-            android:screenOrientation="sensorLandscape"
-            android:supportsPictureInPicture="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
-        <activity
-            android:name=".ui.activity.CollectActivity"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.PushActivity"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.DriveActivity"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.SearchActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.FastSearchActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.AppsActivity"
-            android:screenOrientation="sensorLandscape" />
-        <activity
-            android:name=".ui.activity.SettingActivity"
-            android:screenOrientation="sensorLandscape" />
 
-        <receiver android:name=".receiver.SearchReceiver"
-            android:exported="true">
+        <activity-alias
+            android:name=".SplashActivityThemed"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_themed"
+            android:roundIcon="@mipmap/ic_launcher_round_themed"
+            android:targetActivity=".SplashActivity"
+            android:theme="@style/Theme.Iconify.SplashScreen">
             <intent-filter>
-                <action android:name="android.content.movie.search.Action" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.DetailReceiver"
-            android:exported="true">
+        </activity-alias>
+
+        <activity-alias
+            android:name=".SplashActivityRetro"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_retro"
+            android:roundIcon="@mipmap/ic_launcher_round_retro"
+            android:targetActivity=".SplashActivity"
+            android:theme="@style/Theme.Iconify.SplashScreen">
             <intent-filter>
-                <action android:name="android.content.movie.detail.Action" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.CustomWebReceiver"
+        </activity-alias>
+
+        <receiver
+            android:name=".services.BootCompletedReceiver"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.content.movie.custom.web.Action" />
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+        <service
+            android:name=".services.BackgroundService"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService" />
+        <service
+            android:name=".services.TileMonetEngine"
+            android:exported="true"
+            android:icon="@drawable/ic_app_logo"
+            android:label="Monet Engine"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+        <service
+            android:name=".services.TilePitchBlack"
+            android:exported="true"
+            android:icon="@drawable/ic_app_logo"
+            android:label="Pitch Black"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service> <!-- xposed meta data -->
         <meta-data
-            android:name="design_width_in_dp"
-            android:value="1280" />
+            android:name="xposedmodule"
+            android:value="true" />
         <meta-data
-            android:name="design_height_in_dp"
-            android:value="720" />
-
+            android:name="xposeddescription"
+            android:value="@string/iconify_slogan" />
         <meta-data
-            android:name="xwalk_enable_download_mode"
-            android:value="enable" />
+            android:name="xposedminversion"
+            android:value="82" />
         <meta-data
-            android:name="xwalk_verify"
-            android:value="disable" />
+            android:name="xposedscope"
+            android:resource="@array/module_scope" /> <!-- Remote Preferences Provider -->
+        <provider
+            android:name=".services.RemotePrefProvider"
+            android:authorities="${applicationId}"
+            android:directBootAware="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
     </application>
 
 </manifest>

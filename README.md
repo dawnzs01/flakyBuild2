@@ -1,81 +1,115 @@
-## DongTai-agent-java
-------
-[中文版本(Chinese version)](README_CN.md)
+# 🍃 Spring Cloud AWS
 
-[![license Apache-2.0](https://img.shields.io/github/license/HXSecurity/DongTai-agent-java)](https://github.com/HXSecurity/DongTai-agent-java/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/HXSecurity/DongTai-agent-java.svg?label=Stars&logo=github)](https://github.com/HXSecurity/DongTai-agent-java)
-[![GitHub forks](https://img.shields.io/github/forks/HXSecurity/DongTai-Agent-Java?label=Forks&logo=github)](https://github.com/HXSecurity/DongTai-agent-java)
-[![GitHub Contributors](https://img.shields.io/github/contributors-anon/HXSecurity/DongTai-agent-java?label=Contributors&logo=github)](https://github.com/HXSecurity/DongTai-agent-java)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
+
+Simplifies using AWS managed services in a Spring and Spring Boot applications.
+
+For a deep dive into the project, refer to the Spring Cloud AWS documentation:
+
+| Version                | Reference Docs                                                                                   | API Docs                                                                            |
+|------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| Spring Cloud AWS 3.0.1 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/3.0.1/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/3.0.1/apidocs/index.html) | 
+| Spring Cloud AWS 2.4.4 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.4.4/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.4.4/apidocs/index.html) | 
+| Spring Cloud AWS 2.3.5 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.3.5/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.3.5/apidocs/index.html) |
+
+## Sponsors
+
+Big thanks to [Localstack](https://localstack.cloud) for providing PRO licenses to the development team!
+
+<a href="https://localstack.cloud"><img src="https://user-images.githubusercontent.com/47351025/215054012-f5af0761-0bd5-49c6-bd3e-c6b2a6844f53.png" height="100" /></a>
+
+## Compatibility with Spring Project Versions
+
+This project has dependency and transitive dependencies on Spring Projects. The table below outlines the versions of Spring Cloud, Spring Boot and Spring Framework versions that are compatible with certain Spring Cloud AWS version.
+
+| Spring Cloud AWS             | Spring Cloud                                                                                                          | Spring Boot  | Spring Framework | AWS Java SDK |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------|------------------|--------------|
+| 2.3.x (maintenance mode)  	| [2020.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes) (3.0/Illford) | 2.4.x, 2.5.x | 5.3.x            | 1.x          |
+| 2.4.x (maintenance mode)  	| [2021.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2021.0-Release-Notes) (3.1/Jubilee) | 2.6.x, 2.7.x | 5.3.x            | 1.x          |
+| 3.0.x                        | [2022.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2022.0-Release-Notes) (4.0/Kilburn) | 3.0.x        | 6.0.x            | 2.x          |
+
+**Note**: 3.0.0-M2 is the last version compatible with Spring Boot 2.7.x and Spring Cloud 3.1. Starting from 3.0.0-M3, project has switched to Spring Boot 3.0.
+
+## Supported AWS integrations
+
+| AWS Service     | Spring Cloud AWS 2.x | Spring Cloud AWS 3.x                                                                                                                        |
+|-----------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| S3              | ✅                    | ✅                                                                                                                                           |
+| SNS             | ✅                    | ✅                                                                                                                                           |
+| SES             | ✅                    | ✅                                                                                                                                           |
+| Parameter Store | ✅                    | ✅                                                                                                                                           |
+| Secrets Manager | ✅                    | ✅                                                                                                                                           |
+| SQS             | ✅                    | ✅                                                                                                                                           |
+| RDS             | ✅                    | ❌                                                                                                                                           |
+| EC2             | ✅                    | ❌                                                                                                                                           |
+| ElastiCache     | ✅                    | ❌                                                                                                                                           |
+| CloudFormation  | ✅                    | ❌                                                                                                                                           |
+| CloudWatch      | ✅                    | ✅                                                                                                                                           |
+| Cognito         | ✅                    | [Covered by Spring Boot](https://docs.awspring.io/spring-cloud-aws/docs/3.0.0-SNAPSHOT/reference/html/index.html#migration-from-2-x-to-3-x) |
+| DynamoDB        | ❌                    | ✅                                                                                                                                           |
+
+Note, that Spring provides support for other AWS services in following projects:
+
+- [Spring Cloud Stream Binder AWS Kinesis](https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis)
+- [Spring Cloud Config Server](https://github.com/spring-cloud/spring-cloud-config) supports AWS Parameter Store and Secrets Manager
+- [Spring Integration for AWS](https://github.com/spring-projects/spring-integration-aws)
 
 
-[![CI](https://github.com/HXSecurity/DongTai-agent-java/actions/workflows/release-agent.yml/badge.svg)](https://github.com/HXSecurity/DongTai-agent-java/actions/workflows/release-agent.yml)
-[![Github Version](https://img.shields.io/github/v/release/HXSecurity/DongTai-agent-java?display_name=tag&include_prereleases&sort=semver)](https://github.com/HXSecurity/DongTai-agent-java/releases)
-[![Release downloads](https://shields.io/github/downloads/HXSecurity/DongTai-Agent-Java/total)](https://github.com/HXSecurity/DongTai-agent-java/releases)
+## Checking out and building
 
+To check out the project and build it from source, do the following:
 
-## Project Introduction
+```
+git clone https://github.com/awspring/spring-cloud-aws.git
+cd spring-cloud-aws
+./mvnw package
+```
 
-Dongtai-agent-java is DongTai Iast's data acquisition tool for Java applications. In a Java application with the iast agent added, the required data is collected by rewriting class bytecode, and then the data is sent to dongtai-OpenAPI service, and then the cloud engine processes the data to determine whether there are security holes.
+To build and install jars into your local Maven cache:
 
-Dongtai-agent-java consists of `agent.jar`, `dongtai-core-jar`, `dongtai-spy. Jar` and `dongtai-servlet.jar`:
+```
+./mvnw install
+```
 
-- `agent.jar` It is used to manage agent life cycle and configuration. The life cycle of the Agent includes downloading, installing, starting, stopping, restarting, and uninstalling the agent. Agent configuration includes application startup mode, vulnerability verification mode, whether to enable agent, etc.
-- `dongtai-core.jar ` The main functions of dongtai-core.jar are: bytecode piling, data collection, data preprocessing, data reporting, third-party component management, etc.
-- `dongtai-inject.jar` It is used to inject into the BootStrap ClassLoader. The data collection method in 'iast-core.jar' is then invoked in the target application.
-- `dongtai-servlet.jar` It is used to obtain the requests sent by the application and the responses received. It is used for data display and request replay.
+For faster builds, we recommend using [Maven Daemon](https://github.com/apache/maven-mvnd) and using following commands:
 
-## Application Scenarios
+Build:
 
-- DevOps
-- Security test the application before it goes online
-- Third-party Component Management
-- Code audit
-- 0 Day digging
+```
+make build
+```
 
-## Quick Start
+Clean:
 
-Please refer to the [Quick Start](https://doc.dongtai.io).
+```
+make clean
+```
 
-## Quick Development
+Format code:
 
-1. Fork the [DongTai-agent-java](https://github.com/HXSecurity/DongTai-agent-java) , clone your fork:
+```
+make format
+```
 
-   ```
-   git clone https://github.com/<your-username>/DongTai-agent-java
-   ```
+## Building documentation
 
-2. Write code to your needs.
+Documentation can be built by activating the `docs` profile in the maven build.
 
-3. Compile Dongtai-agent-Java using Maven:
+```
+make docs
+```
 
-   ```
-   mvn clean package -Dmaven.test.skip=true
-   ```
+It generates:
 
-    - notice: JDK version is 1.8.
+- reference documentation in `docs/target/generated-docs/`
+- API docs in `target/site/`
 
-4. folder `./release` is generated in the project root directory after compilation:
+## Getting in touch
 
-   ```
-   release
-   ├── dongtai-agent.jar
-   └── lib
-       ├── dongtai-servlet.jar
-       ├── dongtai-core.jar
-       └── dongtai-spy.jar
-   ```
+- [Discussions on Github](https://github.com/awspring/spring-cloud-aws/discussions) - the best way to discuss anything Spring Cloud AWS related
 
-5. Copy `dongtai-core.jar`、`dongtai-spy.jar`、`dongtai-servlet.jar` to the system temporary directory. Get the system temporary directory to run the following Java code:
+Or reach out directly to individual team members:
 
-   ```
-   System.getProperty("java.io.tmpdir.dongtai");
-   ```
-
-6. Run the application and test the code (for example, SpringBoot) : `java -javaagent:/path/to/dongtai-agent.jar -Ddongtai.debug=true -jar app.jar`
-
-7. Contribute code. If you want to contribute code to the DongTai IAST team, please read the full [contribution guide](https://github.com/HXSecurity/DongTai/blob/main/CONTRIBUTING.md).
-
-### Supported Java versions and middleware
-
-- Java 1.8+
-- Tomcat, Jetty, WebLogic, WebSphere, SpringBoot and Mainstream software and middleware.
+- Maciej Walkowiak [Twitter](https://twitter.com/maciejwalkowiak)
+- Matej Nedic [Twitter](https://twitter.com/MatejNedic1)
+- Tomaz Fernandes [Twitter](https://twitter.com/tomazfernandes_)

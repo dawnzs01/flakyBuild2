@@ -1,40 +1,31 @@
-## for IDEA
-.idea
-.idea/*
-.fleet
-*.iml
-*.DS_Store
-
-## for maven
-pom.xml.versionsBackup
-dongtai-core/target/
-dongtai-spy/target/
-dongtai-agent/target/
-UnitText/target/
+# Ignore folders
 target/
-**/dependency-reduced-pom.xml
-.flattened-pom.xml
+/config
+/.idea
+/out
 
-## for eclipse and vscode
-.classpath
+# Do not ignore them
+!.idea/copyright
+!.idea/inspectionProfiles
+!.idea/scopes
+!.idea/codeStyleSettings.xml
+!.idea/vcs.xml
+
+# Ignore files
+access.properties
+mail.properties
+*.iml
+*.ipr
+*.iws
 .project
-.settings
+.classpath
+.settings/
+
+.vscode/
+
+# Because re-configuring the directory in the share plugin leads to side effect we ignore the file
+dependency-reduced-pom.xml
 .factorypath
+*.versionsBackup
 
-## for vim
-*.swp
-*.swo
-*.swn
-
-# for iast
-release
-
-# for jenv
-.java-version
-
-dongtai-api.jar
-dongtai-core.jar
-dongtai-grpc.jar
-dongtai-spy.jar
-
-logs
+.sdkmanrc

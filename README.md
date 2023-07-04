@@ -1,150 +1,162 @@
-### Quiltflower
+# Wolvic XR Browser
 
-Quiltflower is a modern, general purpose decompiler focused on improving code quality, speed, and usability. Quiltflower is a fork of Fernflower and Forgeflower.
+The goal of the Wolvic project is to create a full-featured browser exclusively AR and VR headsets.
 
-Changes include:
-- New language features (Try with resources, switch expressions, pattern matching, and more)
-- Better control flow generation (loops, try-catch, and switch, etc.)
-- More configurability
-- Better error messages
-- Javadoc application
-- Multithreading
-- Optimization
-- Many other miscellaneous features and fixes
+You can find us in [wolvic.com](https://www.wolvic.com), Mastodon [@WolvicXR](https://floss.social/@WolvicXR), Twitter [@wolvicxr](https://twitter.com/wolvicxr), and at [info@wolvic.com](mailto:info@wolvic.com).
 
-### Use
-Want to use Quiltflower? There are a few ways! For Fabric and Architectury projects, [Loom Quiltflower](https://github.com/Juuxel/LoomQuiltflower) allows you to run genSources with Quiltflower.
-The [Quiltflower Intellij IDEA plugin](https://plugins.jetbrains.com/plugin/18032-quiltflower) replaces Fernflower in IDEA with Quiltflower, and allows you to modify its settings.
-Or, if you want to run Quiltflower from the commandline, head over to the [Releases tab](https://github.com/QuiltMC/quiltflower/releases) and grab the latest, and then follow the instructions further down the readme.
-Make sure to report any issues to the [Issues tab!](https://github.com/QuiltMC/quiltflower/issues)
+Want to learn more about Wolvic? Read our [FAQ](https://wolvic.com/en/faq)!
 
-For support or questions, please join the [Quilt toolchain discord.](https://discord.quiltmc.org/toolchain)
+## Locale support
 
-### Contributing
-To contribute, please check out [CONTRIBUTING.md](./CONTRIBUTING.md) and [ARCHITECTURE.md](./ARCHITECTURE.md)!
+For more info on localization, how it works in the Wolvic XR project, and how to correctly edit localizable text in the application, please see our [localization wiki page](https://github.com/Igalia/wolvic/wiki/Localization).
 
-When pulling from upstream, use https://github.com/fesh0r/fernflower
+## Setup instructions
 
-#### Special Thanks
-* Jetbrains- For maintaining Fernflower
-* Forge Team- For maintaining ForgeFlower
-* CFR- For it's large suite of very useful tests
+> By default Wolvic will try to download prebuilt GeckoView libraries from [Mozilla's maven repositories](https://maven.mozilla.org/maven2/org/mozilla/geckoview/?prefix=maven2/org/mozilla/geckoview/). Note that after [PR #70](https://github.com/Igalia/wolvic/pull/70) WebXR sessions won't work with those images because that PR introduced a change in the GeckoView protocol that is only available in the `wolvic_release` branch from [this repository](https://github.com/Igalia/gecko-dev/). For additional details on how to use a local GeckoView build check [this section](#dependency-substitutions)
 
-Fernflower's readme is preserved below:
-### About Fernflower
+>  **UPDATE**: use `FIREFOX_103_0_2_RELEASE` instead of `wolvic_release` after [PR #256](https://github.com/Igalia/wolvic/pull/256).
 
-Fernflower is the first actually working analytical decompiler for Java and 
-probably for a high-level programming language in general. Naturally it is still 
-under development, please send your bug reports and improvement suggestions to the
-[issue tracker](https://github.com/QuiltMC/quiltflower/issues).
+*Clone Wolvic.*
 
-### Licence
+```bash
+git clone git@github.com:Igalia/wolvic.git
+cd wolvic
+```
 
-Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+*Clone the third-party repo.*
 
-### Running from command line
+If you're developing for the Oculus, Huawei, Pico, or VIVE, you need to clone the repo with third-party SDK files.
 
-`java -jar quiltflower.jar [-<option>=<value>]* [<source>]+ <destination>`
+```bash
+git clone https://github.com/Igalia/wolvic-third-parties.git third_party
+```
 
-\* means 0 or more times\
-\+ means 1 or more times
+This repo is only available to Igalia members. If you have access to the relevant SDK but not this repo, you can manually place them here:
 
-\<source>: file or directory with files to be decompiled. Directories are recursively scanned. Allowed file extensions are class, zip and jar.
-          Sources prefixed with -e= mean "library" files that won't be decompiled, but taken into account when analysing relationships between 
-          classes or methods. Especially renaming of identifiers (s. option 'ren') can benefit from information about external classes.          
+ - `third_party/ovr_mobile/` for Oculus (should contain a `VrApi` folder)
+ - `third_party/OVRPlatformSDK/` for Oculus (should contain a `Android` and `include` folders)
+ - `third_party/ovr_openxr_mobile_sdk/` for Oculus (should contain an `OpenXR` folder)
+ - `third_party/hvr/` for Huawei (should contain  `arm64-v8a`, `armeabi-v7a` and `include` folders)
+ - `third_party/wavesdk/` for Vive (should contain a `build` folder, among other things)
+ - `third_party/picoxr` [Pico OpenXR Mobile SDK](https://developer-global.pico-interactive.com/sdk?deviceId=1&platformId=3&itemId=11) (should contain `include` and `libs` folders, among other things that are not necessary for Wolvic)
+ - `third_party/lynx` [for Lynx](https://portal.lynx-r.com)(should contain a `loader-release.aar` file)
+ - `third_party/snapdragon-spaces` [for Snapdragon Spaces](https://spaces.qualcomm.com/)(should contain `libopenxr_loader.aar` and `qxrclients.aar` files)
+ - `third_party/OpenXR-SDK/` [OpenXR-SDK](https://github.com/KhronosGroup/OpenXR-SDK) (should contain an `include` folder)
 
-\<destination>: destination directory 
+The [repo in `third_party`](https://github.com/Igalia/wolvic-third-parties) can be updated like so:
 
-\<option>, \<value>: a command-line option with the corresponding value (see "Command-line options" below).
+```bash
+pushd third_party && git fetch && git checkout main && git rebase origin/main && popd
+```
 
-##### Examples:
+*Fetch Git submodules.*
 
-`java -jar quiltflower.jar -hes=0 -hdc=0 c:\Temp\binary\ -e=c:\Java\rt.jar c:\Temp\source\`
+You may need to set up [two-factor authentication](https://blog.github.com/2013-09-03-two-factor-authentication/#how-does-it-work-for-command-line-git) for the command line.
 
-`java -jar quiltflower.jar -dgs=1 c:\Temp\binary\library.jar c:\Temp\binary\Boot.class c:\Temp\source\`
+```bash
+git submodule update --init --recursive
+```
 
-### Command-line options
-To force saving as a file or folder, `--file` and `--folder` can be provided. If not specified, Quiltflower will try to guess based on the file name.
+You can build for different devices:
 
-With the exception of mpm, urc, ind, thr and log, the value of 1 means the option is activated, 0 - deactivated. Default 
-value, if any, is given between parentheses.
+- **`oculusvr`**: Oculus Quest
+- **`hvr`**: Huawei VR Glasses
+- **`wavevr`**: VIVE Focus
+- **`picoxr`**: Pico 4 and (untested) Pico Neo 3
+- **`lynx`**: Lynx R1
+- **`spaces`**: Lenovo A3
 
-Typically, the following options will be changed by user, if any: hes, hdc, dgs, mpm, ren, urc, ind, thr, tlf, tco
-The rest of options can be left as they are: they are aimed at professional reverse engineers.
+For testing on a non-VR device:
 
-- rbr (1): Hide bridge methods
-- rsy (1): Hide synthetic class members
-- din (1): Decompile inner classes
-- dc4 (1): Collapse 1.4 class references
-- das (1): Decompile assertions
-- hes (1): Hide empty super invocation
-- hdc (1): Hide empty default constructor
-- dgs (1): Decompile generic signatures
-- ner (1): Assume return not throwing exceptions
-- esm (1): Ensure synchronized ranges are complete
-- den (1): Decompile enumerations
-- rgn (1): Remove getClass() invocation, when it is part of a qualified new statement
-- lit (0): Output numeric literals "as-is"
-- bto (1): Interpret int 1 as boolean true (workaround to a compiler bug)
-- asc (0): Encode non-ASCII characters in string and character literals as Unicode escapes
-- nns (0): Allow for not set synthetic attribute (workaround to a compiler bug)
-- uto (1): Consider nameless types as java.lang.Object (workaround to a compiler architecture flaw)
-- udv (1): Reconstruct variable names from debug information, if present
-- ump (1): Use method parameter names from the MethodParameter attribute.
-- rer (1): Remove empty exception ranges
-- fdi (1): De-inline finally structures
-- inn (1): Check for IntelliJ IDEA-specific `@NotNull` annotation and remove inserted code if found
-- lac (0): Decompile lambda expressions to anonymous classes
-- bsm (0): Add mappings for source bytecode instructions to decompiled code lines
-- dcl (0): Dump line mappings to output archive zip entry extra data
-- iib (0): Ignore invalid bytecode
-- vac (0): Verify that anonymous classes can be anonymous
-- tcs (0): Simplify boolean constants in ternary operations
-- pam (1): Decompile pattern matching
-- tlf (1): loop-in-try fixes
-- tco (1): Allow ternaries to be generated in if and loop conditions
-- swe (1): Decompile Switch Expressions in modern Java
-- shs (0): Display code blocks hidden, for debugging purposes
-- ovr (1): Show override annotations for methods known to the decompiler.
-- ssp (1): Second-Pass Stack Simplficiation
-- vvm (0): Verify variable merges before remapping them
-- iec (0): Give the decompiler information about every jar on the classpath.
-- jrt (0/if running from CLI, `current`): The path to a java runtime to add to the classpath, or `1` or `current` to add the java runtime of the active JVM to the classpath.
-- ega (0): Explicit Generic Arguments
-- isl (1): Inline simple lambdas
-- log (INFO): A logging level, possible values are TRACE, INFO, WARN, ERROR
-- mpm (0): [DEPRECATED] max processing time per decompiled method, in seconds. 0 means no upper limit
-- ren (0): Rename ambiguous (resp. obfuscated) classes and class elements
-- urc (-): Full name of a user-supplied class implementing IIdentifierRenamer interface. It is used to determine which class identifiers
-           should be renamed and provides new identifier names (see "Renaming identifiers")
-- nls (0): define new line character to be used for output. 0 - '\r\n' (Windows), 1 - '\n' (Unix), default is OS-dependent
-- ind (3 spaces): Indentation string
-- pll (160): Max line length before formatting
-- ban (-): Banner to display before every root class definition
-- erm (-): Message to display when a decomplication error occurs
-- thr: maximum number of threads (default is number of threads available to the JVM)
-- jvn (0): Use jad variable naming for local variables
-- sef (0): Skip copying non-class files from the input folder or file to the output
-- win (1): Warn about inconsistent inner class attributes
-- dbe (1): Dump bytecode on errors
-- dee (1): Dump exceptions on errors
-- dec (1): Decompiler error comments
-- sfc (0): Debug comments showing the class SourceFile attribute if present
-- dcc (0): Decompile complex constant-dynamic bootstraps, that might have different or slower run-time behaviour when recompiled
-- dpr (1): Decompile preview features in latest Java versions
+- **`noapi`**: Runs on standard Android phones without a headset
 
-### Renaming identifiers
+Building for Oculus Mobile, Huawei and WaveVR requires access to their respective SDKs which are not included in this repo.
 
-Some obfuscators give classes and their member elements short, meaningless and above all ambiguous names. Recompiling of such
-code leads to a great number of conflicts. Therefore it is advisable to let the decompiler rename elements in its turn, 
-ensuring uniqueness of each identifier.
+The command line version of `gradlew` requires JDK 11. If you see an error that Gradle doesn't understand your Java version, check which version of you're using by running `java -showversion` or `java -version`. You're probably using and older JDK, which won't work.
 
-Option 'ren' (i.e. -ren=1) activates renaming functionality. Default renaming strategy goes as follows:
-- rename an element if its name is a reserved word or is shorter than 3 characters
-- new names are built according to a simple pattern: (class|method|field)_\<consecutive unique number>  
-You can overwrite this rules by providing your own implementation of the 4 key methods invoked by the decompiler while renaming. Simply 
-pass a class that implements org.jetbrains.java.decompiler.main.extern.IIdentifierRenamer in the option 'urc'
-(e.g. -urc=com.example.MyRenamer) to Fernflower. The class must be available on the application classpath.
+*Open the project with [Android Studio](https://developer.android.com/studio/index.html)* then build and run it. Depending on what you already have installed in Android Studio, the build may fail and then may prompt you to install dependencies. Just keep doing as it suggests. To select the device to build for, go to `Tool Windows > Build Variants` and select a build variant corresponding to your device.
 
-The meaning of each method should be clear from naming: toBeRenamed determine whether the element will be renamed, while the other three
-provide new names for classes, methods and fields respectively.  
+*If you want to build Wolvic for WaveVR SDK:*
+
+Download the [VIVE Wave SDK](https://developer.vive.com/resources/knowledgebase/wave-sdk/) from the [VIVE Developer Resources](https://vivedeveloper.com/), and unzip it. Then, from the top-level project directory, run:
+
+```bash
+mkdir -p third_party/wavesdk
+cp /path/to/the/sdk/2.0.32/SDK/libs/wvr_client.aar third_party/wavesdk
+cp ./extra/wavesdk/build.gradle ./third_party/wavesdk
+```
+
+Make certain to set the build flavor to `wavevrDebug` in Android Studio before building the project.
+
+## Local Development
+
+### Dependency substitutions
+
+You might be interested in building this project against local versions of some of the dependencies.
+This could be done either by using a [local maven repository](https://mozilla-mobile.github.io/android-components/contributing/testing-components-inside-app) (quite cumbersome), or via Gradle's [dependency substitutions](https://docs.gradle.org/current/userguide/customizing_dependency_resolution_behavior.html) (not at all cumbersome!).
+
+Currently, the substitution flow is streamlined for some of the core dependencies via configuration flags in `local.properties`. You can build against a local checkout of the following dependencies by specifying their local paths:
+- [GeckoView](https://hg.mozilla.org/mozilla-central), specifying its path via `dependencySubstitutions.geckoviewTopsrcdir=/path/to/mozilla-central` (and, optionally, `dependencySubstitutions.geckoviewTopobjdir=/path/to/topobjdir`). See [Bug 1533465](https://bugzilla.mozilla.org/show_bug.cgi?id=1533465).
+  - This assumes that you have built, packaged, and published your local GeckoView -- but don't worry, the dependency substitution script has the latest instructions for doing that.
+
+Do not forget to run a Gradle sync in Android Studio after changing `local.properties`. If you specified any substitutions, they will be reflected in the modules list, and you'll be able to modify them from a single Android Studio window.
+
+
+## Install dev and production builds on device simultaneously
+
+You can enable a dev applicationID sufix to install both dev and production builds simultaneously. You just need to add this property to your `user.properties` file:
+
+```ini
+simultaneousDevProduction=true
+```
+## Locally generate Android release builds
+
+Local release builds can be useful to measure performance or debug issues only happening in release builds. Insead of dealing with release keys you can make the testing easier just adding this property to your `user.properties` file:
+
+```ini
+useDebugSigningOnRelease=true
+```
+
+Note: the release APKs generated with a debug keystore can't be used for production.
+
+## Compress assets
+
+ETC2 compression is used to improve performance and memory usage. Raw assets are placed in the `uncompressed_assets` folder. You can generate the compressed textures using the compressor utility in `tools/compressor`. You need to set up [etc2comp](https://github.com/google/etc2comp) and make it available on your PATH before running the script. Run this command to generate the compressed assets:
+
+```bash
+cd tools/compressor
+npm install
+npm run compress
+```
+
+## Enable OpenXR builds
+You can enable OpenXR API for Oculus by adding this property to your `user.properties` file:
+
+```ini
+openxr=true
+```
+
+## Development troubleshooting
+
+### `Device supports , but APK only supports armeabi-v7a[...]`
+
+Enable [USB Remote Debugging](https://github.com/MozillaReality/FirefoxReality/wiki/Developer-Info#remote-debugging) on the device.
+
+### **`Firefox > Web Developer > WebIDE > Performance`** gets stuck with greyed out "stop and show profile"
+
+Restart Wolvic XR and close and re-open the WebIDE page.
+
+### **`Tool Windows > Build Variants`** list is empty
+
+1. If you're not on the latest version, update Android Studio from **`Android Studio > Check for Updates…`**.
+2. Run **`File > Sync Project with Gradle Files`**.
+
+## Debugging tips
+
+- When using the native debugger you can ignore the first SIGSEGV: address access protected stop in GV thread. It's not a crash; you can click *Resume* to continue debugging.
+- On some platforms such as Oculus Go the native debugger stops on each input event. You can set this LLDB post-attach command in Android Studio to fix the problem: `pro hand -p true -s false SIGILL`
+- You can use `adb shell am start -a android.intent.action.VIEW -d "https://aframe.io" com.igalia.wolvic/com.igalia.wolvic.VRBrowserActivity` to load a URL from the command line
+- You can use `adb shell am start -a android.intent.action.VIEW  -n com.igalia.wolvic/com.igalia.wolvic.VRBrowserActivity -e homepage "https://example.com"` to override the homepage
+- You can use `adb shell setprop debug.oculus.enableVideoCapture 1` to record a video on the Oculus Go. Remember to run `adb shell setprop debug.oculus.enableVideoCapture 0` to stop recording the video.
+    - You can also record videos on the Oculus Go by exiting to the system library, and from the Oculus tray menu (toggle with the Oculus button on the controller): **`Sharing > Record Video`**
+- You can set `disableCrashRestart=true` in the gradle `user.properties` to disable app relaunch on crash.

@@ -1,0 +1,99 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- App name -->
+    <string name="app_name" translatable="false">GAppsMod</string>
+
+    <!-- Github and links -->
+    <string name="github" translatable="false">Github</string>
+    <string name="github_api_link" translatable="false">https://api.github.com/repos/jacopotediosi/GAppsMod</string>
+    <string name="github_link" translatable="false">https://github.com/jacopotediosi/GAppsMod</string>
+
+    <!-- GApp names, taken from https://play.google.com/store/apps/details?id=PACKAGE_NAME&hl=en -->
+    <string name="dialer_app_name">Phone by Google</string>
+    <string name="messages_app_name">Messages by Google</string>
+    <string name="photos_app_name" tools:keep="@string/photos_app_name">Google Photos</string>
+
+    <!-- Common -->
+    <string name="beta" translatable="false">Beta</string>
+    <string name="continue_anyway">Continue anyway</string>
+    <string name="done">Done</string>
+    <string name="exit">Exit</string>
+    <string name="install">Install</string>
+    <string name="no">No</string>
+    <string name="or">Or</string>
+    <string name="yes">Yes</string>
+    <string name="package_spinner_label" translatable="false">Package:</string>
+    <string name="remember">Remember</string>
+    <string name="select_package">Select package</string>
+    <string name="unknown">Unknown</string>
+
+    <!-- Search and search filters -->
+    <string name="additional_filters">Additional filters:</string>
+    <string name="changed_and_unchanged">Changed and unchanged</string>
+    <string name="changed_only">Changed only</string>
+    <string name="changed_status_filter">Changed status filter</string>
+    <string name="disabled_only">Disabled only</string>
+    <string name="enabled_and_disabled">Enabled and disabled</string>
+    <string name="enabled_only">Enabled only</string>
+    <string name="enabled_status_filter">Enabled status filter</string>
+    <string name="expand_additional_filters">Expand additional filters</string>
+    <string name="search">Search</string>
+    <string name="search_by_flag">Search by flag</string>
+    <string name="search_by_package_or_app">Search by package or application</string>
+    <string name="unchanged_only">Unchanged only</string>
+
+    <!-- Fragment titles -->
+    <string name="boolean_mods">Boolean mods</string>
+    <string name="information">Information</string>
+    <string name="revert_mods">Revert mods</string>
+    <string name="suggested_mods">Suggested mods</string>
+
+    <!-- Splash screen -->
+    <string name="splash_screen_phenotype_gms">Checking Phenotype DB…</string>
+    <string name="splash_screen_root">Checking root permissions…</string>
+    <string name="splash_screen_root_service">Connecting to the root service…</string>
+    <string name="splash_screen_updates">Checking updates…</string>
+
+    <!-- Suggested mods -->
+    <!-- Dialer -->
+    <string name="choose_a_language_for_call_screen">Choose a language for call screen</string>
+    <string name="force_enable_call_recording">Force enable call recording</string>
+    <string name="force_enable_call_screen">Force enable call screen</string>
+    <string name="silence_call_recording_alerts">Silence call recording alerts (${dialer_app_name} &lt;= 94.x only)</string>
+    <!-- Messages -->
+    <string name="force_enable_debug_menu">Force enable debug menu</string>
+    <string name="force_enable_images_via_gphotos">Force enable sending images via ${photos_app_name}</string>
+    <string name="force_enable_magic_compose">Force enable magic compose (draft suggestions with Bard AI)</string>
+    <string name="force_enable_marking_conversations_as_unread">Force enable marking conversations as unread</string>
+    <string name="force_enable_message_organization">Force enable message organization (supersort)</string>
+    <string name="force_enable_nudges_and_birthdays">Force enable nudges and birthday reminders</string>
+    <string name="force_enable_smart_actions_in_notifications">Force enable smart actions (smart reply) in notifications</string>
+    <string name="force_enable_smart_compose_settings_menu">Force enable smart compose settings menu</string>
+    <string name="force_enable_spotlights">Force enable spotlights suggestions settings menu</string>
+    <string name="force_enable_suggested_stickers_settings_menu">Force enable suggested stickers settings menu</string>
+    <string name="force_enable_verified_sms">Force enable verified SMS settings menu</string>
+
+    <!-- Revert mods -->
+    <string name="revert_mods_for_all_packages">Revert mods for all packages</string>
+    <string name="revert_mods_for_all_packages_confirm">Do you really want to revert all mods?</string>
+    <string name="revert_mods_for_all_packages_explanation">Press the button below to revert all mods applied to all packages.</string>
+    <string name="revert_mods_for_the_selected_package">Revert mods for the selected package</string>
+    <string name="revert_mods_for_the_selected_package_confirm">Do you really want to revert mods for the package %1$s?</string>
+    <string name="revert_mods_for_the_selected_package_explanation">Select a package and press the button below to revert mods applied to that specific package.</string>
+
+    <!-- Information -->
+    <string name="credits">Credits</string>
+    <string name="how_it_works">How it works</string>
+    <string name="how_it_works_explanation">The patches applied by ${app_name} survive Google Apps updates over time, even after uninstalling and reinstalling them.\nMods are therefore to be considered permanent, but they can be easily reverted from the \"${revert_mods}\" section of the sidebar menu.\nThere is no need to keep this app installed after applying the desired mods.\n\nAfter applying changes, you may have to force close and reopen the Google app you are trying to mod a few times before they take effect.</string>
+    <string name="if_bug_found_open_github_issue">If you think you\'ve found any bugs please open an issue on Github:</string>
+    <string name="made_with_love_by">Made with ❤ by <a href="https://github.com/jacopotediosi">Jacopo Tediosi</a> (and other amazing contributors)</string>
+    <string name="what_is_app_name">What is ${app_name}</string>
+    <string name="what_is_it_explanation">${app_name} is an app that allows, using root privileges, to modify the values contained in "Phenotype" database of Google Play Services, thus altering the behavior of Google Apps (such as ${dialer_app_name} and ${messages_app_name}) to unlock experimental features or features that are only available in certain countries or devices.</string>
+
+    <!-- Warning and error messages -->
+    <string name="an_error_has_occurred">An error has occurred</string>
+    <string name="app_not_installed_error">It looks like the app is not installed.</string>
+    <string name="dialer_permission_alert">${dialer_app_name} is not installed as a system app and therefore does not have the CAPTURE_AUDIO_OUTPUT permission.\nSome features, such as call recording, may not work.</string>
+    <string name="new_version_alert">A new version of ${app_name} is available.\n\nYou can download it from Github Releases page.</string>
+    <string name="phenotype_db_does_not_exist_gms">Phenotype DB does not appear to exist.\n\nInstall Google Play Services from Google Play and try again.</string>
+    <string name="root_access_denied">Root access denied. Please allow root access.</string>
+</resources>

@@ -1,82 +1,84 @@
-<div align="center">
-  <img src="tai-e-logo.png" height="200">
+<p align="center">
+  <img src="assets/Sketchware-Pro.png" />
+</p>
 
-## Tai-e
+# Sketchware Pro
+![GitHub contributors](https://img.shields.io/github/contributors/Sketchware-Pro/Sketchware-Pro) ![GitHub last commit](https://img.shields.io/github/last-commit/Sketchware-Pro/Sketchware-Pro) ![Discord server stats](https://img.shields.io/discord/790686719753846785)
 
-</div>
+Welcome to Sketchware Pro! Here you'll find the source code of many classes in Sketchware Pro and, most importantly, the place to contribute to Sketchware Pro.
 
-## What is Tai-e?
+## Building the App
+To build the app, you must use Gradle. It's highly recommended to use Android Studio for the best experience.
 
-Tai-e (Chinese: 太阿; pronunciation: [ˈtaɪə:]) is a new static analysis framework for Java (please
-see our [ISSTA 2023 paper](https://cs.nju.edu.cn/tiantan/papers/issta2023.pdf) for details), which features arguably
-the "best" designs from both the novel ones we proposed and those of classic frameworks such as
-Soot, WALA, Doop, and SpotBugs. Tai-e is easy-to-learn, easy-to-use, efficient, and highly
-extensible, allowing you to easily develop new analyses on top of it.
+There are two build variants with different features:
 
-Currently, Tai-e provides the following major analysis components (and more analyses are on the
-way):
+- `minApi26:` This variant supports exporting AABs from projects and compiling Java 1.8, 1.9, 10, and 11 code. However, it only works on Android 8.0 (O) and above.
+- `minApi21:` This variant can't produce AABs from projects and can only compile Java 1.7 code, but it supports Android 5 and above.
 
-- Powerful pointer analysis framework
-    - On-the-fly call graph construction
-    - Various classic and advanced techniques of heap abstraction and context sensitivity for
-      pointer analysis
-    - Extensible analysis plugin system (allows to conveniently develop and add new analyses that
-      interact with pointer analysis)
-- Various fundamental/client/utility analyses
-    - Fundamental analyses, e.g., reflection analysis and exception analysis
-    - Modern language feature analyses, e.g., lambda and method reference analysis, and
-      invokedynamic analysis
-    - Clients, e.g., configurable taint analysis (allowing to configure sources, sinks and taint
-      transfers)
-    - Utility tools like analysis timer, constraint checker (for debugging), and various graph
-      dumpers
-- Control/Data-flow analysis framework
-    - Control-flow graph construction
-    - Classic data-flow analyses, e.g., live variable analysis, constant propagation
-    - Your data-flow analyses
-- SpotBugs-like bug detection system
-    - Bug detectors, e.g., null pointer detector, incorrect `clone()` detector
-    - Your bug detectors
+To select the appropriate build variant in Android Studio, use the Build Variants tab or use the appropriate Gradle build command.
 
-Tai-e is developed in Java, and it can run on major operating systems including Windows, Linux, and
-macOS.
+### Source Code Map
 
-As a courtesy to the developers, we expect that you **please [cite](docs/bibtex.txt) the paper** from ISSTA 2023 describing the Tai-e framework in your research work:
+| Class           | Role                                        |
+| --------------- | ------------------------------------------- |
+| `a.a.a.ProjectBuilder`      | Helper for compiling an entire project       |
+| `a.a.a.Ix`      | Responsible for generating AndroidManifest.xml |
+| `a.a.a.Jx`      | Generates source code of activities          |
+| `a.a.a.Lx`      | Generates source code of components, such as listeners, etc. |
+| `a.a.a.Ox`      | Responsible for generating XML files of layouts |
+| `a.a.a.qq`      | Registry of built-in libraries' dependencies |
+| `a.a.a.tq`      | Responsible for the compiling dialog's quizzes |
+| `a.a.a.yq`      | Organizes Sketchware projects' file paths    |
 
-Tian Tan and Yue Li. 2023.
-**Tai-e: A Developer-Friendly Static Analysis Framework for Java by Harnessing the Good Designs of Classics.**
-In Proceedings of the 32nd ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA '23), July 17–21, 2023, Seattle, WA, United States ([pdf](https://cs.nju.edu.cn/tiantan/papers/issta2023.pdf), [bibtex](docs/bibtex.txt)).
+You can also check the `mod` package, which contains the majority of contributors' changes.
 
-## How to Obtain Runnable Jar of Tai-e?
+## Contributing
 
-The simplest way is to download it
-from [GitHub Releases](https://github.com/pascal-lab/Tai-e/releases).
+If you'd like to contribute to Sketchware Pro, follow these steps:
 
-Alternatively, you might build the latest Tai-e yourself from the source code. This can be simply
-done via Gradle (be sure that Java 17 (or higher version) is available on your system). You just
-need to run command `gradlew fatJar`, and then the runnable jar will be generated in `tai-e/build/`,
-which includes Tai-e and all its dependencies.
+1. Fork this repository.
+2. Make changes in your forked repository.
+3. Test out those changes.
+4. Create a pull request in this repository.
+5. Your pull request will be reviewed by the repository members and merged if accepted.
 
-## Documentation
+We welcome contributions of any size, whether they are major features or bug fixes, but please note that all contributions will be thoroughly reviewed.
 
-### Wiki
-We are hosting the documentation of Tai-e
-on [the GitHub wiki](https://github.com/pascal-lab/Tai-e/wiki), where you could find more
-information about Tai-e such
-as [Setup in IntelliJ IDEA](https://github.com/pascal-lab/Tai-e/wiki/Setup-Tai%E2%80%90e-in-IntelliJ-IDEA)
-, [Command-Line Options](https://github.com/pascal-lab/Tai-e/wiki/How-to-Run-Tai%E2%80%90e%3F-(command%E2%80%90line-options))
-,
-and [Development of New Analysis](https://github.com/pascal-lab/Tai-e/wiki/How-to-Develop-A-New-Analysis-on-Tai%E2%80%90e%3F)
-.
+### What Changes We're Unlikely to Accept
 
-### Changelog
-Since we are actively developing and updating Tai-e, we record the notable changes we made, especially the new features and breaking changes, in [CHANGELOG](CHANGELOG.md). If you find something wrong after updating Tai-e, maybe you could check [CHANGELOG](CHANGELOG.md) for useful information.
+Most changes related to the user interface (components that already exist in vanilla Sketchware) are unlikely to be accepted. If something design-related gets changed, ideally the whole app should follow the new style too, which is challenging, especially for mods.
 
-## Tai-e Assignments
+### Commit Message
 
-In addition, we have developed
-an [educational version of Tai-e](http://tai-e.pascal-lab.net/en/intro/overview.html) where eight
-programming assignments are carefully designed for systematically training learners to implement
-various static analysis techniques to analyze real Java programs. The educational version shares a
-large amount of code with Tai-e, thus doing the assignments would be a good way to get familiar with
-Tai-e.
+When you make changes to one or more files, you need to commit those changes with a commit message. Here are some guidelines:
+
+- Keep the commit message short and detailed.
+- Use one of these commit types as a prefix:
+  - `feat:` for a feature, possibly improving something already existing.
+  - `fix:` for a fix, such as a bug fix.
+  - `style:` for features and updates related to styling.
+  - `refactor:` for refactoring a specific section of the codebase.
+  - `test:` for everything related to testing.
+  - `docs:` for everything related to documentation.
+  - `chore:` for code maintenance (you can also use emojis to represent commit types).
+
+Examples:
+- `feat: Speed up compiling with new technique`
+- `fix: Fix crash during launch on certain phones`
+- `refactor: Reformat code in File.java`
+
+## Thanks for Contributing
+
+Thank you for contributing to Sketchware Pro! Your contributions help keep Sketchware Pro alive. Each accepted contribution will be noted down in the "About Modders" activity. We'll use your GitHub name and profile picture initially, but they can be changed, of course.
+
+## Discord
+
+Want to chat with us, discuss changes, or just hang out? We have a Discord server just for that.
+
+[![Join our Discord server!](https://invidget.switchblade.xyz/kq39yhT4rX)](http://discord.gg/kq39yhT4rX)
+
+## Disclaimer
+
+This mod was not created for any harmful purposes, such as harming Sketchware; quite the opposite, actually. It was made to keep Sketchware alive by the community for the community. Please use it at your own discretion and consider becoming a Patreon backer to support the developers. Unfortunately, other ways to support them are not working anymore, so Patreon is the only available option currently. You can find their Patreon page [here](https://www.patreon.com/sketchware).
+
+We love Sketchware very much and are grateful to Sketchware's developers for creating such an amazing app. However, we haven't received updates for a long time. That's why we decided to keep Sketchware alive by creating this mod, and it's completely free. We don't demand any money :)

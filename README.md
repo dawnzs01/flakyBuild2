@@ -1,52 +1,73 @@
-![Build project](https://github.com/netty/netty-incubator-codec-quic/workflows/Build%20project/badge.svg)
+# R2DBC migration tool
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/name.nkonev.r2dbc-migrate/r2dbc-migrate-spring-boot-starter/badge.svg)](https://search.maven.org/search?q=g:name.nkonev.r2dbc-migrate%20AND%20a:r2dbc-migrate-spring-boot-starter)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/nkonev/r2dbc-migrate)](https://hub.docker.com/r/nkonev/r2dbc-migrate/tags)
+[![Build Status](https://travis-ci.com/nkonev/r2dbc-migrate.svg?branch=master)](https://travis-ci.com/nkonev/r2dbc-migrate)
 
-# Netty QUIC codec
+Inspired by [this](https://spring.io/blog/2020/03/12/spring-boot-2-3-0-m3-available-now) announcement.
 
-This is a new experimental QUIC codec for netty which makes use of [quiche](https://github.com/cloudflare/quiche).
+R2DBC [page](https://r2dbc.io/).
 
-## How to include the dependency
+## Supported databases
+* PostgreSQL
+* Microsoft SQL Server
+* MySQL
+* H2
 
-To include the dependency you need to ensure you also specify the right classifier. At the moment we only support Linux
- x86_64 / aarch_64, macOS / OSX x86_64 / aarch_64 and Windows x86_64 but this may change. 
- 
-As an example this is how you would include the dependency in maven:
-For Linux x86_64:
+## Features
+* Convention-based file names, for example `V3__insert_to_customers__split,nontransactional.sql`
+* It waits until database have been started, there is test query, and validation result of. This can be useful to initial load data into database with docker-compose
+* Supports migrations files larger than `-Xmx`: file will be splitted line-by-line (`split` modifier), then it will be loaded by chunks into database
+* Lock support, that make you able to start number of replicas your microservice, without care of migrations will collide each other
+* Each migration runs in the separated transaction
+* It also supports `nontransactional` migrations, due to SQL Server prohibits `CREATE DATABASE` in the transaction
+* Docker image
+
+All available configuration options are in [R2dbcMigrateProperties](https://github.com/nkonev/r2dbc-migrate/blob/master/r2dbc-migrate-core/src/main/java/name/nkonev/r2dbc/migrate/core/R2dbcMigrateProperties.java) class.
+Their descriptions are available in your IDE Ctrl+Space help or in [spring-configuration-metadata.json](https://github.com/nkonev/r2dbc-migrate/blob/master/r2dbc-migrate-spring-boot-starter/src/main/resources/META-INF/spring-configuration-metadata.json) file.
+
+## Download
+
+### Docker
 ```
+docker pull nkonev/r2dbc-migrate:latest
+```
+
+### Spring Boot Starter
+```xml
 <dependency>
-    <groupId>io.netty.incubator</groupId>
-    <artifactId>netty-incubator-codec-native-quic</artifactId>
-    <version>0.0.21.Final</version>
-    <classifier>linux-x86_64</classifier>
+  <groupId>name.nkonev.r2dbc-migrate</groupId>
+  <artifactId>r2dbc-migrate-spring-boot-starter</artifactId>
+  <version>VERSION</version>
 </dependency>
 ```
 
-For macOS / OSX:
-
-```
+### Only library
+```xml
 <dependency>
-    <groupId>io.netty.incubator</groupId>
-    <artifactId>netty-incubator-codec-native-quic</artifactId>
-    <version>0.0.21.Final</version>
-    <classifier>osx-x86_64</classifier>
+    <groupId>name.nkonev.r2dbc-migrate</groupId>
+    <artifactId>r2dbc-migrate-core</artifactId>
+    <version>VERSION</version>
 </dependency>
 ```
 
-For Windows:
-
-```
+It has weak dependency on `spring-core`, in order to read protocols like `file:/`, `classpath:/`, so you need to add
+```xml
 <dependency>
-    <groupId>io.netty.incubator</groupId>
-    <artifactId>netty-incubator-codec-native-quic</artifactId>
-    <version>0.0.21.Final</version>
-    <classifier>windows-x86_64</classifier>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>VERSION</version>
 </dependency>
 ```
 
-## How to use this codec ?
+### Standalone application
 
-For some examples please check our 
-[example package](https://github.com/netty/netty-incubator-codec-quic/tree/main/codec-native-quic/src/test/java/io/netty/incubator/codec/quic).
-This contains a server and a client that can speak some limited HTTP/0.9 with each other.
+If you want to build your own docker image you will be able to do this
+```bash
+curl -Ss https://repo.maven.apache.org/maven2/name/nkonev/r2dbc-migrate/r2dbc-migrate-standalone/VERSION/r2dbc-migrate-standalone-VERSION.jar > /tmp/migrate.jar
+```
 
-For more "advanced" use cases, consider checking our
-[netty-incubator-codec-http3](https://github.com/netty/netty-incubator-codec-http3) project.
+## Spring Boot Example
+https://github.com/nkonev/r2dbc-migrate-example
+
+## Library example
+https://github.com/nkonev/r2dbc-migrate-example/tree/library

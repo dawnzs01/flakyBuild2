@@ -1,34 +1,21 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: "/odd-platform-ui"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
       interval: weekly
-      time: "10:00"
-      timezone: Europe/Moscow
-    open-pull-requests-limit: 10
-    versioning-strategy: increase-if-necessary
-    labels:
-      - "scope: frontend"
+  - package-ecosystem: gradle
+    commit-message:
+      prefix: deps
+    directory: /
+    schedule:
+      interval: daily
     ignore:
-      - dependency-name: react-scripts
-        versions:
-          - 4.0.3
-          - 5.0.0
-      - dependency-name: lodash
-        versions:
-          - 4.17.21
-      - dependency-name: react-json-tree
-        versions:
-          - 0.15.0
-      - dependency-name: d3-selection
-        versions:
-          - 2.0.0
-      - dependency-name: husky
-        versions:
-          - 4.3.8
-      - dependency-name: d3-zoom
-        versions:
-          - 2.0.0
-      - dependency-name: "*"
-        update-types: [ "version-update:semver-minor" ]
+      # jgit 6 requires Java 11+
+      - dependency-name: org.eclipse.jgit:org.eclipse.jgit
+      # commons-net has a broken timestamp version -> 20030805.205232
+      - dependency-name: commons-net:commons-net
+      # aws-java-sdk updates several times per week
+      - dependency-name: com.amazonaws:aws-java-sdk-s3
+      # download-task 5.1.x fails due to gradle module metadata
+      - dependency-name: de.undercouch:gradle-download-task

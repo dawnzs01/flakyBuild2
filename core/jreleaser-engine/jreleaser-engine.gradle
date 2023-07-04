@@ -1,0 +1,69 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2020-2023 The JReleaser authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+dependencies {
+    api project(':jreleaser-model-impl')
+    api project(':jreleaser-templates')
+    api project(':jreleaser-git-java-sdk')
+    api project(':jreleaser-tool-java-sdk')
+    api project(':jreleaser-signing-java-sdk')
+    api project(':jreleaser-command-java-sdk')
+
+    api "org.apache.commons:commons-text:$commonsTextVersion"
+    api "org.commonmark:commonmark:$commonmarkVersion"
+    api "com.github.victools:jsonschema-generator:$jsonSchemaVersion"
+    api "com.github.victools:jsonschema-module-jackson:$jsonSchemaVersion"
+
+    // tools
+    api "org.apache.commons:commons-lang3:${commonsLang3Version}"
+
+    compileOnly "org.kordamp.jipsy:jipsy-annotations:${jipsyVersion}"
+    annotationProcessor "org.kordamp.jipsy:jipsy-processor:${jipsyVersion}"
+
+    // announce
+    api project(':jreleaser-bluesky-java-sdk')
+    api project(':jreleaser-discord-java-sdk')
+    api project(':jreleaser-discourse-java-sdk')
+    api project(':jreleaser-gitter-java-sdk')
+    api project(':jreleaser-google-chat-java-sdk')
+    api project(':jreleaser-linkedin-java-sdk')
+    api project(':jreleaser-smtp-java-sdk')
+    api project(':jreleaser-mastodon-java-sdk')
+    api project(':jreleaser-mattermost-java-sdk')
+    api project(':jreleaser-opencollective-java-sdk')
+    api project(':jreleaser-sdkman-java-sdk')
+    api project(':jreleaser-slack-java-sdk')
+    api project(':jreleaser-teams-java-sdk')
+    api project(':jreleaser-telegram-java-sdk')
+    api project(':jreleaser-twitter-java-sdk')
+    api project(':jreleaser-webhooks-java-sdk')
+    api project(':jreleaser-zulip-java-sdk')
+    // release
+    api project(':jreleaser-github-java-sdk')
+    api project(':jreleaser-gitlab-java-sdk')
+    api project(':jreleaser-gitea-java-sdk')
+    api project(':jreleaser-codeberg-java-sdk')
+    api project(':jreleaser-genericgit-java-sdk')
+    // download/upload/deploy
+    api project(':jreleaser-artifactory-java-sdk')
+    api project(':jreleaser-azure-java-sdk')
+    api project(':jreleaser-nexus2-java-sdk')
+    api project(':jreleaser-ftp-java-sdk')
+    api project(':jreleaser-http-java-sdk')
+    api project(':jreleaser-ssh-java-sdk')
+    api project(':jreleaser-s3-java-sdk')
+}

@@ -1,26 +1,239 @@
-configure([project(':odd-platform-api-contract'), project(':odd-platform-api')]) {
-    apply plugin: 'java'
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2020-2023 The JReleaser authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+boolean qualityEnabled    = (project.rootProject.findProperty('qualityEnabled') ?: false).toBoolean()
+boolean sonarEnabled      = qualityEnabled || (project.rootProject.findProperty('sonarEnabled') ?: false).toBoolean()
+boolean spotbugsEnabled   = qualityEnabled || (project.rootProject.findProperty('spotbugsEnabled') ?: false).toBoolean()
+boolean errorproneEnabled = qualityEnabled || (project.rootProject.findProperty('errorproneEnabled') ?: false).toBoolean()
 
+config {
+    info {
+        description = 'jreleaser'
+        inceptionYear = '2020'
+        tags = ['release']
+
+        links {
+            website      = "https://github.com/jreleaser/${project.rootProject.name}"
+            issueTracker = "https://github.com/jreleaser/${project.rootProject.name}/issues"
+            scm          = "https://github.com/jreleaser/${project.rootProject.name}.git"
+        }
+
+        scm {
+            url                 = "https://github.com/jreleaser/${project.rootProject.name}"
+            connection          = "scm:git:https://github.com/jreleaser/${project.rootProject.name}.git"
+            developerConnection = "scm:git:git@github.com:jreleaser/${project.rootProject.name}.git"
+        }
+
+        specification {
+            enabled = true
+        }
+
+        implementation {
+            enabled = true
+        }
+    }
+
+    docs {
+        javadoc {
+            autoLinks {
+                enabled = false
+            }
+        }
+    }
+
+    licensing {
+        mappings += [
+            gdsl: 'SLASHSTAR_STYLE',
+            dsld: 'SLASHSTAR_STYLE'
+        ]
+    }
+
+    quality {
+        checkstyle {
+            toolVersion = checkstyleVersion
+            aggregate {
+                enabled = true
+            }
+        }
+        spotbugs {
+            enabled = spotbugsEnabled
+            toolVersion = spotbugsVersion
+            ignoreFailures = true
+            report = 'xml'
+            aggregate {
+                enabled = spotbugsEnabled
+            }
+        }
+        errorprone {
+            enabled = errorproneEnabled
+            excludedPaths = '.*/build/mavenPlugin/.*'
+            args = [
+                '-Xep:MissingSummary:OFF',
+                '-Xep:SameNameButDifferent:OFF',
+                '-Xep:JavaLangClash:OFF'
+            ]
+        }
+        sonar {
+            enabled = sonarEnabled
+            standalone = true
+            hostUrl = 'https://sonarcloud.io'
+            organization = 'org-jreleaser-sonar'
+            projectKey = 'org_jreleaser_jreleaser'
+        }
+    }
+
+    coverage {
+        jacoco {
+            enabled = true
+            toolVersion = jacocoVersion
+        }
+        coveralls {
+            enabled = true
+            standalone = true
+        }
+    }
+}
+
+allprojects {
     repositories {
-        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+    }
+
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
     }
 }
 
-ext {
-    env = findProperty('env') ?: 'prod'
-    armBuild = resolveBooleanProperty("containerBuildArm")
-    amdBuild = resolveBooleanProperty("containerBuildAmd", !armBuild)
-    bundleUI = resolveBooleanProperty("bundleUI", true)
-}
-
-boolean resolveBooleanProperty(String propertyName, boolean defaultValue = false) {
-    def propertyValueStr = findProperty(propertyName)
-    return propertyValueStr == null ? defaultValue : propertyValueStr.toBoolean();
-}
-
-if (hasProperty('buildScan')) {
-    buildScan {
-        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-        termsOfServiceAgree = 'yes'
+subprojects {
+    config {
+        info {
+            description = project.project_description
+        }
     }
+
+    license {
+        exclude('build/**')
+        exclude('**/*.tpl')
+        exclude('META-INF/**/*.yml')
+    }
+
+    dependencies {
+        testImplementation "org.junit.jupiter:junit-jupiter:$junit5Version"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:$junit5Version"
+        testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
+        testImplementation "org.assertj:assertj-core:$assertjVersion"
+        testImplementation "org.junit-pioneer:junit-pioneer:$junitPioneerVersion"
+
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+subprojects { p ->
+    config {
+        coverage {
+            jacoco {
+                enabled = hasTestsAt(p.file('src/test'))
+            }
+        }
+    }
+}
+
+gradleProjects {
+    subprojects {
+        dirs(['api', 'core', 'sdks']) {
+            compileJava {
+                options.compilerArgs += ["-AprojectPath=${project.group}/${project.name}"]
+            }
+
+            dependencies {
+                compileOnly project(':jreleaser-nativeimage-annotations')
+                annotationProcessor project(':jreleaser-nativeimage-processor')
+            }
+
+            if (!(project.findProperty('automatic.module.name.skip') ?: false).toBoolean()) {
+                jar {
+                    manifest {
+                        attributes('Automatic-Module-Name': project.findProperty('automatic.module.name'))
+                    }
+                }
+            }
+        }
+    }
+}
+
+profiles {
+    profile('sbom') {
+        activation {
+            property {
+                key   = 'sbom'
+                value = true
+            }
+        }
+        action {
+            println 'SBOM generation is turned ON'
+
+            gradleProjects {
+                subprojects {
+                    dirs(['api', 'core', 'sdks', 'plugins']) {
+                        cyclonedxBom {
+                            includeConfigs = ['runtimeClasspath']
+                            projectType = project.projectDir.absolutePath.contains('plugins')? 'application' : 'library'
+                            outputName = "${project.name}-${project.version}-cyclonedx".toString()
+                            destination = file('build/reports/cyclonedx')
+                            includeLicenseText = false
+                        }
+
+                        publishing {
+                            publications {
+                                main(MavenPublication) {
+                                    artifact classifier: 'cyclonedx', source: new File(cyclonedxBom.destination.get(), cyclonedxBom.outputName.get() + '.xml')
+                                    artifact classifier: 'cyclonedx', source: new File(cyclonedxBom.destination.get(), cyclonedxBom.outputName.get() + '.json')
+                                }
+                            }
+                        }
+
+                        project.generatePomFileForMainPublication.dependsOn(cyclonedxBom)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Delete Gradle artifacts not suitable for publication to Maven Central
+tasks.register('cleanupStagedRepository') {
+    doLast {
+        def repoDir = project.layout.buildDirectory.dir('repos/local/release/org/jreleaser').get()
+        repoDir.dir('jdks').asFile.deleteDir()
+        repoDir.dir('jdks-gradle-plugin').asFile.deleteDir()
+        repoDir.dir('jreleaser-gradle-plugin').asFile.deleteDir()
+        repoDir.dir('org.jreleaser.gradle.plugin').asFile.deleteDir()
+    }
+}
+
+boolean hasTestsAt(File testDir) {
+    testDir.exists() && testDir.listFiles()?.size()
 }

@@ -1,0 +1,16 @@
+name: Clear cache
+
+on:
+  push:
+    branches: [ jreleaser ]
+
+
+
+
+jobs:
+  clear:
+    name: Delete all caches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear caches
+        uses: easimon/wipe-cache@v2

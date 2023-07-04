@@ -1,31 +1,30 @@
-# Ignore folders
-target/
-/config
-/.idea
-/out
+# gradle
 
-# Do not ignore them
-!.idea/copyright
-!.idea/inspectionProfiles
-!.idea/scopes
-!.idea/codeStyleSettings.xml
-!.idea/vcs.xml
+.gradle/
+build/
+out/
+classes/
 
-# Ignore files
-access.properties
-mail.properties
+# idea
+
+.idea/
 *.iml
 *.ipr
 *.iws
-.project
-.classpath
+
+# vscode
+
 .settings/
-
 .vscode/
+bin/
+.classpath
+.project
 
-# Because re-configuring the directory in the share plugin leads to side effect we ignore the file
-dependency-reduced-pom.xml
-.factorypath
-*.versionsBackup
+# fabric
 
-.sdkmanrc
+run/
+logs/
+
+src/main/java/kaptainwutax/stronghold/
+
+credentials.properties

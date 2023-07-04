@@ -1,115 +1,230 @@
-# 🍃 Spring Cloud AWS
+# SeedCrackerX [![Github All Releases](https://img.shields.io/github/downloads/19MisterX98/SeedCrackerX/total.svg)]
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
+## Readme Language
 
-Simplifies using AWS managed services in a Spring and Spring Boot applications.
+[中文](./READMEzh.md)
+[Русский](./READMEru.md)
+[Українська](./READMEuk.md)
+[Türkçe](./READMEtr.md)
 
-For a deep dive into the project, refer to the Spring Cloud AWS documentation:
+## I'm active on:
 
-| Version                | Reference Docs                                                                                   | API Docs                                                                            |
-|------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| Spring Cloud AWS 3.0.1 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/3.0.1/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/3.0.1/apidocs/index.html) | 
-| Spring Cloud AWS 2.4.4 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.4.4/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.4.4/apidocs/index.html) | 
-| Spring Cloud AWS 2.3.5 | [Reference Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.3.5/reference/html/index.html) | [API Docs](https://docs.awspring.io/spring-cloud-aws/docs/2.3.5/apidocs/index.html) |
+- [My Discord](https://discord.gg/JRmHzqQYfp)
+- [Youtube](https://www.youtube.com/channel/UCby9ZxEjJCqmccQGF3GSYlA)
 
-## Sponsors
+# Version Tab
 
-Big thanks to [Localstack](https://localstack.cloud) for providing PRO licenses to the development team!
+| Minecraft Version | SeedCrackerX version                                                                                       | Dependencies                                                                                                                                                                                   |
+|-------------------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.20.x             | [2.14.4](https://github.com/19MisterX98/SeedcrackerX/releases/download/prerelease/seedcrackerX-2.14.4.jar) | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
+| 1.19.4            | [2.14.2](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.14.2/seedcrackerX-2.14.2.jar)     | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
+| 1.19.3            | [2.13.1](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.13.1/seedcrackerX-2.13.1.jar)     | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
+| 1.19-1.19.2       | [2.13](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.13/seedcrackerX-2.13.jar)           | [Fabric mod loader 0.14.0+](https://fabricmc.net/use/)                                                                                                                                         |
+| 1.18.2            | [2.12](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.12/seedcrackerX-2.12.jar)           | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 | 
+| 1.18-1.18.1       | [2.11.4](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.11.4/seedcrackerX-2.11.4.jar)     | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 |
+| 1.17-1.17.1       | [2.10.1](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.10.1/seedcrackerX-2.10.1.jar)     | [Fabric mod loader](https://fabricmc.net/use/)                                                                                                                                                 |
+| 1.16.5            | [2.7](https://github.com/19MisterX98/SeedcrackerX/releases/download/2.7.1/seedcrackerX-0.2.7.jar)          | [Fabric mod loader](https://fabricmc.net/use/), [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api),  [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu/files) |
 
-<a href="https://localstack.cloud"><img src="https://user-images.githubusercontent.com/47351025/215054012-f5af0761-0bd5-49c6-bd3e-c6b2a6844f53.png" height="100" /></a>
+## Installation
 
-## Compatibility with Spring Project Versions
+Download and install the [fabric mod loader](https://fabricmc.net/use/)
+ 
+Download the latest [release or pre-release](https://github.com/19MisterX98/SeedCrackerX/releases) of SeedCrackerX
+  
+put the .jar file in your mod directory, either %appdata%/.minecraft/mods/ folder for the vanilla launcher or your own instance folder.
+  
+#### Optional
+  
+Download the latest release of [Multiconnect](https://github.com/Earthcomputer/multiconnect/releases) or [ViaFabric](https://modrinth.com/mod/viafabric) to connect to servers on lower MC versions
+  
+## Database
 
-This project has dependency and transitive dependencies on Spring Projects. The table below outlines the versions of Spring Cloud, Spring Boot and Spring Framework versions that are compatible with certain Spring Cloud AWS version.
+Since the mod is used by many people, I have decided to create a Google sheet for server seeds.
+If you enable the database option in the config gui the mod will send cracked seeds from 10+ player servers directly to the Google sheet.
+You also need a minecraft license
 
-| Spring Cloud AWS             | Spring Cloud                                                                                                          | Spring Boot  | Spring Framework | AWS Java SDK |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------|------------------|--------------|
-| 2.3.x (maintenance mode)  	| [2020.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes) (3.0/Illford) | 2.4.x, 2.5.x | 5.3.x            | 1.x          |
-| 2.4.x (maintenance mode)  	| [2021.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2021.0-Release-Notes) (3.1/Jubilee) | 2.6.x, 2.7.x | 5.3.x            | 1.x          |
-| 3.0.x                        | [2022.0.x](https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2022.0-Release-Notes) (4.0/Kilburn) | 3.0.x        | 6.0.x            | 2.x          |
+[The Sheet](https://docs.google.com/spreadsheets/d/1tuQiE-0leW88em9OHbZnH-RFNhVqgoHhIt9WQbeqqWw/edit?usp=sharing)
 
-**Note**: 3.0.0-M2 is the last version compatible with Spring Boot 2.7.x and Spring Cloud 3.1. Starting from 3.0.0-M3, project has switched to Spring Boot 3.0.
+# Usage
 
-## Supported AWS integrations
+## 1.17.X and below
 
-| AWS Service     | Spring Cloud AWS 2.x | Spring Cloud AWS 3.x                                                                                                                        |
-|-----------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| S3              | ✅                    | ✅                                                                                                                                           |
-| SNS             | ✅                    | ✅                                                                                                                                           |
-| SES             | ✅                    | ✅                                                                                                                                           |
-| Parameter Store | ✅                    | ✅                                                                                                                                           |
-| Secrets Manager | ✅                    | ✅                                                                                                                                           |
-| SQS             | ✅                    | ✅                                                                                                                                           |
-| RDS             | ✅                    | ❌                                                                                                                                           |
-| EC2             | ✅                    | ❌                                                                                                                                           |
-| ElastiCache     | ✅                    | ❌                                                                                                                                           |
-| CloudFormation  | ✅                    | ❌                                                                                                                                           |
-| CloudWatch      | ✅                    | ✅                                                                                                                                           |
-| Cognito         | ✅                    | [Covered by Spring Boot](https://docs.awspring.io/spring-cloud-aws/docs/3.0.0-SNAPSHOT/reference/html/index.html#migration-from-2-x-to-3-x) |
-| DynamoDB        | ❌                    | ✅                                                                                                                                           |
+### Overworld
 
-Note, that Spring provides support for other AWS services in following projects:
+Run around in the world until the mod finds a dungeon. After the mod found one the cracking process starts automatically.
+If it doesn't give you a world seed, you may need to find another dungeon.
 
-- [Spring Cloud Stream Binder AWS Kinesis](https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis)
-- [Spring Cloud Config Server](https://github.com/spring-cloud/spring-cloud-config) supports AWS Parameter Store and Secrets Manager
-- [Spring Integration for AWS](https://github.com/spring-projects/spring-integration-aws)
+### The Nether
+
+Run around in the warped fungus biome until the mod finds big fungus and starts cracking.
+
+### The End
+
+You have to find 5 (or more) end cities or end gateways and then return to the center of the end dimension to obtain the pillar seed, after that cracking should begin.
+
+#### Video guides:
+- [Structures and Endpillars](https://youtu.be/aUuPSZVPH8E?t=462)
+- [warped fungus](https://www.youtu.be/HKjwgofhKs4)
+
+  ### Supported Decorators
+    - Dungeon
+    - End Gateway
+    - Desert Well
+    - Emerald Ore
+    - Warped Fungus
+
+## 1.18.X and higher
+
+Dungeon cracking, fungus cracking don't work anymore.
+
+### Overworld
+
+Go to the config menu via "/seedcracker gui" (1.19.3+) or "/seed gui" (before 1.19.3) and make sure that Emeralds, Gateways, Biomes, Desert wells and Warped fungi are disabled since they aren't updated and can give wrong data.
+
+For cracking, you now need to get 40 bits of liftable structures and 32 regular bits from the listed ones:
+
+  ### Supported Structures
+  
+    - Igloo - 9 regular and liftable bits
+    - Desert Pyramid - 9 regular and liftable bits
+    - Jungle Temple - 9 regular and liftable bits
+    - Swamp Hut - 9 regular and liftable bits
+    - Shipwreck - 8 regular and liftable bits
+    - Pillager Outpost - 9 lifable bits
+    - Ocean Monument - 9 regular bits
+
+Any combination is valid. For example: 3 shipwrecks, 1 pyramid and 1 igloo.
+You can track your process with "/seed data bits" (look at the bits count for liftable structures)
+A structure is found when there is an outline around it.
+After you get enough, the cracking process starts automatically. This process takes around 1-5 mins.
+The mod may ask you to find additional structures after this.
+It's more likely to happen with fewer bits and structures of the same type.
+After reducing your structure seeds, the mod will brute force your world seed via dungeon positions or hashed seed.
+
+### The Nether
+
+Fungus cracking don't work anymore, so there are no way to find nether seed using SeedcrackerX, however you can try to crack it yourself by using [Nether_Bedrock_Cracker](https://github.com/19MisterX98/Nether_Bedrock_Cracker)
+    
+### The End
+
+You have to find 5 (or more) end cities (fill up regular bits) and then return to the center of the end dimension to obtain the pillar seed, after that cracking should begin.
+
+- You need to disable end gateways!
+
+## Commands
+
+If version of your mod is older than 2.13.1, use prefix
+ - `/seed` instead of `/seedcracker`
+
+  ### GUI Command
+  - `/seedcracker gui`
+  
+  Opens the config gui where you can modify settings like the server mc-version, all finders, database and rendermode.
+  There are command alternatives for most of this, but they should'nt be used anymore.
+  
+  ### Finder Reload Command
+  - `/seedcracker finder reload`
+
+  Rescans the loaded Chunks to find structures that weren't found before.
+
+  ### Data Command
+  - `/seedcracker data clear`
+  
+  Clears all the collected data without requiring a relog. This is useful for multi-world servers.
+  
+  - `/seedcracker data bits`
+  
+  Display how many bits of information have been collected.
+  Normal bits are used for end pillar + structure cracking. Cracking starts at 32 bits.
+  Lifting bits are used for liftable structure cracking. Cracking starts at 40 bits.
+  
+  - `/seed data restore`
+  
+  When you leave a world, the mod will save currently collected structure information in a file of the .minecraft/config directory.
+  After rejoining, you can restore it with this command.
+  
+  
+  ### Debug Command
+  - `/seedcracker cracker debug`
+
+  Additional info is shown
+  
+  ### Database Command
+  - `/seedcracker database`
+  
+  Opens a [google sheet](https://docs.google.com/spreadsheets/d/1tuQiE-0leW88em9OHbZnH-RFNhVqgoHhIt9WQbeqqWw/edit?usp=sharing) that is maintained by the mod
+  
+## Video Tutorials
+
+Neil's:
+- [1.15](https://youtu.be/1ChmLi9og8Q)
+- [1.16](https://youtu.be/aUuPSZVPH8E)
+
+Dyiing's
+- [1.18](https://www.youtube.com/watch?v=tKeEyx7jIE4)
+
+Mine:
+- [Dungeon cracking & end pillar cracking](https://youtu.be/8ytfZ2MXosY)
+- [Nether cracking](https://youtu.be/HKjwgofhKs4)
+- [Structure cracking](https://www.youtu.be/UXVrBaOR8H0)
 
 
-## Checking out and building
+## Setting up the Workspace
 
-To check out the project and build it from source, do the following:
+-Clone the repository.
 
-```
-git clone https://github.com/awspring/spring-cloud-aws.git
-cd spring-cloud-aws
-./mvnw package
-```
+-Run `gradlew genSources <idea|eclipse>`.
 
-To build and install jars into your local Maven cache:
+## Building the Mod
 
-```
-./mvnw install
-```
+-Update the version in `build.gradle` and `fabric.mod.json`.
 
-For faster builds, we recommend using [Maven Daemon](https://github.com/apache/maven-mvnd) and using following commands:
+-Run `gradlew build`.
 
-Build:
+## API for other mods
 
-```
-make build
-```
+- Include seedcracker-api and jitpack in your build.gradle
 
-Clean:
+      repositories {
+          mavenCentral()
+          maven { url "https://jitpack.io" }
+      }
+      
+      dependencies {
+          implementation (include('com.github.19MisterX98.SeedcrackerX:seedcrackerx-api:master-SNAPSHOT')) {transitive = false}
+      }
 
-```
-make clean
-```
+- Add a class that implements the api interface
 
-Format code:
+      package misterx.myMod.seedManagemnet.SeedCrackerEP
+      
+      import kaptainwutax.seedcrackerX.api.SeedCrackerAPI;
+    
+      public class SeedCrackerEP implements SeedCrackerAPI {
+          @Override
+          public void pushWorldSeed(long seed) {
+              //do something
+              Foo.bar(seed)
+          }
+      }
 
-```
-make format
-```
+- Tell fabric.mod.json where your entrypoint is
 
-## Building documentation
+      "entrypoints": {
+        "main": [...],
+        "client": [...],
+        "server": [...],
+        "seedcrackerx": [
+          "misterx.myMod.seedManagemnet.SeedCrackerEP"
+        ]
+      },
 
-Documentation can be built by activating the `docs` profile in the maven build.
+## Contributors
 
-```
-make docs
-```
+[KaptainWutax](https://github.com/KaptainWutax) - Author of the original mod
 
-It generates:
+[neil](https://www.youtube.com/watch?v=aUuPSZVPH8E) - Video Tutorials
 
-- reference documentation in `docs/target/generated-docs/`
-- API docs in `target/site/`
+[Nekzuris](https://github.com/Nekzuris) and [ItzSkyReed](https://github.com/ItzSkyReed)  - README
 
-## Getting in touch
-
-- [Discussions on Github](https://github.com/awspring/spring-cloud-aws/discussions) - the best way to discuss anything Spring Cloud AWS related
-
-Or reach out directly to individual team members:
-
-- Maciej Walkowiak [Twitter](https://twitter.com/maciejwalkowiak)
-- Matej Nedic [Twitter](https://twitter.com/MatejNedic1)
-- Tomaz Fernandes [Twitter](https://twitter.com/tomazfernandes_)
+[19MisterX98](https://www.youtube.com/channel/UCby9ZxEjJCqmccQGF3GSYlA) - Author of SeedCrackerX

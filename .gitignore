@@ -1,23 +1,25 @@
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# Package Files #
-*.jar
-*.zip
-*.tar.gz
-
-# Maven output dir
-target/
-.project
-.classpath
-.settings
-.DS_Store
+**/target/**
 *.swp
-.vscode
-
-.idea
-*.iml
-
+*.swn
+*.swo
+debug/**
+diagnose.txt
+run.txt
+train.txt
+log/**
+license/zinggLicense
+client/src/test/resources/large.xlsx
+.idea/**
+**/*.iml
+/target/
+/zingg/*
+**/snow.json
+__pycache__
+deps/**
+zingg.egg-info
+dist
+python/docs/_build/html
+python/docs/_build/_doctrees
+**/python/build/*
+**/assembly/.classpath
+**/.DS_Store

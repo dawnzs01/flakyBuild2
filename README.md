@@ -1,194 +1,131 @@
-# 🎭 [Playwright](https://playwright.dev) for Java
+## The Problem
 
-[![javadoc](https://javadoc.io/badge2/com.microsoft.playwright/playwright/javadoc.svg)](https://javadoc.io/doc/com.microsoft.playwright/playwright)
-[![maven version](https://img.shields.io/maven-central/v/com.microsoft.playwright/playwright)](https://search.maven.org/search?q=com.microsoft.playwright)
-[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.microsoft.playwright/playwright.svg)](https://oss.sonatype.org/content/repositories/snapshots/com/microsoft/playwright/playwright/)
-[![Join Slack](https://img.shields.io/badge/join-slack-infomational)](https://aka.ms/playwright-slack)
+Real world data contains multiple records belonging to the same customer. These records can be in single or multiple systems and they have variations across fields, which makes it hard to combine them together, especially with growing data volumes. This hurts [customer analytics](docs/bizLeaderSurvey.md) - establishing lifetime value, loyalty programs, or marketing channels is impossible when the base data is not linked. No AI algorithm for segmentation can produce the right results when there are multiple copies of the same customer lurking in the data. No warehouse can live up to its promise if the dimension tables have duplicates. 
 
-#### [Website](https://playwright.dev/java/) | [API reference](https://www.javadoc.io/doc/com.microsoft.playwright/playwright/latest/index.html)
+![# Zingg - Data Silos](/assets/dataSilos.png)
 
-Playwright is a Java library to automate [Chromium](https://www.chromium.org/Home), [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [WebKit](https://webkit.org/) with a single API. Playwright is built to enable cross-browser web automation that is **ever-green**, **capable**, **reliable** and **fast**.
+With a modern data stack and DataOps, we have established patterns for E and L in ELT for building data warehouses, datalakes and deltalakes. However, the T - getting data ready for analytics still needs a lot of effort. Modern tools like dbt are actively and successfully addressing this. What is also needed is a quick and scalable way to build the single source of truth of core business entities post Extraction and pre or post Loading.
 
-|          | Linux | macOS | Windows |
-|   :---   | :---: | :---: | :---:   |
-| Chromium <!-- GEN:chromium-version -->115.0.5790.24<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| WebKit <!-- GEN:webkit-version -->16.4<!-- GEN:stop --> | ✅ | ✅ | ✅ |
-| Firefox <!-- GEN:firefox-version -->113.0<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+With Zingg, the analytics engineer and the data scientist can quickly integrate data silos and build unified views at scale!
 
-Headless execution is supported for all the browsers on all platforms. Check out [system requirements](https://playwright.dev/java/docs/next/intro/#system-requirements) for details.
+![# Zingg - Data Mastering At Scale with ML](/assets/dataMastering.png)
 
-* [Usage](#usage)
-  - [Add Maven dependency](#add-maven-dependency)
-  - [Is Playwright thread-safe?](#is-playwright-thread-safe)
-* [Examples](#examples)
-  - [Page screenshot](#page-screenshot)
-  - [Mobile and geolocation](#mobile-and-geolocation)
-  - [Evaluate JavaScript in browser](#evaluate-javascript-in-browser)
-  - [Intercept network requests](#intercept-network-requests)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-* [Is Playwright for Java ready?](#is-playwright-for-java-ready)
+Besides probabilistic matching, also known as fuzzy matching, Zingg also does deterministic matching, which is useful in identity resolution and householding applications.
 
-## Usage
+![#Zingg Detereministic Matching](/assets/deterministicMatching.png)
 
-Playwright requires **Java 8** or newer.
+## Why Zingg
 
-#### Add Maven dependency
+Zingg is an ML based tool for entity resolution. The following features set Zingg apart from other tools and libraries: 
+- Ability to handle any entity like customer, patient, supplier, product etc 
+- Ability to connect to [disparate data sources](https://docs.zingg.ai/zingg/connectors). Local and cloud file systems in any format, enterprise applications and relational, NoSQL and cloud databases and warehouses
+- Ability to scale to large volumes of data. [See why this is important](https://docs.zingg.ai/zingg/zmodels/) and [Zingg performance numbers](https://docs.zingg.ai/zingg/stepbystep/hardwaresizing)
+- [Interactive training data builder](https://docs.zingg.ai/zingg/stepbystep/createtrainingdata/label) using active learning that builds models on frugally small training samples to high accuracy.
+![Shows records and asks user to mark yes, no, cant say on the cli.](/assets/label.gif) 
+- Ability to define domain specific functions to improve matching  
+- Out of the box support for English as well as Chinese, Thai, Japanese, Hindi and other languages
 
-Playwright is distributed as a set of [Maven](https://maven.apache.org/what-is-maven.html) modules. The easiest way to use it is to add one dependency to your Maven `pom.xml` file as described below. If you're not familiar with Maven please refer to its [documentation](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html).
+Zingg is useful for
+- Building unified and trusted views of customers and suppliers across multiple systems
+- Large Scale Entity Resolution for AML, KYC and other fraud and compliance scenarios
+- [Deduplication](docs/patient.md) and data quality
+- Identity Resolution 
+- Integrating data silos during mergers and acquisitions
+- Data enrichment from external sources
+- Establishing customer [households](docs/households.md)
 
-To run Playwright simply add following dependency to your Maven project:
+## The Story
 
-```xml
-<dependency>
-  <groupId>com.microsoft.playwright</groupId>
-  <artifactId>playwright</artifactId>
-  <version>1.28.1</version>
-</dependency>
-```
-
-To run Playwright using Gradle add following dependency to your build.gradle file:
-
-```gradle
-dependencies {
-  implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.28.1'
-}
-```
-
-#### Is Playwright thread-safe?
-
-No, Playwright is not thread safe, i.e. all its methods as well as methods on all objects created by it (such as BrowserContext, Browser, Page etc.) are expected to be called on the same thread where Playwright object was created or proper synchronization should be implemented to ensure only one thread calls Playwright methods at any given time. Having said that it's okay to create multiple Playwright instances each on its own thread.
-
-## Examples
-
-You can find Maven project with the examples [here](./examples).
-
-#### Page screenshot
-
-This code snippet navigates to Playwright homepage in Chromium, Firefox and WebKit, and saves 3 screenshots.
-
-```java
-import com.microsoft.playwright.*;
-
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-
-public class PageScreenshot {
-  public static void main(String[] args) {
-    try (Playwright playwright = Playwright.create()) {
-      List<BrowserType> browserTypes = Arrays.asList(
-        playwright.chromium(),
-        playwright.webkit(),
-        playwright.firefox()
-      );
-      for (BrowserType browserType : browserTypes) {
-        try (Browser browser = browserType.launch()) {
-          BrowserContext context = browser.newContext();
-          Page page = context.newPage();
-          page.navigate("https://playwright.dev/");
-          page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot-" + browserType.name() + ".png")));
-        }
-      }
-    }
-  }
-}
-```
-
-#### Mobile and geolocation
-
-This snippet emulates Mobile Chromium on a device at a given geolocation, navigates to openstreetmap.org, performs action and takes a screenshot.
-
-```java
-import com.microsoft.playwright.options.*;
-import com.microsoft.playwright.*;
-
-import java.nio.file.Paths;
-
-import static java.util.Arrays.asList;
-
-public class MobileAndGeolocation {
-  public static void main(String[] args) {
-    try (Playwright playwright = Playwright.create()) {
-      Browser browser = playwright.chromium().launch();
-      BrowserContext context = browser.newContext(new Browser.NewContextOptions()
-        .setUserAgent("Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
-        .setViewportSize(411, 731)
-        .setDeviceScaleFactor(2.625)
-        .setIsMobile(true)
-        .setHasTouch(true)
-        .setLocale("en-US")
-        .setGeolocation(41.889938, 12.492507)
-        .setPermissions(asList("geolocation")));
-      Page page = context.newPage();
-      page.navigate("https://www.openstreetmap.org/");
-      page.click("a[data-original-title=\"Show My Location\"]");
-      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("colosseum-pixel2.png")));
-    }
-  }
-}
-```
-
-#### Evaluate JavaScript in browser
-
-This code snippet navigates to example.com in Firefox, and executes a script in the page context.
-
-```java
-import com.microsoft.playwright.*;
-
-public class EvaluateInBrowserContext {
-  public static void main(String[] args) {
-    try (Playwright playwright = Playwright.create()) {
-      Browser browser = playwright.firefox().launch();
-      BrowserContext context = browser.newContext();
-      Page page = context.newPage();
-      page.navigate("https://www.example.com/");
-      Object dimensions = page.evaluate("() => {\n" +
-        "  return {\n" +
-        "      width: document.documentElement.clientWidth,\n" +
-        "      height: document.documentElement.clientHeight,\n" +
-        "      deviceScaleFactor: window.devicePixelRatio\n" +
-        "  }\n" +
-        "}");
-      System.out.println(dimensions);
-    }
-  }
-}
-```
-
-#### Intercept network requests
-
-This code snippet sets up request routing for a WebKit page to log all network requests.
-
-```java
-import com.microsoft.playwright.*;
-
-public class InterceptNetworkRequests {
-  public static void main(String[] args) {
-    try (Playwright playwright = Playwright.create()) {
-      Browser browser = playwright.webkit().launch();
-      BrowserContext context = browser.newContext();
-      Page page = context.newPage();
-      page.route("**", route -> {
-        System.out.println(route.request().url());
-        route.resume();
-      });
-      page.navigate("http://todomvc.com");
-    }
-  }
-}
-```
+What is the [backstory behind Zingg](https://sonalgoyal.substack.com/p/time-to-zingg)? 
 
 ## Documentation
 
-Check out our official [documentation site](https://playwright.dev/java).
+Check the detailed Zingg [documentation](https://docs.zingg.ai/zingg/) 
 
-You can also browse [javadoc online](https://www.javadoc.io/doc/com.microsoft.playwright/playwright/latest/index.html).
+## Community
 
-## Contributing
+Be part of the conversation in the [Zingg Community Slack](https://join.slack.com/t/zinggai/shared_invite/zt-w7zlcnol-vEuqU9m~Q56kLLUVxRgpOA)
 
-Follow [the instructions](https://github.com/microsoft/playwright-java/blob/main/CONTRIBUTING.md#getting-code) to build the project from source and install the driver.
+## People behind Zingg
 
-## Is Playwright for Java ready?
+Zingg is being developed by the [Zingg.AI](https://www.zingg.ai) team. If you need [custom help with or around Zingg](https://www.zingg.ai/company/consulting), let us know. 
 
-Yes, Playwright for Java is ready. v1.10.0 is the first stable release. Going forward we will adhere to [semantic versioning](https://semver.org/) of the API.
+## Demo
+
+See Zingg in action [here](https://www.youtube.com/watch?v=zOabyZxN9b0)
+
+## Getting Started
+
+The easiest way to get started with Zingg is through Docker and by running the prebuilt models.
+```
+docker pull zingg/zingg:0.3.5
+docker run -it zingg/zingg:0.3.5 bash
+./scripts/zingg.sh --phase match --conf examples/febrl/config.json
+``` 
+
+Check the [step by step guide](https://docs.zingg.ai/zingg/stepbystep) for more details.
+
+## Connectors
+
+Zingg connects, reads and writes to most on-premise and cloud data sources. Zingg runs on any private or cloud based Spark service.
+![zinggConnectors](assets/zinggOSS.png)
+
+Zingg can read and write to Snowflake, Cassandra, S3, Azure, Elastic, major RDBMS and any Spark supported data sources. Zingg also works with all major file formats including Parquet, Avro, JSON, XLSX, CSV & TSV. This is done through the Zingg [pipe](docs/dataSourcesAndSinks/pipes.md) abstraction.  
+
+## Key Zingg Concepts
+
+Zingg learns 2 models on the data:
+
+1. Blocking Model
+
+One fundamental problem with scaling data mastering is that the number of comparisons increase quadratically as the number of input record increases.
+![Data Mastering At Scale](/assets/fuzzymatchingcomparisons.jpg)
+
+
+Zingg learns a clustering/blocking model which indexes near similar records. This means that Zingg does not compare every record with every other record. Typical Zingg comparisons are 0.05-1% of the possible problem space.
+
+2. Similarity Model 
+
+The similarity model helps Zingg predict which record pairs match. Similarity is run only on records within the same block/cluster to scale the problem to larger datasets. The similarity model is a classifier which predicts similarity between records that are not exactly the same, but could belong together.
+
+![Fuzzy matching comparisons](/assets/dataMatching.jpg) 
+
+To build these models, training data is needed. Zingg comes with an interactive learner to rapidly build training sets. 
+
+![Shows records and asks user to mark yes, no, cant say on the cli.](assets/label2.gif) 
+
+## Pretrained models
+
+Zingg comes with pretrained models for the Febrl dataset under the [models](models) folder.
+
+## Reporting bugs and contributing 
+
+Want to report a bug or request a feature? Let us know on [Slack](https://join.slack.com/t/zinggai/shared_invite/zt-w7zlcnol-vEuqU9m~Q56kLLUVxRgpOA), or open an [issue](https://github.com/zinggAI/zingg/issues/new/choose)
+
+Want to commit code? Please check the [contributing documentation.](https://docs.zingg.ai/zingg/contributing)
+
+## Book Office Hours
+
+If you want to schedule a 30-min call with our team to help you understand if Zingg is the right technology for your problem, please book a slot [here](https://calendly.com/sonalgoyal/30min). 
+
+## Asking questions on running Zingg
+
+If you have a question or issue while using Zingg, kindly log a [question](https://github.com/zinggAI/zingg/issues/new/choose) and we will reply very fast :-) 
+Or you can use [Slack](https://join.slack.com/t/zinggai/shared_invite/zt-w7zlcnol-vEuqU9m~Q56kLLUVxRgpOA)
+
+## License
+
+Zingg is licensed under [AGPL v3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) - which means you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
+
+AGPL allows unresticted use of Zingg by end users and solution builders and partners. We strongly encourage solution builders to create custom solutions for their clients using Zingg.   
+
+Need a different license? Write to us.
+
+
+## Acknowledgements
+
+Zingg would not have been possible without the excellent work below:
+- [Apache Spark](https://spark.apache.org)
+- [SecondString](http://secondstring.sourceforge.net/)
+- [Febrl](http://users.cecs.anu.edu.au/~Peter.Christen/Febrl/febrl-0.3/febrldoc-0.3/)
+

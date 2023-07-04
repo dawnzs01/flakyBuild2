@@ -1,3 +1,0 @@
-ext.bundleProjects = ['annotation', 'port', 'engine', 'shared']
-
-apply from: configProject.file('gradle/aarbundler.gradle'), to: project

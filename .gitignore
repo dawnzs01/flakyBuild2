@@ -1,22 +1,4 @@
-.gradle/
-*.iml
-*.ipr
-*.iws
-.idea/
-.vscode/
-build/
-out/
-target/
-tmp/
-.DS_Store
-.tmp
-# Eclipse
-*/bin
-!core/jreleaser-templates/src/main/resources/META-INF/jreleaser/templates/**/bin
-.classpath
-.project
-.settings
-.oci
-/bin/
-*.jar
-*.class
+/bazel-*
+.ijwb
+.clwb
+/coverage

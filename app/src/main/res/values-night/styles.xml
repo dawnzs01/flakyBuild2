@@ -1,38 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~    sora-editor - the awesome code editor for Android
+  ~    https://github.com/Rosemoe/sora-editor
+  ~    Copyright (C) 2020-2023  Rosemoe
+  ~
+  ~     This library is free software; you can redistribute it and/or
+  ~     modify it under the terms of the GNU Lesser General Public
+  ~     License as published by the Free Software Foundation; either
+  ~     version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~     This library is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~     Lesser General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU Lesser General Public
+  ~     License along with this library; if not, write to the Free Software
+  ~     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+  ~     USA
+  ~
+  ~     Please contact Rosemoe by email 2073412493@qq.com if you need
+  ~     additional information or have any questions
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 <resources>
 
-    <style name="ColorPicker" parent="Theme.Material3.Dark.Dialog">
-        <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="android:windowTitleStyle">@style/DarkPickerDialogTitleStyle</item>
-        <item name="android:dialogCornerRadius">@dimen/cont_corner_radius</item>
-        <item name="android:buttonCornerRadius">@dimen/cont_corner_radius</item>
-        <item name="android:background">@drawable/container</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="android:fontFamily">@font/normal</item>
-        <item name="android:tint">@color/colorAccent</item>
-        <item name="android:radius">@dimen/cont_corner_radius</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorButtonNormal">@color/colorAccent</item>
-        <item name="colorPrimary">@color/colorAccent</item>
-        <item name="colorSecondary">@color/colorAccent</item>
-        <item name="colorTertiary">@color/colorAccent</item>
-        <item name="cpv_hashColor">@color/textColorPrimary</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#3F51B5</item>
+        <item name="colorAccent">#EC407A</item>
     </style>
 
-    <style name="DarkPickerDialogTitleStyle">
-        <item name="android:maxLines">1</item>
-        <item name="android:scrollHorizontally">true</item>
-        <item name="android:textAppearance">
-            @android:style/TextAppearance.Material.DialogWindowTitle
-        </item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-    </style>
-
-    <style name="MenuDarkTheme" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="android:background">@color/colorContainer</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-    </style>
 </resources>

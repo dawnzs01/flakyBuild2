@@ -1,4 +1,0 @@
-Iconify v3.1 Beta (HotFix) has arrived! It has the following new changes:
-
-• Fixed Outline QsTile for Pixel variant.
-• Fixed Leafy Outline QsTile for Pixel variant.

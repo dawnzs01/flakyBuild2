@@ -1,280 +1,194 @@
-[![image](https://img.shields.io/github/v/release/eritpchy/aliyundrive-webdav)](https://github.com/eritpchy/aliyundrive-webdav/releases)  [![image](https://img.shields.io/maven-central/v/net.xdow/aliyundrive-sdk-openapi)](https://central.sonatype.com/artifact/net.xdow/aliyundrive-sdk-openapi/)
+# 🎭 [Playwright](https://playwright.dev) for Java
 
-说明
-> [1.1.0版本](https://github.com/zxbu/aliyundrive-webdav/releases/tag/v1.1.0)支持阿里Teambition网盘的webdav协议
+[![javadoc](https://javadoc.io/badge2/com.microsoft.playwright/playwright/javadoc.svg)](https://javadoc.io/doc/com.microsoft.playwright/playwright)
+[![maven version](https://img.shields.io/maven-central/v/com.microsoft.playwright/playwright)](https://search.maven.org/search?q=com.microsoft.playwright)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/com.microsoft.playwright/playwright.svg)](https://oss.sonatype.org/content/repositories/snapshots/com/microsoft/playwright/playwright/)
+[![Join Slack](https://img.shields.io/badge/join-slack-infomational)](https://aka.ms/playwright-slack)
 
-> 2.x版本仅支持阿里云盘, 不再维护Teambition网盘版本
+#### [Website](https://playwright.dev/java/) | [API reference](https://www.javadoc.io/doc/com.microsoft.playwright/playwright/latest/index.html)
 
-> 3.x版本支持阿里云盘OpenApi
+Playwright is a Java library to automate [Chromium](https://www.chromium.org/Home), [Firefox](https://www.mozilla.org/en-US/firefox/new/) and [WebKit](https://webkit.org/) with a single API. Playwright is built to enable cross-browser web automation that is **ever-green**, **capable**, **reliable** and **fast**.
 
-> 3.4.0及以上版本默认支持直连模式下载
+|          | Linux | macOS | Windows |
+|   :---   | :---: | :---: | :---:   |
+| Chromium <!-- GEN:chromium-version -->115.0.5790.24<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| WebKit <!-- GEN:webkit-version -->16.4<!-- GEN:stop --> | ✅ | ✅ | ✅ |
+| Firefox <!-- GEN:firefox-version -->113.0<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
-目录
-- [aliyundrive-webdav](#aliyundrive-webdav)
-- [如何使用](#如何使用)
-    - [Jar包运行](#jar包运行)
-    - [容器运行](#容器运行)
-    - [Docker-Compose](#docker-compose)
-- [参数说明](#参数说明)
-- [QQ群](#qq群)
-- [新手教程](#新手教程)
-    - [群晖](#群晖)
-    - [Windows10](#windows10)
-    - [Linux](#linux)
-    - [Mac](#mac)
-- [客户端兼容性](#客户端兼容性)
-- [浏览器获取refreshToken方式](#浏览器获取refreshtoken方式仅webapi需要)
-- [功能说明](#功能说明)
-    - [支持的功能](#支持的功能)
-    - [注意事项](#注意事项)
-- [免责声明](#免责声明)
+Headless execution is supported for all the browsers on all platforms. Check out [system requirements](https://playwright.dev/java/docs/next/intro/#system-requirements) for details.
 
-# aliyundrive-webdav
-本项目实现了阿里云盘的webdav协议, 只需要简单的配置一下, 就可以让阿里云盘变身为webdav协议的文件服务器。
-基于此, 你可以把阿里云盘挂载为Windows、Linux、Mac系统的磁盘, 可以通过NAS系统做文件管理或文件同步, 更多玩法等你挖掘
+* [Usage](#usage)
+  - [Add Maven dependency](#add-maven-dependency)
+  - [Is Playwright thread-safe?](#is-playwright-thread-safe)
+* [Examples](#examples)
+  - [Page screenshot](#page-screenshot)
+  - [Mobile and geolocation](#mobile-and-geolocation)
+  - [Evaluate JavaScript in browser](#evaluate-javascript-in-browser)
+  - [Intercept network requests](#intercept-network-requests)
+* [Documentation](#documentation)
+* [Contributing](#contributing)
+* [Is Playwright for Java ready?](#is-playwright-for-java-ready)
 
+## Usage
 
-## 直接运行(Windows/Linux/macOS/Android)
+Playwright requires **Java 8** or newer.
 
-[点击下载](https://file.xdow.net/aliyundriver)
+#### Add Maven dependency
 
-- Windows
-```powershell
-aliyundrive-webdav-windows-amd64.exe
-```
-- Linux(X64)
-```bash
-./aliyundrive-webdav-linux-amd64
-```
-- Linux(ARM64)
-```bash
-./aliyundrive-webdav-linux-arm64
-```
-- macOS(Intel)
-```bash
-./aliyundrive-webdav-darwin-x86_64
-```
-- WebApi
-```bash
-./aliyundrive-webdav-darwin-x86_64 --aliyundrive.driver=WebApi
-```
-## Jar包运行
-> 建议自己下载源码编译, 以获得最新代码
-```bash
-java -jar webdav.jar
-```
-## 容器运行
-```bash
-mkdir $(pwd)/conf
-docker run -d \
-  --name=aliyundrive-webdav \
-  --restart=always -p 8080:8080  \
-  -v /etc/localtime:/etc/localtime \
-  -v $(pwd)/conf:/conf \
-  -e TZ="Asia/Shanghai" \
-  -e ALIYUNDRIVE_DRIVER=OpenApi \
-  -e ALIYUNDRIVE_DOWNLOAD_PROXY_MODE=Auto \
-  -e ALIYUNDRIVE_REFRESH_TOKEN="your refreshToken" \
-  -e ALIYUNDRIVE_AUTH_PASSWORD="admin" \
-  eritpchy/aliyundrive-webdav
+Playwright is distributed as a set of [Maven](https://maven.apache.org/what-is-maven.html) modules. The easiest way to use it is to add one dependency to your Maven `pom.xml` file as described below. If you're not familiar with Maven please refer to its [documentation](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html).
 
-# /conf 挂载卷自动维护了最新的refreshToken, 建议挂载
-# ALIYUNDRIVE_AUTH_PASSWORD 是admin账户的密码, 建议修改
+To run Playwright simply add following dependency to your Maven project:
+
+```xml
+<dependency>
+  <groupId>com.microsoft.playwright</groupId>
+  <artifactId>playwright</artifactId>
+  <version>1.28.1</version>
+</dependency>
 ```
 
-## Docker-Compose
-```yml
-version: "3.0"
-services:
-  aliyundrive-webdav:
-    image: eritpchy/aliyundrive-webdav
-    container_name: aliyundriver
-    environment:
-      - TZ=Asia/Shanghai
-      - ALIYUNDRIVE_DRIVER=OpenApi
-      - ALIYUNDRIVE_DOWNLOAD_PROXY_MODE=Auto
-      - ALIYUNDRIVE_REFRESH_TOKEN=refreshToken
-      - ALIYUNDRIVE_AUTH_USER_NAME=admin
-      - ALIYUNDRIVE_AUTH_PASSWORD=admin
-    volumes:
-      - ./docker/conf:/conf
-    ports:
-      - 6666:8080
-    restart: always
+To run Playwright using Gradle add following dependency to your build.gradle file:
 
-# “refreshToken”请根据下文说明自行获取。
-# “ALIYUNDRIVE_AUTH_USER-NAME”和“ALIYUNDRIVE_AUTH_PASSWORD”为连接用户名和密码, 建议更改。
-# “./docker/conf/:/conf”, 可以把冒号前改为指定目录, 比如“/homes/USER/docker/alidriver/:/conf”。
-# 删除了“/etc/localtime:/etc/localtime”, 如有需要同步时间请自行添加在environment下。
-# 端口6666可自行按需更改, 此端口为WebDAV连接端口,8080为容器内配置端口, 修改请量力而为。
-# 建议不要保留这些中文注释, 以防报错, 比如QNAP。
-```
-## Kubernetes
-参考根目录内中的[k8s_app.yaml](k8s_app.yaml), 需要文件中修改container的环境变量值。  
-use this to deploy in truenas scale
-```shell
-sudo k3s kubectl apply -f k8s_app.yaml
-```
-or other k8s cluster
-```shell
-sudo kubectl apply -f k8s_app.yaml
-```
-# 参数说明
-```bash
---aliyundrive.refresh-token
-    阿里云盘的refreshToken, 获取方式见下文
---server.port
-    非必填, 服务器端口号, 默认为8080
---aliyundrive.auth.enable=true
-    是否开启Webdav账户验证, 默认开启
---aliyundrive.auth.user-name=admin
-    Webdav账户, 默认admin
---aliyundrive.auth.password=admin
-    Webdav密码, 默认admin
---aliyundrive.work-dir=./conf
-    token挂载路径, 如果在同一个路径多开, 需修改此配置
---aliyundrive.driver=OpenApi
-    驱动引擎, 默认官方OpenApi, 可选WebApi
---aliyundrive.download-proxy-mode=Auto
-    文件下载模式, 默认Auto, 自动模式, 默认直连模式, 客户端不支持直连模式时使用代理模式
-    可选Direct, 强制直连模式, 使用此模式, 一些客户端不兼容, 将会直接报错400,302,403等错误, 详见 '客户端兼容性'
-    可选Proxy, 代理模式, 文件下载由程序中转, 3.3.0以前版本默认模式, 如遇问题或报上述错误可尝试使用Proxy模式
-    
-```
-
-# SDK使用
 ```gradle
-//依赖
-compileOnly "org.projectlombok:lombok:1.18.26"
-annotationProcessor "org.projectlombok:lombok"
-implementation "com.squareup.okhttp3:okhttp:3.12.13" //api19
-implementation "com.squareup.okhttp3:logging-interceptor:3.12.13" //api19
-implementation "com.google.code.gson:gson:2.8.9"
-
-//主要
-implementation "net.xdow:aliyundrive-sdk-openapi:1.3.2"
-implementation "net.xdow:aliyundrive-sdk-webapi:1.3.2"
-
-//可选
-implementation "net.xdow:webdav:1.3.2"
-implementation "net.xdow:webdav-jakarta:1.3.2"
-implementation "net.xdow:webdav-javax:1.3.2"
-implementation "net.xdow:aliyundrive-webdav-internal:1.3.2"
-implementation "net.xdow:aliyundrive-android-core:1.3.2"
-implementation "net.xdow:jap-http:1.3.2"
-implementation "net.xdow:jap-http-jakarta-adapter:1.3.2"
-implementation "net.xdow:jap-http-javax-adapter:1.3.2"
+dependencies {
+  implementation group: 'com.microsoft.playwright', name: 'playwright', version: '1.28.1'
+}
 ```
-## 基础用法
+
+#### Is Playwright thread-safe?
+
+No, Playwright is not thread safe, i.e. all its methods as well as methods on all objects created by it (such as BrowserContext, Browser, Page etc.) are expected to be called on the same thread where Playwright object was created or proper synchronization should be implemented to ensure only one thread calls Playwright methods at any given time. Having said that it's okay to create multiple Playwright instances each on its own thread.
+
+## Examples
+
+You can find Maven project with the examples [here](./examples).
+
+#### Page screenshot
+
+This code snippet navigates to Playwright homepage in Chromium, Firefox and WebKit, and saves 3 screenshots.
+
 ```java
-AliyunDrive.newAliyunDrive()
+import com.microsoft.playwright.*;
+
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
+
+public class PageScreenshot {
+  public static void main(String[] args) {
+    try (Playwright playwright = Playwright.create()) {
+      List<BrowserType> browserTypes = Arrays.asList(
+        playwright.chromium(),
+        playwright.webkit(),
+        playwright.firefox()
+      );
+      for (BrowserType browserType : browserTypes) {
+        try (Browser browser = browserType.launch()) {
+          BrowserContext context = browser.newContext();
+          Page page = context.newPage();
+          page.navigate("https://playwright.dev/");
+          page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot-" + browserType.name() + ".png")));
+        }
+      }
+    }
+  }
+}
 ```
 
-# QQ群
-> 群号（已满）：789738128
+#### Mobile and geolocation
 
-> 二群群号（已满）：979024890
+This snippet emulates Mobile Chromium on a device at a given geolocation, navigates to openstreetmap.org, performs action and takes a screenshot.
 
-> 三群群号（已满）：212673498
+```java
+import com.microsoft.playwright.options.*;
+import com.microsoft.playwright.*;
 
-> 四群群号（已满）：752067171
+import java.nio.file.Paths;
 
-> 五群群号：703607910
+import static java.util.Arrays.asList;
 
-# 新手教程
-![imaage](./doc/img/openapi_login.gif)
-
-# 客户端兼容性
-| 客户端           |           下载 | 上传 |                 备注                 |
-|:--------------|-------------:| :----: |:----------------------------------:|
-| 群辉Cloud Sync  |         代理模式 | :white_check_mark: |              建议使用单向同步              | 
-| Rclone        | :rocket:直连模式 | :white_check_mark: |  推荐, 支持各个系统, 直连模式需要添加参数, 见下方配置说明   |
-| Mac原生         | :rocket:直连模式 | :white_check_mark: |                                    | 
-| Transmit      | :rocket:直连模式 | :white_check_mark: |                                    | 
-| Windows原生     | :rocket:直连模式 | :white_check_mark: | 有4GB文件传输限制,首次使用还需配置http, 见下方'注意事项' |
-| RaiDrive      | :rocket:直连模式 | :white_check_mark: |          Windows平台下建议用这个           |
-| WinSCP 6.1.1+ | :rocket:直连模式 | :white_check_mark: |          6.1.1以下版本不支持直连模式          |
-| nPlayer       | :rocket:直连模式 | :white_check_mark: |                 推荐                 |
-| MT管理器         | :rocket:直连模式 | :white_check_mark: |                 推荐                 |
-| ES文件浏览器       | :rocket:直连模式 | :white_check_mark: |                                    |
-| Kodi 20.0+    | :rocket:直连模式 | :white_check_mark: |          2023年后编译版本可用直连模式          |
-
-注: 所有客户端均默认支持代理模式
-
-## Rclone 配置说明
-- Rclone 1.62.2及以下版本应选择Vendor为Nextcloud以支持rclone自身的数据校验功能
-- Rclone 1.63.0及以上版本(目前为beta版本, [点击前往下载beta版](https://beta.rclone.org/)) 请选择Vendor为Fastmail Files, 如选择Vendor为Nextcloud, 则advanced config中nextcloud_chunk_size应设置为0, 否则使用时报错
-- Vendor 选择为Other无数据校验功能
-- Vendor 选择为Owncloud, 因Rclone本身只校验md5无数据校验功能
-- 直连模式需要在Rclone 命令行参数添加 --header="Referer:", 否则报错403
-```shell
-例如: R:\rclone1.63.0.exe --header="Referer:" copy test:/demo/demo.mkv R:/test
+public class MobileAndGeolocation {
+  public static void main(String[] args) {
+    try (Playwright playwright = Playwright.create()) {
+      Browser browser = playwright.chromium().launch();
+      BrowserContext context = browser.newContext(new Browser.NewContextOptions()
+        .setUserAgent("Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
+        .setViewportSize(411, 731)
+        .setDeviceScaleFactor(2.625)
+        .setIsMobile(true)
+        .setHasTouch(true)
+        .setLocale("en-US")
+        .setGeolocation(41.889938, 12.492507)
+        .setPermissions(asList("geolocation")));
+      Page page = context.newPage();
+      page.navigate("https://www.openstreetmap.org/");
+      page.click("a[data-original-title=\"Show My Location\"]");
+      page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("colosseum-pixel2.png")));
+    }
+  }
+}
 ```
 
-## 浏览器获取refreshToken方式(仅WebApi需要)
-<details>
-  <summary>方式1</summary>
-1. 先通过浏览器（建议chrome）打开阿里云盘官网并登录：https://www.aliyundrive.com/drive/
-2. 登录成功后, 按F12打开开发者工具, 点击Application, 点击Local Storage, 点击 Local Storage下的 [https://www.aliyundrive.com/](https://www.aliyundrive.com/), 点击右边的token, 此时可以看到里面的数据, 其中就有refresh_token, 把其值复制出来即可。（格式为小写字母和数字, 不要复制双引号。例子：ca6bf2175d73as2188efg81f87e55f11）
-3. 第二步有点繁琐, 大家结合下面的截图就看懂了
-   ![image](https://user-images.githubusercontent.com/32785355/119246278-e6760880-bbb2-11eb-877c-aca16cf75d89.png)
-</details>
-<details>
-  <summary>方式2</summary>
+#### Evaluate JavaScript in browser
 
-1. 先通过浏览器（建议chrome）打开阿里云盘官网并登录：https://www.aliyundrive.com/drive/
-2. 登录成功后, 在地址栏输入 javascript:
-   ![imgage](./doc/img/step1.jpg)
-3. 粘贴下列代码到javascript: 后面,然后按回车键
-   ![image](./doc/img/step2.jpg)
-   弹窗
-   ![image](./doc/img/step3.jpg)
- ```javascript
-var p=document.createElement('p');p.style='text-align:center;margin-top:30px';p.innerHTML='refresh_token: <span style="color:red;">'+JSON.parse(localStorage.getItem('token')).refresh_token+'</span>';var win=window.open('','_blank','width=800,height=100');win.document.body.appendChild(p);
+This code snippet navigates to example.com in Firefox, and executes a script in the page context.
+
+```java
+import com.microsoft.playwright.*;
+
+public class EvaluateInBrowserContext {
+  public static void main(String[] args) {
+    try (Playwright playwright = Playwright.create()) {
+      Browser browser = playwright.firefox().launch();
+      BrowserContext context = browser.newContext();
+      Page page = context.newPage();
+      page.navigate("https://www.example.com/");
+      Object dimensions = page.evaluate("() => {\n" +
+        "  return {\n" +
+        "      width: document.documentElement.clientWidth,\n" +
+        "      height: document.documentElement.clientHeight,\n" +
+        "      deviceScaleFactor: window.devicePixelRatio\n" +
+        "  }\n" +
+        "}");
+      System.out.println(dimensions);
+    }
+  }
+}
 ```
-同时, 也可以将上述代码组合为
- ```javascript
-javascript:var p=document.createElement('p');p.style='text-align:center;margin-top:30px';p.innerHTML='refresh_token: <span style="color:red;">'+JSON.parse(localStorage.getItem('token')).refresh_token+'</span>';var win=window.open('','_blank','width=800,height=100');win.document.body.appendChild(p);
+
+#### Intercept network requests
+
+This code snippet sets up request routing for a WebKit page to log all network requests.
+
+```java
+import com.microsoft.playwright.*;
+
+public class InterceptNetworkRequests {
+  public static void main(String[] args) {
+    try (Playwright playwright = Playwright.create()) {
+      Browser browser = playwright.webkit().launch();
+      BrowserContext context = browser.newContext();
+      Page page = context.newPage();
+      page.route("**", route -> {
+        System.out.println(route.request().url());
+        route.resume();
+      });
+      page.navigate("http://todomvc.com");
+    }
+  }
+}
 ```
-添加为浏览器书签, 在https://www.aliyundrive.com/drive/ 页面点击该书签也会弹出refresh_token弹窗
-</details>
 
-# 功能说明
-## 支持的功能
-1. 查看文件夹、查看文件
-2. 文件移动目录
-3. 文件重命名
-4. 文件下载
-5. 文件删除
-6. 文件上传（支持大文件自动分批上传）
-7. 支持超大文件上传（官方限制30G）
-8. 支持Webdav权限校验（默认账户密码：admin/admin）
-9. 文件下载断点续传
-10. Webdav下的流媒体播放等功能
-11. 支持文件名包含 `/` 字符
-12. 数据校验
+## Documentation
 
-## 注意事项
-1. 移动文件到其他目录的同时, 修改文件名。比如 /a.zip 移动到 /b/a1.zip, 是不支持的
-2. 文件上传断点续传
-3. 部分客户端兼容性不好
-4. 由于http协议在公网上明文传输密码, 部署在公网切记要开https, 否则不安全, 用宝塔反代即可
-<details>
-  <summary>5. Windows提示无法访问</summary>
-  <pre>注册表: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebClient\Parameters
-BasicAuthLevel 改为2, 改完重启计算机或WebClient服务</pre>
-</details>
-<details>
-  <summary>6. Windows提示文件大小超过允许的限制，无法保存</summary>
-  <pre>注册表: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebClient\Parameters
-FileSizeLimitInBytes 改为FFFFFFFF, 也就是最大4GB限制, 改完重启计算机或WebClient服务
-其他教程: <a href="http://blog.51yip.com/linux/2221.html" target="_blank">文件大小超过允许的限制，无法保存</a></pre>
-</details>
+Check out our official [documentation site](https://playwright.dev/java).
 
-# 免责声明
-1. 本软件为免费开源项目, 无任何形式的盈利行为。
-2. 本软件服务于阿里云盘, 旨在让阿里云盘功能更强大。如有侵权, 请与我联系, 会及时处理。
-3. 本软件皆调用官方接口实现, 无任何“Hack”行为, 无破坏官方接口行为。
-4. 本软件仅做流量转发, 不拦截、存储、篡改任何用户数据。
-5. 严禁使用本软件进行盈利、损坏官方、散落任何违法信息等行为。
-6. 本软件不作任何稳定性的承诺, 如因使用本软件导致的文件丢失、文件破坏等意外情况, 均与本软件无关。
+You can also browse [javadoc online](https://www.javadoc.io/doc/com.microsoft.playwright/playwright/latest/index.html).
+
+## Contributing
+
+Follow [the instructions](https://github.com/microsoft/playwright-java/blob/main/CONTRIBUTING.md#getting-code) to build the project from source and install the driver.
+
+## Is Playwright for Java ready?
+
+Yes, Playwright for Java is ready. v1.10.0 is the first stable release. Going forward we will adhere to [semantic versioning](https://semver.org/) of the API.

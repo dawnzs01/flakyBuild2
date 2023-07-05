@@ -1,35 +1,42 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
 .classpath
 .factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+*.project
+*.settings
 
-### IntelliJ IDEA ###
+# Mac
+*.DS_Store
+
+# Intellij Idea files
 .idea
-*.iws
 *.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# VS Code
+.vscode
 
-### VS Code ###
-.vscode/
+# gradle
+.gradle
+**/build/
+!src/**/build/
 
-.DS_Store
+# Java files
+*pom.xml.versionsBackup
+**/target
+
+# NodeJS files
+**/dist
+node_modules
+
+# Testing files
+.coverage
+
+# Generated code
+packages/ts/*/*.d.ts
+packages/ts/*/*.d.ts.map
+packages/ts/*/*.js
+packages/ts/*/*.js.map
+packages/ts/*/.coverage
+packages/ts/*/.vite
+!packages/ts/*/.lintstagedrc.js
+
+# npm pack
+packages/ts/*/*.tgz

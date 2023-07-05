@@ -1,0 +1,7 @@
+packages/ts/*/*.js
+packages/ts/*/*.d.ts
+
+# Prevents automatic formatting changes on TypeScript templates and
+# expected test output, they could break tests otherwise.
+packages/java/endpoint/src/main/resources/**/*.template.ts
+packages/java/endpoint/src/test/resources/**/expected-*.ts

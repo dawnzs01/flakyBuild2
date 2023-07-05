@@ -1,79 +1,9 @@
-### Eclipse ###
-
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
-
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
-# CDT- autotools
-.autotools
-
-# Java annotation processor (APT)
-.factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
-.springBeans
-
-# Code Recommenders
-.recommenders/
-
-# Annotation Processing
-.apt_generated/
-
-# Scala IDE specific (Scala & Java development for Eclipse)
-.cache-main
-.scala_dependencies
-.worksheet
-
-### Eclipse Patch ###
-# Eclipse Core
-.project
-
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
-# Annotation Processing
-.apt_generate
-
-dist/*
-d
-commons/pac-batch-commons/publish.propertie
-
-webapp/package.jsons
-/.idea/
-/jobs/job-scheduler/target/*
-lambda-functions/notification-template-formatter-service/target/*
-lambda-functions/notification-send-email-service/target/*
-lambda-functions/notification-invoke-service/target/*
-lambda-functions/notification-es-logging-service/target/*
+.gradle
+.idea
+/out/
+/build/
+gradle-app.setting
+.gradletasknamecache
+.git
+.idea/
+/releases/

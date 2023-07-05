@@ -1,133 +1,122 @@
-[![Latest release](https://img.shields.io/badge/release-2.0.2-blue)](https://github.com/PaladinCloud/CE/releases/latest)
-[![Build Status](https://github.com/PaladinCloud/CE/blob/master/wiki/images/gitter.svg)](https://github.com/PaladinCloud/CE/actions?query=branch%3Amaster)
-[![GitHub license](https://github.com/PaladinCloud/CE/blob/master/wiki/license_apache.svg)](https://github.com/PaladinCloud/CE/blob/master/LICENSE)
-[![Slack](https://img.shields.io/badge/chat-chat%20on%20Slack-9cf)](http://paladincloudcommunity.slack.com/)
-[![Community Survey](https://img.shields.io/badge/community-survey-9cf)](https://paladincloud.io/paladin-cloud-survey/)
+# About this repository & EOL
+This repository will not be updated anymore. Please use https://github.com/irsdl/BurpSuiteSharpenerEx.
 
-![Paladin Cloud, Inc](https://github.com/PaladinCloud/Rev1/raw/master/wiki/images/banner_paladincloud.png)
+# Burp Suite Sharpener
+This extension should add a number of UI and functional features to Burp Suite to make working with it a bit easier. The latest version only works with the Montoya API which should be available in Burp Suite 2023.1 or higher.
 
-# Introduction
-
-Paladin Cloud is an extensible, Security-as-Code (SaC) platform designed to help developers and security teams reduce risks in their cloud environments. It functions as a policy management plane across multi-cloud and enterprise systems, protecting applications and data. The platform contains best practice security policies and performs continuous monitoring of cloud assets, prioritizing security violations based on severity levels to help you focus on the events that matter..
-
-Its resource discovery capability creates an asset inventory, then evaluates security policies against each asset. Powerful visualization enables developers to quickly identify and remediate violations on a risk-adjusted basis. An auto-fix framework provides the ability to automatically respond to policy violations by taking predefined actions.
-
-Paladin Cloud is more than a tool to manage cloud misconfiguration. It's a holistic cloud security platform that can be used for continuous monitoring and reporting across any domain.
-
-# Extend your Coverage
-
-Paladin Cloud's plugin-based connector architecture allows for data ingestion from multiple sources. Plugins allow you to pull data from various cloud-based enterprise systems, such as Kubernetes management, API gateways and threat intelligence systems in order to holistically manage cloud security. Examples include, Qualys Vulnerability Assessment Platform, Bitbucket, TrendMicro Deep Security, Tripwire, Venafi Certificate Management, and Redhat. You can write rules based on data collected by these plugins to get a complete picture of your cloud security posture.
-
-# How Does It Work?
-
-Assess -> Report -> Remediate -> Repeat
-
-Paladin Cloud constantly assesses and monitors your cloud security posture on a near real-time basis. The platform discovers assets, evaluates policy, creates issues for policy violations, and prioritizes remediation. If an auto-fix is configured with the policy, those auto-fixes are executed when the resources fail the evaluation. Policy violations cannot not be closed manually; the issue must be fixed on the inspected asset, and then Paladin Cloud will mark it closed in the next scan.
-
-Exceptions can be added to policy violations. Sticky exceptions (exceptions based on resource attribute matching criteria) can be added to exempt similar resources that may be created in the future. Note that exceptions should be used sparingly and only if they are aligned with corporate security guidelines.
-
-Asset groups are a powerful way to visualize cloud security and compliance. Asset groups are created by defining one or more target resource's attribute matching criteria. For example, you could create an asset group of all running assets by defining criteria to match all EC2 instances with attribute `instancestate.name=running`. Any new EC2 instance launched after the creation of an asset group will be automatically included in the group.
-
-In the Paladin Cloud UI, you can select the scope of the portal to a specific asset group. All the data points shown in the UI will be confined to the selected asset group. It is common practice to create asset groups per account (or subscription, project), per application, per business unit, or per environment.
-
-Asset groups are not just for setting the scope of the data shown in the UI. The groups can be used to scope rule execution as well. Policies contain one or more rules. These rules can be configured to run against all resources or a specific asset group. The rules will evaluate all resources in the asset group configured as the scope for the rule. This provides an opportunity to write policies that are very specific to an application or organization.
-
-A good example is when some teams would like to enforce additional tagging standards beyond the global requirements. They implement this policy with their custom rules and configure it to run only on their assets.
-
-# Paladin Cloud Key Capabilities
-
-* Continuous asset discovery
-* Continuous security policy evaluation
-* Detailed reporting
-* Auto-Fix for policy violations
-* Ability to search all discovered resources
-* Simplified policy violation tracking and prioritization
-* Easy to use Self-Service portal
-* Custom policies and custom auto-fix actions
-* Dynamic asset grouping to view compliance
-* Ability to create multiple compliance domains
-* Exception management
-* Email digests
-* Supports unlimited AWS, Azure, and GCP accounts
-* Completely automated installer
-* OAuth2 Support
-* Azure AD integration for login
-* Role-based access control
-
-# Technology Stack
-
-* Front End - Angular
-* Backend End APIs, Jobs, Rules - Java
-* Installer - Python and Terraform
-
-# Deployment Stack
-
-* AWS ECS & ECR - For hosting UI and APIs
-* AWS Batch - For rules and resource collection jobs
-* AWS CloudWatch Rules - For rule trigger, scheduler
-* AWS Elastic Search - Primary data store used by the web application
-* AWS RDS - For admin CRUD functionalities
-* AWS S3 - For storing inventory files and persistent storage of historical data
-* AWS Lambda - policy execution
-
-Paladin Cloud installer automatically launches all of these services and configures them. A
-typical [installation](https://github.com/PaladinCloud/CE/wiki/Paladin-Cloud-Installation-(On-AWS-Cloud)) takes about 20 minutes.
-
-# Paladin Cloud User Interface
-
-**Overview Screen**
-<img src=./wiki/images/compliance_compliance-dashboard-Readme.png>
-
-**Violation List View**
-<img src=./wiki/images/violations-list.png>
-
-**Asset Detail View**
-<img src=./wiki/images/Asset-360-Readme.png>
-
-**Search results**
-<img src=./wiki/images/Search-Results-Readme.png>
-
-**Category Summary**
-<img src=./wiki/images/category-compliance-readme.png>
-
-**Asset Group Selection**
-<img src=./wiki/images/asset-group-selection-Readme.png>
+<pre>
+ ___  _                                      
+/ __>| |_  ___  _ _  ___  ___ ._ _  ___  _ _ 
+\__ \| . |<_> || '_>| . \/ ._>| ' |/ ._>| '_>
+<___/|_|_|<___||_|  |  _/\___.|_|_|\___.|_|
+                    |_|
+v3.6
+</pre>
 
 # Installation
+* Download the latest jar file built by GitHub from [/releases/latest](https://github.com/mdsecresearch/BurpSuiteSharpener/releases/latest), or by going through the [Workflows' Artifacts](https://github.com/mdsecresearch/BurpSuiteSharpener/actions).
+* Add it to Burp Suite using the Extender tab
 
-Detailed installation instructions are available [here](https://github.com/PaladinCloud/CE/wiki/Paladin-Cloud-Installation-(On-AWS-Cloud))
+# Using the Legacy Extension
+The latest version of this extension is only compatible with Burp Suite version 2023.1 and above due to the full support of Montoya API.
+The older versions of this extension can be downloaded from the legacy branch:
+https://github.com/mdsecresearch/BurpSuiteSharpener/tree/Legacy-Extension/release
+The legacy branch will not receive any future updates.
 
-# Usage
+# Current Features
+* Making main tools' tabs more distinguishable by choosing a theme
+* Ability to control style of sub-tabs in Repeater and Intruder
+* Ability to change Burp Suite title and its icon
+* Copy & pasting style ability for Repeater and Intruder tabs
+* Pasting style for Repeater and Intruder tabs when their title matches a Regular Expression
+* Copy & pasting titles by creating unique titles by adding a number in the end
+* Rename titles without a need to double-click on the title
+* Jump to first and last tabs in Repeater and Intruder
+* Back and Forward feature depends on the previously selected tabs
+* Finding Repeater and Intruder tabs when their title matches a Regular Expression
+* Scrollable main tool tabs
+* Scrollable Repeater and Intruder tabs
+* Taking screenshot of repeater or intruder tabs
+* Trimming long titles into 100 characters
+* Show previously chosen titles for a tab
+* Several keyboard shortcuts to make the tab navigation easier
+* Support for PwnFox Firefox extension highlighter
+* Ability to save the last size and position of Burp Suite to move it to the same location next time
+* Ability to detect off-screen Burp Suite window to bring it to the centre
 
-The installer will launch required AWS services listed in
-the [installation instructions](https://github.com/PaladinCloud/CE/wiki/Paladin-Cloud-Installation-(On-AWS-Cloud)). After successful installation hit
-the UI load balancer URL. Log into the application using the credentials supplied during the installation. The results
-from the policy evaluation will start getting populated within 30 minutes. Trend line widgets will be populated when
-there are at least two data points.
+# Burp Suite Compatibility and Reporting Errors
+As PortSwigger has a plan to update Burp Suite UI in a near future, some features in this extension may become redundant or unreliable.
+While we use this extension ourselves we can see potential errors from time to time, as an open source project, it relies on the community feedback for improvements and to fix the issues. Please report any errors in [issues](https://github.com/mdsecresearch/BurpSuiteSharpener/issues).
 
-When you install Paladin Cloud, the AWS account where you install is the **source** account. Paladin Cloud can then
-monitor other **target** AWS accounts. Refer to the
-instructions [here](https://github.com/PaladinCloud/CE/wiki/Paladin-Cloud-Installation-(On-AWS-Cloud)) to add new accounts to Paladin Cloud. By
-default the **source** account will be monitored by Paladin Cloud.
+This extension has been tested against the latest early edition of pro version which was 2023.1 at the time of writing this document. It should however be also compatible with the community edition.
 
-Login as Admin user and go to the Admin page from the top menu. In the Admin section, you can
+# Suggesting New Features
+The plan is to add simple but effective missing features to this single extension to make tester's life easier as a must-have companion when using Burp Suite (so we cannot Burp without it!).
 
-* Create/Manage Policies
-* Create/Manage Rules and associate Rules with Policies
-* Create/Manage Asset Groups
-* Create/Manage Sticky Exception
-* Manage Jobs
-* Create/Manage Access Roles
-* Manage Paladin cloud Configurations
-* See detailed instruction with screenshots on how to use the admin
-  feature [here](https://github.com/paladincloud/rev1/wiki/Admin-Features)
+Please feel free to submit your new feature requests using `FR: ` in its title in [issues](https://github.com/mdsecresearch/BurpSuiteSharpener/issues).
 
-## User Guide / Wiki
+It would be great to also list any known available extensions which might have implemented suggested features. 
+Perhaps the best features can be imported from different open-source extensions so the overhead of adding different extensions can be reduced.
+  
+# Usage Tips
+* You can use the following key combination(s) in Repeater and Intruder sub-tab menu:
 
-Wiki is [here](https://github.com/PaladinCloud/CE/wiki).
+| Description                                      | Combinations/Shortcuts                                                                             |
+|--------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Show Context Menu for Repeater and Intruder Tabs | Mouse Middle-Click<br/>Alt + Any Mouse Key<br/>Down Arrow<br/>Ctrl + Enter<br/>Ctrl + Shift +Enter |
+| Find Tabs for Repeater and Intruder Tab          | Ctrl + Shift + F                                                                                   |
+| Find Next                                        | F3 <br/>Ctrl + F3                                                                                  |
+| Find Previous                                    | Shift + F3<br/>Ctrl + Shift + F3                                                                   |
+| Jump to the First Tab                            | Home<br/>Ctrl + Shift + Home                                                                       |
+| Jump to the last Tab                             | End<br/>Ctrl + Shift + End                                                                         |
+| Previous Tab                                     | Left Arrow<br/>Ctrl + Shift + Left                                                                 |
+| Next Tab                                         | Right Arrow<br/>Ctrl + Shift + Right<br/>Mouse Wheel                                               |
+| Back (Previously Selected Tab)                   | Alt + Left<br/>Ctrl + Alt + Left<br/>Mouse Wheel                                                   |
+| Forward                                          | Alt + Right<br/>Ctrl + Alt + Right                                                                 |
+| Copy Subtab Title                                | Ctrl + C<br/>Ctrl + Shift + C                                                                      |
+| Paste Subtab Title                               | Ctrl + V<br/>Ctrl + Shift + V                                                                      |
+| Rename Subtab Title                              | F2<br/>Ctrl + F2                                                                                   |
+| Increase Font Size                               | Ctrl + Mouse Wheel                                                                                 |
+| Increase Font Size & Bold                        | Middle Click + CTRL                                                                                |
+| Decrease Font Size & Bold                        | Middle Click + CTRL + SHIFT                                                                        |
+| Big & Red & Bold                                 | Middle Click + SHIFT                                                                               |
 
-# License
+* You can use the following key combination(s) on the main window frame:
 
-Paladin Cloud is a derivative of [T-Mobile's PacBot project](https://github.com/tmobile/pacbot). Paladin Cloud is
-open-sourced under the terms of section 7 of the Apache 2.0 license and is released AS-IS WITHOUT WARRANTIES OR
-CONDITIONS OF ANY KIND.
+| Description                                        | Combinations/Shortcuts |
+|----------------------------------------------------|------------------------|
+| Move Burp Suite Window to the centre of the Screen | Ctrl + Alt + C         |
+
+* After setting style on a sub-tab, setting the same title on another sub-tab will copy its style
+* Alt + Any Mouse Click works on empty parts of the tabs which do not contain any text
+* Use the `Debug` option in `Global Settings` if you are reporting a bug or if you want to see what is happening
+* Check the [extension's GitHub repository](https://github.com/mdsecresearch/BurpSuiteSharpener) rather than BApp Store for the latest updates
+* A sample of icons should also be accessible in the `/` directory
+
+![images/img.png](images/img.png)
+
+![images/img_0.png](images/img_0.png)
+
+![images/img_1.png](images/img_1.png)
+
+![images/img_2.png](images/img_2.png)
+
+![images/img_3.png](images/img_3.png)
+
+![images/img_4.png](images/img_4.png)
+
+![images/img_5.png](images/img_5.png)
+
+![images/img_6.png](images/img_6.png)
+
+![images/img_7.png](images/img_7.png)
+
+![images/img_8.png](images/img_8.png)
+
+![images/img_9.png](images/img_9.png)
+
+# Thanks To
+* Corey Arthur [CoreyD97](https://twitter.com/CoreyD97) for https://github.com/CoreyD97/Burp-Montoya-Utilities/
+* Bruno Demarche (for initial Swing hack inspiration)
+
+Please feel free to report bugs, suggest features, or send pull requests.

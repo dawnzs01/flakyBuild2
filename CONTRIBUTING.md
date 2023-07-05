@@ -1,20 +1,41 @@
-## How to contribute to Cassandre trading bot
+# Contributing to MicroStream
 
-### You fund a bug
+We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
-* Do not open up a GitHub issue if the bug is a security vulnerability, and instead to refer to our [security policy](https://github.com/cassandre-tech/cassandre-trading-bot/blob/development/SECURITY.md).
-* Ensure the bug was not already reported by searching on GitHub under [Issues](https://github.com/cassandre-tech/cassandre-trading-bot/issues).
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/cassandre-tech/cassandre-trading-bot/issues/new/choose). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
 
-### You wrote a patch that fixes a bug
+## We Develop with Github
 
-* Open a new GitHub pull request with the patch.
-* Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
+We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
 
-### You intend to add a new feature or change an existing one
+## All Code Changes Happen Through Pull Requests
 
-* [Open a new issue](https://github.com/cassandre-tech/cassandre-trading-bot/issues/new/choose).
+Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
 
-Thanks!
+1. Fork the repo and create your branch from `master`.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Ensure the test suite passes.
+5. Issue that pull request!
 
-Cassandre team
+All commits must be [signed](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits). 
+
+## Any contributions you make will be under the Eclipse Public License
+
+In short, when you submit code changes, your submissions are understood to be under the same [EPL-2.0 License](https://github.com/microstream-one/microstream/blob/master/LICENSE) that covers the project. Feel free to contact the maintainers if that's a concern.
+
+## Report bugs using Github's [issues](https://github.com/microstream-one/microstream/issues)
+
+We use GitHub issues to track public bugs. Report a bug by opening a new issue, it's that easy!
+
+## License
+
+By contributing, you agree that your contributions will be licensed under its Eclipse Public License.
+
+## Code of Conduct
+
+Please follow our [Code of Conduct](CODE_OF_CONDUCT.md).

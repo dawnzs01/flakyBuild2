@@ -1,126 +1,93 @@
-# IDEs and editors
-target/
-bot/target/
+*.class
+*.log
+~*
 
-# eclipse specific git ignore
-bin/**
-.tmp/
-tmp/**
-tmp/**/*
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+LICENSE
+
+# Maven
+target/
+.m2/
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+dependency-reduced-pom.xml
+release.properties
+buildNumber.properties
+.flattened-pom.xml
+.mvn/.gradle-enterprise
+
+# Gradle
+.gradle/
+build/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JetBrains
+.idea/
+*.ipr
+*.iws
+*.iml
+*.releaseBackup
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+
+# Eclipse
+.settings/
+.settings
+.project
+.classpath
+.metadata
+bin/
+tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
-.gradle
-.classpath
+local.properties
 .settings/
 .loadpath
-.checkstyle
-
-# External tool builders
+.recommenders
 .externalToolBuilders/
-
-# Locally stored "Eclipse launch configuration"
 *.launch
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-# CDT-specific
-.cproject
-
-# Java annotation processor (APT)
 .factorypath
-
-# PDT-specific
-.buildpath
-
-# sbteclipse plugin
 .target
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
 .springBeans
+.recommenders/
+.apt_generated/
+.apt_generated_test/
+.cache-main
+.scala_dependencies
+.worksheet
 
-# Maven
-log/
-.notes
-*.iml
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.nb-gradle/
 
-# Node
-node/
-node_modules/
-bower_components/
+# MacOS
+.DS_Store
+profile
 
-# Eclipse configuration
-eclipse-*.*
+# Asciidoctor
+.asciidoctor/
 
-# Mock server
-mockserver.log
-
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-.idea/*
-
-# User-specific stuff:
-
-# Sensitive or high-churn files:
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/dataSources.local.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
-
-# Gradle:
-.idea/gradle.xml
-
-# Mongo Explorer plugin:
-.idea/mongoSettings.xml
-
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-release.properties
-Supprimerait .idea/
-Supprimerait loose-touch.iml
-
-# aws
-output-*
-/.idea/
-
-# Yarn - We retrieve the latest release of all libs during CI
-docs/yarn.lock
-
-# others
-/_data/
-/_site/
-/pages/
-/images/
-/trading-bot-strategies/technical_analysis/ta4j-strategy/.idea/
-/trading-bot-strategies/technical_analysis/ta4j-strategy/.idea/libraries/
-/archetype-test-basic/
-/archetype-test-ta4j-basic/
-/util/test/api/graphql/package.json
-/docs/docs/.vuepress/
+# Vim
+*.swp

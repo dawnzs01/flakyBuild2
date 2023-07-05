@@ -1,92 +1,109 @@
-apply plugin: 'com.android.application'
-
-// http://www.race604.com/android-auto-version/
-// use git count as build number, as current date as build version
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy.MM.dd')
-    return formattedDate
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
 }
-def cmd = 'git rev-list HEAD --count'
-def gitVersion = cmd.execute().text.trim().toInteger() + 100
-def appVersion = getDate()
 
+String BUILD_UUID = UUID.randomUUID().toString()
+println "Current build ID is " + BUILD_UUID
 
 android {
-    compileSdkVersion 30
+    //noinspection GradleCompatible
+    compileSdk 32
+    buildToolsVersion "31.0.0"
+    ndkVersion "23.1.7779620"
+
+    namespace 'cc.ioctl.tmoe'
 
     defaultConfig {
-        applicationId "com.zfdang.touchhelper"
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode gitVersion
-        versionName appVersion
+        applicationId "cc.ioctl.tmoe"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0" + (getGitHeadRefsSuffix.call() as String)
+        buildConfigField "String", "BUILD_UUID", '"' + BUILD_UUID + '"'
 
-        // Enabling multidex support.
-        multiDexEnabled true
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations = ['zh-rCN']
-    }
-
-    signingConfigs {
-        release {
-            storeFile file("touch_helper.keystore")
-            storePassword "touchhelper"
-            keyAlias "touchhelper"
-            keyPassword "touchhelper"
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
-    }
 
+        resConfigs 'en', 'zh-rCN', 'zh-rTW', 'ru', 'es'
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-    }
-    packagingOptions {
-        jniLibs {
-            excludes += ['pinyindb/*']
-        }
-        resources {
-            excludes += ['pinyindb/*']
-        }
-    }
-
-    // http://www.sollyu.com/android-apk-studio-generated-automatically-appends-a-version-number/
-    android.applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            if(buildType.name == "release") {
-                output.outputFileName = new File("TouchHelper" + "-" + buildType.name + "-v" + defaultConfig.versionName + ".apk" );
-            } else {
-                output.outputFileName = new File("TouchHelper" + "-" + buildType.name + "-v" + defaultConfig.versionName + ".apk" );
+        externalNativeBuild {
+            cmake {
+                arguments "-DTMOE_VERSION=" + versionName, "-DANDROID_PLATFORM=android-21"
+                cppFlags "-std=c++17"
             }
         }
     }
 
+    buildTypes {
+        release {
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel "full"
+            }
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+        useIR = true
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.18.1"
+        }
+    }
+    androidResources {
+        additionalParameters("--allow-reserved-package-id", "--package-id", "0x73")
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    if (System.getenv("KEYSTORE_PATH") != null) {
+        signingConfigs {
+            release {
+                storeFile file(System.getenv("KEYSTORE_PATH"))
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+                enableV2Signing = true
+                enableV3Signing = true
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    implementation 'com.google.code.gson:gson:2.8.5'
-
-    // https://developer.android.com/jetpack/androidx/releases/preference?hl=zh-cn
-    implementation 'androidx.preference:preference:1.1.1'
-
-    // https://mvnrepository.com/artifact/com.belerweb/pinyin4j
-    implementation group: 'com.belerweb', name: 'pinyin4j', version: '2.5.1'
+    implementation 'com.tencent:mmkv-static:1.2.14'
+    implementation 'io.noties.markwon:core:4.6.2'
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
+    implementation 'org.smali:dexlib2:2.4.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.github.kyuubiran:EzXHelper:1.0.3'
+    compileOnly("de.robv.android.xposed:api:82")
 }

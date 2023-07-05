@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TMoe" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent.TMoe</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorPrimaryDark">#426482</item>
+        <item name="android:colorPrimary">#527da3</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="ActionBar.Transparent.TMoe" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:logo">@drawable/transparent</item>
+        <item name="android:background">#ff527da3</item>
+        <item name="android:title">""</item>
+    </style>
+
+</resources>

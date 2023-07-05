@@ -1,32 +1,86 @@
 <resources>
-    <string name="app_name">开屏跳过</string>
-    <string name="title_home">状态</string>
-    <string name="title_settings">设置</string>
-    <string name="title_about">关于</string>
-    <string name="status_title">服务状态</string>
-    <string name="text_instructions">\"开屏跳过\"基于安卓系统的无障碍服务来实现跳过自动广告功能，开源不联网，绝对安全！为保证程序能正常工作，请检查以下设置：</string>
-    <string name="text_accessibility_permission">1. 在\"无障碍\"设置里，打开\"开屏跳过 - 无障碍服务\"。</string>
-    <string name="text_power_permission">2. 在\"电池优化\"设置里，设置\"开屏跳过\"为\"不优化\"。</string>
-    <string name="text_rom_battery">3. 在电池管理里，设置\"开屏跳过\"为\"允许后台耗电\"。设置方法因品牌不同有所差异，比如VIVO系统为：\"设置\" -> \"电池\" -> \"后台耗电管理\"。</string>
-    <string name="text_task_manager">4. 在\"任务管理\"里，锁定\"开屏跳过\"。</string>
-    <string name="text_status_help">更多信息，请访问网址:</string>
-    <string name="text_status_weblink">https://touchhelper.zfdang.com/enable</string>
+    <string name="app_name" translatable="false">TMoe</string>
+    <string name="res_inject_success" translatable="false">Resources injection success</string>
+    <string name="xposeddescription">Extra features for Telegram clients.</string>
 
-    <string name="button_setting">设置</string>
-    <string name="touch_helper_service_label">开屏跳过-无障碍服务</string>
-    <string name="touch_helper_service_description">\"开屏跳过\"是基于安卓系统的无障碍服务来实现自动跳过广告功能的，为了保证程序能正常工作，打开此服务。\n\n本程序为开源程序，不需要网络权限，不会收集或上传任何个人信息，请放心使用！</string>
-    <string name="about_app_introduction">
-        \"开屏跳过\"可以帮助用户自动跳过一些应用的开屏广告，基于Android的无障碍服务实现。
-        \n\n程序可以使用三种方法跳过开屏广告：
-        \n\n1. 关键字。在应用中查找含有关键字的按钮，如果发现了对应的按钮，自动帮用户点击从而跳过广告；
-        \n2. 应用里的指定控件。当应用工作时，自动查找对应的控件，如果找到则自动点击；
-        \n3. 应用里的指定位置。当应用工作时，自动点击对应的区域。
-        \n\n上述三种方法可以在\"设置\"里做具体设置。
-        \n\n详细信息，请访问网站:
-    </string>
-
-    <string name="about_weblink">https://touchhelper.zfdang.com/</string>
-    <string name="about_copyright">Copyright © 2022 Zhengfa Dang</string>
-
-    <string name="app_version">版本: %s (%d)</string>
+    <string name="TMoeSettings">TMoe Settings</string>
+    <string name="Cancel">Cancel</string>
+    <string name="EnableDebugMode">Enable debug mode</string>
+    <string name="AntiAntiForward">Anti-Anti-Forward message</string>
+    <string name="ProhibitChannelSwitching">Prohibit Channel Switching</string>
+    <string name="ProhibitEnableReactions">Prohibit Enable Reactions</string>
+    <string name="ProhibitChatGreetings">Prohibit Chat Greetings</string>
+    <string name="HidePhoneNumber">Hide Phone Number</string>
+    <string name="HistoricalNewsOption">Historical News Option</string>
+    <string name="AddSubItemChannel">AddSubItemChannel</string>
+    <string name="AddSubItemChannelD">AddSubItemChannel</string>
+    <string name="ChannelDetailNumbers">ChannelDetailNumbers</string>
+    <string name="ChannelDetailNumbersD">ChannelDetailNumbers</string>
+    <string name="AddInfoContainer">AddInfoContainer</string>
+    <string name="AddInfoContainerD">AddInfoContainer</string>
+    <string name="ProhibitSpoilers">Prohibit Spoilers</string>
+    <string name="ProhibitSpoilersD">Spoiler content will be displayed as normal</string>
+    <string name="SendCommand">Ask for tap command</string>
+    <string name="ForceBlurChatAvailable">Force Chat Blur Option Available</string>
+    <string name="DisablePremiumStickerAnimation">Disable Premium Sticker Animation</string>
+    <string name="AntiAntiCopy">Anti-Anti-Copy message</string>
+    <string name="AntiAntiCopyD">Conflict with Anti-Anti-Forward</string>
+    <string name="ChatUiSettings">Chat Settings</string>
+    <string name="BasicFunction">Basic</string>
+    <string name="AboutTMoe">About TMoe</string>
+    <string name="About">About</string>
+    <string name="Misc">Miscellaneous</string>
+    <string name="AccessHash">Access Hash</string>
+    <string name="GitHub" translatable="false">GitHub</string>
+    <string name="SourceCode">Source code</string>
+    <string name="DiscussionGroup">Discussion group</string>
+    <string name="LicenseNotices">License notices</string>
+    <string name="HideUserAvatar">Hide specific user avatars</string>
+    <string name="NotEnabled">Not enabled</string>
+    <string name="HideUserAvatarEnabledTargetCount">%1$d user(s), %2$d channel(s), %3$d group(s)</string>
+    <string name="NotImplemented">Not implemented yet</string>
+    <string name="VersionInfo">Version</string>
+    <string name="TextCopied">Text copied to clipboard.</string>
+    <string name="HideSponsoredMsg">Hide sponsored message</string>
+    <string name="ShowMsgId">Show message ID</string>
+    <string name="ReloadMessage">Reload Message</string>
+    <string name="RestartClient">Restart Telegram</string>
+    <string name="LostMsgMitigation">If you have lost messages</string>
+    <string name="AddReloadMsgBtn">Reload Message Button</string>
+    <string name="AddReloadMsgBtnDesc">Add Reload Message Button in chat menu</string>
+    <string name="DatabaseCorruptionWarning">Database Corruption Warning</string>
+    <string name="DatabaseCorruptionWarningDesc">Show database corruption warning if detected.</string>
+    <string name="DumpGroupMember">Persist Access Hash</string>
+    <string name="DumpGroupMemberDesc">Save known channels\' and users\' access hashes to ctx.filesDir/TMoe_channel_dump.db, so that you will be able to access them with a id when you need.</string>
+    <string name="ExtendedOfflineSearch">Extended Offline Search</string>
+    <string name="ExtendedOfflineSearchDesc">Allow search users, groups and channels by id in TMoe_channel_dump.db, requiring \"Persist Access Hash\" enabled.</string>
+    <string name="HistoricGroupMemberRecord">Show Historic Groups</string>
+    <string name="HistoricGroupMemberRecordDesc">Show historic common groups in a user\'s profile, requiring \"Persist Access Hash\" enabled.</string>
+    <string name="Ignore">Ignore</string>
+    <string name="RestrictContentMitigationDesc">Allow copy, save and screenshot in secret chats</string>
+    <string name="KeepVideoMuted">Keep video muted when pressing the volume button</string>
+    <string name="DebugAndLogsForClient">Debug &amp; Logs</string>
+    <string name="DisableLogConfigOnStartup">Disable Debug Logs on Startup</string>
+    <string name="DisableLogConfigOnStartupDesc">Set LOGS_ENABLED in BuildVars.java and FileLog.cpp to false on startup, for debug variant clients only, not useful for release builds.</string>
+    <string name="TgnetLogsEnabled">LOGS_ENABLED: tgnet (FileLog.cpp) </string>
+    <string name="TgnetLogsEnabledDesc">See LOGS_ENABLED in FileLog.cpp (instant, non-persistent)</string>
+    <string name="TgnetLogsEnabledDescSymbolNotFound">### Symbol not found. See LOGS_ENABLED in FileLog.cpp</string>
+    <string name="BuildVarsLogsEnabled">LOGS_ENABLED (BuildVars.java)</string>
+    <string name="BuildVarsLogsEnabledDesc">See LOGS_ENABLED in BuildVars.java (instant, non-persistent)</string>
+    <string name="BuildVarsLogsEnabledDescSymbolNotFound">### Field not found. See LOGS_ENABLED in BuildVars.java</string>
+    <string name="ViewTopicAsMsgByDefault">View as Group by default</string>
+    <string name="ViewTopicAsMsgByDefaultDesc">\"View as Group\" by default in topic chats</string>
+    <string name="HidePremiumStickerSetTab">Hide Premium Sticker Tab</string>
+    <string name="HidePremiumStickerSetTabDesc">For premium users only. Remove the premium sticker set tab from the sticker panel.</string>
+    <string name="ViewChannel">View Channel</string>
+    <string name="ForwardsRestrictedInfoGroup">Сopying and forwarding is not allowed in this group.</string>
+    <string name="UnsupportedOperation">Unsupported operation.</string>
+    <string name="Dialog_Message_ConfirmClickToSendBotCommand">Are you sure you want to send this command?</string>
+    <string name="MenuItem_HistoryMessage">History</string>
+    <string name="MenuItem_RepeatMessage">Repeat</string>
+    <string name="DebugVerbose_DoubleTapDetected">Double tap detected</string>
+    <string name="DialogTitle_OperationCompleted">Completed</string>
+    <string name="DialogTitle_OperationConfirmation">Confirmation</string>
+    <string name="DialogButton_Confirm">Confirm</string>
+    <string name="DialogMsg_ConfirmDumpChannelMembers">Fetch group members?</string>
 </resources>

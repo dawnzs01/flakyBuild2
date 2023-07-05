@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/drawable-night/icon.xml" value="0.1955" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/drawable/ic_water.xml" value="0.2635" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/drawable/sticker_panel_main.xml" value="0.2095" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/activity_main.xml" value="0.25833333333333336" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/emo_list_panel.xml" value="0.36614583333333334" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/emo_pic_container.xml" value="0.36614583333333334" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/sticker_panel_main_list_view.xml" value="0.3651041666666667" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/sticker_panel_plus_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Project/Build/QT/QTool/QTool/src/main/res/layout/sticker_panel_plus_pack_item.xml" value="0.5" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/drawable/bg_round.xml" value="0.129" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/drawable/ic_icon.xml" value="0.118" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/drawable/icon.xml" value="0.146" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/drawable/itemback.xml" value="0.222" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/drawable/menu_item_base.xml" value="0.222" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/alarm_view.xml" value="0.2359375" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/base_main_menu.xml" value="0.23125" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/chat_msg_panel.xml" value="0.33" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/child_item.xml" value="0.23385416666666667" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/dbcleaner_item.xml" value="0.26458333333333334" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/emo_list_panel.xml" value="0.2390625" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/item_checker_hook_item.xml" value="0.33" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/item_checker_main.xml" value="0.1" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/item_checker_show_detail.xml" value="0.13333333333333333" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/join_save_item.xml" value="0.37344398340248963" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/menu_javaplugin.xml" value="0.22916666666666666" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/plugin_item_local.xml" value="0.17864583333333334" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/plugin_item_online.xml" value="0.17864583333333334" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/repeater_set_dialog.xml" value="0.6971279373368147" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/select_item.xml" value="0.253125" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/storage_clean_item.xml" value="0.2453125" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_base_panel.xml" value="0.28541666666666665" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_edit_bundle.xml" value="0.33" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_panel_ed_bundle.xml" value="0.17395833333333333" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_panel_item.xml" value="0.192481884057971" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_pre_save.xml" value="0.17395833333333333" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/voice_tts.xml" value="0.25" />
+        <entry key="..\:/Project/QT/QTool/QTool/src/main/res/layout/zhihu_comment.xml" value="0.17395833333333333" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable-night/bg_round.xml" value="0.102" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable-night/menu_item_base2.xml" value="0.2295" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/bg_round.xml" value="0.14" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/btnclick.xml" value="0.1" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/itemback.xml" value="0.108" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/menu_item_base.xml" value="0.108" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/menu_item_round.xml" value="0.1495" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/ripple_amin.xml" value="0.1" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/round_corners.xml" value="0.1" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/text_item_press.xml" value="0.1245" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/drawable/textlines.xml" value="0.1875" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/activity_opensource.xml" value="0.21014492753623187" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/activity_update.xml" value="0.11296296296296296" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/adapter_zhihu_comment.xml" value="0.22735507246376813" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/base_activity_container.xml" value="0.1" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/base_main_menu.xml" value="0.25" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/base_menu_item.xml" value="0.12083333333333333" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/child_item.xml" value="0.2796875" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/child_item_container.xml" value="0.5" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/custom_bottom_popup.xml" value="0.22735507246376813" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_bundle_list.xml" value="0.28854166666666664" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_get_from_tg.xml" value="0.5228215767634855" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_list_panel.xml" value="0.20742753623188406" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_pic_container.xml" value="0.5" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_pre_save.xml" value="0.2677083333333333" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_search_online.xml" value="0.28854166666666664" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_show_empty.xml" value="0.15" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/emo_show_panel.xml" value="0.18" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/file_download.xml" value="0.3416666666666667" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/main_menu.xml" value="0.23333333333333334" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/menu_javaplugin.xml" value="0.12907608695652173" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/menu_main.xml" value="0.22" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/open_source_item.xml" value="0.21014492753623187" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_api_desc.xml" value="0.1322463768115942" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_inchat_menu.xml" value="0.33" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_inchat_menu_item.xml" value="0.21666666666666667" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_item.xml" value="0.12907608695652173" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_item_local.xml" value="0.18" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_item_menu_item.xml" value="0.2484375" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/plugin_item_online.xml" value="0.26071428571428573" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/select_dialog.xml" value="0.14" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/select_item.xml" value="0.25833333333333336" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_base_panel.xml" value="0.11676798378926039" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_edit_bundle.xml" value="0.25" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_panel_ed_bundle.xml" value="0.33" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_panel_folder.xml" value="0.11676798378926039" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_panel_item.xml" value="0.30353430353430355" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_pre_save.xml" value="0.25" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/voice_tts.xml" value="0.15121580547112462" />
+        <entry key="..\:/Project/QTool/QTool/src/main/res/layout/zhihu_comment.xml" value="0.22735507246376813" />
+        <entry key="..\:/Project/QTool/app/src/main/res/drawable/btnclick.xml" value="0.1215" />
+        <entry key="..\:/Project/QTool/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1215" />
+        <entry key="..\:/Project/QTool/app/src/main/res/drawable/itemback.xml" value="0.1215" />
+        <entry key="..\:/Project/QTool/app/src/main/res/layout/activity_main.xml" value="0.18931159420289856" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

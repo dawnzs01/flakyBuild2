@@ -1,0 +1,26 @@
+<div class="violations-card flex flex-col">
+    <div class="violations-content-container flex flex-row">
+        <div class="violations-img">
+            <img
+                src="/assets/icons/violations-{{ card.name }}.svg"
+                [alt]="card.name + ' violation icon'"
+            />
+        </div>
+        <div class="violations-content flex flex-col">
+            <div class="violations-title capitalize nowrap-ellipsis">
+                {{ card.name }} Violations
+            </div>
+            <div class="violations-count" (click)="redirect()">
+                {{ card.totalViolations | number }}
+                <img src="/assets/icons/Path.svg" alt="go to violation" />
+            </div>
+        </div>
+    </div>
+    <hr class="violations-card-divider" width="100%" />
+    <div class="violations-info-container flex flex-row">
+        <div class="violations-info-item flex flex-col" *ngFor="let item of getKeys(card.subInfo)">
+            <div class="name nowrap-ellipsis">{{ item }}</div>
+            <div class="count center">{{ card.subInfo[item] | number }}</div>
+        </div>
+    </div>
+</div>

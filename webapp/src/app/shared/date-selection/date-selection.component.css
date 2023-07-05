@@ -1,0 +1,40 @@
+.date-selection-card {
+    padding: 8px 0 10px;
+    max-width: 450px;
+    width: 300px;
+}
+
+.date-selection-actions {
+    border-top: 2px solid var(--border-100);
+    display: flex;
+    margin: 0;
+    height: 42px;
+    align-items: center;
+    background: var(--background-white);
+    padding: 0 24px;
+}
+
+.date-selection-content {
+    padding: 0 16px;
+    margin: 0;
+    background: var(--background-white);
+}
+
+.apply-btn {
+    margin-left: auto;
+    color: var(--primary-400);
+    border: none;
+    background: var(--background-white);
+    cursor: pointer;
+    height: 17px;
+    font-family: var(--text-medium-font-family);
+    font-style: var(--text-font-style);
+    font-weight: var(--text-font-weight);
+    font-size: var(--text-body-2-font-size);
+    letter-spacing: -0.005em;
+}
+
+.apply-btn:disabled {
+    color: var(--primary-200);
+    cursor: unset;
+}

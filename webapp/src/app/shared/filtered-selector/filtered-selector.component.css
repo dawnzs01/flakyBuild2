@@ -1,0 +1,68 @@
+/*
+ *Copyright 2018 T Mobile, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); You may not use
+ * this file except in compliance with the License. A copy of the License is located at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * or in the "license" file accompanying this file. This file is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or
+ * implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.each-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    width: fit-content;
+    background: #EDF2F7;
+    border-radius: 2px;
+}
+
+.text-content{
+    font-family: 'mark-pro-medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    display: block;
+    align-items: center;
+    color: var(--primary-600);
+    padding: 4px 0px 4px 10px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.right-close-wrap {
+    padding: 8px 6px 0px 6px;
+    cursor: pointer;
+}
+
+.close-img:hover {
+    transform: rotate(-90deg); 
+}
+
+.clear-filter {
+    font: var(--text-body-2);
+    display: flex;
+    align-items: center;
+    color: var(--text-low-emphasis);
+    cursor: pointer;
+}
+
+.filters{
+gap: 10px;
+display: flex;
+flex-wrap: wrap;
+}
+
+.filters-wrapper{
+    display: flex;
+    justify-content: space-between;
+
+}

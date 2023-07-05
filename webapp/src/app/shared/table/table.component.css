@@ -1,0 +1,254 @@
+.table-container {
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-100);
+    position: relative;
+}
+
+.table-content-container {
+    background-color: var(--background-white);
+    width: 100%;
+    height: calc(100% - 70px);
+    overflow-y: scroll;
+}
+
+.noImg {
+    height: 16px;
+    width: 24px;
+    opacity: 0;
+}
+
+.table-wrapper {
+    height: 100%;
+    width: 100%;
+    background: var(--background-white);
+}
+
+.table-header {
+    background-color: var(--background-white);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.table-right-items > *:not(:last-child) {
+    padding: 0 16px;
+    border-right: 1px solid #a8b9cc;
+}
+
+.table-right-items > *:last-child {
+    padding-left: 16px;
+}
+
+.table-right-items > *:first-child {
+    padding-left: 0;
+}
+
+.table-count-info {
+    font: var(--text-caption);
+    color: #4d4d4d;
+}
+
+.table-header .table-column-modifier {
+    border: 1px solid var(--border-100);
+    padding: 12px 19px 12px 24px;
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+
+.table-header .search-bar-wrapper {
+    width: 100%;
+    border: 1px solid var(--border-200);
+}
+
+.table-header .search-bar-wrapper input {
+    min-width: 150px;
+}
+
+.table-header .header-left {
+    display: none;
+    height: 40px;
+    max-width: 543px;
+    flex: 3;
+}
+
+::ng-deep .mat-menu-panel {
+    min-height: auto !important;
+    min-width: fit-content !important;
+}
+
+::ng-deep .mat-menu-content {
+    padding: 0 !important;
+}
+
+.isDisabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.table-header ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0.6em 0.75em 0;
+}
+
+.table-header ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.table-header ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: var(--text-low-emphasis);
+    font: var(--text-body-2);
+}
+
+.search-bar-cursor {
+    cursor: text;
+}
+
+:host::ng-deep .mat-option-text {
+    font: var(--text-body-2) !important;
+    color: var(--text-high-emphasis) !important;
+}
+
+:host::ng-deep .mat-option {
+    flex-direction: row-reverse !important;
+}
+
+:host::ng-deep .mat-option:first-child .mat-pseudo-checkbox {
+    display: none;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.row-title {
+    color: var(--primary-400);
+}
+
+.row-selected,
+.row-hover:hover {
+    background-color: var(--background-grey);
+}
+
+.row-hover:hover {
+    cursor: pointer;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+    align-items: center;
+    font: var(--text-body-2);
+    color: var(--text-high-emphasis);
+}
+
+tr.mat-footer-row {
+    height: 62px;
+}
+
+tr.mat-row.lg {
+    height: 62px;
+}
+
+tr.mat-row.md {
+    height: 48px;
+}
+
+tr.mat-row.sm {
+    height: 36px;
+}
+
+tr.mat-row.md > td {
+    font-size: 93%;
+}
+
+tr.mat-row.sm > td {
+    font-size: 86%;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+    padding: 0 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 100px;
+    border: none;
+}
+
+tr.mat-header-row {
+    height: 40px;
+    padding: 16px 0;
+    font: var(--text-body-2);
+    color: var(--text-low-emphasis);
+    border: 1px solid var(--border-100);
+    background-color: #f8f8f8;
+}
+
+.filter-chips-wrapper {
+    padding-right: 8px;
+}
+
+.table-wrapper ::ng-deep .mat-sort-header-content {
+    gap: 11px;
+}
+
+.menu-btn {
+    height: 28px;
+    width: 28px;
+    padding: 4px;
+}
+
+.menu-btn:hover {
+    border-radius: 50%;
+    background: var(--primary-100);
+}
+
+.symbol {
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 12px solid;
+}
+
+.circle {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.square {
+    height: 12px;
+    width: 12px;
+}
+
+.disabled-option ::ng-deep .mat-pseudo-checkbox {
+    display: none;
+}
+
+.copy-icon {
+    display: none;
+}
+
+.table-cell:hover .copy-icon {
+    display: block;
+}
+
+.table-filters {
+    flex: 1;
+}

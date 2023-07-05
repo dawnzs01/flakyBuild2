@@ -1,0 +1,128 @@
+<!--
+ *Copyright 2018 T Mobile, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); You may not use
+ * this file except in compliance with the License. A copy of the License is located at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or
+ * implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<div class="contextual-menu-wrapper" [ngStyle]="theme">
+    <!-- asset-switcher -->
+    <div class="asset-switcher-container">
+        <app-asset-switcher [isExpanded]="expanded"></app-asset-switcher>
+    </div>
+    <nav>
+        <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <!-- PARENT NODE -->
+            <cdk-nested-tree-node *cdkTreeNodeDef="let node">
+                <div
+                    *ngIf="
+                        hasRequiredPermission(node) &&
+                        !(node.notDisplayIfAzure && agAndDomain.ag === 'azure')
+                    "
+                    class="tree-item flex flex-align-center"
+                    [class.collapsed]="!expanded"
+                    [routerLink]="
+                        !node.children
+                            ? node.overlay
+                                ? [{ outlets: { modalBGMenu: [node.route] } }]
+                                : [node.route]
+                            : null
+                    "
+                    [queryParams]="agAndDomain"
+                    routerLinkActive="node-wrapper-active"
+                >
+                    <img
+                        *ngIf="node.image"
+                        class="node-img"
+                        src="/assets/icons/{{ node.image }}.svg"
+                        alt=""
+                    />
+                    <span>
+                        {{ node.name }}
+                    </span>
+                </div>
+            </cdk-nested-tree-node>
+            <!--./PARENT NODE -->
+
+            <!-- PARENT NODE WITH CHILDREN -->
+            <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild">
+                <div
+                    *ngIf="
+                        hasRequiredPermission(node) &&
+                        !(node.notDisplayIfAzure && agAndDomain.ag === 'azure')
+                    "
+                    class="tree-item flex flex flex-align-center"
+                    [class.collapsed]="!expanded"
+                    cdkTreeNodeToggle
+                >
+                    <img
+                        *ngIf="node.image"
+                        class="node-img"
+                        src="/assets/icons/{{ node.image }}.svg"
+                        alt=""
+                    />
+                    <span>
+                        {{ node.name }}
+                    </span>
+                    <mat-icon class="tree-expand-icon">
+                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                    </mat-icon>
+                </div>
+                <!-- CHILD NODES -->
+                <div [hidden]="!treeControl.isExpanded(node)">
+                    <ng-container *cdkTreeNodeOutlet></ng-container>
+                </div>
+                <!--./CHILD NODES -->
+            </cdk-nested-tree-node>
+            <!--./PARENT NODE WITH CHILDREN -->
+
+            <!-- CHILD NODE -->
+            <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: isChild">
+                <div
+                    class="tree-child-wrapper"
+                    *ngIf="
+                        hasRequiredPermission(node) &&
+                        !(node.notDisplayIfAzure && agAndDomain.ag === 'azure')
+                    "
+                >
+                    <div
+                        class="tree-child-item"
+                        [routerLink]="
+                            !node.children
+                                ? node.overlay
+                                    ? [{ outlets: { modalBGMenu: [node.route] } }]
+                                    : [node.route]
+                                : null
+                        "
+                        routerLinkActive="node-wrapper-active"
+                        [queryParams]="agAndDomain"
+                    >
+                        <span>
+                            {{ node.name }}
+                        </span>
+                    </div>
+                </div>
+            </cdk-nested-tree-node>
+            <!--./CHILD NODE -->
+        </cdk-tree>
+    </nav>
+    <div class="know-your-app-wrapper" (click)="showTour()">
+        <div class="icon icon-wrapper">
+            <img class="node-img" src="/assets/images/getStarted.svg" alt="" />
+        </div>
+        <div class="app-wrapper" [class.is-collapsed]="!expanded">
+            <div class="know-your-app-content">Getting Started</div>
+        </div>
+    </div>
+    <div class="version-wrapper" [class.collapsed]="!expanded">
+        <span class="version-text" [class.collapsed]="!expanded">Version</span>
+        <span class="version-number">{{ current_version }}</span>
+    </div>
+</div>

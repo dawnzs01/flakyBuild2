@@ -1,0 +1,34 @@
+<mat-card class="panel">
+    <mat-card-header>
+        {{ card.header }}
+        <div *ngIf="showDateDropdown" class="date-dropdown-container">
+            <div
+                class="date-selection-trigger"
+                #menuTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="menu"
+            ></div>
+            <app-dropdown
+                (closeEventEmitter)="onDropdownClose()"
+                (click)="onCustomSelection()"
+                [items]="['1 week', '1 month', '6 months', '12 months', 'All time', 'Custom']"
+                [selectedItem]="selectedItem"
+                (selected)="handleGraphIntervalSelection($event)"
+            >
+            </app-dropdown>
+            <mat-menu #menu="matMenu" xPosition="before">
+                <div class="date-selection-modal">
+                    <app-date-selection
+                        (datesSelected)="dateIntervalSelected($event.from, $event.to)"
+                    ></app-date-selection>
+                </div>
+            </mat-menu>
+        </div>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="chart">
+            <div class="chart-wrapper" id="trendGraph">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,10 @@
+<div class="filter-search-container flex gap-8">
+    <img src="/assets/icons/search-icon.svg">
+    <input
+        class="filter-search-input"
+        type="text"
+        [(ngModel)]="text"
+        (ngModelChange)="textChange.emit(text)"
+        placeholder="Search"
+    />
+</div>

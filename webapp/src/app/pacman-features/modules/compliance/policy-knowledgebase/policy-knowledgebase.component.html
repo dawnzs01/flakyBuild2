@@ -1,0 +1,72 @@
+<!--
+ *Copyright 2018 T Mobile, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); You may not use
+ * this file except in compliance with the License. A copy of the License is located at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or
+ * implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<div class="policy-knowledgebase-wrapper flex flex-between flex-col">
+    <app-page-title [title]="breadcrumbPresent"></app-page-title>
+    <div class="policy-categories-container flex flex-row">
+        <div
+            class="policy-category-item flex flex-align-center"
+            *ngFor="let category of policyCategories"
+            (click)="applyFilterByCategory(category)"
+        >
+            <img
+                class="policy-category-icon"
+                [src]="'/assets/icons/' + tableImageDataMap[category].image + '.svg'"
+            />
+            <div class="policy-category-name capitalize">{{ category }}</div>
+            <div class="policy-category-count">
+                {{ policyCategoryDic[category] }}
+            </div>
+        </div>
+    </div>
+    <div class="policy-knowledgebase-content-wrapper">
+        <div class="policy-knowledgebase-content">
+            <app-table
+                [centeredColumns]="centeredColumns"
+                [columnsSortFunctionMap]="columnsSortFunctionMap"
+                [columnWidths]="columnWidths"
+                [data]="tableData"
+                [direction]="direction"
+                [doLocalFilter]="true"
+                [doLocalSearch]="doLocalSearch"
+                [filteredArray]="filters"
+                [filterTagLabels]="filterTagLabels"
+                [filterTypeLabels]="filterTypeLabels"
+                [headerColName]="headerColName"
+                [rowSize]="'SM'"
+                [searchQuery]="searchTxt"
+                [showAddRemoveCol]="showAddRemoveCol"
+                [showDownloadBtn]="true"
+                [showFilterBtn]="true"
+                [showSearchBar]="showSearchBar"
+                [tableDataLoaded]="tableDataLoaded"
+                [tableErrorMessage]="errorMessage"
+                [tableScrollTop]="tableScrollTop"
+                [totalRows]="totalRows"
+                [whiteListColumns]="whiteListColumns"
+                (downloadClicked)="handlePopClick($event)"
+                (rowSelectEventEmitter)="goToDetails($event)"
+                (searchCalledEventEmitter)="callNewSearch($event)"
+                (searchInColumnsChanged)="handleSearchInColumnsChange($event)"
+                (headerColNameSelected)="handleHeaderColNameSelection($event)"
+                (whitelistColumnsChanged)="handleWhitelistColumnsChange($event)"
+                (selectedFilter)="handleFilterSelection()"
+                (selectedFilterType)="handleFilterTypeSelection()"
+                (deleteFilters)="deleteFilters($event)"
+                [selectedRowIndex]="selectedRowIndex"
+            >
+            </app-table>
+        </div>
+    </div>
+</div>

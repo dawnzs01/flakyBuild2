@@ -1,0 +1,270 @@
+.asset-distribution-container {
+    height: 100%;
+    padding: 18px 24px;
+}
+
+.chart {
+    padding: 0 24px;
+    width: calc(100% - 76px);
+}
+
+.chart.expanded {
+    padding: 10px 24px;
+    width: 67%;
+}
+
+.asset-header {
+    font: var(--text-body-2);
+    display: flex;
+    align-items: center;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.slider-img {
+    width: 26px !important;
+    height: 26px !important;
+    transform: rotate(180deg);
+}
+
+.slider-img.collapsed {
+    transform: rotate(0deg);
+}
+
+.page-header-subtext {
+    font: var(--text-body-1);
+    margin-left: 16px;
+}
+
+.overall-distribution {
+    height: calc(100% - 51px);
+}
+
+.slider {
+    height: 100%;
+    width: 33%;
+    border-left: 1px solid var(--border-200);
+}
+
+.isCollapsed {
+    display: none;
+}
+
+.collapsed {
+    width: 76px;
+}
+
+.slider-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 12px;
+    border-bottom: 2px solid var(--border-200);
+}
+
+.col-header {
+    font: var(--text-body-2);
+    color: var(--text-low-emphasis);
+}
+
+.distribution-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border-200);
+    border-radius: 8px;
+    background-color: var(--background-white);
+}
+
+.search-icon {
+    padding-left: 10px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background: var(--background-white);
+    border-radius: 4px;
+    border: 1px solid var(--border-200);
+}
+
+.sort-img {
+    width: 8px;
+    height: 8px;
+    transform: rotate(180deg);
+}
+
+.sort-img.sorted {
+    transform: rotate(0deg);
+}
+
+.header-search-content-container {
+    display: flex;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+.content-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.search-container {
+    padding: 8px 24px;
+    background-color: var(--background-white);
+    border-bottom: 2px solid var(--border-200);
+}
+
+.search-container .isCollapsed {
+    display: none;
+}
+
+.column-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.column-wrapper .col {
+    padding: 8px 24px;
+}
+
+.column-wrapper-header .col:first-child {
+    width: 70%;
+}
+
+.column-wrapper-header .col:last-child {
+    width: 30%;
+}
+
+.column-wrapper .col:first-child {
+    width: 80%;
+}
+
+.column-wrapper .col:last-child {
+    width: 20%;
+}
+
+.search-box {
+    border: none;
+    background: var(--background-white);
+    padding-left: 12px;
+    height: 20px;
+    width: inherit;
+    font: var(--text-body-2);
+    color: var(--text-low-emphasis);
+}
+
+.col {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 12px;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.asset-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 24px;
+    gap: 12px;
+    height: 56px;
+    border-radius: 4px;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    z-index: 1;
+}
+
+.column-wrapper:hover {
+    background-color: var(--background-grey);
+}
+
+.column-wrapper-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 52px;
+    border-bottom: 2px solid var(--border-200);
+}
+
+::ng-deep .asset-name {
+    font: var(--text-body-2);
+    color: var(--text-high-emphasis);
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    width: inherit;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.asset-count {
+    font: var(--text-body-2);
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    color: var(--primary-400);
+}
+
+::ng-deep .asset-img {
+    width: 16px;
+    height: 16px;
+}
+
+.asset-list {
+    overflow-y: auto;
+    height: calc(100% - 52px);
+}
+
+::ng-deep .apexcharts-toolbar {
+    display: none !important;
+}
+
+.slider-content {
+    height: calc(100% - 104px);
+}
+
+::ng-deep .tooltip-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+    background: var(--background-white);
+    border: 1px solid var(--border-200);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.16), 0 0 1px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+}
+
+::ng-deep .tooltip-header {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--border-200);
+    padding: 8px 12px;
+    align-items: center;
+    gap: 8px;
+}
+
+::ng-deep .tooltip-assetCount {
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0 8px 12px;
+}
+
+::ng-deep .apexcharts-canvas {
+    width: inherit !important;
+    overflow: hidden !important;
+}

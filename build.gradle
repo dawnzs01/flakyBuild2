@@ -1,46 +1,22 @@
-// Burp Suite Extension Name: Sharpener
-// Released under AGPL see LICENSE for more information
-// Developed by Soroush Dalili (@irsdl)
-// Released initially as open source by MDSec - https://www.mdsec.co.uk
-// Project link: https://github.com/mdsecresearch/BurpSuiteSharpener
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
 
-apply plugin: 'java-library'
-apply plugin: 'maven-publish'
-
-group 'burp'
-version ''
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://jitpack.io"
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'
     }
 }
 
-dependencies {
-    implementation "net.portswigger.burp.extensions:montoya-api:2023.1"
-    implementation "com.github.CoreyD97:Burp-Montoya-Utilities:86c912a" //https://jitpack.io/com/github/CoreyD97/Burp-Montoya-Utilities/86c912a/
-    implementation "com.google.code.gson:gson:2.10.1"
-    implementation "com.google.guava:guava:31.1-jre"
-    implementation "org.apache.commons:commons-lang3:3.12.0"
-    implementation "com.formdev:flatlaf:3.0"
-    implementation "org.springframework:spring-core:6.0.6"
-}
-
-jar{
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archivesBaseName = project.name
-    from {
-        (configurations.runtimeClasspath).collect { it.isDirectory() ? it : zipTree(it) }
-    }{
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-        exclude "META-INF/*.txt"
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 }
-
-tasks.withType(Jar) {
-    destinationDirectory = file("$rootDir/releases/")
-}
-

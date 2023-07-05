@@ -1,9 +1,26 @@
-.gradle
+# Build
+*.apk
+
+# Cache
+bin
+gen
+out
+
+# NDK
+*.so
+*.hpp
+*.h
+
+# Gradle
+*.gradle
+*.jar
+gradlew
+gradlew.bat
+build
+
+# Configuration
+local.properties
+
+# Other
 .idea
-/out/
-/build/
-gradle-app.setting
-.gradletasknamecache
-.git
-.idea/
-/releases/
+.vs

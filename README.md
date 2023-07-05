@@ -1,162 +1,172 @@
-# Wolvic XR Browser
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Auto Plan Helper</h1>
+<h4 align="center">自动化的托管系统</h4>
+<p align="center">
+	<a href="https://github.com/wyt1215819315/autoplan"><img src="https://img.shields.io/github/v/release/wyt1215819315/autoplan?color=green"></a>
+	<img src="https://img.shields.io/github/stars/wyt1215819315/autoplan">
+</p>
 
-The goal of the Wolvic project is to create a full-featured browser exclusively AR and VR headsets.
+## 项目简介
+本项目为自动化的托管系统，目前支持以下功能：
+1. b站每日自动经验任务
+2. b站赛事预测赚硬币任务
+3. 网易云自动签到刷歌任务
+4. 米游社原神签到领奖励任务以及米游币任务
 
-You can find us in [wolvic.com](https://www.wolvic.com), Mastodon [@WolvicXR](https://floss.social/@WolvicXR), Twitter [@wolvicxr](https://twitter.com/wolvicxr), and at [info@wolvic.com](mailto:info@wolvic.com).
+**如果觉得好用，点个star吧**
 
-Want to learn more about Wolvic? Read our [FAQ](https://wolvic.com/en/faq)!
+> **2.5以上版本由于重构了bili-helper，原来的数据库结构不再兼容新版，请使用管理员用户登录并在bili任务中点击“转json”按钮完成配置转换，记得备份原来的数据库**
 
-## Locale support
-
-For more info on localization, how it works in the Wolvic XR project, and how to correctly edit localizable text in the application, please see our [localization wiki page](https://github.com/Igalia/wolvic/wiki/Localization).
-
-## Setup instructions
-
-> By default Wolvic will try to download prebuilt GeckoView libraries from [Mozilla's maven repositories](https://maven.mozilla.org/maven2/org/mozilla/geckoview/?prefix=maven2/org/mozilla/geckoview/). Note that after [PR #70](https://github.com/Igalia/wolvic/pull/70) WebXR sessions won't work with those images because that PR introduced a change in the GeckoView protocol that is only available in the `wolvic_release` branch from [this repository](https://github.com/Igalia/gecko-dev/). For additional details on how to use a local GeckoView build check [this section](#dependency-substitutions)
-
->  **UPDATE**: use `FIREFOX_103_0_2_RELEASE` instead of `wolvic_release` after [PR #256](https://github.com/Igalia/wolvic/pull/256).
-
-*Clone Wolvic.*
-
-```bash
-git clone git@github.com:Igalia/wolvic.git
-cd wolvic
+> 1.x - 2.0版本升级需要升级配置文件，以及新增一个定时任务(不一定要执行sql，可以直接去管理界面加)：
+```mysql
+INSERT INTO `t_sys_quartz_job` (`id`, `job_name`, `job_group`, `invoke_target`, `cron_expression`, `misfire_policy`, `concurrent`, `status`) VALUES ('592295794938351617', '米游社更新个人信息', 'DEFAULT', 'mihuyouTask.updateAvatar()', '0 15 0 ? * MON', '3', '1', 0);
 ```
 
-*Clone the third-party repo.*
+***
 
-If you're developing for the Oculus, Huawei, Pico, or VIVE, you need to clone the repo with third-party SDK files.
+> **2.11版本新增小米运动，需要新增数据库，请执行如下sql**
+```mysql
+# 任务记录表
+CREATE TABLE `auto_xiaomi`
+(
+    `id`                INT(11)     NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `user_id`           INT(11)     NULL DEFAULT NULL COMMENT '外键约束user_id',
+    `phone`             VARCHAR(50) NOT NULL COMMENT '小米账号' COLLATE 'utf8mb4_general_ci',
+    `password`          VARCHAR(50) NOT NULL COMMENT '密码' COLLATE 'utf8mb4_general_ci',
+    `steps`             VARCHAR(5)  NULL DEFAULT NULL COMMENT '步数' COLLATE 'utf8mb4_general_ci',
+    `previous_occasion` VARCHAR(5)  NULL DEFAULT NULL COMMENT '上次提交的步数' COLLATE 'utf8mb4_general_ci',
+    `name`              VARCHAR(50) NULL DEFAULT NULL COMMENT '任务名称' COLLATE 'utf8mb4_general_ci',
+    `status`            VARCHAR(10) NULL DEFAULT NULL COMMENT '任务状态' COLLATE 'utf8mb4_general_ci',
+    `random_or_not`     CHAR(1)     NULL DEFAULT NULL COMMENT '是否随机：0否，1是' COLLATE 'utf8mb4_general_ci',
+    `enable`            VARCHAR(50) NULL DEFAULT NULL COMMENT '任务是否开启' COLLATE 'utf8mb4_general_ci',
+    `enddate`           DATETIME    NULL DEFAULT NULL COMMENT '任务结束时间',
+    `webhook`           TEXT        NULL DEFAULT NULL COMMENT '推送地址json' COLLATE 'utf8mb4_general_ci',
+    `CREATED_TIME`      DATETIME    NULL DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    INDEX `userid` (`user_id`) USING BTREE,
+    CONSTRAINT `auto_xiaomi_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+    COLLATE = 'utf8mb4_general_ci'
+    ENGINE = InnoDB
+;
 
-```bash
-git clone https://github.com/Igalia/wolvic-third-parties.git third_party
+# 定时任务执行sql
+INSERT INTO `t_sys_quartz_job`
+VALUES ('684022184875790336', '小米自动刷步数', 'DEFAULT', 'xiaomiTask.doAutoCheck()', '0 0 12 * * ? *', '3', '1', 0);
+INSERT INTO `t_sys_quartz_job`
+VALUES ('684022184905150464', '小米运动定时重置任务状态', 'DEFAULT', 'xiaomiTask.resetStatus()', '0 0 0 * * ? *', '3', '1', 0);
+
 ```
 
-This repo is only available to Igalia members. If you have access to the relevant SDK but not this repo, you can manually place them here:
+## 演示站地址
+<a href="https://auto.oldwu.top/" target="_blank">点击打开Auto Plan</a>
 
- - `third_party/ovr_mobile/` for Oculus (should contain a `VrApi` folder)
- - `third_party/OVRPlatformSDK/` for Oculus (should contain a `Android` and `include` folders)
- - `third_party/ovr_openxr_mobile_sdk/` for Oculus (should contain an `OpenXR` folder)
- - `third_party/hvr/` for Huawei (should contain  `arm64-v8a`, `armeabi-v7a` and `include` folders)
- - `third_party/wavesdk/` for Vive (should contain a `build` folder, among other things)
- - `third_party/picoxr` [Pico OpenXR Mobile SDK](https://developer-global.pico-interactive.com/sdk?deviceId=1&platformId=3&itemId=11) (should contain `include` and `libs` folders, among other things that are not necessary for Wolvic)
- - `third_party/lynx` [for Lynx](https://portal.lynx-r.com)(should contain a `loader-release.aar` file)
- - `third_party/snapdragon-spaces` [for Snapdragon Spaces](https://spaces.qualcomm.com/)(should contain `libopenxr_loader.aar` and `qxrclients.aar` files)
- - `third_party/OpenXR-SDK/` [OpenXR-SDK](https://github.com/KhronosGroup/OpenXR-SDK) (should contain an `include` folder)
+**本人不会利用任何cookie，但是为了安全考虑，建议还是自己搭建运行环境**
 
-The [repo in `third_party`](https://github.com/Igalia/wolvic-third-parties) can be updated like so:
+## 项目架构
+基于Springboot、SpringSecurity、layui、mysql开发
 
-```bash
-pushd third_party && git fetch && git checkout main && git rebase origin/main && popd
-```
+定时任务核心：quartz（从pearadmin中抠过来的）
 
-*Fetch Git submodules.*
+## 使用说明
+### bilibili
+> 原作者开源项目已经停止维护，可以看看他的博客声明https://blog.misec.top/archives/bye-helper
+> 
+* 支持b站签到任务以及赛事预测任务
+* 支持扫码登录和cookie登录
+* cookie登录请参考<a href="https://blog.oldwu.top/index.php/archives/84/#toc_6">这里</a>以获取cookie值
+### 网易云
+* 网易云每日签到和网易云每日刷300首歌
+> **由于网易云的检测机制会封服务器ip，导致目前该功能的可用性为零**
 
-You may need to set up [two-factor authentication](https://blog.github.com/2013-09-03-two-factor-authentication/#how-does-it-work-for-command-line-git) for the command line.
+### 米游社
+* 原神签到任务
+* 米游币任务
 
-```bash
-git submodule update --init --recursive
-```
+### 小米运动
 
-You can build for different devices:
+- 每天中午12点定时提交任务，步数可以同步到微信、支付宝。绑定好就行了
 
-- **`oculusvr`**: Oculus Quest
-- **`hvr`**: Huawei VR Glasses
-- **`wavevr`**: VIVE Focus
-- **`picoxr`**: Pico 4 and (untested) Pico Neo 3
-- **`lynx`**: Lynx R1
-- **`spaces`**: Lenovo A3
+[**更多详细使用说明请查看**](https://blog.oldwu.top/index.php/archives/84/#toc_5)
 
-For testing on a non-VR device:
-
-- **`noapi`**: Runs on standard Android phones without a headset
-
-Building for Oculus Mobile, Huawei and WaveVR requires access to their respective SDKs which are not included in this repo.
-
-The command line version of `gradlew` requires JDK 11. If you see an error that Gradle doesn't understand your Java version, check which version of you're using by running `java -showversion` or `java -version`. You're probably using and older JDK, which won't work.
-
-*Open the project with [Android Studio](https://developer.android.com/studio/index.html)* then build and run it. Depending on what you already have installed in Android Studio, the build may fail and then may prompt you to install dependencies. Just keep doing as it suggests. To select the device to build for, go to `Tool Windows > Build Variants` and select a build variant corresponding to your device.
-
-*If you want to build Wolvic for WaveVR SDK:*
-
-Download the [VIVE Wave SDK](https://developer.vive.com/resources/knowledgebase/wave-sdk/) from the [VIVE Developer Resources](https://vivedeveloper.com/), and unzip it. Then, from the top-level project directory, run:
-
-```bash
-mkdir -p third_party/wavesdk
-cp /path/to/the/sdk/2.0.32/SDK/libs/wvr_client.aar third_party/wavesdk
-cp ./extra/wavesdk/build.gradle ./third_party/wavesdk
-```
-
-Make certain to set the build flavor to `wavevrDebug` in Android Studio before building the project.
-
-## Local Development
-
-### Dependency substitutions
-
-You might be interested in building this project against local versions of some of the dependencies.
-This could be done either by using a [local maven repository](https://mozilla-mobile.github.io/android-components/contributing/testing-components-inside-app) (quite cumbersome), or via Gradle's [dependency substitutions](https://docs.gradle.org/current/userguide/customizing_dependency_resolution_behavior.html) (not at all cumbersome!).
-
-Currently, the substitution flow is streamlined for some of the core dependencies via configuration flags in `local.properties`. You can build against a local checkout of the following dependencies by specifying their local paths:
-- [GeckoView](https://hg.mozilla.org/mozilla-central), specifying its path via `dependencySubstitutions.geckoviewTopsrcdir=/path/to/mozilla-central` (and, optionally, `dependencySubstitutions.geckoviewTopobjdir=/path/to/topobjdir`). See [Bug 1533465](https://bugzilla.mozilla.org/show_bug.cgi?id=1533465).
-  - This assumes that you have built, packaged, and published your local GeckoView -- but don't worry, the dependency substitution script has the latest instructions for doing that.
-
-Do not forget to run a Gradle sync in Android Studio after changing `local.properties`. If you specified any substitutions, they will be reflected in the modules list, and you'll be able to modify them from a single Android Studio window.
+## 项目部署
+1. 首先准备好`application.yml`配置文件，模板文件可以点击链接下载：
+[application.yml](https://github.com/wyt1215819315/autoplan/blob/master/application-example.yml)
+2. 在`mysql`中创建数据库并导入`auto_plan.sql`
+3. 接下来你可以选择两种方式部署：
+   * 第一种方法 **使用 <a href="https://github.com/wyt1215819315/autoplan/releases">Releases</a> 中打包好的jar运行**
+     * 将`application.yml`修改正确并放入jar包同级目录中
+     * 使用`java -jar xxx.jar`运行
+   * 第二种方法 **自行编译jar包**
+     * 导入idea并下载依赖（请使用JDK1.8）
+     * 在`resources`文件夹放入`application.yml`配置文件（可选，你可以选择外置配置文件）
+     * 使用maven install打包成jar
+     * 使用`java -jar xxx.jar`运行
 
 
-## Install dev and production builds on device simultaneously
+4. 注册账号，并将其定为管理员账户，步骤：
+   * 查看`sys_user`表中你的账号对应的`id`
+   * 进入`sys_role_user`表中找到对应的`user_id`
+   * 将对应行的`sys_role_id`值改为1
+5. 一些定时任务的配置请登录管理员账号在`自动任务管理`中查看
 
-You can enable a dev applicationID sufix to install both dev and production builds simultaneously. You just need to add this property to your `user.properties` file:
+> **提示：[Releases](https://github.com/wyt1215819315/autoplan/releases) 中的jar包可能更新不及时，项目设置有自动构建，急需最新版jar包，可前往 [actions](https://github.com/wyt1215819315/autoplan/actions) 自行下载**
 
-```ini
-simultaneousDevProduction=true
-```
-## Locally generate Android release builds
+**版本更新时，请务必备份数据库，以免未知的后果造成影响**
 
-Local release builds can be useful to measure performance or debug issues only happening in release builds. Insead of dealing with release keys you can make the testing easier just adding this property to your `user.properties` file:
+如果你不需要自动建表，请将配置文件中的actable有关的项全都注释掉即可
 
-```ini
-useDebugSigningOnRelease=true
-```
+### 一些问题
+1. 代码不是一般的乱，（非常非常乱....而且很多地方不符合规范），本人萌新一枚，请大佬多多指教
 
-Note: the release APKs generated with a debug keystore can't be used for production.
+### 未来
+1. 管理员功能：查看日志，删除任务等
+2. go-cqhttp推送（需要加机器人为好友）
+3. ~~手动执行b站任务（咕咕咕）~~
+5. 修改密码功能
+6. 自动清理n天之前的日志
 
-## Compress assets
+### 更新日志
+* 21.8.29 更新了b站二维码登录以及任务删除功能
+* 21.8.30 增加了网易云推送，改变了日志表结构
+* 21.8.31 增加了米游社原神签到，修复了网易云刷歌不计数的问题（摔、垃圾网易云json数组外边还要加引号）
+* 21.9.2 增加了编辑参数编辑功能
+* 21.9.3 增加了网易云任务和米游社任务的手动执行开关
+* 21.9.4 增加了米游社cookie字段，使其能够执行米游币任务
+* 21.9.5 修复了非管理员无法使用单次执行任务的问题，修复了米游社任务无权限访问的问题，修复了bilibili直播送礼物报错的问题
+* 21.9.6 增加了bilibili赛事预测,修复了网易云uid超出int范围导致任务中断的问题
+* 21.9.15 尝试更新了BILIBILI-HELPER至1.1.5，可以改善部分任务中出现的null错误
+* 21.10.1 layui已下线，目前将所有cdn服务换为本地文件
+* 21.10.3 修复了部分bug，更改了部分数据表字段名称使其更统一，增加bilibili反向赛事预测
+* 21.10.4 增加了全局webhook，更改webhook的传入方式为json字符串，增加生成器页面用来生成webhook.json
+* 21.11.6 修复米游币任务分享帖子失效的问题
+* 21.12.11 修复log4j2漏洞
+* 21.12.29 修改米游社原神签到逻辑，适配米游社账号下多角色不同服的签到处理，并修改一些页面显示，使其更美观（感谢@MuXia-0326）
+* 22.1.26 **（2.0版本重大更新）**
+   1. 重构了所有页面，所有请求均改为前后端分离
+   2. 增加登录注册验证码校验
+   3. 修复网易云登录时可能出现的乱码问题
+   4. 个人任务管理支持头像展示
+   5. 增加actable自动建表，以后更改表结构时无需手动更改（第一次使用时还是需要导入sql）
+   6. 将mybatis换为mybatis-plus，精简了大量xml文件
+* 22.2.2 推送生成器支持自动填充json至推送框，首页公告改为从后台读取并且支持编辑功能
+* 22.2.3 **2.0版本必更！** 
+   1. 推送测试支持回显错误信息便于用户排查
+   2. 发布2.1版本，修改了mybatis-plus的配置，需要修改配置文件，详情请查看`application-example`
+   3. 增加删除功能，之前忘记写了
+* 22.2.5 修复网易云账号信息验证失败时无法打印错误信息的问题
+* 22.2.9 修复webhook页面显示bug，修改公告修改页面的样式，给网易云重试添加延迟操作
+* 22.5.24 bili-helper重构基本实现，可能还会有小问题，咕了n久，只是懒得写说明文档
+* 22.11.18 **新增小米运动**，支持定时，步数可以同步到微信、支付宝。修复定时任务管理分页查询问题。
 
-ETC2 compression is used to improve performance and memory usage. Raw assets are placed in the `uncompressed_assets` folder. You can generate the compressed textures using the compressor utility in `tools/compressor`. You need to set up [etc2comp](https://github.com/google/etc2comp) and make it available on your PATH before running the script. Run this command to generate the compressed assets:
 
-```bash
-cd tools/compressor
-npm install
-npm run compress
-```
+### 鸣谢
+1. <a href="https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE">BILIBILI-HELPER-PRE（作者不干了）</a>
+2. <a href="https://github.com/secriy/CloudMusic-LevelUp">CloudMusic-LevelUp</a>
+3. <a href="https://github.com/PonKing66/genshi-helper">genshi-helper</a>
+4. <a href="https://github.com/y1ndan/genshinhelper">genshinhelper</a>
 
-## Enable OpenXR builds
-You can enable OpenXR API for Oculus by adding this property to your `user.properties` file:
+感谢 JetBrains 对本项目的支持。
 
-```ini
-openxr=true
-```
+[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg?_gl=1*y52vqx*_ga*NTE4NjY3NDA2LjE2MjY5NDU3MDk.*_ga_V0XZL7QHEB*MTYzMzE4NjE1Mi4yLjEuMTYzMzE4NjE4MS4w&_ga=2.80927447.171770786.1633179814-518667406.1626945709)](https://www.jetbrains.com/)
 
-## Development troubleshooting
-
-### `Device supports , but APK only supports armeabi-v7a[...]`
-
-Enable [USB Remote Debugging](https://github.com/MozillaReality/FirefoxReality/wiki/Developer-Info#remote-debugging) on the device.
-
-### **`Firefox > Web Developer > WebIDE > Performance`** gets stuck with greyed out "stop and show profile"
-
-Restart Wolvic XR and close and re-open the WebIDE page.
-
-### **`Tool Windows > Build Variants`** list is empty
-
-1. If you're not on the latest version, update Android Studio from **`Android Studio > Check for Updates…`**.
-2. Run **`File > Sync Project with Gradle Files`**.
-
-## Debugging tips
-
-- When using the native debugger you can ignore the first SIGSEGV: address access protected stop in GV thread. It's not a crash; you can click *Resume* to continue debugging.
-- On some platforms such as Oculus Go the native debugger stops on each input event. You can set this LLDB post-attach command in Android Studio to fix the problem: `pro hand -p true -s false SIGILL`
-- You can use `adb shell am start -a android.intent.action.VIEW -d "https://aframe.io" com.igalia.wolvic/com.igalia.wolvic.VRBrowserActivity` to load a URL from the command line
-- You can use `adb shell am start -a android.intent.action.VIEW  -n com.igalia.wolvic/com.igalia.wolvic.VRBrowserActivity -e homepage "https://example.com"` to override the homepage
-- You can use `adb shell setprop debug.oculus.enableVideoCapture 1` to record a video on the Oculus Go. Remember to run `adb shell setprop debug.oculus.enableVideoCapture 0` to stop recording the video.
-    - You can also record videos on the Oculus Go by exiting to the system library, and from the Oculus tray menu (toggle with the Oculus button on the controller): **`Sharing > Record Video`**
-- You can set `disableCrashRestart=true` in the gradle `user.properties` to disable app relaunch on crash.
+**免责声明：请勿将本项目用于付费代挂，或者是作为骗取cookie的黑产业链，任何造成的结果均与本项目无关！**

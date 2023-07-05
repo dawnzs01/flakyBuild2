@@ -1,195 +1,80 @@
-<p align="center">
-  <img alt="giskardlogo" src="readme/giskard_logo.png#gh-light-mode-only">
-  <img alt="giskardlogo" src="readme/giskard_logo_green.png#gh-dark-mode-only">
-</p>
-<h1 align="center" weight='300' >The testing framework dedicated to ML models, from tabular to LLMs</h1>
-<h3 align="center" weight='300' >Scan AI models to detect risks of biases, performance issues and errors. In 4 lines of code. </h3>
-<p align="center">
-   <a href="https://github.com/Giskard-AI/giskard/releases">
-      <img alt="GitHub release" src="https://img.shields.io/github/v/release/Giskard-AI/giskard">
-  </a>
- <a href="https://github.com/Giskard-AI/giskard/blob/main/LICENSE">
-     <img alt="GitHub" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg">
- </a>
-  <a href="https://github.com/Giskard-AI/giskard/actions/workflows/build.yml?query=branch%3Amain">
-    <img alt="build" src="https://github.com/Giskard-AI/giskard/actions/workflows/build.yml/badge.svg?branch=main"/>
- </a>
-  <a href="https://sonarcloud.io/summary/new_code?id=giskard">
-    <img alt="build" src="https://sonarcloud.io/api/project_badges/measure?project=giskard&metric=alert_status"/>
- </a>
-  <a href="https://gisk.ar/discord">
-    <img alt="Giskard on Discord" src="https://img.shields.io/discord/939190303397666868?label=Discord"/>
-  </a>
-  <a rel="me" href="https://fosstodon.org/@Giskard"></a>
-</p>
-<h3 align="center">
-   <a href="https://docs.giskard.ai/en/latest/getting-started/quickstart.html"><b>Documentation</b></a> &bull;
-   <a href="https://www.giskard.ai/knowledge-categories/blog/?utm_source=github&utm_medium=github&utm_campaign=github_readme&utm_id=readmeblog"><b>Blog</b></a> &bull;  
-  <a href="https://www.giskard.ai/?utm_source=github&utm_medium=github&utm_campaign=github_readme&utm_id=readmeblog"><b>Website</b></a> &bull;
-  <a href="https://gisk.ar/discord"><b>Discord Community</b></a> &bull;
-  <a href="https://www.giskard.ai/about?utm_source=github&utm_medium=github&utm_campaign=github_readme&utm_id=readmeblog#advisors"><b>Advisors</b></a>
- </h3>
-<br />
+![logo](site/docs/ch/images/arctic_logo_for_git.png)
 
-## Table of contents
-1. [What is Giskard?](#what-is-giskard)
-2. [Getting started](#getting-started)
-  * [Installation](#installation)
-  * [Scan your model to detect vulnerabilities](#scan-your-model-to-detect-vulnerabilities)
-  * [Automatically generate a test suite](#automatically-generate-a-test-suite-based-on-the-scan-results)
-  * [Upload your test suite to the Giskard server](#upload-your-test-suite-to-the-giskard-server)
-3. [How to contribute](#how-to-contribute)
-4. [Like what we're doing?](#like-what-were-doing)
+Arctic is a LakeHouse management system under open architecture, which on top of data lake open formats provides more optimizations for streaming and upsert scenarios, as well as a set of pluggable self-optimizing mechanisms and management services. Using Arctic could help various data platforms, tools and products build out-of-the-box, streaming and batch unified LakeHouses quickly.
 
+## What is Arctic
 
-## What is Giskard?
-**Giskard is an open-source testing framework dedicated to ML models, from tabular models to LLMs.**
+Currently, Arctic is a LakeHouse management system on top of iceberg format. Benefit from the thriving ecology of Apache Iceberg, Arctic could be used on kinds of data lakes on premise or clouds with varities of engines. Several concepts should be known before your deeper steps:
 
-Testing Machine Learning applications can be tedious. Since ML models depend on data, testing scenarios depend on the domain specificities and are often infinite. 
+![Introduce](site/docs/ch/images/introduce_arctic.png)
 
-<p align="center">
-<strong>Where to start testing? Which tests to implement? What issues to cover? How to implement the tests?</strong>
-</p>
+- AMS and optimizers - Arctic Management Service provides management features including self-optimizing mechanisms running on optimizers, which could be scaled as demand and scheduled on different platforms.
+- Multiple formats — Arctic use formats analogous to MySQL or ClickHouse using storage engines to meet different scenarios. Two formats were available since Arctic v0.4.
+	* Iceberg format — learn more about iceberg format details and usage with different engines: [Iceberg Docs](https://iceberg.apache.org/docs/latest/)
+	* Mixed streaming format - if you are interested in advanced features like auto-bucket, logstore, hive compatible, strict PK constraints etc. learn Arctic [Mixed Iceberg format](https://arctic.netease.com/ch/concepts/table-formats/#mixed-iceberg-format) and [Mixed Hive format](https://arctic.netease.com/ch/concepts/table-formats/#mixed-hive-format)
+## Arctic features
 
-<p align="center">
-  <img src="https://giskard.readthedocs.io/en/latest/_images/hey.png" alt="hey" width="20%">
-</p>
+- Defining keys - supports defining primary key with strict constraints, and more types of keys in future
+- Self-optimizing - user-insensitive asynchronous self-optimization mechanisms could keep lakehouse fresh and healthy
+- Management features - dashboard UI to support catalog/table management, SQL terminal and all kinds of metrics
+- Formats compatible - Hive/Iceberg format compatible means writing and reading through native Hive/Iceberg connector 
+- Better data pipeline SLA - using LogStore like kafka to accelarate streaming data pipeline to ms/s latency
+- Better OLAP performace - provides auto-bucket feature for better compaction and merge-on-read performance
+- Concurrent conflicts resovling - Flink or Spark could concurrent write data without worring about conflicts
 
-At Giskard, we believe that Machine Learning needs its own testing framework. Created by ML engineers for ML engineers, Giskard enables you to:
+## Modules
 
-- **Scan your model to find dozens of vulnerabilities**: The Giskard scan automatically detects vulnerability issues such as performance bias, data leakage, unrobustness, spurious correlation, overconfidence, underconfidence, unethical issue, etc.
+Arctic contains modules as below:
 
-<p align="center">
-  <img src="readme/scan_example.png" alt="Scan Example" width="700px">
-</p>
+- `arctic-core` contains core abstractions and common implementation for other modules
+- `arctic-flink` is the module for integrating with Apache Flink (use arctic-flink-runtime for a shaded version)
+- `arctic-spark` is the module for integrating with Apache Spark (use arctic-spark-runtime for a shaded version)
+- `arctic-trino` now provides query integrating with apache trino, built on JDK17
+- `arctic-ams` is arctic meta service module
+  - `ams-api` contains ams thrift api
+  - `ams-dashboard` is the dashboard frontend for ams
+  - `ams-server` is the backend server for ams
+  - `ams-optimizer` provides default optimizer implementation
 
-- **Instantaneously generate domain-specific tests**: Giskard automatically generates relevant tests based on the vulnerabilities detected by the scan. You can easily customize the tests depending on your use case by defining domain-specific data slicers and transformers as fixtures of your test suites.
+## Building
 
-<p align="center">
-  <img src="readme/test_suite_example.png" alt="Scan Example" width="700px">
-</p>
+Arctic is built using Maven with Java 1.8 and Java 17(only for `trino` module).
 
-- **Leverage the Quality Assurance best practices of the open-source community**: The Giskard catalog enables you to easily contribute and load data slicing & transformation functions such as AI-based detectors (toxicity, hate, etc.), generators (typos, paraphraser, etc.), or evaluators. Inspired by the Hugging Face philosophy, the aim of Giskard is to become the open-source hub of ML Quality Assurance.
-
-<p align="center">
-  <img src="readme/catalog_example.png" alt="Scan Example" width="700px">
-</p>
-
-And of course, Giskard works with any model, any environment and integrates seamlessly with your favorite tools ⤵️ <br/>
-<p align="center">
-  <img width='600' src="readme/tools.png">
-</p>
-<br/>
-
-
-
-## Getting started
-
-### Installation
-```sh
-pip install "giskard[server]>=2.0.0b" -U
-
-giskard server start
+* To build Trino module need config `toolchains.xml` in `${user.home}/.m2/` dir, the content is
 ```
-
-That's it. Access at http://localhost:19000
-
-### Scan your model to detect vulnerabilities
-
-After having wrapped your [model](https://docs.giskard.ai/en/latest/guides/wrap_model/index.html) & [dataset](https://docs.giskard.ai/en/latest/guides/wrap_dataset/index.html), you can scan your model for vulnerabilities using:
-
-```python
-import giskard
-
-# Replace this with your own data & model creation.
-df = giskard.demo.titanic_df()
-data_preprocessor, clf = giskard.demo.titanic_pipeline()
-
-# Wrap your Pandas DataFrame with Giskard.Dataset (test set, a golden dataset, etc.). Check the dedicated doc page: https://docs.giskard.ai/en/latest/guides/wrap_dataset/index.html
-giskard_dataset = giskard.Dataset(
-    df=df,  # A pandas.DataFrame that contains the raw data (before all the pre-processing steps) and the actual ground truth variable (target).
-    target="Survived",  # Ground truth variable
-    name="Titanic dataset", # Optional
-    cat_columns=['Pclass', 'Sex', "SibSp", "Parch", "Embarked"]  # Optional, but is a MUST if available. Inferred automatically if not.
-)
-
-# Wrap your model with Giskard.Model. Check the dedicated doc page: https://docs.giskard.ai/en/latest/guides/wrap_model/index.html
-# you can use any tabular, text or LLM models (PyTorch, HuggingFace, LangChain, etc.),
-# for classification, regression & text generation.
-def prediction_function(df):
-    # The pre-processor can be a pipeline of one-hot encoding, imputer, scaler, etc.
-    preprocessed_df = data_preprocessor(df)
-    return clf.predict_proba(preprocessed_df)
-
-giskard_model = giskard.Model(
-    model=prediction_function,  # A prediction function that encapsulates all the data pre-processing steps and that could be executed with the dataset used by the scan.
-    model_type="classification",  # Either regression, classification or text_generation.
-    name="Titanic model",  # Optional
-    classification_labels=clf.classes_,  # Their order MUST be identical to the prediction_function's output order
-    feature_names=['PassengerId', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked'],  # Default: all columns of your dataset
-    # classification_threshold=0.5,  # Default: 0.5
-)
-
-# Then apply the scan
-results = giskard.scan(giskard_model, giskard_dataset)
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>sun</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>${YourJDK17Home}</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>
 ```
+* To invoke a build and run tests: `mvn package -P toolchain`
+* To skip tests: `mvn -DskipTests package -P toolchain`
+* To package without trino module and JAVA 17 dependency: `mvn clean package -DskipTests -pl '!trino'`
 
-Once the scan completes, you can display the results directly in your notebook:
+## Engines supported
 
-```python
-display(scan_results)  # in your notebook
-```
+Arctic support multiple processing engines as below:
 
-### Automatically generate a test suite based on the scan results
+| Processing Engine | Version                   |
+| ----------------- |---------------------------|
+| Flink             | 1.12.x, 1.14.x and 1.15.x |
+| Spark             | 3.1, 3.2, 3.3             |
+| Trino             | 406                       |
 
-If the scan found potential issues in your model, you can automatically generate a test suite.
+## Quickstart
 
-Generating a test suite from your scan results will enable you to:
-- Turn the issues you found into actionable tests that you can directly integrate in your CI/CD pipeline
-- Diagnose your vulnerabilities and debug the issues you found in the scan
+Visit [https://arctic.netease.com/ch/quickstart/setup/](https://arctic.netease.com/ch/quickstart/setup/) to quickly explore what arctic can do.
 
-```python
-test_suite = scan_results.generate_test_suite("My first test suite")
+## Join Community 
+If you are interested in Lakehouse, Data Lake Format, welcome to join our community, we welcome any organizations, teams and individuals to grow together, and sincerely hope to help users better use Data Lake Format through open source. 
 
-# You can run the test suite locally to verify that it reproduces the issues
-test_suite.run()
-```
-
-### Upload your test suite to the Giskard server
-
-You can then upload the test suite to the local Giskard server. This will enable you to:
-- Compare the quality of different models to decide which one to promote
-- Debug your tests to diagnose the identified issues
-- Create more domain-specific tests relevant to your use case
-- Share results, and collaborate with your team to integrate business feedback
-
-First, install the Giskard server by following [this documentation](https://docs.giskard.ai/en/latest/guides/installation_app/index.html)
-
-```python
-# Create a Giskard client after having installed the Giskard server (see documentation)
-token = "API_TOKEN"  # Find it in Settings in the Giskard server
-client = GiskardClient(
-    url="http://localhost:19000", token=token  # URL of your Giskard instance
-)
-
-my_project = client.create_project("my_project", "PROJECT_NAME", "DESCRIPTION")
-
-# Upload to the current project
-test_suite.upload(client, "my_project")
-
-```
-    
-For more information on uploading to your local Giskard server, go to the [Upload an object to the Giskard server](https://docs.giskard.ai/en/latest/guides/upload/index.html) page.
-
-## How to contribute
-We welcome contributions from the Machine Learning community!
-
-Read this [guide](CONTRIBUTING.md) to get started.
-
-<br />
-
-## Like what we're doing?
-
-🌟 [Leave us a star](https://github.com/Giskard-AI/giskard), it helps the project to get discovered by others and keeps us motivated to build awesome open-source tools! 🌟
-
-❤️ You can also [sponsor us](https://github.com/sponsors/Giskard-AI) on GitHub. With a monthly sponsor subscription, you can get a sponsor badge and get your bug reports prioritized. We also offer one-time sponsoring if you want us to get involved in a consulting project, run a workshop, or give a talk at your company.
+Join the Arctic WeChat Group: Add " `kllnn999` " as a friend on WeChat and specify "Arctic lover".

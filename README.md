@@ -1,151 +1,52 @@
-<img align="left" alt="jte" src="jte.svg" width="128">jte is a secure and lightweight template engine for Java and Kotlin. jte is designed to introduce as few new keywords as possible and builds upon existing Java features, so that it is very easy to reason about what a template does. The <a href="https://plugins.jetbrains.com/plugin/14521-jte">IntelliJ plugin</a> offers full completion and refactoring support for Java parts as well as for jte keywords. Supports Java 8 or higher.
-<br clear="left">
+# TiebaTS
 
-[![Build Status](https://github.com/casid/jte/workflows/Test%20all%20JDKs%20on%20all%20OSes/badge.svg)](https://github.com/casid/jte/actions)
-[![Coverage Status](https://codecov.io/gh/casid/jte/branch/main/graph/badge.svg)](https://codecov.io/gh/casid/jte)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/casid/jte/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/gg.jte/jte.svg)](http://mvnrepository.com/artifact/gg.jte/jte)
+提供修改百度贴吧底栏等个性化功能。An Xposed module for Baidu Tieba with personalized functions.
 
-## Features
-- Intuitive and easy syntax, you'll rarely need to check the [documentation](DOCUMENTATION.md)
-- Write plain Java or Kotlin for expressions
-- Context-sensitive [HTML escaping](https://github.com/casid/jte/blob/master/DOCUMENTATION.md#html-escaping) at compile time
-- <a href="https://plugins.jetbrains.com/plugin/14521-jte">IntelliJ plugin</a> with completion and refactoring support
-- Hot reloading of templates during development
-- Blazing fast execution ([see benchmarks](#performance))
+[![Android CI](https://github.com/GuhDoy/TiebaTS/workflows/Android%20CI/badge.svg)](https://github.com/GuhDoy/TiebaTS/actions)
+[![Chat](https://img.shields.io/badge/Telegram-Chat-blue.svg?logo=telegram)](https://t.me/TabSwitch)
+[![Stars](https://img.shields.io/github/stars/GuhDoy/TiebaTS?label=Stars)](https://github.com/GuhDoy/TiebaTS)
+[![Download](https://img.shields.io/github/v/release/GuhDoy/TiebaTS?label=Download)](https://github.com/GuhDoy/TiebaTS/releases/latest)
 
-## TLDR
+## 功能
 
-jte gives you the same productive, type safe experience you're used to from writing Java or Kotlin. This is IntelliJ with the <a href="https://plugins.jetbrains.com/plugin/14521-jte">jte plugin</a> installed:
+- 自定义主页导航栏
+- 禁用 Flutter
+- 净化进吧
+- 净化我的
+- 隐藏小红点
+- 过滤首页推荐
+- 过滤帖子回复
+- 过滤吧页面
+- 进吧增加收藏、历史
+- 我的收藏增加搜索、吧名
+- 浏览历史增加搜索
+- 搜索楼中楼增加查看主题贴
+- 楼层增加点按效果
+- 长按下载保存全部图片
+- 备注关注的人
+- 自动签到
+- 自动切换夜间模式
+- 吧页面起始页面改为最新
+- 自动查看原图
+- 使用媒体存储保存图片
+- 禁用帖子手势
+- 用赞踩差数代替赞数
+- 禁止监听内部图片内容变化
 
-<img alt="jte in IntelliJ" src="jte-intellij.gif" />
+## 项目地址
 
-## 5 minutes example
+[https://github.com/GuhDoy/TiebaTS](https://github.com/GuhDoy/TiebaTS)
 
-Here is a small jte template `example.jte`:
-```htm
-@import org.example.Page
+## 特别鸣谢
 
-@param Page page
+详见[LicenseActivity.java](https://github.com/GuhDoy/TiebaTS/blob/full/app/src/main/java/gm/tieba/tabswitch/ui/LicenseActivity.java)
 
-<head>
-    @if(page.getDescription() != null)
-        <meta name="description" content="${page.getDescription()}">
-    @endif
-    <title>${page.getTitle()}</title>
-</head>
-<body>
-    <h1>${page.getTitle()}</h1>
-    <p>Welcome to my example page!</p>
-</body>
-```
+## 下载
 
-So what is going on here?
-- `@import` directly translates to Java imports, in this case so that `org.example.Page` is known to the template.
-- `@param Page page` is the parameter that needs to be passed to this template.
-- `@if`/`@endif` is an if-block. The stuff inside the parentheses (`page.getDescription() != null`) is plain Java code.
-- `${}` writes to the underlying template output, as known from various other template engines.
+[Github Release](https://github.com/GuhDoy/TiebaTS/releases/latest)
 
-To render this template, an instance of `TemplateEngine` is required. Typically you create it once per application (it is safe to share the engine between threads):
-```java
-CodeResolver codeResolver = new DirectoryCodeResolver(Path.of("jte")); // This is the directory where your .jte files are located.
-TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html); // Two choices: Plain or Html
-```
+## 协议
 
-The content type passed to the engine determines how user output will be escaped. If you render HTML files, `Html` is highly recommended. This enables the engine to analyze HTML templates at compile time and perform context sensitive output escaping of user data, to prevent you from XSS attacks.
+复制或参考hook规则用于开发百度贴吧模块需遵守[GNU General Public Licence, version 3](https://choosealicense.com/licenses/gpl-3.0/)
 
-With the `TemplateEngine` ready, templates are rendered like this:
-```java
-TemplateOutput output = new StringOutput();
-templateEngine.render("example.jte", page, output);
-System.out.println(output);
-```
-
-> Besides `StringOutput`, there are several other `TemplateOutput` implementations you can use, or create your own if required.
-
-If you had more than one page like `example.jte`, you would have to duplicate a lot of shared template code. Let's extract the shared code into another template, so that it can be reused.
-
-Let's move stuff from our example page to `layout.jte`:
-
-```htm
-@import org.example.Page
-@import gg.jte.Content
-
-@param Page page
-@param Content content
-
-<head>
-    @if(page.getDescription() != null)
-        <meta name="description" content="${page.getDescription()}">
-    @endif
-    <title>${page.getTitle()}</title>
-</head>
-<body>
-    <h1>${page.getTitle()}</h1>
-    ${content}
-</body>
-```
-
-The `@param Content content` is a content block that can be provided by callers of the template. `${content}` renders this content block. Let's refactor `example.jte` to use the new template:
-
-```htm
-@import org.example.Page
-
-@param Page page
-
-@template.layout(page = page, content = @`
-    <p>Welcome to my example page!</p>
-`)
-```
-
-The shorthand to create content blocks within jte templates is an `@` followed by two backticks. For advanced stuff, you can even create Java methods that return custom `Content` implementation and call it from your template code!
-
-Check out the [syntax documentation](DOCUMENTATION.md), for a more comprehensive introduction.
-
-## Performance
-By design, jte provides very fast output. This is a <a href="https://github.com/casid/template-benchmark/">fork of mbosecke/template-benchmark</a> with jte included, running on AMD Ryzen 5950x (single thread):
-
-![alt Template Benchmark](https://raw.githubusercontent.com/casid/template-benchmark/master/results.png)
-
-### High concurrency
-This is the same benchmark as above, but the amount of threads was set to `@Threads(16)`, to fully utilize all cores. jte has pretty much zero serialization bottlenecks and runs  very concurrent on servers with a lot of CPU cores:
-![alt Template Benchmark](https://raw.githubusercontent.com/casid/template-benchmark/ryzen-5950x/results.png)
-
-## Getting started
-
-jte is available on <a href="http://mvnrepository.com/artifact/gg.jte/jte">Maven Central</a>:
-
-### Maven
-```xml
-<dependency>
-    <groupId>gg.jte</groupId>
-    <artifactId>jte</artifactId>
-    <version>2.3.2</version>
-</dependency>
-```
-
-### Gradle
-```groovy
-implementation group: 'gg.jte', name: 'jte', version: '2.3.2'
-```
-
-No further dependencies required! Check out the [syntax documentation](DOCUMENTATION.md) and have fun with jte.
-
-## Framework integration
-
-- [Javalin](https://javalin.io/tutorials/jte)
-- [Eclipse Vert.x](https://github.com/vert-x3/vertx-web/tree/master/vertx-template-engines/vertx-web-templ-jte)
-- [Spring Boot](https://github.com/casid/jte-spring-boot-demo)
-- [Spring Web MVC](https://github.com/izogfif/demo-spring-jte)
-- [Ktor](https://ktor.io/docs/jte.html)
-- [Micronaut](https://micronaut-projects.github.io/micronaut-views/latest/guide/#jte)
-- [Quarkus](https://github.com/renannprado/quarkus-jte-extension/)
-- [Severell](https://github.com/severell/severell-jte-plugin)
-
-## Websites rendered with jte
-
-- <a href="https://jte.gg">The jte website</a> (<a href="https://github.com/casid/jte-website">Source</a>)
-- <a href="https://mazebert.com">Mazebert TD (game website)</a>
-- <a href="https://github.com/casid/jte-javalin-tutorial">Javalin website example with login and multiple languages</a>
-- <a href="https://www.mitchdennett.com/">Mitch Dennett's Blog</a>
-- <a href="https://flowcrypt.com/docs/business/enterprise-admin-panel.html">FlowCrypt Admin Panel</a>
+复制或参考其它代码用于开发其它模块或软件需遵守[Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)

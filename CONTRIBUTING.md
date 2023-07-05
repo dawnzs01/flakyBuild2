@@ -1,41 +1,53 @@
-# Contributing to MicroStream
+# 👉 How to contribute to Giskard?
 
-We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
+Everyone is encouraged to contribute, and we appreciate each and every one of them. Helping the community is thus not limited to writing code. The community will greatly benefit from your efforts to provide clarification, assist others, and enhance the documentation. 📗
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
-- Becoming a maintainer
+Additionally, it is helpful if you help us spread the word by mentioning the library in blog articles about the amazing projects it enabled, tweeting about it on occasion, or just staring the repository! ⭐️
 
-## We Develop with Github
+If you choose to contribute, please be mindful to respect our [code of conduct](https://github.com/Giskard-AI/giskard/blob/main/CODE_OF_CONDUCT.md).
 
-We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
+## The different ways you can contribute to Giskard!
 
-## All Code Changes Happen Through Pull Requests
+There are 5 ways you can contribute to Giskard:
+* Submitting issues related to bugs or desired new features.
+* Contributing to the examples or to the documentation;
+* Fixing outstanding issues with the existing code;
+* Implementing new ML tests (performance tests, drifts, metamorphic, etc.);
+* Implementing new features to Giskard
 
-Pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
+### Did you find a bug? 
 
-1. Fork the repo and create your branch from `master`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. Ensure the test suite passes.
-5. Issue that pull request!
+First, we would really appreciate it if you could **make sure the bug was not
+already reported** (use the search bar on Github under Issues).
 
-All commits must be [signed](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits). 
+If you did not find it, please follow these steps to inform us:
 
-## Any contributions you make will be under the Eclipse Public License
+* Include your **OS type and version**, the versions of **Python**, and different Python libraries you used;
+* A short, self-contained, code snippet that allows us to reproduce the bug in less than 30s;
+* Provide the *full* stack trace if an exception is raised.
 
-In short, when you submit code changes, your submissions are understood to be under the same [EPL-2.0 License](https://github.com/microstream-one/microstream/blob/master/LICENSE) that covers the project. Feel free to contact the maintainers if that's a concern.
+To get the logs of a given container, you can run
 
-## Report bugs using Github's [issues](https://github.com/microstream-one/microstream/issues)
+```bash
+docker logs <NAME OF THE CONTAINER>
+```
 
-We use GitHub issues to track public bugs. Report a bug by opening a new issue, it's that easy!
+### Do you want to implement a new ML test?
 
-## License
+Custom and domain-based tests are welcome. If you have an idea, you can inform us by providing us a short description of the test and possibly a link to its documentation (paper, etc.).
 
-By contributing, you agree that your contributions will be licensed under its Eclipse Public License.
+If you are willing to contribute the model yourself, let us know so we can best guide you.
 
-## Code of Conduct
+### Do you want a new feature (that is not a test)?
 
-Please follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+An awesome feature request addresses the following points:
+
+1. Motivation first: Is it related to a problem/frustration with the library? Is it related to something you would need for a project? Is it something you worked on and think could benefit the community?
+2. Write a *full paragraph* describing the feature;
+3. Attach any additional information (drawings, screenshots, etc.) you think may help.
+
+## Style guide
+
+For documentation strings, Giskard follows the [google style](https://google.github.io/styleguide/pyguide.html).
+
+**This guide was heavily inspired by the awesome [HuggingFace guide to contributing](https://github.com/huggingface/transformers/blob/main/CONTRIBUTING.md).**

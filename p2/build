@@ -1,1 +1,0 @@
-mvn clean validate p2:site

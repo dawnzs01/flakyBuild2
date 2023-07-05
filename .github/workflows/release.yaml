@@ -1,0 +1,30 @@
+name: "Build and upload release"
+
+on:
+  push:
+    branches: [ utt ]
+
+
+
+
+jobs:
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v2
+      - name: "Install Java"
+        uses: "actions/setup-java@v1"
+        with:
+          java-version: "17"
+      - name: "Run build"
+        run: |
+          bash build.sh
+      - name: "Create release"
+        uses: "softprops/action-gh-release@v1"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            target/utt

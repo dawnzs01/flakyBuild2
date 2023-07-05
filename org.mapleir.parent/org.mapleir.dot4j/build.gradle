@@ -1,8 +1,0 @@
-plugins {
-    id 'java'
-}
-
-
-
-group = 'dev.skidfuscator.mapleir'
-description = 'MapleIR-dot4j'

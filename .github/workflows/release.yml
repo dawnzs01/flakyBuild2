@@ -1,40 +1,50 @@
 name: Release
+
+on:
   push:
-    branches: [ react-native-fbsdk-next ]
-on: workflow_dispatch
+    branches: [ amarok-hider ]
+
+
+
+
 jobs:
-  release:
-    name: Release
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v3
         with:
-          node-version: 16
-      - name: Install yarn
-        run: npm install -g yarn
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
+      - name: Inject signing key
+        run: |
+          echo 'RELEASE_STORE_PASSWORD=${{ secrets.RELEASE_STORE_PASSWORD }}' >> ~/.gradle/gradle.properties
+          echo 'RELEASE_KEY_ALIAS=${{ secrets.RELEASE_KEY_ALIAS }}' >> ~/.gradle/gradle.properties
+          echo 'RELEASE_KEY_PASSWORD=${{ secrets.RELEASE_KEY_PASSWORD }}' >> ~/.gradle/gradle.properties
+          echo 'RELEASE_STORE_FILE=${{ github.workspace }}/keystore.jks' >> ~/.gradle/gradle.properties
+          echo '${{ secrets.KEY_STORE }}' | base64 --decode > ${{ github.workspace }}/keystore.jks
+      - name: Build with Gradle
+        run: |
+          echo 'org.gradle.caching=true' >> gradle.properties
+          echo 'org.gradle.parallel=true' >> gradle.properties
+          echo 'org.gradle.vfs.watch=true' >> gradle.properties
+          echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
+          echo 'android.native.buildOutput=verbose' >> gradle.properties
+          ./gradlew assembleRelease
+      - name: Upload built apk
+        if: success()
+        uses: actions/upload-artifact@v3
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-v1-
-      - name: Install dependencies
-        uses: nick-invision/retry@v2
+          path: |
+              ${{ github.workspace }}/app/build/outputs/apk/**/*.apk
+      - name: Upload release asset
+        if: success()
+        uses: shogo82148/actions-upload-release-asset@v1
         with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          command: rm -rf node_modules && yarn install --frozen-lockfile
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn semantic-release
+         upload_url: ${{ github.event.release.upload_url }}
+         asset_path: ${{ github.workspace }}/app/build/outputs/apk/**/*.apk

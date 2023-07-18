@@ -1,92 +1,116 @@
-# CONTRIBUTING
+# Contributing to SlimeVR
 
-# Issues
+This document describes essential knowledge required to contribute to the SlimeVR Server.
 
-Issues are used for tracking new features, bugs or other tasks. If you have a question don't hesitate and open a [new discussion][new-discussion]!
-Please make sure that your issue contains all nesessary information to avoid waiting times. All communication, including issues, should be written in understandable english.
+### Prerequisites
 
-## Scope of the Project
+- [Git](https://git-scm.com/downloads)
+- [Java v17+](https://adoptium.net/temurin/releases/)
+- [Node.js v16+](https://nodejs.org) (We recommend the use of `nvm` instead of installing Node.js directly)
+- [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/#download-section) or `webkit2gtk` for Linux
+- [Rust](https://rustup.rs)
 
-Before you submit a new issue please make sure it is in scope of this project:
-- bugs in bttv-android
-- features that exist in BTTV
-- features that enhance quality of life (e.g. improving integration with existing Twitch behavior)
+## Cloning the code
+First, clone the codebase using git in a terminal in the folder you want.
 
-### Not in scope:
-- bugs not caused by the mod
-- features that are unrelated to BTTV (e.g. a new theme)
-
-This way the mod does not become bloated and is thus more stable and maintainable.
-
-
-# PRs
-
-Most PRs have an associated issue, if you PR is one of those make sure to reference the issue. Your PR will be reviewed and commented please prepare yourself for that, we do not want to end up in stale PRs. It's ok (and encouraged) to open an PR even when you are not finished. Please mark those PRs as drafts. If you have any questions feel free to tag @bttv-android/developers and somebody will help you out :)
-
-Before you undraft a PR follow the checklist in the PR template!
-
-
-# Setup
-
-> Read the build it yourself part (the hard way) in the README aswell!
-
-Do the following once:
-
-1. Initialize the workspace as described in the README
-2. Now you can build the java source code in (`mod`) using `./buildsource disass`.
-   It will automaticly dex the class files and baksmali them.
-   It is recommended to scim through the script so you can set your environment variables.
-4. Build your new changes using the `./build disass` script.
-5. Open an emulator and run `./install`
-
-> Please only modify or add java files in the bttv package! Others won't be compiled anyway.
-> In case you need to apply a monkey-patch (i.e. edit smali files (not in the bttv package) in `extracted` directly) read the [instructions below](#genmonke).
-> **Never check in the `disass` directories for legal reasons**
-
-## Overview
-
-```
-bttv/
-├─ initworkspace - used to set up everything
-├─ buildsource - used to build the java sources
-├─ build - re-assembles the 'disass' dir
-├─ decompile - you need JADX to use this
-├─ install - install the result of build on a device (using adb)
-├─ patches - contains monkey patches
-├─ genmonke - script that generates the patches based on disass (more below)
-├─ disass/ - renamed from disass
-│  ├─ AndroidManifest.xml
-│  ├─ res/
-│  ├─ smali_classes0-10/ - contains disassembled app + bttv code
-│  ├─ dist/
-│  │  ├─ twitch.apk - the final app
-├─ mod/        - java sources for patches
-│  ├─ app/     - sources for the mod
-|  ├─ twitch/  - stubs so we can call twitch's classes
-
+```bash
+git clone --recursive https://github.com/SlimeVR/SlimeVR-Server.git
 ```
 
-### genmonke
-
-During initialization the disass dir is initialized with an empty git repo.
-Right after the disassemblement the first commit is made and tagged "base".
-This is used to generate the patch file.
-`patches` is thus the result of a diff between master and base.
-
-#### Only source changes
-
-You need to nothing else, you can commit your code and start a pull request!
-
-#### Monkey patch changes
-
-Run `./genmonke disass` before you make a commit.
-
-## Best practices for contributers
-
-> Please also read the [architecture.md](./architecture.md) file!
-
-Everytime you get a new version of the code (e.g. using git pull or git checkout) remove `extraced` and run `./initworkspace` again.
+Now you can open the codebase in [IDEA](https://www.jetbrains.com/idea/download/) (Recommended; VSCode and Eclipse also work but have limited Kotlin support).
 
 
+## Building the code
 
-[new-discussion]: https://github.com/bttv-android/bttv/discussions/new
+### Java (server)
+
+The Java code is built with `gradle`, a CLI tool that manages java projects and their
+dependencies.
+- You can run the server by running `./gradlew run` in your IDE's terminal.
+- To compile the code, run `./gradlew shadowJar`. The result will
+be at `server/build/libs/slimevr.jar` (you can ignore `server.jar`).
+
+(Note: Your IDE may be able to do all of the above for you.)
+
+### Tauri (gui)
+
+- Run `npm install` in your IDE's terminal to download and install dependencies.
+- To launch the GUI in dev mode, run `npm run gui`.
+- Finally, to compile for production, run `npm run tauri build`. The result
+will be at `target/release/slimevr.exe`.
+
+## Code style
+
+### Java (server)
+
+The Java code is auto-formatted with [spotless](https://github.com/diffplug/spotless/tree/main/plugin-gradle).
+Code is checked for autoformatting whenever you build, but you can also run
+`./gradlew spotlessCheck` if you prefer.
+
+To auto-format your Java and Kotlin code from the command line, you can run `./gradlew spotlessApply`.
+We recommend installing support for spotless in your IDE, and formatting
+whenever you save a file to make things easy.
+
+If you need to prevent autoformatting for a select region of code, use
+`// @formatter:off` and `// @formatter:on`
+
+#### Setting up spotless for IntelliJ IDEA
+* Install https://plugins.jetbrains.com/plugin/18321-spotless-gradle
+* Add a keyboard shortcut for `Code` > `Reformat Code with Spotless`
+* They are working on support to do this on save without a keybind
+  [here](https://github.com/ragurney/spotless-intellij-gradle/issues/8)
+
+#### Setting up spotless for VSCode
+* Install the `richardwillis.vscode-spotless-gradle` extension
+* Add the following to your workspace settings, at `.vscode/settings.json`:
+```json
+"spotlessGradle.format.enable": true,
+"editor.formatOnSave": true,
+"[java]": {
+	"editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
+}
+```
+
+#### Setting up Eclipse autoformatting
+Import the formatting settings defined in `spotless.xml`, like this:
+* Go to `File > Properties`, then `Java Code Style > Formatter`
+* Check `Enable project specific settings`
+* Click `Import`, then open `spotless.xml`, then `Apply`
+* Go to `Java Editor > Save Actions`
+* Select `Enable project specific settings`, `Perform the selected actions on save`,
+`Format source code`, `Format all lines`
+
+Eclipse will only do a subset of the checks in `spotless`, so you may still want to do
+`./gradlew spotlessApply` if you ever see an error from spotless.
+
+### Tauri (gui)
+
+We use ESLint and Prettier to format GUI code.
+- First, go into the GUI's directory with your terminal by running `cd gui`.
+- To check code formatting, run `npm run lint`.
+- To fix code formatting, run `npm run lint:fix` and `npm run format`
+
+Don't forget to run `cd ..` to return to the root directory.
+
+## SolarXR Protocol
+
+SolarXR is used to communicate between the server (backend) and GUI (frontend).
+It can also be used to communicate to third party applications.
+
+When touching SolarXR:
+- You will need `flatc`. To know which version to get, refer to
+[SolarXR's README](https://github.com/SlimeVR/SolarXR-Protocol/blob/main/README.md#flatc)
+- The only files you should edit are in the `schema` directory.
+- After editing files, you should run `cd solarxr-protocol`, then either run
+`./generate-flatbuffer.ps1` (Windows) or `./generate-flatbuffer.sh` (Linux/OSX)
+- Make sure to commit your changes inside the submodule.
+
+## Code Licensing
+SlimeVR uses dual MIT and Apache-2.0 license. Be sure that any code that you reference,
+or dependencies you add, are compatible with these licenses. For example, `GPL-v3` is
+not compatible because it requires any and all code that depends on it to *also* be
+licensed under `GPL-v3`.
+
+## Discord
+We use discord *a lot* to coordinate and discuss development. Come join us at
+https://discord.gg/SlimeVR!

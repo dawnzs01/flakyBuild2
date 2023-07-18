@@ -1,38 +1,12 @@
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Syncthing ignore file
-.stignore
-
-# Ignore .idea
-.idea
-
-# Ignore .fleet
-.fleet
-
-# Ignore eclipse stuff
-.project
-.classpath
-.settings
-
-# VSCode stuff
-/.vscode/settings.json
-
-# Ignore eclipse stuff
-.project
-.classpath
-.settings
-
-# Node Stuff
-/node_modules
-.husky
-
-
-# ignore gradle build folder
+*.aar
+*.iml
+*.so
+.cxx
+.externalNativeBuild
+.gradle/
+.idea/
+.vscode/
 build/
-
-# Rust build artifacts
-/target
-
-# direnv has been claimed for Nix usage
-.direnv/
+local.properties
+obj/
+service_account_credentials.json

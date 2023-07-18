@@ -1,0 +1,54 @@
+name: C2ME Build Script
+
+on:
+  push:
+    branches: [ c2me-fabric ]
+
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: 17
+        java-package: jdk
+        
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+          ./.gradle/loom-cache
+        key: ${{ runner.os }}-gradle4-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle4-
+        
+    - name: Build C2ME
+      run: |
+        ./gradlew clean build --stacktrace
+
+    - name: upload to modrinth and curseforge
+      run: ./gradlew modrinth curseforge
+      if: github.ref == 'refs/heads/ver/1.20.1'
+      env:
+        MODRINTH_TOKEN: ${{ secrets.MODRINTH_UPLOAD_TOKEN }}
+        CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_API_TOKEN }}
+        GITHUB_EVENT_RAW_PATH: ${{ github.event_path }}
+      continue-on-error: true
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: c2me-artifact
+        path: 'build/libs/*.jar'
+      

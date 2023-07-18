@@ -1,3 +1,0 @@
-com.tencent.tsf.femas.governance.metrics.micrometer.registry.GovernanceMeterRegistry
-com.tencent.tsf.femas.governance.metrics.micrometer.registry.JmxMeterRegistry
-com.tencent.tsf.femas.governance.metrics.micrometer.registry.RpcMeterRegistry

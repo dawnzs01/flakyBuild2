@@ -1,2 +1,0 @@
-com.tencent.tsf.femas.governance.metrics.micrometer.exporter.logger.LoggerMeterExporter
-com.tencent.tsf.femas.governance.metrics.micrometer.exporter.PrometheusMeterExporter

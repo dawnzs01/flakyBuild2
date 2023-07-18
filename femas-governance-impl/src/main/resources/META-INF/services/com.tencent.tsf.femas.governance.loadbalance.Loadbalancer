@@ -1,3 +1,0 @@
-com.tencent.tsf.femas.governance.loadbalance.impl.RandomLoadbalancer
-com.tencent.tsf.femas.governance.loadbalance.impl.RoundRobinLoadbalancer
-com.tencent.tsf.femas.governance.loadbalance.impl.TagBasedLoadbalancer

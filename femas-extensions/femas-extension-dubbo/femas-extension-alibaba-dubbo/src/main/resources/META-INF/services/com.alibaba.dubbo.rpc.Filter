@@ -1,2 +1,0 @@
-femasConsumerFilter=com.tencent.tsf.femas.extensions.dubbo.filter.FemasConsumerFilter
-femasProviderFilter=com.tencent.tsf.femas.extensions.dubbo.filter.FemasProviderFilter

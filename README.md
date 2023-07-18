@@ -1,111 +1,46 @@
-<!--
-    Copyright (c) 2020 Contributors to the Eclipse Foundation
+## Partisan-Telegram messenger for Android
 
-    See the NOTICE file(s) distributed with this work for additional
-    information regarding copyright ownership.
+[![Crowdin](https://badges.crowdin.net/p-telegram-android/localized.svg)](https://crowdin.com/project/p-telegram-android)
+[![Bitcoin donation](https://img.shields.io/badge/donate-bitcoin-fe9515.svg)](https://telegra.ph/Partisan-Telegram--P-SMS-support-01-02-2)
+[![Ethereum donation](https://img.shields.io/badge/donate-ethereum-536bc3.svg)](https://telegra.ph/Partisan-Telegram--P-SMS-support-01-02-2)
+[![USDT donation](https://img.shields.io/badge/donate-USDT-26A17B.svg)](https://telegra.ph/Partisan-Telegram--P-SMS-support-01-02-2)
+[![Monero donation](https://img.shields.io/badge/donate-monero-f26822.svg)](https://telegra.ph/Partisan-Telegram--P-SMS-support-01-02-2)
+[![Litecoin donation](https://img.shields.io/badge/donate-Litecoin-345d9d.svg)](https://telegra.ph/Partisan-Telegram--P-SMS-support-01-02-2)
 
-    This program and the accompanying materials are made available under the
-    terms of the Eclipse Public License 2.0 which is available at
-    http://www.eclipse.org/legal/epl-2.0
+![](https://github.com/wrwrabbit/Partisan-Telegram-Android/blob/wiki_images/wiki_images/Readme.jpg)
 
-    SPDX-License-Identifier: EPL-2.0
- -->
+A special version of Telegram that protects peaceful protesters in Belarus (can be used in other countries with authoritarian regimes as well). 
+P-Telegram has two passcodes instead of one - the real passcode and a false passcode.
+If a user enters the false passcode a series of pre-defined actions is performed such as:
+- Sending a custom SOS message to family and a trusted contact using Telegram
+- Delete chats and channels that can be used against the user
+- Log-out of the account on this device
+- Delete all other sessions besides the current one
+- And others
 
-# Eclipse Jifa
+Usage of P-Telegram can be used against the user in Belarus to justify torture and jail, therefore P-Telegram looks and feels like the original Telegram as much as possible.
 
-[![License](https://img.shields.io/badge/License-EPL%202.0-green.svg)](https://opensource.org/licenses/EPL-2.0)
+Stay safe.
 
-[Eclipse Jifa](https://eclipse.org/jifa) is open-source software for better troubleshooting common problems that occurred in Java applications.
+## Translations
 
-Many of the useful tools are client-based. When faced with problems in the production environment or the cloud environment, such tools cannot be used directly due to network or resource problems. Jifa provides a web solution, allowing developers to use the browser to troubleshoot.
+If you'd like to add translations to Partisan Telegram, please join the project on [Crowdin](https://crowdin.com/project/p-telegram-android).
 
-The following features are supported:
+## Contact
 
-- [Heap Dump Analysis](backend/heap-dump-analyzer/README.md)
+Partisan Telegram is developed and maintained by [Cyber Partisans](https://t.me/cpartisans_security). If you have questions about the application, you can ask them in our [bot](https://t.me/partisan_telegram_bot).
 
-- [GC Log Analysis](backend/gc-log-analyzer/README.md)
+## Compilation Guide
 
-- [Thread Dump Analysis](backend/thread-dump-analyzer/README.md)
+**Note**: In order to support [reproducible builds](https://core.telegram.org/reproducible-builds), this repo contains dummy release.keystore,  google-services.json and filled variables inside BuildVars.java. Before publishing your own APKs please make sure to replace all these files with your own.
 
-The backend of Jifa uses Vert.x as the main framework and consists of two modules:
+You will require Android Studio 3.4, Android NDK rev. 20 and Android SDK 8.1
 
-- Master
-    - manage workers and route the requests from browser to the workers
-- Worker
-    - do the real analysis work
-  
-The frontend of Jifa uses Vue as the main framework.
+1. Download the Telegram source code from https://github.com/wrwrabbit/Partisan-Telegram-Android ( git clone https://github.com/wrwrabbit/Partisan-Telegram-Android.git )
+2. Copy your release.keystore into TMessagesProj/config
+3. Fill out RELEASE_KEY_PASSWORD, RELEASE_KEY_ALIAS, RELEASE_STORE_PASSWORD in gradle.properties to access your release.keystore
+4.  Go to https://console.firebase.google.com/, create two android apps with application IDs org.telegram.messenger and org.telegram.messenger.beta, turn on firebase messaging and download google-services.json, which should be copied to the same folder as TMessagesProj.
+5. Open the project in the Studio (note that it should be opened, NOT imported).
+6. Fill out values in TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java – there’s a link for each of the variables showing where and which data to obtain.
+7. You are ready to compile Telegram.
 
-## Getting Started
-
-### Build
-
-- Prerequisites
-  - JDK 11+, and make sure $JAVA_HOME is set properly
-
-  - npm
-
-- Build All
-  
-  ```bash
-  $ ./gradlew buildJifa
-  ```
-
-- Build Worker Only
-
-  ```bash
-  $ ./gradlew buildWorker
-  ```
-
-### Run & Deploy
-
-- Master & Worker
-
-  - Default pattern
-    ```bash
-    $ cd deploy/default_pattern
-    $ ./deploy_jifa.sh
-    ```
-
-  - K8S pattern, workers are scheduled by K8S
-    ```bash
-    $ cd deploy/k8s_pattern
-    $ ./deploy.sh
-    ```
-    
-- Worker Only
-  ```bash
-  $ cd deploy
-  $ ./depoy_worker.sh
-  ```
-
-See [deployment document](deploy/README.md) for more details.
-
-## Quick Demo
-
-```bash
-$ docker pull jifadocker/jifa-worker:demo
-$ docker run -p 8102:8102 jifadocker/jifa-worker:demo
-```
-
-**Note:**  if running Apple's M1 Max chip, include the `--platform linux/amd64` switch after the `run` command.
-
-Then, you can visit Jifa at `http://localhost:8102`
-
-## Documents
-
-- [Jifa Customization](CUSTOMIZATION.md)
-- [Contribution Guide](CONTRIBUTING.md)
-    
-## Links
-
-- Join the Eclipse Jifa developer community [mailing list](https://accounts.eclipse.org/mailing-list/jifa-dev).
-  The community primarily uses this list for project announcements and administrative discussions amongst committers.
-  Questions are welcome here as well.
-- **Ask a question or start a discussion via the [GitHub issue](https://github.com/eclipse/jifa/issues).(Recommend)**
-- Slack channel: [Eclipse Jifa](https://eclipsejifa.slack.com)
-- 钉钉中文交流群
-
-  <div>
-    <img src=https://user-images.githubusercontent.com/33491035/226314386-e1cf71d4-8429-4e4c-bdc0-c511a9009ee1.JPG width=25%/>
-  </div>

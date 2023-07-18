@@ -1,112 +1,198 @@
-![logo](/docs/.vuepress/public/logo.svg)
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-[![Maven Central](https://img.shields.io/maven-central/v/us.abstracta.jmeter/jmeter-java-dsl.svg?label=Maven%20Central)](https://search.maven.org/artifact/us.abstracta.jmeter/jmeter-java-dsl)
-[![Reproducible Builds](https://img.shields.io/badge/Reproducible_Builds-ok-green?labelColor=1e5b96)](https://github.com/jvm-repo-rebuild/reproducible-central/blob/master/content/us/abstracta/jmeter/jmeter-java-dsl/README.md)
 
-Simple Java API to run performance tests, using [JMeter] as engine, in a Git and programmers friendly way.
 
-If you like this project, **please give it a star :star:!** This helps the project be more visible, gain relevance, and encourage us to invest more effort in new features.
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+<!--[![LinkedIn][linkedin-shield]][linkedin-url]-->
 
-Please join [discord server](https://discord.gg/WNSn5hqmSd) or create GitHub [issues](https://github.com/abstracta/jmeter-java-dsl/issues) and [discussions](https://github.com/abstracta/jmeter-java-dsl/discussions) to be part of the community and clear out doubts, get the latest news, propose ideas, report issues, etc.
+- [English version Readme_en.md](https://github.com/Jarrettluo/document-sharing-site/blob/main/README.md)
+- [中文版 Readme.md](https://github.com/Jarrettluo/document-sharing-site/blob/main/README_CH.md)
 
-## Usage
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/Jarrettluo/document-sharing-site">
+    <img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/banner.png" alt="Logo" width="300" height="300">
+  </a>
 
-If you use [maven](https://maven.apache.org/what-is-maven.html), just include the following dependency:
+<h3 align="center">All Docs</h3>
 
-```xml
-<dependency>
-  <groupId>us.abstracta.jmeter</groupId>
-  <artifactId>jmeter-java-dsl</artifactId>
-  <version>1.12</version>
-  <scope>test</scope>
-</dependency>
-``` 
+  <p align="center">
+    Document sharing and storage system with full-text search support.
+    <br />
+  </p>
+</p>
 
-Here is a simple example test in [JUnit 5](https://junit.org/junit5/)+ with 2 threads/users iterating 10 times each to send HTTP POST requests with a JSON body to `http://my.service`:
 
-```java
-import static org.assertj.core.api.Assertions.assertThat;
-import static us.abstracta.jmeter.javadsl.JmeterDsl.*;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-import org.apache.http.entity.ContentType;
-import org.junit.jupiter.api.Test;
-import us.abstracta.jmeter.javadsl.core.TestPlanStats;
 
-public class PerformanceTest {
 
-  @Test
-  public void testPerformance() throws IOException {
-    TestPlanStats stats = testPlan(
-      threadGroup(2, 10,
-        httpSampler("http://my.service")
-          .post("{\"name\": \"test\"}", ContentType.APPLICATION_JSON)
-      ),
-      //this is just to log details of each request stats
-      jtlWriter("target/jtls")
-    ).run();
-    assertThat(stats.overall().sampleTimePercentile99()).isLessThan(Duration.ofSeconds(5));
-  }
-  
-}
-```
+<!-- ABOUT THE PROJECT -->
+## ABOUT THE PROJECT
 
-> This example also uses [AssertJ](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html) for assertions, but you can use whatever assertion library you choose.
+In small teams, there is often a large number of collaborative documents. For example, we place various types of documents in cloud storage, SVN, and other software, but there is a problem with the inability to quickly search for content within the documents. Therefore, we have developed a dedicated knowledge base for storing documents such as PPT, Word, PNG, etc., which supports private deployment and retrieval.
 
-More examples can be found in [tests](jmeter-java-dsl/src/test/java/us/abstracta/jmeter/javadsl)
+<p>Experience URL：<a href="http://81.69.247.172/#/">http://81.69.247.172/#/</a></p>
 
-[Here](https://github.com/abstracta/jmeter-java-dsl-sample) is a sample project for reference or for starting new projects from scratch.
+> administrator account：admin123, administrator password： admin123
 
-> **Tip 1:** Check [the DSL recorder](https://abstracta.github.io/jmeter-java-dsl/guide/#dsl-recorder) and [jmx2dsl](https://abstracta.github.io/jmeter-java-dsl/guide/#dsl-code-generation-from-jmx-file) to ease test plan creation or migration from existing JMX files.
->
-> **Tip 2:** Since JMeter uses [log4j2](https://logging.apache.org/log4j/2.x/), if you want to control the logging level or output, you can use something similar to the tests included [log4j2.xml](jmeter-java-dsl/src/test/resources/log4j2.xml).
->
-> **Tip 3:** When working with multiple samplers in a test plan, specify their names to easily check their respective statistics.
+## PREVIEW
 
-**Check [here](https://abstracta.github.io/jmeter-java-dsl/) for details on some interesting use cases**, like running tests at scale in [BlazeMeter](https://www.blazemeter.com/) or [OctoPerf](https://octoperf.com/), saving and loading test plans from JMX, publishing test metrics to [InfluxDB](https://www.influxdata.com/products/influxdb-overview/) (and visualizing them from [Grafana](https://grafana.com/)), and general usage guides.
+<p align="center">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/homepage.png" alt="homepage" height="400">
+<p align="center">
+homepage
+</p>
+</p>
 
-## Why?
+<p align="center">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/docList.png" alt="docList" height="400">
+<p align="center">
+list of documents
+</p>
+</p>
 
-Check more about the motivation and analysis of alternatives [here](https://abstracta.github.io/jmeter-java-dsl/motivation/)
+<p align="center">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/searchPage.png" alt="searchPage" height="400">
+<p align="center">
+page of search 
+</p>
+</p>
 
-## Support
+<p align="center">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/fileUpload.png" alt="fileUpload" height="400">
+<p align="center">
+upload page
+</p>
+</p>
 
-Join our [Discord server](https://discord.gg/WNSn5hqmSd) to engage with fellow JMeter DSL enthusiasts, ask questions, and share experiences. Visit [GitHub Issues](https://github.com/abstracta/jmeter-java-dsl/issues) or [GitHub Discussions](https://github.com/abstracta/jmeter-java-dsl/discussions) for bug reports, feature requests and share ideas.
+<p align="center">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/userPage.png" alt="userPage" height="400">
+<p align="center">
+user's info page
+</p>
+</p>
 
-[Abstracta](https://abstracta.us), the main supporter for JMeter DSL development, offers enterprise-level support. Get faster response times, personalized customizations and consulting.
+### Repository URL
 
-For detailed support information, visit our [Support](https://abstracta.github.io/jmeter-java-dsl/support) page.
+frontend project:
+<a href="https://github.com/Jarrettluo/all-documents-vue.git">
+https://github.com/Jarrettluo/all-documents-vue.git
+</a>
 
-## Articles & Talks
 
-* [Developer’s friendly tools for continuous performance testing](https://abstracta.us/blog/performance-testing/developers-friendly-tools-for-continuous-performance-testing/): Walk-through from Fiddler recording to JMeter DSL test plan by Belen Vignolo @ Abstracta. [Russian translation by Ksenia Moseenkova](https://habr.com/ru/company/otus/blog/653823/).
-* [JMeterDSL: Bringing Performance Testing Closer to Developers](https://www.blazemeter.com/blog/jmeterdsl-performance-testing-developers): Intro to JMeter DSL and scaling execution in BlazeMeter by Yaina Machado.
-* [Performance testing tools trend](https://www.linkedin.com/pulse/performance-testing-tools-trend-roger-abelenda/): A quick review of different alternatives for performance testing in Java and associated trend by Roger Abelenda @ Abstracta.
-* [JMeter scripting: la pieza faltante](https://www.youtube.com/watch?v=n-U6YPXAGX0): Spanish demo by Roger Abelenda and hosted by Blanca Moreno @ QA Minds.
-* [Getting Started with JMeter DSL](https://qainsights.com/getting-started-with-jmeter-dsl): Intro to JMeter DSL and general thoughts by Roger Abelenda and hosted by NaveenKumar Namachivayam @ QA Insights. [Here is the video version](https://www.youtube.com/watch?v=JnnmSSYE2ok).
-* [Virtual Threads: JMeter meets Project Loom](https://abstracta.us/blog/performance-testing/virtual-threads-jmeter-meets-project-loom/): Experimenting with Virtual Threads in JMeter using JMeter DSL as a prototyping tool by Roger Abelenda @ Abstracta. [Here is the Spanish version](https://medium.com/@abstracta/threads-virtuales-jmeter-y-project-loom-ad2a849af53f)
-* [JMeter Scripts Written in Java??](https://www.youtube.com/watch?v=_drADTk82kg): JMeter DSL demo and discussion at PerfBytes session by Roger Abelenda and hosted by Mark Tomlinson.
-* [JMeter: test as code solutions](https://octoperf.com/blog/2022/06/13/jmeter-test-as-code/): JMeter DSL & Taurus review by Gérald Pereira @ OctoPerf.
-* [JMeter DSL, an Innovative Tool for Performance Testing](https://abstracta.us/blog/tools/jmeter-dsl-an-innovative-tool-for-performance-testing/): Short article on JMeter DSL motivation by Roger Abelenda @ Abstracta. [Spanish version](https://medium.com/@abstracta/jmeter-dsl-una-innovadora-herramienta-para-testing-de-performance-e808e3e82c3b).
-* [JMeter DSL, the Story of Abstracta’s Latest Innovation in Software Testing](https://abstracta.us/blog/performance-testing/jmeter-dsl-abstractas-latest-innovation-in-software-testing/): Post about JMeter DSL inception story by Natalie Rodgers & Roger Abelenda @ Abstracta. [Spanish Version](https://medium.com/@abstracta/jmeter-dsl-la-historia-de-la-m%C3%A1s-reciente-innovaci%C3%B3n-en-testing-de-software-de-abstracta-743b02e287e2).
-* [Develop JMeter Scripts Using Java with Roger Abelenda](https://testguild.com/podcast/performance/p93-roger/): Short interview by Joe Colantonio from TestGuild to Roger Abelenda about JMeter DSL basics.
-* [PerfOps - faster and cheaper through a service approach](https://habr.com/ru/company/oleg-bunin/blog/682746/): A nice analysis on implementing a performance experts service while using JMeter DSL as basics for creating a framework on top of it by Kirill Yurkov. (In Russian, but you can use Chrome Translation ;))
-* [pymeter announcement](https://www.linkedin.com/feed/update/urn:li:activity:6987704015933304832/): Announcement of a python API, built on top JMeter DSL, which eases JMeter test plan creation and execution for python devs by Eldad Uzman. 
+backend project:
+<a href="https://github.com/Jarrettluo/document-sharing-site.git">
+https://github.com/Jarrettluo/document-sharing-site.git
+</a>
 
-## Ecosystem
+We choose MongoDB as the primary database to store documents and files.
 
-* [pymeter](https://github.com/eldaduzman/pymeter): python API based on JMeter DSL that allows python devs to create and run JMeter test plans.
+Backend：SpringBoot + MongoDB + ES
 
-## Contributing & Requesting features
+Frontend：Vue + axios
 
-Currently, the project covers the most used features required when implementing JMeter performance tests, but not everything the JMeter supports/provides.
+### PROJECT DEPLOYMENT
 
-We invest in the development of DSL according to the community's (your) interest, which we evaluate by reviewing GitHub stars' evolution, feature requests, and contributions.
+- [Deploy on Windows](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/depoly_win_zh.md)
+- [Deploy on Linux](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_linux_zh.md)
+- [Deploy by Docker](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_docker_zh.md)
+- [Deploy by Docker Compose](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_docker_compose_zh.md)
 
-To keep improving the DSL we need you to **please create an issue for any particular feature or need that you have**.
+<!-- ROADMAP -->
+## ROADMAP
 
-We also really appreciate pull requests. Check the [CONTRIBUTING](CONTRIBUTING.md) guide for an explanation of the main library components and how you can extend the library.
+- Record the last page number read by the user 🌟
+- Revamp the search page style 🌟🌟
+- Allow users to bookmark documents 🌟
+- Support video files 🌟
+- Support permission management 🌟
+- Support file tree 🌟
+- Support Mobi files 🌟
 
-[JMeter]: http://jmeter.apache.org/
+read [open issues](https://github.com/othneildrew/Best-README-Template/issues) 。
+
+
+
+<!-- CONTRIBUTING -->
+## CONTRIBUTING
+
+You can join our Wechat group if you are interested.
+
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/WechatIMG112.jpeg" alt="imGroup" width="200">
+
+> If you have any requirements for customization or private deployment, please feel free to contact me.
+
+(Please add me on WeChat and kindly mention 'All Docs' in the request.)
+
+
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/Wechat.jpeg" alt="imGroup" width="200">
+
+
+1. `Fork` This project
+2. create a branch  (`git checkout -b feature/AmazingFeature`)
+3. commit you feature (`git commit -m 'Add some AmazingFeature'`)
+4. push the commit (`git push origin feature/AmazingFeature`)
+5. open a pull request
+
+
+
+<!-- CONTACT -->
+## CONTACT
+
+Read `LICENSE` file。
+
+
+
+<!-- CONTACT -->
+## CONTACT
+
+Jarrett Luo - luojiarui2@163.com
+
+If you find the project valuable, your support and appreciation are welcome!
+
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/wechat.jpg" alt="wechat" width="200">
+<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/wechat.jpg" alt="wechat" width="200">
+
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## ACKNOWLEDGEMENTS
+- YOU
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Jarrettluo/document-sharing-site.svg?style=for-the-badge
+[contributors-url]: https://github.com/Jarrettluo/document-sharing-site/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Jarrettluo/document-sharing-site.svg?style=for-the-badge
+[forks-url]: https://github.com/Jarrettluo/document-sharing-site/network/members
+[stars-shield]: https://img.shields.io/github/stars/Jarrettluo/document-sharing-site.svg?style=for-the-badge
+[stars-url]: https://github.com/Jarrettluo/document-sharing-site/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Jarrettluo/document-sharing-site.svg?style=for-the-badge
+[issues-url]: https://github.com/Jarrettluo/document-sharing-site/issues
+[license-shield]: https://img.shields.io/github/license/Jarrettluo/document-sharing-site.svg?style=for-the-badge
+[license-url]: https://github.com/Jarrettluo/document-sharing-site/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png

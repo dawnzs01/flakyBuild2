@@ -1,58 +1,24 @@
-<img width="200" src="https://github.com/RelativityMC/C2ME-fabric/raw/ver/1.17/src/main/resources/assets/c2me/icon.png" alt="C2ME icon" align="right">
-<div align="left">
-<h1>C^2M-Engine</h1>
+# PolyMc
+What if you could put mods on a server, without needing it on the client?  
+Well, that's impossible. But we can try! *Nothing is impossible!*
 
-[![Github-CI](https://github.com/RelativityMC/C2ME-fabric/workflows/C2ME%20Build%20Script/badge.svg)](https://github.com/RelativityMC/C2ME-fabric/actions?query=workflow%3ACI)
-[![Build Status](https://ci.codemc.io/job/RelativityMC/job/C2ME-fabric/job/ver%252F1.18/badge/icon)](https://ci.codemc.io/job/RelativityMC/job/C2ME-fabric/job/ver%252F1.18/)
-[![Discord](https://img.shields.io/discord/756715786747248641?logo=discord&logoColor=white)](https://discord.io/ishlandbukkit)
-<h3>A Fabric mod designed to improve the chunk performance of Minecraft.</h3>
-</div>
+**Note:** if you're a mod developer looking to make a mod that'll be solely used serverside, you might want to consider [Polymer](https://github.com/Patbox/polymer). It has some advantages and disadvantages over PolyMc.
 
-## So what is C2ME?
-C^2M-Engine, or C2ME for short, is a Fabric mod designed to improve the performance of chunk generation, I/O, and loading. This is done by taking advantage of multiple CPU cores in parallel. For the best performance it is recommended to use C2ME with [Lithium](https://github.com/CaffeineMC/lithium-fabric) and [Starlight](https://github.com/Spottedleaf/Starlight).
+## How PolyMc works
+PolyMc is unique in that it operates on packet level. This means PolyMc doesn't touch the mechanics of the mod at all.
+The server is *genuinely modded*. This results in the server being quite stable, all the hacks PolyMc does to display things
+are separated from what's actually happening. 
 
-## What does C2ME stand for?
-Concurrent chunk management engine, it's about making the game better threaded and more scalable in regard to world gen and chunk io performance.
+PolyMc uses a host of techniques to automatically try and display your modded things. PolyMc also features a large api
+to customize how items/blocks/entities/whatevers are transformed.
 
-## So what is C2ME not?
-**C2ME is currently in alpha stage and pretty experimental.**  
-Although it is usable in most cases and tested during build time, it doesn't mean that it is fully stable for a production server.  
-So backup your worlds and practice good game modding skills.
+Do you want to get started? [Check out the wiki!](https://theepicblock.github.io/PolyMc/)
 
-## Branch development status
-| Branch                     | Status                               |
-|----------------------------|--------------------------------------|
-| fabric/ver/1.19            | Active, Mainline                     |
-| fabric/ver/1.18            | Bugfixes only                        |
-| fabric/backport/ver/1.18.1 | Inactive                             |
-| fabric/ver/1.17            | Inactive                             |
-| fabric/ver/1.16.5          | Inactive                             |
-| forge/ver/1.16.5           | Partial[^forge_partial116], Inactive |
+## Building
+Run `./gradlew runDatagen` once. Then just run `./gradlew build`
 
-[^forge_partial116]: Forge doesn't appear to support Java 16 on 1.16.5, so these versions uses Java 11 and may not contain some features which is present in the fabric versions.
-
-## Downloads
-You can find semi-stable releases here: https://github.com/RelativityMC/C2ME-fabric/releases  
-
-### Development builds
-**Note: Development builds may modify the config files in a way unreadable by previous versions. You may encounter crashes or config reset when rolling back to previous versions. Please always backup your config.**
-
-You can find development builds here: https://ci.codemc.io/job/RelativityMC/job/C2ME-fabric  
-Note that these builds may contain more bugfixes and performance improvements but are less tested.  
-If you have encountered any problems in release builds, give development builds a try before reporting.
-
-## Support
-Our issue tracker: [link](https://github.com/RelativityMC/C2ME-fabric/issues)  
-Our discord server: [link](https://discord.io/ishlandbukkit)
-
-## Building and setting up
-JDK 17+ is required to build and use C2ME  
-Run the following commands in the root directory:
-
-```shell
-./gradlew clean build
-```
-
-## License
-License information can be found [here](/LICENSE).
-
+<a href="https://discord.gg/hbp9Gv2">![discord](https://img.shields.io/badge/Fabric_server--side_development-PolyMc-7289DA?logo=discord&logoColor=white&style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/issues/">![issues](https://img.shields.io/github/issues-raw/TheEpicBlock/PolyMc?color=succes&logo=github&style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/releases/">![latest release](https://img.shields.io/github/v/release/TheEpicBlock/PolyMc?style=flat-square&label=latest%20release)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/commits/">![GitHub commits since latest release](https://img.shields.io/github/commits-since/TheEpicBlock/PolyMc/latest?style=flat-square)</a> 
+<a href="https://github.com/TheEpicBlock/PolyMc/blob/master/LICENSE">![GitHub](https://img.shields.io/github/license/TheEpicBlock/PolyMc?style=flat-square)</a>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item name="header" type="id"/>
+
+	<item name="profile_posts" type="id"/>
+	<item name="profile_posts_with_replies" type="id"/>
+	<item name="profile_pinned_posts" type="id"/>
+	<item name="profile_media" type="id"/>
+	<item name="profile_about" type="id"/>
+	
+	<item name="discover_posts" type="id"/>
+	<item name="discover_hashtags" type="id"/>
+	<item name="discover_news" type="id"/>
+	<item name="discover_users" type="id"/>
+	<item name="discover_local_timeline" type="id"/>
+	<item name="discover_federated_timeline" type="id"/>
+	<item name="discover_lists" type="id"/>
+
+	<item name="notifications_all" type="id"/>
+	<item name="notifications_mentions" type="id"/>
+
+	<item name="menu_add_timeline" type="id" />
+	<item name="menu_back" type="id" />
+</resources>

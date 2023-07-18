@@ -1,220 +1,227 @@
-# 重要公告: Chat2DB将迁移到新地址：>>>[Chat2DB++](https://github.com/chat2db/Chat2DB) 
-### 6月底将有颠覆性重大升级，敬请期待 🔥
-The Chat2DB repository will be migrated to: [Chat2DB++](https://github.com/chat2db/Chat2DB). There will be a significant upgrade by the end of June. Please stay tuned! 🔥🔥🔥
+![Pink logo with pink shark](mastodon/src/main/res/mipmap-xhdpi/ic_launcher_round.png)
 
-<h1 align="center">Chat2DB</h1>
+# Megalodon
 
-<div align="center">
+[![Translation status](https://translate.codeberg.org/widgets/megalodon/-/svg-badge.svg)](https://translate.codeberg.org/engage/megalodon/)
+&nbsp;
+[![Download latest release](https://img.shields.io/badge/dynamic/json?color=d92aad&label=Download%20APK&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsk22%2Fmegalodon%2Freleases%2Flatest&style=flat)](https://github.com/sk22/megalodon/releases/latest/download/megalodon.apk)
 
- An intelligent and versatile general-purpose SQL client and reporting tool for databases which integrates ChatGPT capabilities.
+<a href="https://play.google.com/store/apps/details?id=org.joinmastodon.android.sk"><img height="50" alt="Get it on Google Play" src="img/google-play-badge.png"></a>
+&nbsp;
+<a href="#installation"><img height="50" alt="Get it on IzzyOnDroid" src="img/izzy-badge.png"></a>
 
-[![License](https://img.shields.io/github/license/alibaba/fastjson2?color=4D7A97&logo=apache)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![GitHub release](https://img.shields.io/github/release/alibaba/ali-dbhub)](https://github.com/alibaba/ali-dbhub/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/alibaba/ali-dbhub)](https://github.com/alibaba/ali-dbhub/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/alibaba/ali-dbhub)](https://github.com/alibaba/ali-dbhub/fork)
-[![GitHub Contributors](https://img.shields.io/github/contributors/alibaba/ali-dbhub)](https://github.com/alibaba/ali-dbhub/graphs/contributors)
-
-</div>
-
-<div align="center">
-<p align="center"><b>Share Chat2DB Repository </b></p>
-<p align="center">
-<a href="https://twitter.com/intent/tweet?text=Chat2DB-An%20intelligent%20and%20versatile%20general-purpose%20SQL%20client%20and%20reporting%20tool%20for%20databases%20which%20integrates%20ChatGPT%20capabilities.&url=https://github.com/alibaba/Chat2DB&hashtags=ChatGPT,AGI,SQL%20Client,Reporting%20tool" target="blank" > <img src="https://img.shields.io/twitter/follow/_Chat2DB?label=Share Repo on Twitter&style=social" alt=""/> </a> 
-<a href="https://t.me/share/url?text=Chat2DB-An%20intelligent%20and%20versatile%20general-purpose%20SQL%20client%20and%20reporting%20tool%20for%20databases%20which%20integrates%20ChatGPT%20capabilities.&url=https://github.com/alibaba/Chat2DB" target="_blank"><img src="https://img.shields.io/twitter/url?label=Telegram&logo=Telegram&style=social&url=https://github.com/alibaba/Chat2DB" alt="Share on Telegram"/></a>
-<a href="https://api.whatsapp.com/send?text=Chat2DB-An%20intelligent%20and%20versatile%20general-purpose%20SQL%20client%20and%20reporting%20tool%20for%20databases%20which%20integrates%20ChatGPT%20capabilities.%20https://github.com/alibaba/Chat2DB"><img src="https://img.shields.io/twitter/url?label=whatsapp&logo=whatsapp&style=social&url=https://github.com/alibaba/Chat2DB" /></a>
-<a href="https://www.reddit.com/submit?url=https://github.com/alibaba/Chat2DB&title=Chat2DB-An%20intelligent%20and%20versatile%20general-purpose%20SQL%20client%20and%20reporting%20tool%20for%20databases%20which%20integrates%20ChatGPT%20capabilities." target="blank"><img src="https://img.shields.io/twitter/url?label=Reddit&logo=Reddit&style=social&url=https://github.com/alibaba/Chat2DB" alt="Share on Reddit"/></a>
-<a href="mailto:?subject=Check%20this%20GitHub%20repository%20out.&body=Chat2DB-An%20intelligent%20and%20versatile%20general-purpose%20SQL%20client%20and%20reporting%20tool%20for%20databases%20which%20integrates%20ChatGPT%20capabilities.%3A%0Ahttps://github.com/alibaba/Chat2DB" target="_blank"><img src="https://img.shields.io/twitter/url?label=Gmail&logo=Gmail&style=social&url=https://github.com/alibaba/Chat2DB"/></a>
-</p>
-
-**License Notation**: Chat2DB is constructed and distributed for personal and non-commercial use only. For commercial use of this project, please contact corresponding authors.
-
-Languages： English | [中文](README_CN.md)
-</div>
-
-## 📖 Introduction
-&emsp; &emsp;Chat2DB is a multi-database client tool that is open-source and free from Alibaba. It supports local installation on Windows and Mac, as well as server-side deployment and web page access. Compared to traditional database client software such as Navicat and DBeaver, Chat2DB integrates AIGC's capabilities and is able to convert natural language into SQL. It can also convert SQL into natural language and provide optimization suggestions for SQL to greatly enhance the efficiency of developers. It is a tool for database developers in the AI era, and even non-SQL business operators in the future can use it to quickly query business data and generate reports.
-## ✨ Features
-- 🌈 AI intelligent assistant, supporting natural language to SQL conversion, SQL to natural language conversion, and SQL optimization suggestions
-- 👭 Support team collaboration, developers do not need to know the online database password, solving the problem of enterprise database account security
-- ⚙️ Powerful data management capability, supporting management of data tables, views, stored procedures, functions, triggers, indexes, sequences, users, roles, authorizations, etc.
-- 🔌 Powerful extension capability, currently supporting MySQL, PostgreSQL, Oracle, SQLServer, ClickHouse, OceanBase, H2, SQLite, etc., and more databases will be supported in the future
-- 🛡 Front-end development using Electron, providing a solution that integrates Windows, Mac, Linux clients, and web versions
-- 🎁 Support environment isolation, online, and daily data permission separation
+> A fork of the [Mastodon Android app](https://github.com/mastodon/mastodon-android) adding important features that are missing in the official app, focusing on [Glitch](https://glitch-soc.github.io/docs) compatibility, a pretty UI and adding new features that I feel make using the Fediverse a more pleasent experience.
 
 
-## ⏬ Download and Install
+## Key features
 
-| Description                   | Download                                                                                                                                                   |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Windows      | [https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB%20Setup%201.0.11.exe](https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB%20Setup%201.0.11.exe) |
-| MacOS ARM64 | [https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB-1.0.11-arm64.dmg](https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB-1.0.11-arm64.dmg)         |
-| MacOS X64  | [https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB-1.0.11.dmg](https://oss-chat2db.alibaba.com/release/1.0.11/Chat2DB-1.0.11.dmg)                     |
-| Jar包         | [https://oss-chat2db.alibaba.com/release/1.0.11/ali-dbhub-server-start.jar](https://oss-chat2db.alibaba.com/release/1.0.11/ali-dbhub-server-start.jar)     |
+### **Unlisted posting**
 
-## 🚀 Supported databases
-| Databases     | Status    |
-|---------------|---------|
-| Mysql         | ✅       |
-| H2            | ✅       |
-| Oracle        | ✅       |       
-| PostgreSQL    | ✅       |                                                                                                                
-| SQLServer     | ✅       |   
-| SQLLite       | ✅       |   
-| MariaDB       | ✅       |   
-| ClickHouse    | ✅       |   
-| DM            | ✅       |   
-| Presto        | ✅       |   
-| DB2           | ✅       |   
-| OceanBase     | ✅       |   
-| Redis         | ✅       |   
-| Hive          | ✅       |   
-| KingBase      | ✅       |   
-| MongoDB       | ✅       |   
-| Hbase         |Planning |  
-| Elasticsearch | Planning | 
-| openGauss     | Planning | 
-| TiDB          | Planning |
-| InfluxDB      | Planning |
+<details>
+<p><summary>Allows you to post publicly without having your post show up in trends, hashtags or public timelines (i.e., in the tabs “Community”, “Federated” and “Posts”).</summary></p>
 
-## 🌰 Demo
-### Create data source
-  <a><img src="https://gw.alicdn.com/imgextra/i3/O1CN01PlpLYy1hIq5aMugpg_!!6000000004255-0-tps-3446-1750.jpg" width="100%"/></a>
-### Data source management
-  <a><img src="https://gw.alicdn.com/imgextra/i2/O1CN01DpzZJL1T7w2Xv9VMl_!!6000000002336-0-tps-3410-1662.jpg" width="100%"/></a>
-### SQL console
-  <a><img src="https://gw.alicdn.com/imgextra/i2/O1CN01aidnkx1Oo0LJ1Pdty_!!6000000001751-0-tps-3440-1736.jpg" width="100%"/></a>
-### AI intelligent assistant
-  <a><img src="https://gw.alicdn.com/imgextra/i4/O1CN01iaSXot1W6VeaDFbK2_!!6000000002739-0-tps-3430-1740.jpg" width="100%"/></a>
+When posting with Unlisted visibility, your posts will still be publicly accessible in your profile. They will also be shown in people’s Home timelines, but only if they follow you or someone they follow reblogged/replied to your post.
 
-## 🔥 AI Configuration
-### CONFIGURE OPENAI
+The Mastodon documentation has some more information about [Unlisted posting](https://docs.joinmastodon.org/user/posting/#unlisted) and [Public timelines](https://docs.joinmastodon.org/user/network/#timelines).
+</details>
 
-Option 1 (recommended): To use the ChatSql function of OPENAI, two conditions must be met:
+### **Federated timeline**
 
-- You need an OPENAI_API_KEY.
-- The client's network can connect to the OPENAI website, and for users in China, a VPN is required. Note: If the local VPN is not fully effective, the network connectivity can be ensured by setting the network proxy HOST and PORT in the client.
+<details>
+<p><summary>This allows you to chronologically see all Public posts from people on all other Fediverse neighborhoods your home instance is connected to.</summary></p>
 
-<a><img src="https://img.alicdn.com/imgextra/i2/O1CN01anrJMI1FEtSBbmTau_!!6000000000456-0-tps-1594-964.jpg" width="60%"/></a>
+Despite being one of the main features of federated social media, the Federated timeline wasn’t included in the official Mastodon app – supposedly, because this conflicts with Google’s safety requirements for apps on the Play Store.
+  
+That’s one of the reasons why choosing a small, **well-moderated instance is important**. Instance admins and moderators should always make sure to ban abusive users and stop federating with instances who platform them. On well-moderated instances, the Federated timeline can be a welcoming place to meet new people!
+</details>
 
-Option 2 (recommended): We provide a unified proxy service.
+### **Customizable timelines**
 
-- No OPENAI_API_KEY is required.
-- No proxy or VPN is required, as long as the network is connected.
+<details>
+<p><summary>You can customize Megalodon’s home tab and not only add local and federated timelines, but also pin lists and hashtags.</summary></p>
 
-To facilitate users' quick use of AI capabilities, you can scan the QR code below to follow our WeChat public account and apply for our custom API_KEY. 
+Even better: You can rename every timeline however you please and pick a distinct icon for each timeline. This way, you can pin the hashtag “#Caturday”, rename your timeline to “CUTENESS OVERLOAD” and set <img src="img/ic_fluent_animal_cat_24_regular.svg" alt="Cat icon from Microsoft Fluent UI icons"> as its icon. :3 You can find the timelines editor by opening your home tab, tapping the `⋮` button in the top right and going to “Edit timelines”.
+</details>
 
-<a><img src="https://oss-chat2db.alibaba.com/static/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg" width="40%"/></a>
+### **Draft and schedule posts**
 
-After the application is completed, refer to the following figure for configuration and usage. Config Api Host as http://test.sqlgpt.cn/gateway/api/.
+<details>
+<p><summary>
+Allows to prepare a post and schedule it to send it automatically at a specific time.</summary></p>
 
-<a><img src="https://img.alicdn.com/imgextra/i2/O1CN01xNobD21mo3B1ILrs2_!!6000000005000-0-tps-592-515.jpg" width="60%"/></a>
+You can create drafts, edit them, send them manually later or set a scheduled date. Drafts are technically saved as scheduled posts, so you can view and edit them from other apps that support scheduled posts. Scheduled posts are handled by your home instance, so they'll work even if you uninstall Megalodon.
+</details>
 
-### CONFIGURE CUSTOM AI
-- Customized AI can be any LLM that you deployed, such as ChatGLM、ChatGPT、ERNIE Bot、Tongyi Qianwen, and so on. However, the customized interface need to conform to the protocol definition. Otherwise, secondary development may be required. Two DEMOs are provided in the code, the configuration is as shown below. In specific use, you can refer to the DEMO interface to write a custom interface, or directly perform secondary development in the DEMO interface.
-- DEMO for configuring customized stream output interface.
-  <a><img src="https://img.alicdn.com/imgextra/i1/O1CN01xMqnRH1DlkdSekvSF_!!6000000000257-0-tps-591-508.jpg" width="60%"/></a>
-- DEMO for configuring customized non-stream output interface.
-  <a><img src="https://img.alicdn.com/imgextra/i1/O1CN01JqmbGo1fW0GAQhRu4_!!6000000004013-0-tps-587-489.jpg" width="60%"/></a>
+## Installation
+
+### IzzyOnDroid
+
+[apt.izzysoft.de/fdroid/index/apk/org.joinmastodon.android.sk](https://apt.izzysoft.de/fdroid/index/apk/org.joinmastodon.android.sk)
+
+<a href="https://apt.izzysoft.de/fdroid/index/apk/org.joinmastodon.android.sk"><img height="50" alt="Get it on IzzyOnDroid" src="img/izzy-badge.png"></a>
+
+Note that you'll need to add Izzy's F-Droid repository to your F-Droid app first:
+
+[`https://apt.izzysoft.de/fdroid/repo`](https://apt.izzysoft.de/fdroid/repo)
+
+### Google Play Store
+
+[play.google.com/store/apps/details?id=org.joinmastodon.android.sk](https://play.google.com/store/apps/details?id=org.joinmastodon.android.sk)
+
+<a href="https://play.google.com/store/apps/details?id=org.joinmastodon.android.sk"><img height="50" alt="Get it on Google Play" src="img/google-play-badge.png"></a>
+
+### F-Droid
+
+**[F-Droid.org?](https://f-droid.org)** Not yet, sorry!
+
+If you want, you can help me figure out if something's missing in the [Issue #47: F-Droid.org](https://github.com/sk22/megalodon/issues/47)
+
+### Direct
+
+Press the download button to download the APK. Open the downloaded file on your Android device to install it. Megalodon will automatically notify you about new updates inside the app.
+
+[![Download latest release](https://img.shields.io/badge/dynamic/json?color=d92aad&label=Download%20APK&query=%24.tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsk22%2Fmegalodon%2Freleases%2Flatest&style=flat)](https://github.com/sk22/megalodon/releases/latest/download/megalodon.apk)
+
+You might have to accept installing APK files from your browser when trying to install it. You can also take a look at all releases on the [Releases](https://github.com/sk22/megalodon/releases) page.
+
+Megalodon makes use of [Mastodon for Android](https://github.com/mastodon/mastodon-android)’s automatic update checker. Megalodon will check for new updates available on GitHub and offer to download and install them. You can also manually press “Check for updates” at the bottom of the settings page!
+
+---
 
 
+## Release variants
 
-## 📦 Docker installation
+All downloads can be found on the [Releases](https://github.com/sk22/megalodon/releases) page. When downloading a pre-release, expect to see unfinished features and bugs. If you don’t want that, just download the [latest full release](https://github.com/sk22/megalodon/releases/latest/download/megalodon.apk).
 
-```bash
-docker pull chat2db/chat2db:latest
+**`megalodon.apk`**
+
+Variant with an integrated updater. If you download Megalodon from here (and not from an app store), just download the regular `megalodon.apk`.
+
+**`upstream-1234abc.apk`**
+
+This is an **unmodified version** of the official [Mastodon for Android](https://github.com/mastodon/mastodon-android) app the respective Megalodon release is based on. Should you find any bugs in Megalodon (which you will), try to see if it occurs with this variant, too. The last 7 digits of the file name are important to know which version of the official app you're using.
+
+<!-- **`megalodon-fdroid.apk`**
+
+Variant without the integrated updater. This is the variant to be published to F-Droid.org where an integrated updater is not necessary. -->
+
+---
+
+## Contribution
+
+### Translation
+
+The translation for the base of the app is sourced from the upstream **Mastodon for Android** project, which you can contribute to on its Crowdin project: [https://crowdin.com/project/mastodon-for-android](https://crowdin.com/project/mastodon-for-android)
+
+There's also a bunch of custom strings exclusive to this project that need to be translated. You can help translate **Megalodon** on Weblate: [https://translate.codeberg.org/projects/megalodon](https://translate.codeberg.org/projects/megalodon)
+
+[![Translation status](https://translate.codeberg.org/widgets/megalodon/-/horizontal-auto.svg)](https://translate.codeberg.org/engage/megalodon)
+
+
+---
+
+
+## Detailed changes
+
+### Features
+
+* [Add “Unlisted” as a post visibility option](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/enable-unlisted)
+  ([Pull request](https://github.com/mastodon/mastodon-android/pull/103))
+* [Add “Federation” tab and change Discover tab order](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/add-federated-timeline) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/8))
+* [Add image description button and viewer](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/display-alt-text) ([Pull request](https://github.com/mastodon/mastodon-android/pull/129))
+* [Implement pinning posts and displaying pinned posts](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/pin-posts) ([Pull request](https://github.com/mastodon/mastodon-android/pull/140))
+* [Implement deleting and re-drafting](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/delete-redraft) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/21))
+* [Implement a bookmark button and list](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/bookmarks) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/22))
+* [Add “Check for update” button in addition to integrated update checker](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/check-for-update-button)
+* [Add “Mark media as sensitive” option](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/mark-media-as-sensitive)
+* [Add settings to hide replies and reblogs from the timeline](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/filter-home-timeline) ([Pull request](https://github.com/mastodon/mastodon-android/pull/317))
+* [Follow and unfollow hashtags](https://github.com/sk22/megalodon/commit/7d38f031f197aa6cefaf53e39d929538689c1e4e) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/233))
+* [Notification bell for posts](https://github.com/sk22/megalodon/commit/b166ca705eb9169025ef32bbe6315b42491b57ea) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/81))
+* [Viewing lists and adding/removing users from lists](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:list-timeline-views) based on [@obstsalatschuessel](https://github.com/obstsalatschuessel)'s [Pull request](https://github.com/mastodon/mastodon-android/pull/286)
+* [List favorited posts](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/favs-list)
+* [Accept/reject follow requests](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/follow-requests)
+* [Display content warning title above text](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/cw-above-text)
+* [Add notifications tab for posts](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/posts-notifications-tab)
+* [Show visibility of original post when replying](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/display-reply-visibility)
+* [Clickable reply/boost line above posts](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:clickable-boost-reply-line)
+* [Add push notification setting for post notifications](https://github.com/sk22/megalodon/commit/b190480d7739be47f23543d9e7644660f9b4b4ee)
+* [Add option to allow voting for multiple options on polls](https://github.com/sk22/megalodon/commit/5b28468efd49387b4f8b83f142f3adf3104ca60c)
+* [Add translate function](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/translate-button)
+* [Add language selector](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/language-selector)
+* [Implement deleting notifications](https://github.com/sk22/megalodon/commit/b0f9ce081f69f29ad59658fc00ca41372cd2677d) (disabled by default)
+* [Long-click boost button to "quote" a post](https://github.com/sk22/megalodon/commit/b25a237c20c6a924ed4d9b357999867c3a32b32b)
+* [Draft and schedule posts](https://github.com/sk22/megalodon/pull/217)
+* [Display original post when replying](https://github.com/sk22/megalodon/commit/375f8ceb2747705fedf43686681cc0e0b812f899)
+* [Display server announcements](https://github.com/sk22/megalodon/commit/84179bc207d6b69cc2a770a3c28fa0a39b0b54e8)
+* [Create](https://github.com/sk22/megalodon/commit/294595513a45037359b31377aafc25ae5b58d8e7), [edit](https://github.com/sk22/megalodon/commit/d47797bf7ac8cff3f9ba1cfee219a1bb2af21da6) and [delete](https://github.com/sk22/megalodon/commit/54c29fd787fc2cd0dfd2787ad796b8190f795973) lists
+* [Soft-blocking (by blocking and immediately unblocking)](https://github.com/sk22/megalodon/commit/e75d350b7a2709259e9fc5138e0e1f361bdb0972)
+* [Pinnable custom timelines](https://github.com/sk22/megalodon/pull/338/commits)
+* Support for local-only posts
+* Support for copying the URL to posts/accounts/… in Pixel launcher’s Recent apps view
+* Compatibility for Akkoma Bubble timeline
+* Listings of followers/following/favorites/boosts can be loaded from the origin instance (there’s an option to disable this in in the settings)
+* Allow opening posts/accounts in-app by sharing a URL/handle to Megalodon (Originally implemented in [Moshidon](https://github.com/LucasGGamerM/moshidon), [PR](https://github.com/sk22/megalodon/pull/531))
+
+
+### Behavior
+
+* [Make back button return to the home tab before exiting the app](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/back-returns-home) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/118))
+* [Always preserve content warnings when replying](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/always-preserve-cw) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/113))
+* [Display full image when adding image description](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/compose-image-description-full-image) ([Pull request](https://github.com/mastodon/mastodon-android/pull/182))
+* [Set spoiler height independently to content height](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:spoiler-height-independent) ([Closes issue](https://github.com/mastodon/mastodon-android/issues/166))
+* [Option to hide interaction numbers](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:settings/hide-interaction-numbers)
+* [Option to always reveal content warnings](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/cw-above-text)
+* [Option to disable scrolling title bars](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:settings/disable-marquee)
+* [No ellipsis for long poll answers](https://github.com/mastodon/mastodon-android/commit/c9aae828e2518adccdc092e41f8d1f0489636271)
+* [Show poll vote button for multiple and single answer polls](https://github.com/mastodon/mastodon-android/commit/e14dfda2fdf32f0fa3043504ac5831683a87559a)
+* [Show own vote after voting](https://github.com/mastodon/mastodon-android/commit/4ab9e25fec4fd9c10b7a8ddd1be522b3cc12cf28) ([Closes issue](https://github.com/mastodon/mastodon-android/commit/4ab9e25fec4fd9c10b7a8ddd1be522b3cc12cf28))
+* [Make inline emoji search case-insensitive and don't only search from start of emoji names](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:better-inline-emoji-search) ([Pull request](https://github.com/mastodon/mastodon-android/pull/445))
+* [Include subject line when sharing e.g. a website to Megalodon](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:external-share-include-subject)
+* [Improve semantics for voting on polls (radio buttons and checkboxes)](https://github.com/sk22/megalodon/commit/6fd58c96827cb1d2da329cebdc170a1425dd18d7)
+* [Copy post URL when long-pressing share button](https://github.com/sk22/megalodon/commit/ba36347f03278763ecec617b1ce57ba89db7be72)
+* [Add option to disable swiping between tabs](https://github.com/sk22/megalodon/commit/1f20b21fc84bf006c1ec14bd2229cbfad5215ec8)
+* [Resolve Fediverse links in the app](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/open-urls-in-app)
+* [Preserve whitespaces in HTML](https://github.com/sk22/megalodon/commit/7d876bddc7a07d98f0fecbf62b13bdb9fcce3412)
+* [Long-click to copy links](https://github.com/sk22/megalodon/commit/b32e32274923a94742a9926ef38785f746d41405)
+* Improved filtering using Mastodon 4.0 API: [#202](https://github.com/sk22/megalodon/pull/202), [#212](https://github.com/sk22/megalodon/pull/212), [#255](https://github.com/sk22/megalodon/pull/255) by [@thiagojedi](https://github.com/thiagojedi)
+* [Support admin notifications](https://github.com/sk22/megalodon/commit/c12a6eaee6b609bc53eb0a45d9199f37d5241801) and [notifications for edited reblogged posts](https://github.com/sk22/megalodon/commit/900e8fb2e9353002c16d15e06b78d2731e121601)
+* [Android file opener added back in addition to image picker](https://github.com/sk22/megalodon/commit/3a6ace53d5ab01e28077c9c930cb6ed487b78031)
+* [Replies are inserted below the replied-to post in thread view](https://github.com/sk22/megalodon/commit/87c37df370ec24aeea0d2dbaeb29468aa4fb5808)
+* Option to auto-reveal equal content warnings in threads
+
+
+### Visual
+
+* [Custom extended footer redesign](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:compact-extended-footer)
+* [Improvements to the true black mode](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:true-black-improvements)
+* [Profile header tweaks](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:ui/profile-header-tweaks)
+* [Custom color themes](https://github.com/sk22/megalodon/pull/124) by [@LucasGGamerM](https://github.com/LucasGGamerM)
+* [Custom "megalodon" text logo](https://github.com/sk22/megalodon/commit/563afd487ca5c608cfbb00fa3909d3c27384acc0) by [@LucasGGamerM](https://github.com/LucasGGamerM)
+* [Custom login screen](https://github.com/sk22/megalodon/commit/9bbf8c4618dbe13accaeb3b5482bf3fe88cac4c0)
+* [More distinct filled boost icon](https://github.com/sk22/megalodon/commits/more-distinct-filled-boost-icon)
+* Material You color theme by [@LucasGGamerM](https://github.com/LucasGGamerM)
+* [Animations for interaction buttons](https://github.com/mastodon/mastodon-android/compare/master...sk22:megalodon:feature/animate-buttons)
+* [Dedicated icons for different notification types](https://github.com/sk22/megalodon/pull/178) by [@florian-obernberger](https://github.com/florian-obernberger)
+* Scale text according to system settings
+* Header in timeline for followed hashtags
+* [Indicator for missing alt texts](https://github.com/sk22/megalodon/commit/c0c276f03e793b78c478c17dfdef24a66ef7cedb)
+* Visually grouped (by removing divider lines and reducing padding) threaded replies in thread view
+
+
+## Building
+
+As this app is using Java 17 features, you need JDK 17 or newer to build it. Other than that, everything is pretty standard. You can either import the project into Android Studio and build it from there, or run the following command in the project directory:
+
+```
+./gradlew assembleRelease
 ```
 
-## 🎯 Operating Environment
-Note: If local debugging is required
-- Java runtime Open JDK 17
-- JRE reference packaging and deployment method of jre.
-- Node runtime environment Node16 Node.js.
+Note that Megalodon might be depending on an in-development version of [AppKit](https://github.com/grishka/appkit) – a library by Mastodon for Android’s developer. In case the used AppKit version isn’t published to Maven Central yet, you might have to clone, build and publish it to your local Maven repository. For more information, see [this GitHub issue](https://github.com/mastodon/mastodon-android/issues/375#issuecomment-1507678585).
 
-## 💻 Local Debugging
-- git clone to local
-```bash
-$ git clone git@github.com:alibaba/Chat2DB.git
-```
-- Front-End installation
-```bash
-$ cd Chat2DB/ali-dbhub-client
-$ npm install # Mounting front-end dependency
-$ npm run build:prod # Package js to the source directory on the back end
-```
-- Backend debug
-```bash
-$ cd ../ali-dbhub-server
-$ mvn clean install # maven 3.8 or later needs to be installed
-$ cd ali-dbhub-server/ali-dbhub-server-start/target/
-$ java -jar -Dchatgpt.apiKey=xxxxx ali-dbhub-server-start.jar  # To launch the chat application, you need to enter the ChatGPT key for the chatgpt.apiKey. Without entering it, you won't be able to use the AIGC function.
-$ # open http://127.0.0.1:10821 to start debug Note: Front-end installation is required
-```
+## License
 
-- Front-End debug
-```bash
-$ cd Chat2DB/ali-dbhub-client
-$ npm install 
-$ npm run start 
-$ # open http://127.0.0.1:10821  to start Front-End debug
-$ # Note Front-end page completely depends on the service, so front-end students need to debug the back-end project
-```
-But front debugging need mapping of resources, you can download [XSwitch](https://chrome.google.com/webstore/detail/idkjhjggpffolpidfkikidcokdkdaogg), add the following configuration file
-``` json
-{
-  "proxy": [
-    [
-      "http://127.0.0.1:10821/(.*).js$",
-      "http://127.0.0.1:8001/$1.js",
-    ],
-    [
-      "http://127.0.0.1:10821/(.*).css$",
-      "http://127.0.0.1:8001/$1.css",
-    ],
-    [
-      "http://127.0.0.1:10821/static/front/(.*)",
-      "http://127.0.0.1:8001/$1",
-    ],
-    [
-      "http://127.0.0.1:10821/static/(.*)$",
-      "http://127.0.0.1:8001/static/$1",
-    ],
-  ],
-}
+This project is released under the [GPL-3 License](./LICENSE).
 
-```
+## Links
 
-## 📑 Documentation
-
-* <a href="https://chat2db.opensource.alibaba.com">Official website document</a>
-* <a href="https://github.com/alibaba/ali-dbhub/issues">Issue </a>
-
-## Stargazers
-[![Stargazers repo roster for @alibaba/Chat2DB](https://reporoster.com/stars/alibaba/Chat2DB)](https://github.com/alibaba/Chat2DB/stargazers)
-
-## Forkers
-[![Forkers repo roster for @alibaba/Chat2DB](https://reporoster.com/forks/alibaba/Chat2DB)](https://github.com/alibaba/Chat2DB/network/members)
-
-## ☎️ Contact Us
-Please star and fork on GitHub before joining the group.
-Follow our WeChat public account
-<a><img src="https://oss-chat2db.alibaba.com/static/%E5%85%AC%E4%BC%97%E5%8F%B7.jpg" width="40%"/></a>
-
-
-## ❤️ Acknowledgements
-Thanks to all the students who contributed to Chat2DB~
-
-<a href="https://github.com/alibaba/ali-dbhub/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=alibaba/ali-dbhub" />
-</a>
-
-
-## Star History
-
-<a href="https://star-history.com/#alibaba/chat2db&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=alibaba/chat2db&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=alibaba/chat2db&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=alibaba/chat2db&type=Date" />
-  </picture>
-</a>
-
+<a rel="me" href="https://floss.social/@megalodon">@megalodon<wbr>@floss.social</a>

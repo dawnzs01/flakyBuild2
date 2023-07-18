@@ -1,55 +1,111 @@
-<div align="center">
-         <a href="https://github.com/gaodayu168/datasophon" target="_blank" rel="noopener noreferrer">
-           <img src="website/static/img/logo.png" width="20%" height="20%" alt="DataSophon Logo" />
-        </a>
- <h1>DataSophon</h1>
- <h3>Makes it easy to manage and monitor clusters</h3>
-</div>
+<!--
+    Copyright (c) 2020 Contributors to the Eclipse Foundation
 
-<p align="center">
-  <img src="https://img.shields.io/github/release/gaodayu168/datasophon.svg">
-  <img src="https://img.shields.io/github/stars/gaodayu168/datasophon">
-  <img src="https://img.shields.io/github/forks/gaodayu168/datasophon">
-  <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"></a>
-  <p align="center">
-    <a href="https://datasophon.github.io/datasophon-website/">Office Website</a> |
-    <a href="https://github.com/datasophon/datasophon/blob/dev/README_CN.md">Chinese</a>
-  </p>
-</p>
-<h3>If you like,star fork it and join us</h3>
+    See the NOTICE file(s) distributed with this work for additional
+    information regarding copyright ownership.
 
-# Vision
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License 2.0 which is available at
+    http://www.eclipse.org/legal/epl-2.0
 
-Aiming at quickly deploying,managing,monitoring and automating the operation and maintenance of Big Data service components and nodes,helping you quickly build stable, efficient Big Data cluster services.
+    SPDX-License-Identifier: EPL-2.0
+ -->
 
-# What is DataSophon?
+# Eclipse Jifa
 
-*The Three-Body Problem*, a Hugo Award-winning work of the world's highest science fiction literature, is known for its stunning "hard science fiction" style, and its author Liu Cixin is credited with "single-handedly raising Chinese science fiction to a world-class level".
+[![License](https://img.shields.io/badge/License-EPL%202.0-green.svg)](https://opensource.org/licenses/EPL-2.0)
 
-As a very important role in the Triad, the Sophon is a two-dimensional unfolding of the nine-dimensional proton, which is transformed into a supercomputer through circuit etching and then transferred back to the microscopic eleventh dimension to monitor every human movement and use quantum entanglement to achieve instantaneous communication to report to the Triad civilization four light years away. To put it bluntly, the Sophon is a AI real-time remote monitoring and management platform deployed by the Triad civilization on Earth.
+[Eclipse Jifa](https://eclipse.org/jifa) is open-source software for better troubleshooting common problems that occurred in Java applications.
 
-DataSophon is a similar management platform. Unlike the Sophon, which aims to limit human's basic science and hinder human's technology development, DataSophon is dedicated to automatical monitoring, operation and management of Big Data infrastructure components and nodes, helping you to quickly build a stable, efficient Big Data cluster service.
+Many of the useful tools are client-based. When faced with problems in the production environment or the cloud environment, such tools cannot be used directly due to network or resource problems. Jifa provides a web solution, allowing developers to use the browser to troubleshoot.
 
-## Key Features
+The following features are supported:
 
-* Easy to deploy, can quickly complete the deployment of about 300 nodes of big data clusters
-* Nationalization compatible, compatible with arm servers and common localized operating systems
-* Comprehensive and rich monitoring indicators, showing that the users care about most, based on production practice.
-* Flexible and convenient alarm service, which can realize user-defined alarm groups and alarm indicators
-* Strong scalability, users can integrate or upgrade any components through configuration.
+- [Heap Dump Analysis](backend/heap-dump-analyzer/README.md)
 
-![img](website/static/img/dashboard.png)
+- [GC Log Analysis](backend/gc-log-analyzer/README.md)
 
-# Product Architecture
+- [Thread Dump Analysis](backend/thread-dump-analyzer/README.md)
 
-![product-en](./website/static/img/product-en.png)
+The backend of Jifa uses Vert.x as the main framework and consists of two modules:
 
-# Architecture
+- Master
+    - manage workers and route the requests from browser to the workers
+- Worker
+    - do the real analysis work
+  
+The frontend of Jifa uses Vue as the main framework.
 
-![img](website/static/img/archive.png)
+## Getting Started
 
-# Questions
-For questions, bugs and supports please open an [issue](https://github.com/gaodayu168/datasophon/issues/new/choose), we'll reply you in time.
+### Build
 
+- Prerequisites
+  - JDK 11+, and make sure $JAVA_HOME is set properly
 
+  - npm
 
+- Build All
+  
+  ```bash
+  $ ./gradlew buildJifa
+  ```
+
+- Build Worker Only
+
+  ```bash
+  $ ./gradlew buildWorker
+  ```
+
+### Run & Deploy
+
+- Master & Worker
+
+  - Default pattern
+    ```bash
+    $ cd deploy/default_pattern
+    $ ./deploy_jifa.sh
+    ```
+
+  - K8S pattern, workers are scheduled by K8S
+    ```bash
+    $ cd deploy/k8s_pattern
+    $ ./deploy.sh
+    ```
+    
+- Worker Only
+  ```bash
+  $ cd deploy
+  $ ./depoy_worker.sh
+  ```
+
+See [deployment document](deploy/README.md) for more details.
+
+## Quick Demo
+
+```bash
+$ docker pull jifadocker/jifa-worker:demo
+$ docker run -p 8102:8102 jifadocker/jifa-worker:demo
+```
+
+**Note:**  if running Apple's M1 Max chip, include the `--platform linux/amd64` switch after the `run` command.
+
+Then, you can visit Jifa at `http://localhost:8102`
+
+## Documents
+
+- [Jifa Customization](CUSTOMIZATION.md)
+- [Contribution Guide](CONTRIBUTING.md)
+    
+## Links
+
+- Join the Eclipse Jifa developer community [mailing list](https://accounts.eclipse.org/mailing-list/jifa-dev).
+  The community primarily uses this list for project announcements and administrative discussions amongst committers.
+  Questions are welcome here as well.
+- **Ask a question or start a discussion via the [GitHub issue](https://github.com/eclipse/jifa/issues).(Recommend)**
+- Slack channel: [Eclipse Jifa](https://eclipsejifa.slack.com)
+- 钉钉中文交流群
+
+  <div>
+    <img src=https://user-images.githubusercontent.com/33491035/226314386-e1cf71d4-8429-4e4c-bdc0-c511a9009ee1.JPG width=25%/>
+  </div>

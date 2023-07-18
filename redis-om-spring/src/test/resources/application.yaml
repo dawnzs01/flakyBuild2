@@ -1,6 +1,0 @@
-redis:
-  om:
-    spring:
-      repository:
-        query:
-          limit: 20

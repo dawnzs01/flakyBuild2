@@ -1,31 +1,44 @@
-HELP.md
+# IntelliJ project files
+.factorypath
+.idea/
+*.iml
+out
+gen
+
+# Maven
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+!/.mvn/wrapper/maven-wrapper.jar
+*/.flattened-pom.xml
+.flattened-pom.xml
 
-/target/
-redis-om-spring/target/
-/data
-
-### VS Code ###
-.vscode/
-
-### Eclipse ###
-bin/
-tmp/
-/.apt_generated_tests/
+# Eclipse
+.classpath
 .settings/
 .project
 
-### IDEA ###
-.idea
+/logs
+*/logs
+*.log
 
-### Mac ###
-**/.DS_Store
-redis-om-spring/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-redis-om-spring/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+env.sh
 
-# spelling
-*.dic
-/demos/roms-vss/src/main/resources/static/product-images/
+# System related
+*.DS_Store
+Thumbs.db
+
+
+# Atom console
+node_modules
+dist
+.vscode
+
+# femas-agent jar file
+femas-agent/femas-agent

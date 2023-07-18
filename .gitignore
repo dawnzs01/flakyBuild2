@@ -1,11 +1,16 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+*.bak
+*.out
+*.log
+*.attach_pid*
+TEMP_*
+NOTES.md
+.~lock*
 
-# dependencies
-/node_modules
+.settings/
+.idea/
+.run/
+target/
+src/test/java/experimental/
 
 ### STS ###
 .apt_generated
@@ -15,12 +20,18 @@ target/
 .settings
 .springBeans
 .sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
@@ -28,9 +39,9 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
 
 ### VS Code ###
 .vscode/
 
-.env.*
+### Maven wrapper ###
+.mvn/wrapper/*.jar

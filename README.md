@@ -1,115 +1,157 @@
-  <p align="center">
-	<img src="/media/banner/book_project_newlogo_2x.png" alt="Logo"/>
-  </p>
+<img src="https://i.imgur.com/937nevX.png" alt="Instancio" width="250"/> [![Maven Central](https://img.shields.io/maven-central/v/org.instancio/instancio-core.svg)](https://search.maven.org/artifact/org.instancio/instancio-core/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=instancio_instancio&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=instancio_instancio)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=instancio_instancio&metric=coverage)](https://sonarcloud.io/summary/new_code?id=instancio_instancio)
 
-<p align="center">	
-  <a href="https://github.com/Project-Books/book-project/actions/workflows/build.yml">
-    <img src="https://github.com/Project-Books/book-project/actions/workflows/build.yml/badge.svg" alt="Build Status"/>
-  </a>
-	
-  <a href="https://sonarcloud.io/dashboard?id=Project-Books_book-project">
-    <img src="https://sonarcloud.io/api/project_badges/measure?project=Project-Books_book-project&metric=coverage" alt="Code coverage" />
-  </a>	
+---
 
-  <a href="hhttps://opencollective.com/book-project">
-    <img src="https://img.shields.io/badge/open%20collective-donate-2ecc71" alt="Slack" />
-  </a>
-</p>
+# What is it?
 
-Book tracker web app made with Spring Boot and React (Typescript).
+Instancio is a Java library that automatically creates and populates objects for your unit tests.
 
-![image](https://user-images.githubusercontent.com/11173328/112493885-739b0d80-8d7a-11eb-85a1-b4c500dc61ab.png)
+Instead of manually setting up test data:
 
-*The image above is from our mockup designs, so this may look slightly different to the app. If major changes are made, we will upload a new image.*
+```java
+Address address  = new Address();
+address.setStreet("street");
+address.setCity("city");
+//...
 
-# Getting started locally
-
-Prerequisites:
-- Docker with [Buildkit enabled](https://docs.docker.com/develop/develop-images/build_enhancements/#to-enable-buildkit-builds)
-  - Windows or macOS: install [Docker Desktop](https://www.docker.com/products/docker-desktop)
-  - Linux: install [Docker Engine](https://docs.docker.com/engine/) and [Docker Compose](https://docs.docker.com/compose/). Follow the [post installation guide](https://docs.docker.com/engine/install/linux-postinstall/) to add your user to the `docker` group
-
-1. Clone the repository (if you're contributing, you'll need to first fork the repository and then clone your fork)
-1. Start Docker engine (Linux) or Docker desktop (macOS or Windows). 
-   - If you're using an Apple silicon chip (e.g. M1), you'll need to uncomment [this line](https://github.com/Project-Books/book-project/blob/0.2.0/backend/docker-compose.yml#L6). 
-1. In the root of the project, run `docker-compose build` to build the database, backend and frontend services
-1. Run `docker-compose --env-file .env up` to start the containers
-1. Once the development server has started (you'll get notified in the output of `docker-compose up`), go to `localhost:3000` in your web browser to access the frontend
-1. When finished, run `docker-compose down` to stop and remove the containers
-
-You may want to also want to run our [Books API](https://github.com/Project-Books/books-api) to avoid seeing an error on the search page on the frontend.
-
-> Note for backend contributors: Please ensure you run the unit tests manually (we supply the `-DskipTests` flag with Docker by default for convenience).
-
-## Log in with our test user
-
-When running the frontend and backend, or only the backend, you can use the following test user:
-- Email address: `user@user.user`
-- Password: `password`
-
-Note: If you're running the backend, you will need a JWT token for subsequent requests after logging in or creating an account; see our [connecting to the backend](https://project-books.github.io/development/how-to/backend-postman/) wiki page.
- 
-## Access database (optional)
-
-Using your favourite SQL client, use the following settings:
-- Host: `localhost`
-- Port: `5433`
-- User: `dbuser`
-- Password: `dbpassword`
-- Database name: `book_project_db`
-
-For example, in DataGrip or IntelliJ Ultimate:
-
-![image](https://user-images.githubusercontent.com/11173328/153755219-051627c5-f052-4db9-a223-091acb4b2e76.png)
-
-# Contributing
-
-If you wish to contribute (thanks!), please first see the [contributing document](https://github.com/knjk04/book-project/blob/master/CONTRIBUTING.md). 
-
-We work hard to make our project approachable to everyone -- from those new to open-source looking to make their first contribution to seasoned developers.
-
-## Backend: fixing Lombok errors
-
-You may find lots of errors for things like the log statements, or the entities not having constructors. 
-You can find instructions on fixing this for IntelliJ and Eclipse in our [troubleshooting page](https://project-books.github.io/development/how-to/troubleshoot/). 
-Other common errors and solutions are also on the troubleshooting page.
-
-## Docker running slowly: Windows users
-
-If you are notice that the Vmmem process is consuming too much of your CPU and RAM, you can adjust the maximum limit that Docker can use.
-
-![image](https://user-images.githubusercontent.com/11173328/154207932-d7ffaf70-0d1a-4362-bba8-ca23cb147692.png)
-
-If using the WSL 2 backend (see the image above: go to Docker Desktop > Settings > Resources), create a `.wslconfig` file at the root of your user folder: `C:\Users\<your-username>`:
-
-```
-[wsl2]
-memory=4GB   # Limits VM memory in WSL 2 up to 4GB
-processors=2# Makes the WSL 2 VM use two virtual processors
+Person person = new Person();
+person.setFirstName("first-name");
+person.setLastName("last-name");
+person.setAge(22);
+person.setGender(Gender.MALE);
+person.setAddress(address);
+//...
 ```
 
-Update the values as appropriate for your system. See the [documentation](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) for more information
+You can simply do the following:
 
-## Help
+```java
+Person person = Instancio.create(Person.class);
+```
 
-If you need help with anything, we'll be happy to help you over a [GitHub Q&A discussion](https://github.com/Project-Books/book-project/discussions/categories/q-a). Alternatively, feel free to chat with us on the [#book-project](https://teambookproject.slack.com/archives/C01AGDC5X1S) channel on our [Slack workspace](https://teambookproject.slack.com/join/shared_invite/zt-punc8os7-Iz9PTCAkYcO_0S~XwtO5_A#/shared-invite/email).
+This one-liner returns a fully-populated person, including nested objects and collections.
 
-When asking for help on Slack, we always recommend asking on our [#book-project](https://teambookproject.slack.com/archives/C01AGDC5X1S) channel, rather than contacting a maintainer directly. This is so that others can offer help and the answer may help someone else.
+The object is populated with random data that can be <b>reproduced</b> in case of test failure.
 
-# Further information
+### What else can Instancio do?
 
-For more information, such as a roadmap and the project's underlying principles, see our [documentation site](https://project-books.github.io).
+1. Create collections of objects:
 
-To see a list of the open-source software we use, refer to our [Acknowledgements file](https://github.com/Project-Books/book-project/blob/master/ACKNOWLEDGEMENTS.md)
+```java
+List<Person> persons = Instancio.ofList(Person.class).size(10).create();
+```
 
-# Donations
-<p align="center">	
+2. Create streams of objects:
 
-  <a href="hhttps://opencollective.com/book-project">
-    <img src="https://img.shields.io/badge/open%20collective-donate-2ecc71" alt="Slack" />
-  </a>
-</p>
+```java
+Stream<Person> persons = Instancio.stream(Person.class);
+```
 
-If you are able and willing to support us financially, it will go a long way to help us achieve our goals and become more sustainable. We hate to ask for money, but running cloud server costs are not free.
+3. Create generic types:
 
-We currently only accept donations through Open Collective.
+```java
+Pair<List<Foo>, List<Bar>> pairOfLists = Instancio.create(new TypeToken<Pair<List<Foo>, List<Bar>>>() {});
+```
+
+4. Customise generated values:
+
+```java
+Person person = Instancio.of(Person.class)
+    .generate(field(Person::getDateOfBirth), gen -> gen.temporal().localDate().past())
+    .generate(field(Phone::getAreaCode), gen -> gen.oneOf("604", "778"))
+    .generate(field(Phone::getNumber), gen -> gen.text().pattern("#d#d#d-#d#d-#d#d"))
+    .subtype(all(AbstractAddress.class), AddressImpl.class)
+    .supply(all(LocalDateTime.class), () -> LocalDateTime.now())
+    .onComplete(all(Person.class), (Person p) -> p.setName(p.getGender() == Gender.MALE ? "John" : "Jane"))
+    .create();
+```
+
+5. Create reusable templates (Models) of objects:
+
+```java
+Model<Person> simpsons = Instancio.of(Person.class)
+    .set(field(Person::getLastName), "Simpson")
+    .set(field(Address::getCity), "Springfield")
+    .generate(field(Person::getAge), gen -> gen.ints().range(40, 50))
+    .toModel();
+
+Person homer = Instancio.of(simpsons)
+    .set(field(Person::getFirstName), "Homer")
+    .set(all(Gender.class), Gender.MALE)
+    .create();
+
+Person marge = Instancio.of(simpsons)
+    .set(field(Person::getFirstName), "Marge")
+    .set(all(Gender.class), Gender.FEMALE)
+    .create();
+```
+
+## Main Features
+
+- Fully reproducible data in case of test failures.
+- Support for generics, `record` and `sealed` classes.
+- Support for defining custom generators.
+- Support for generating data based on Bean Validation annotations.
+- Flexible configuration options.
+- `InstancioExtension` for Junit 5 `@ExtendWith`.
+- Support for Guava via `instancio-guava` module (experimental)
+
+## Documentation
+
+- [User guide](https://www.instancio.org/user-guide)
+- [Javadocs](https://javadoc.io/doc/org.instancio/instancio-core/latest/)
+
+## Quickstart
+
+[Instancio Quickstart](https://github.com/instancio/instancio-quickstart) is the best way to get started.
+It is a sample (Maven) project that provides an overview of all the main features.
+
+```sh
+git clone https://github.com/instancio/instancio-quickstart.git
+```
+
+## Latest Release
+
+Version `2.16.1` is now available.
+A summary of new features is available in the [release notes](https://github.com/instancio/instancio/discussions/625).
+
+# Maven coordinates
+
+If you have JUnit 5 on the classpath, use the `instancio-junit` dependency.
+
+```xml
+<dependency>
+    <groupId>org.instancio</groupId>
+    <artifactId>instancio-junit</artifactId>
+    <version>2.16.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+To use Instancio with JUnit 4, TestNG, or standalone, use `instancio-core`:
+
+```xml
+<dependency>
+    <groupId>org.instancio</groupId>
+    <artifactId>instancio-core</artifactId>
+    <version>2.16.1</version>
+    <scope>test</scope>
+</dependency>
+```
+
+# Feedback
+
+Feedback and bug reports are greatly appreciated. Please submit an
+[issue](https://github.com/instancio/instancio/issues) to report a bug,
+or if you have a question or a suggestion.
+
+# Special thanks to
+
+[JetBrains](https://www.jetbrains.com/opensource) and [YourKit](https://www.yourkit.com) for supporting this project.
+
+<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="120px" alt="JetBrains logo">
+
+<img src="https://www.yourkit.com/images/yklogo.png" width="150px" alt="YourKit logo">

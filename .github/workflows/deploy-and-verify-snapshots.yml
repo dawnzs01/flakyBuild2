@@ -1,0 +1,42 @@
+name: "Deploy Snapshots"
+on:
+  push:
+    branches: [ instancio ]
+
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: "Deploy"
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Set up Maven Central Repository"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 17
+          server-id: sonatype-snapshots
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: "Deploy snapshots"
+        run: mvn -B deploy --no-transfer-progress
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
+  verify:
+    needs: deploy
+    strategy:
+      matrix:
+        java: [ 8, 11, 17, 20 ]
+    runs-on: ubuntu-latest
+    name: "Verify snapshots JDK ${{ matrix.java }}"
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Set up JDK"
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: ${{ matrix.java }}
+      - name: "Test"
+        run: cd instancio-tests && mvn -B install

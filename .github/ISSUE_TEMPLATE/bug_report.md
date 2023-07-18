@@ -2,45 +2,26 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: bug
-assignees: ''
-
+labels: 'type: bug'
+assignees: armandino
 ---
 
 **Describe the bug**
-
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behaviour:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Expected result**
+Describe the expected behaviour
 
-**Expected behaviour**
+**Actual result**
+Describe the actual behaviour
 
-A clear and concise description of what you expected to happen.
+**Additional information**
+Add any other context about the problem here
 
-**Screenshots**
+**Link to a minimal sample project reproducing the issue or runnable sample code**
+```java
+// code sample
+```
 
-If applicable, add screenshots to help explain your problem.
-
-**Your system**
-
-Tell us:
-- Your OS and version of Docker desktop/engine and compose you are using
-
-If it's frontend-related, tell us which 
-- Browser and browser version you see the bug on
-
-And anything else that may be related.
-
-**Additional context**
-
-- Read our contributing guidelines first!
-- Discuss your implementation approach with us first
-- Provide us with an estimate on how long you think it will take you to complete
-- Branch from main and set main as the destination branch in your pull request
-
-Add any other context about the problem here (e.g. stack trace, branch name, commit hash, etc.).
+- Java version:
+- Instancio version:

@@ -1,0 +1,94 @@
+site_name: Instancio
+site_url: https://www.instancio.org
+repo_url: https://github.com/instancio/instancio
+repo_name: instancio
+latest_release: 2.16.1
+copyright: '&copy; Instancio 2022-2023'
+edit_uri: ''  #disables edit button
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    primary: green
+    accent: deep orange
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.expand
+    - toc.integrate
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.ico
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - macros
+  - search
+  - autolinks
+
+markdown_extensions:
+  - toc:
+      permalink: True
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - admonition
+
+nav:
+    - 'Home': 'index.md'
+    - 'Getting Started': 'getting-started.md'
+    - 'User Guide': 'user-guide.md'
+    - 'Building': 'building.md'
+    - 'Articles': 'articles.md'
+
+extra:
+  # Core
+  AfterGenerate:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/AfterGenerate.html" target="_blank">AfterGenerate</a>'
+  ArrayHint:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/hints/ArrayHint.html" target="_blank">ArrayHint</a>'
+  Assign:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Assign.html" target="_blank">Assign</a>'
+  Assignment:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Assignment.html" target="_blank">Assignment</a>'
+  CollectionHint:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/hints/CollectionHint.html" target="_blank">CollectionHint</a>'
+  Instancio:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Instancio.html" target="_blank">Instancio</a>'
+  InstancioApi:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/InstancioApi.html" target="_blank">InstancioApi</a>'
+  InstancioServiceProvider:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/spi/InstancioServiceProvider.html" target="_blank">InstancioServiceProvider</a>'
+  Generator:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/Generator.html" target="_blank">Generator</a>'
+  GeneratorContext:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/GeneratorContext.html" target="_blank">GeneratorContext</a>'
+  GeneratorProvider:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/spi/InstancioServiceProvider.GeneratorProvider.html" target="_blank">GeneratorProvider</a>'
+  Generators:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generators/Generators.html" target="_blank">Generators</a>'
+  Hints:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/Hints.html" target="_blank">Hints</a>'
+  MapHint:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/generator/hints/MapHint.html" target="_blank">MapHint</a>'
+  Mode:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/settings/Mode.html" target="_blank">Mode</a>'
+  Model:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Model.html" target="_blank">Model</a>'
+  OnCompleteCallback:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/OnCompleteCallback.html" target="_blank">OnCompleteCallback</a>'
+  Random:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Random.html" target="_blank">Random</a>'
+  Select:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Select.html" target="_blank">Select</a>'
+  Selector:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/Selector.html" target="_blank">Selector</a>'
+  SelectorGroup:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/SelectorGroup.html" target="_blank">SelectorGroup</a>'
+  TargetSelector:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/TargetSelector.html" target="_blank">TargetSelector</a>'
+  Keys:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/settings/Keys.html" target="_blank">Keys</a>'
+  SettingKey:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/settings/SettingKey.html" target="_blank">SettingKey</a>'
+  Settings:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/settings/Settings.html" target="_blank">Settings</a>'
+  When:  '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/When.html" target="_blank">When</a>'
+  withMaxDepth: '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/InstancioApi.html#withMaxDepth(int)" target="_blank">withMaxDepth(int depth)</a>'
+  withNullable: '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/InstancioApi.html#withNullable(org.instancio.TargetSelector)" target="_blank">withNullable(TargetSelector)</a>'
+  withSeed: '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/InstancioApi.html#withSeed(int)" target="_blank">withSeed(int seed)</a>'
+  withSettings: '<a href="https://javadoc.io/doc/org.instancio/instancio-core/latest/org/instancio/InstancioApi.html#withSettings(org.instancio.settings.Settings)" target="_blank">withSettings(Settings)</a>'
+  # JUnit
+  InstancioExtension:  '<a href="https://javadoc.io/doc/org.instancio/instancio-junit/latest/org/instancio/junit/InstancioExtension.html" target="_blank">InstancioExtension</a>'
+  InstancioSource:  '<a href="https://javadoc.io/doc/org.instancio/instancio-junit/latest/org/instancio/junit/InstancioSource.html" target="_blank">@InstancioSource</a>'
+  Seed:  '<a href="https://javadoc.io/doc/org.instancio/instancio-junit/latest/org/instancio/junit/Seed.html" target="_blank">@Seed</a>'
+  WithSettings:  '<a href="https://javadoc.io/doc/org.instancio/instancio-junit/latest/org/instancio/junit/WithSettings.html" target="_blank">@WithSettings</a>'
+

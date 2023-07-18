@@ -1,0 +1,63 @@
+#!/bin/bash
+
+STEPS=5
+
+[ -z "$JAVA_PATH" ] && JAVA_PATH=java
+[ -z "$JAVAC_PATH" ] && JAVAC_PATH=javac
+[ -z "$APKTOOL_PATH" ] && APKTOOL_PATH=/opt/apktool/apktool.jar
+[ -z "$UBER_APK_SIGNER_PATH" ] && UBER_APK_SIGNER_PATH=/opt/uber-apk-signer/uber-apk-signer-1.2.1.jar
+[ -z "$ANDROID_SDK_ROOT" ] && ANDROID_SDK_ROOT=~/Android/Sdk
+[ -z "$BAKSMALI_PATH" ] && BAKSMALI_PATH=/opt/baksmali/baksmali-2.4.0.jar
+[ -z "$BUILD_COMPANION" ] && BUILD_COMPANION=/opt/build-companion
+
+
+DX_PATTERN="$ANDROID_SDK_ROOT/build-tools/*/dx"
+DX_FILES=( $DX_PATTERN )
+DX=${DX_FILES[0]}
+
+echo "=== Verifing tools (1/$STEPS) ===" &&
+echo "If an errr occurs during this step make" &&
+echo "you have installed all of the needed tools" &&
+echo "and set the environment variables properly" &&
+echo "" &&
+echo "JAVA_PATH: $JAVA_PATH" &&
+echo "JAVAC_PATH: $JAVAC_PATH" &&
+echo "APKTOOL_PATH: $APKTOOL_PATH" &&
+echo "UBER_APK_SIGNER_PATH: $UBER_APK_SIGNER_PATH" &&
+echo "BUILDTOOLS_PATH: $BUILDTOOLS_PATH" &&
+echo "BAKSMALI_PATH: $BAKSMALI_PATH" &&
+echo "BUILD_COMPANION: $BUILD_COMPANION" &&
+echo "" && echo "java:" && echo "" &&
+$JAVA_PATH -version &&
+echo "" && echo "javac:" && echo "" &&
+$JAVAC_PATH -version &&
+echo "" && echo "apktool:" && echo "" &&
+$JAVA_PATH -jar $APKTOOL_PATH --version &&
+echo "" && echo "uber apk signer:" && echo "" &&
+$JAVA_PATH -jar $UBER_APK_SIGNER_PATH --version &&
+echo "" && echo "dx (android sdk build tools):" && echo "" &&
+$DX --version &&
+echo "" && echo "baksmali:" && echo "" &&
+$JAVA_PATH -jar $BAKSMALI_PATH --version &&
+echo "" &&
+echo "" &&
+echo " => Seems fine" &&
+echo "" &&
+echo "" &&
+echo "=== Disassemble twitch.zip (2/$STEPS) ===" &&
+./disassemble &&
+echo "" &&
+echo "=== Build source (3/$STEPS) ===" &&
+./buildsource disass &&
+echo "" &&
+echo "=== Apply patches (4/$STEPS) ===" &&
+./patch &&
+cd disass &&
+git commit -m "applied patches" &&
+cd .. &&
+echo "" &&
+[ -z "$NOBUILD" ] &&
+echo "=== Build apk (5/$STEPS) ===" &&
+./build disass &&
+echo "" &&
+([ -z "$DOCKER" ] && echo "done, new apk: ./disass/dist/twitch.apk" || mv ./disass/dist/twitch.apk dist/twitch.apk)

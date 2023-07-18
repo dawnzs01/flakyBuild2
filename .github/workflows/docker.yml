@@ -1,0 +1,28 @@
+name: Docker
+on:
+  push:
+    branches: [ bttv ]
+
+
+
+
+
+
+
+
+
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build docker images using cache
+        uses: whoan/docker-build-with-cache-action@v6
+        with:
+          username: bttv-android
+          password: "${{ secrets.BGITHUB_TOKEN }}"
+          registry: ghcr.io
+          image_name: builder

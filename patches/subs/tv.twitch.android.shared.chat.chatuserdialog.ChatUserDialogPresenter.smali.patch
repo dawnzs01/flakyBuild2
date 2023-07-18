@@ -1,0 +1,42 @@
+diff --git a/smali_classes6/tv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter.smali b/smali_classes6/tv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter.smali
+--- a/smali_classes6/tv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter.smali
++++ b/smali_classes6/tv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter.smali
+@@ -10,7 +10,7 @@
+ 
+ 
+ # instance fields
+-.field private final activity:Landroidx/fragment/app/FragmentActivity;
++.field public final activity:Landroidx/fragment/app/FragmentActivity;
+ 
+ .field private final blockedUsersManager:Ltv/twitch/android/shared/blocking/BlockedUsersManager;
+ 
+@@ -26,7 +26,7 @@
+ 
+ .field private final giftSubUserAction:Ltv/twitch/android/shared/chat/chatuserdialog/StandardGiftSubscriptionUserAction;
+ 
+-.field private final info:Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogInfo;
++.field public final info:Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogInfo;
+ 
+ .field private listeners:Ljava/util/Set;
+     .annotation system Ldalvik/annotation/Signature;
+@@ -697,7 +697,7 @@
+ 
+     new-instance v1, Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter$$ExternalSyntheticLambda2;
+ 
+-    invoke-direct {v1, p0, p1}, Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter$$ExternalSyntheticLambda2;-><init>(Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter;Ltv/twitch/android/models/social/ChatUser;)V
++    invoke-direct {v1, p0, p1}, Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter$$ExternalSyntheticLambda2;-><init>(Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter;Ltv/twitch/android/models/social/ChatUser;)V   
+ 
+     invoke-virtual {v0, v1}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+ 
+@@ -735,6 +735,11 @@
+ 
+     invoke-direct {v0, p0, p1}, Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter$$ExternalSyntheticLambda7;-><init>(Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter;Ltv/twitch/android/models/social/ChatUser;)V
+ 
++    # BTTV
++    invoke-static {p0, p1}, Lbttv/api/SubscribeRedirect;->giftSubscriptionListener(Ltv/twitch/android/shared/chat/chatuserdialog/ChatUserDialogPresenter;Ltv/twitch/android/models/social/ChatUser;)Landroid/view/View$OnClickListener;
++    move-result-object v0
++    # /BTTV
++
+     invoke-virtual {p2, v0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+ 
+     .line 142

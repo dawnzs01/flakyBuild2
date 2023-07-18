@@ -1,0 +1,183 @@
+#!/bin/bash
+
+calc_cache_hash() {
+  current_hash=$(find .tmp/ -maxdepth 1 -type f -name "*.apk" -exec sha256sum {} \; |  awk '{print $1}' | sort -d | sha256sum | cut -d ' ' -f 1)
+}
+
+create_gitignore() {
+    cat << EOF > .gitignore &&
+.gitignore
+build
+dist
+lib
+assets/bttv_contributors.json
+smali*/androidx
+smali_classes8/bttv
+smali_classes8/com
+EOF
+    find ../../mod/app/src/main/res -type f | sed "s/..\/..\/mod\/app\/src\/main\///" >> .gitignore &&
+    echo "" >> .gitignore
+}
+
+#
+# gather variables
+#
+
+[ -z "$JAVA_PATH" ] && JAVA_PATH=java
+[ -z "$APKTOOL_PATH" ] && APKTOOL_PATH=/opt/apktool/apktool.jar
+[ -z "$BUILD_COMPANION" ] && BUILD_COMPANION=/opt/build-companion
+[ -z "$UBER_APK_SIGNER_PATH" ] && UBER_APK_SIGNER_PATH=/opt/uber-apk-signer/uber-apk-signer-1.2.1.jar
+
+[[ -f "twitch.zip" ]] && FILE=twitch.zip
+[[ -f "twitch.apk" ]] && FILE=twitch.apk
+[ -z "$FILE" ] && echo "neither twitch.zip or twitch.apk where found" && exit 1
+
+echo "JAVA_PATH: $JAVA_PATH"
+echo "APKTOOL_PATH: $APKTOOL_PATH"
+echo "FILE: $FILE"
+echo "BUILD_COMPANION: $BUILD_COMPANION"
+echo "UBER_APK_SIGNER_PATH: $UBER_APK_SIGNER_PATH"
+
+# remove old working space
+rm -rf .tmp
+
+#
+# gather apk files
+#
+
+if [ "${FILE: -4}" = ".zip" ]; then
+  unzip $FILE -d .tmp
+else
+  mkdir .tmp
+  cp twitch.apk .tmp/tv.twitch.android.app.apk
+fi
+
+
+#
+# check if cache available
+#
+
+if [ -d ".bttv-cache" ] && [ -f ".bttv-cache/disass_hash" ] && [ -d ".bttv-cache/disass" ];
+then
+  echo "found cache"
+  disass_cache_hash=$(<.bttv-cache/disass_hash)
+  calc_cache_hash
+  echo $disass_cache_hash
+  echo $current_hash
+
+  if [ $current_hash = $disass_cache_hash ]; then
+    cp -R .bttv-cache/disass disass
+    rm -rf .tmp
+    echo "used cache"
+    exit 0
+  else
+    echo "cache invalid, removing..."
+    rm -rf .bttv-cache/disass_hash .bttv-cache/disass
+  fi
+fi
+
+#
+# Verify integrity
+#
+
+# compare with https://twitch.tv/.well-known/assetlinks.json
+FMT_TWITCH_SHA="13:38:F9:B0:49:89:3C:C7:0B:78:43:2A:17:75:82:F9:0B:D4:BC:62:96:EA:4E:D3:5B:CC:7D:F5:96:87:AC:53"
+TWITCH_SHA=$(echo $FMT_TWITCH_SHA | sed 's/\://g') # remove all ':'
+
+echo "~~~ Print signatures ~~~" &&
+$JAVA_PATH -jar $UBER_APK_SIGNER_PATH -y --verifySha256 $TWITCH_SHA -a .tmp/*.apk
+
+# exit if verification failed
+[ $? -eq 2 ] &&
+echo "ERROR: 
+ERROR: One or more apk files where not signed by twitch!
+ERROR: This most likely means you have downloaded a potentialy malicious zip archive!
+ERROR: " &&
+exit 1
+
+#
+# disassemble apk files
+#
+
+for file in .tmp/*.apk; do
+  echo $file
+  echo ====
+  $JAVA_PATH -Xmx256m -jar $APKTOOL_PATH d $file -o .tmp/disass/${file/.tmp\//} $file
+done
+
+# move base
+[[ -d ".tmp/disass/tv.twitch.android.app.apk" ]] && echo "found tv.twitch.android.app.apk" && mv .tmp/disass/tv.twitch.android.app.apk .tmp/base
+[[ -d ".tmp/disass/base.apk" ]] && echo "found base.apk" && mv .tmp/disass/base.apk .tmp/base 
+[[ -d ".tmp/base" ]] || (echo "could not identify base please file an issue!" && exit 1)
+
+if [ $(find .tmp/disass | wc -l) != "1" ]; then
+  #
+  # copy all files to base (don't overwrite)
+  #
+  for dir in .tmp/disass/*; do
+    cp -r -n $dir/* .tmp/base
+  done
+
+  # fix public.xml
+  $BUILD_COMPANION fix .tmp/base .tmp/disass/*/res/values/public.xml
+  $BUILD_COMPANION yml .tmp/base .tmp/disass/*/apktool.yml
+fi
+
+# fix apktool's &ltannotation bug
+sed -i 's/&lt;annotation/<annotation/g; s/&lt;\/annotation/<\/annotation/g' .tmp/base/res/values*/plurals.xml
+
+# remove android:isSplitRequired="true"
+sed -i 's/android:isSplitRequired="true"//' .tmp/base/AndroidManifest.xml
+
+# remove vending data
+sed -i '/android:name="com.android.dynamic.apk.fused.modules"/d' .tmp/base/AndroidManifest.xml
+sed -i 's/com.android.vending.derived.apk.id" android:value="."/com.android.vending.derived.apk.id" android:value="1"/' .tmp/base/AndroidManifest.xml
+sed -i '/android:name="com.android.vending.splits.required"/d' .tmp/base/AndroidManifest.xml
+sed -i '/android:name="com.android.vending.splits"/d' .tmp/base/AndroidManifest.xml
+sed -i '/android:name="com.android.vending.derived.apk.id"/d' .tmp/base/AndroidManifest.xml
+
+# remove stamp data
+sed -i '/android:name="com.android.stamp.source"/d' .tmp/base/AndroidManifest.xml
+sed -i '/android:name="com.android.stamp.type"/d' .tmp/base/AndroidManifest.xml
+
+# rename apk
+sed -i "s/apkFileName: tv.twitch.android.app.apk/apkFileName: twitch.apk/" .tmp/base/apktool.yml
+sed -i "s/apkFileName: base.apk/apkFileName: twitch.apk/" .tmp/base/apktool.yml
+
+# fix full dex-files
+mkdir .tmp/base/smali_classes8
+
+# mkdir .tmp/base/smali_classes8/tv
+# mkdir -p .tmp/base/smali_classes8/tv/twitch/android
+
+# mv .tmp/base/smali_classes2/com/github .tmp/base/smali_classes8/com/github
+# mv .tmp/base/smali_classes5/tv/twitch/android/network .tmp/base/smali_classes8/tv/twitch/android/network
+# mv .tmp/base/smali_classes4/jp .tmp/base/smali_classes8/jp
+# mv .tmp/base/smali_classes7/tv/gql .tmp/base/smali_classes8/tv/gql
+
+#
+# Create reference for diffs
+#
+cd .tmp/base &&
+git init &&
+create_gitignore &&
+git add . &&
+git commit --quiet -m "base" &&
+git tag base &&
+cd .. &&
+cd ..
+
+#
+# cache
+#
+mkdir -p .bttv-cache
+calc_cache_hash
+echo $current_hash > .bttv-cache/disass_hash
+cp -R .tmp/base .bttv-cache/disass
+
+
+#
+# clean up
+#
+mv .tmp/base disass
+rm .tmp -rf

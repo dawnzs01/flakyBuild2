@@ -1,11 +1,5 @@
-*.iml
-.gradle
-/local.properties
-/.idea
+node_modules
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-*.jks
+package-lock.json
+Podfile.lock
+.env

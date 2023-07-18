@@ -1,198 +1,55 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
+<div align="center">
+         <a href="https://github.com/gaodayu168/datasophon" target="_blank" rel="noopener noreferrer">
+           <img src="website/static/img/logo.png" width="20%" height="20%" alt="DataSophon Logo" />
+        </a>
+ <h1>DataSophon</h1>
+ <h3>Makes it easy to manage and monitor clusters</h3>
+</div>
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-<!--[![LinkedIn][linkedin-shield]][linkedin-url]-->
-
-- [English version Readme_en.md](https://github.com/Jarrettluo/document-sharing-site/blob/main/README.md)
-- [中文版 Readme.md](https://github.com/Jarrettluo/document-sharing-site/blob/main/README_CH.md)
-
-<!-- PROJECT LOGO -->
-<br />
 <p align="center">
-  <a href="https://github.com/Jarrettluo/document-sharing-site">
-    <img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/banner.png" alt="Logo" width="300" height="300">
-  </a>
-
-<h3 align="center">All Docs</h3>
-
+  <img src="https://img.shields.io/github/release/gaodayu168/datasophon.svg">
+  <img src="https://img.shields.io/github/stars/gaodayu168/datasophon">
+  <img src="https://img.shields.io/github/forks/gaodayu168/datasophon">
+  <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg"></a>
   <p align="center">
-    Document sharing and storage system with full-text search support.
-    <br />
+    <a href="https://datasophon.github.io/datasophon-website/">Office Website</a> |
+    <a href="https://github.com/datasophon/datasophon/blob/dev/README_CN.md">Chinese</a>
   </p>
 </p>
+<h3>If you like,star fork it and join us</h3>
+
+# Vision
+
+Aiming at quickly deploying,managing,monitoring and automating the operation and maintenance of Big Data service components and nodes,helping you quickly build stable, efficient Big Data cluster services.
+
+# What is DataSophon?
+
+*The Three-Body Problem*, a Hugo Award-winning work of the world's highest science fiction literature, is known for its stunning "hard science fiction" style, and its author Liu Cixin is credited with "single-handedly raising Chinese science fiction to a world-class level".
+
+As a very important role in the Triad, the Sophon is a two-dimensional unfolding of the nine-dimensional proton, which is transformed into a supercomputer through circuit etching and then transferred back to the microscopic eleventh dimension to monitor every human movement and use quantum entanglement to achieve instantaneous communication to report to the Triad civilization four light years away. To put it bluntly, the Sophon is a AI real-time remote monitoring and management platform deployed by the Triad civilization on Earth.
+
+DataSophon is a similar management platform. Unlike the Sophon, which aims to limit human's basic science and hinder human's technology development, DataSophon is dedicated to automatical monitoring, operation and management of Big Data infrastructure components and nodes, helping you to quickly build a stable, efficient Big Data cluster service.
+
+## Key Features
+
+* Easy to deploy, can quickly complete the deployment of about 300 nodes of big data clusters
+* Nationalization compatible, compatible with arm servers and common localized operating systems
+* Comprehensive and rich monitoring indicators, showing that the users care about most, based on production practice.
+* Flexible and convenient alarm service, which can realize user-defined alarm groups and alarm indicators
+* Strong scalability, users can integrate or upgrade any components through configuration.
+
+![img](website/static/img/dashboard.png)
+
+# Product Architecture
+
+![product-en](./website/static/img/product-en.png)
+
+# Architecture
+
+![img](website/static/img/archive.png)
+
+# Questions
+For questions, bugs and supports please open an [issue](https://github.com/gaodayu168/datasophon/issues/new/choose), we'll reply you in time.
 
 
 
-
-
-<!-- ABOUT THE PROJECT -->
-## ABOUT THE PROJECT
-
-In small teams, there is often a large number of collaborative documents. For example, we place various types of documents in cloud storage, SVN, and other software, but there is a problem with the inability to quickly search for content within the documents. Therefore, we have developed a dedicated knowledge base for storing documents such as PPT, Word, PNG, etc., which supports private deployment and retrieval.
-
-<p>Experience URL：<a href="http://81.69.247.172/#/">http://81.69.247.172/#/</a></p>
-
-> administrator account：admin123, administrator password： admin123
-
-## PREVIEW
-
-<p align="center">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/homepage.png" alt="homepage" height="400">
-<p align="center">
-homepage
-</p>
-</p>
-
-<p align="center">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/docList.png" alt="docList" height="400">
-<p align="center">
-list of documents
-</p>
-</p>
-
-<p align="center">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/searchPage.png" alt="searchPage" height="400">
-<p align="center">
-page of search 
-</p>
-</p>
-
-<p align="center">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/fileUpload.png" alt="fileUpload" height="400">
-<p align="center">
-upload page
-</p>
-</p>
-
-<p align="center">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/userPage.png" alt="userPage" height="400">
-<p align="center">
-user's info page
-</p>
-</p>
-
-### Repository URL
-
-frontend project:
-<a href="https://github.com/Jarrettluo/all-documents-vue.git">
-https://github.com/Jarrettluo/all-documents-vue.git
-</a>
-
-
-backend project:
-<a href="https://github.com/Jarrettluo/document-sharing-site.git">
-https://github.com/Jarrettluo/document-sharing-site.git
-</a>
-
-We choose MongoDB as the primary database to store documents and files.
-
-Backend：SpringBoot + MongoDB + ES
-
-Frontend：Vue + axios
-
-### PROJECT DEPLOYMENT
-
-- [Deploy on Windows](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/depoly_win_zh.md)
-- [Deploy on Linux](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_linux_zh.md)
-- [Deploy by Docker](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_docker_zh.md)
-- [Deploy by Docker Compose](https://github.com/Jarrettluo/document-sharing-site/blob/main/deploy/deploy_docker_compose_zh.md)
-
-<!-- ROADMAP -->
-## ROADMAP
-
-- Record the last page number read by the user 🌟
-- Revamp the search page style 🌟🌟
-- Allow users to bookmark documents 🌟
-- Support video files 🌟
-- Support permission management 🌟
-- Support file tree 🌟
-- Support Mobi files 🌟
-
-read [open issues](https://github.com/othneildrew/Best-README-Template/issues) 。
-
-
-
-<!-- CONTRIBUTING -->
-## CONTRIBUTING
-
-You can join our Wechat group if you are interested.
-
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/WechatIMG112.jpeg" alt="imGroup" width="200">
-
-> If you have any requirements for customization or private deployment, please feel free to contact me.
-
-(Please add me on WeChat and kindly mention 'All Docs' in the request.)
-
-
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/Wechat.jpeg" alt="imGroup" width="200">
-
-
-1. `Fork` This project
-2. create a branch  (`git checkout -b feature/AmazingFeature`)
-3. commit you feature (`git commit -m 'Add some AmazingFeature'`)
-4. push the commit (`git push origin feature/AmazingFeature`)
-5. open a pull request
-
-
-
-<!-- CONTACT -->
-## CONTACT
-
-Read `LICENSE` file。
-
-
-
-<!-- CONTACT -->
-## CONTACT
-
-Jarrett Luo - luojiarui2@163.com
-
-If you find the project valuable, your support and appreciation are welcome!
-
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/wechat.jpg" alt="wechat" width="200">
-<img src="https://github.com/Jarrettluo/document-sharing-site/blob/main/images/wechat.jpg" alt="wechat" width="200">
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## ACKNOWLEDGEMENTS
-- YOU
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Jarrettluo/document-sharing-site.svg?style=for-the-badge
-[contributors-url]: https://github.com/Jarrettluo/document-sharing-site/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Jarrettluo/document-sharing-site.svg?style=for-the-badge
-[forks-url]: https://github.com/Jarrettluo/document-sharing-site/network/members
-[stars-shield]: https://img.shields.io/github/stars/Jarrettluo/document-sharing-site.svg?style=for-the-badge
-[stars-url]: https://github.com/Jarrettluo/document-sharing-site/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Jarrettluo/document-sharing-site.svg?style=for-the-badge
-[issues-url]: https://github.com/Jarrettluo/document-sharing-site/issues
-[license-shield]: https://img.shields.io/github/license/Jarrettluo/document-sharing-site.svg?style=for-the-badge
-[license-url]: https://github.com/Jarrettluo/document-sharing-site/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png

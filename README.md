@@ -1,57 +1,47 @@
-<img src="https://github.com/tapdata/tapdata-private/raw/master/assets/logo-orange-grey-bar.png" width="300px"/>
-<p align="center">
-    <a href="https://github.com/tapdata/tapdata/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/tapdata/tapdata" /></a>
-    <a href="https://github.com/tapdata/tapdata/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/tapdata/tapdata" /></a>
-    <a href="https://tapdata.github.io/tapdata">
-        <img src="https://github.com/tapdata/tapdata/actions/workflows/docker-image.yml/badge.svg" alt="build status"></a>
-</p>
+<div align="center">
 
-## Online Document: https://docs.tapdata.io/
-## Cloud Service: https://cloud.tapdata.io/
+<h1 align="center">
+    Oh My Helper
+</h1>
 
-## What is Tapdata?
-Tapdata is a real-time data integration platform that enables data to be synchronized in real-time among various systems such as databases, SaaS services, applications, and files.
-The synchronization tasks can be easily built through drag-and-drop operations, from table creation to full and incremental synchronization, all processes are fully automated.
 
-Once the MongoDB-based data centralized storage feature is enabled, Tapdata immediately transforms into an integrated data service platform.
-Through a user-friendly visual interface, you can form real-time, complete, and accurate document-based data in MongoDB from dispersed but interrelated data from various sources. This allows business developers to develop their applications more quickly, and data analysis engineers can rapidly construct their own metrics systems. Once integrated, the data can be used ubiquitously.
+[![GitHub license](https://img.shields.io/github/license/Cruii/oh-my-helper?style=for-the-badge)](https://github.com/Cruii/bilibili-helper-hub/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Cruii/oh-my-helper?style=for-the-badge)](https://github.com/Cruii/bilibili-helper-hub/stargazers)
+[![GitHub contributors](https://img.shields.io/github/contributors/Cruii/oh-my-helper?style=for-the-badge)](https://github.com/Cruii/bilibili-helper-hub/graphs/contributors)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Cruii/oh-my-helper?style=for-the-badge)
 
- 
-### Quick Start
-1. Click https://cloud.tapdata.io/, start your real-time data journey immediately, Free Trial(NO Credit Card Required)
-2. You can easily deploy the service in your local environment with 2 Steps:
-    1. Install Docker
-    2. Exec: `docker run -itd -p 3030:3030 github.com/tapdata/tapdata-opensource:latest bash`, then you can get tapdata server by visting http://localhost:3030,
-    default username is: admin@admin.com, default password is admin
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCruii%2Foh-my-helper.svg?type=for-the-badge)](https://app.fossa.com/projects/git%2Bgithub.com%2FCruii%2Foh-my-helper?ref=badge_shield)
+</div>
 
-### Example Usage
-Before starting the task, please ensure that you can see the following content through your browser.
-![cluster status](./assets/cluster-status.png)
+🚀 Bilibili Helper Hub，Bilibili每日任务托管平台。  
+😎 项目前端地址: [oh-my-helper-frontend](https://github.com/Cruii/bilibili-helper-hub-frontend)  
+😺 本人搭建的平台地址：[OhMyHelper](https://ohmyhelper.com/bilibili/)
+## Why 
+GitHub上已经有许多优秀的B站相关项目，但都需要一定的动手能力。该项目的目标是为那些完全零基础的朋友提供一个能享受到相同便利的项目。  
+目前仅有哔哩哔哩相关的功能开发，未来也会分享自己在生活中有意思的方法并实现。  
+该项目域名已改为[ohmyhelper.com](https://ohmyhelper.com)，正如其名，目标是完成一个有趣的工具性的站点。  
+如果你有好的想法建议，可以提issues也可以发送邮件或在[OhMyHelper](https://ohmyhelper.com/bilibili/)的对话框与我联系。  
 
-#### Sync Data From Mysql To MongoDB
-1. Add Mysql Connection
-![](./assets/mysql-conn.png)
+## Notice
+本项目中proxy.properties文件需要自行更换为自己的API地址，且由于接口返回值的不同，请自行修改ProxyUtil.java文件中解析代理的部分代码逻辑 
 
-2. Add MongoDB Connection
-![](./assets/mongodb-conn.png)
+**该项目会加密存储您的B站Cookie以及用户信息，并承诺不会用于该项目以外的用途。**  
 
-3. Click Data Pipelines => Replications, Create a new job
+对本项目有任何疑问或建议请提交issues或发送邮件到[cruii811@gmail.com](mailto:cruii811@gmail.com)
 
-4. Drag Mysql Connection and MongoDB Connection from left side bar, Drag a line from the MySQL connection node and connect it to the MongoDB node
-5. Click Mysql Node, select tables what you want to sync
-![](./assets/mysql-mongodb-config.png)
+## Thanks
 
-6. Start Job and watch data keep syncing!
-![](./assets/mysql-mongodb-monitor.png)
+该项目灵感来源于 [JunzhouLiu/BILIBILI-HELPER](https://github.com/JunzhouLiu/BILIBILI-HELPER) 以及[SocialSisterYi/bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect) 
 
+
+感谢 JetBrains 对本项目的支持。
+
+[![JetBrains](jetbrains.svg)](https://www.jetbrains.com/?from=BILIBILI-HELPER)
 
 ## License
-Defaults to Server Side Public License.
 
-For Connectors, the license is Apache V2.
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCruii%2Foh-my-helper.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FCruii%2Foh-my-helper?ref=badge_large)
 
-## Join now
-- [Send Email](mailto:team@tapdata.io)
-- [Slack channel](https://join.slack.com/t/tapdatacommunity/shared_invite/zt-1biraoxpf-NRTsap0YLlAp99PHIVC9eA)
+## Sponsor
+
+![Sponsor](https://cruii.io/upload/2021/10/1-c5f430c3f57c461580f04cfb8fdc06e2.png)

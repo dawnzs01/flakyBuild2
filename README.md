@@ -1,127 +1,156 @@
-# RipMe 
-[![Licensed under the MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](/LICENSE.txt)
-[![Join the chat at https://gitter.im/RipMeApp/Lobby](https://badges.gitter.im/RipMeApp/Lobby.svg)](https://gitter.im/RipMeApp/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Subreddit](https://img.shields.io/badge/discuss-on%20reddit-blue.svg)](https://www.reddit.com/r/ripme/)
-![alt Badge Status](https://github.com/ripmeapp2/ripme/actions/workflows/gradle.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/RipMeApp/ripme/badge.svg?branch=master)](https://coveralls.io/github/RipMeApp/ripme?branch=master)
+<!-- Template credit: https://github.com/othneildrew/Best-README-Template -->
 
-RipMe is maintained with ♥️ and in our limited free time by **[@MetaPrime](https://github.com/metaprime)**, **[@cyian-1756](https://github.com/cyian-1756)** and **[@kevin51jiang](https://github.com/kevin51jiang)**. If you'd like to contribute but aren't good with code, help keep us happy with a small contribution! Chat on [gitter](https://gitter.im/RipMeApp/Lobby).
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/Rover656/EnderIO-Rewrite">
+    <img src="doc/img/enderface.png" alt="Logo" width="80" height="80">
+  </a>
 
-[![Tip with PayPal](https://img.shields.io/badge/PayPal-Buy_us...-lightgrey.svg)](https://www.paypal.me/ripmeapp)
-[![Tip with PayPal](https://img.shields.io/badge/coffee-%245-green.svg)](https://www.paypal.com/paypalme/ripmeapp/send?amount=5.00&currencyCode=USD&locale.x=en_US&country.x=US)
-[![Tip with PayPal](https://img.shields.io/badge/beer-%2410-yellow.svg)](https://www.paypal.com/paypalme/ripmeapp/send?amount=10.00&currencyCode=USD&locale.x=en_US&country.x=US)
-[![Tip with PayPal](https://img.shields.io/badge/lunch-%2420-orange.svg)](https://www.paypal.com/paypalme/ripmeapp/send?amount=20.00&currencyCode=USD&locale.x=en_US&country.x=US)
-[![Tip with PayPal](https://img.shields.io/badge/dinner-%2450-red.svg)](https://www.paypal.com/paypalme/ripmeapp/send?amount=50.00&currencyCode=USD&locale.x=en_US&country.x=US)
-[![Tip with PayPal](https://img.shields.io/badge/custom_amount-...-lightgrey.svg)](https://www.paypal.me/ripmeapp)
+  <h3 align="center">EnderIO</h3>
 
-# About
+  <p align="center">
+    The full-fat tech mod for Minecraft 1.20.1
+    <br />
+    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/wiki"><strong>Browse the Wiki »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.curseforge.com/minecraft/mc-mods/ender-io">Curseforge</a>
+    ·
+    <a href="https://modrinth.com/mod/enderio">Modrinth</a>
+    ·
+    <a href="https://discord.gg/sgYk3Jr">Discord</a>
+    ·
+    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+Short+problem+description">Report Bug</a>
+    ·
+    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
+  </p>
+</p>
 
-RipMe is an album ripper for various websites. It is a cross-platform tool that runs on your computer, and requires Java 11. RipMe has been tested and confirmed working on Windows, Linux and MacOS.
 
-![Screenshot](https://i.imgur.com/UCQNjeg.png)
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+      <li>
+      <a href="#looking-for-a-server">Looking for a Server?</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#for-players">For Players</a></li>
+        <li><a href="#for-mod-developers">For Mod Developers</a></li>
+      </ul>
+    </li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
-## Downloads
 
-Download `ripme.jar` from the [latest release](https://github.com/ripmeapp2/ripme/releases). For information about running the `.jar` file, see 
-[the How To Run wiki](https://github.com/ripmeapp/ripme/wiki/How-To-Run-RipMe).
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-The version number like ripme-1.7.94-17-2167aa34-feature_auto_release.jar contains a release number (1.7.94), given by
-a person, the number of commits since this version (17). The commit SHA (2167aa34) uniquely references the
-source code ripme was built from. If it is not built from the main branch, the branch name (feature/auto-release) is
-given.
+[![EnderIO Logo](doc/img/logo.png)](https://www.curseforge.com/minecraft/mc-mods/ender-io)
 
-## Installation
+[![Build Status](https://ci.tterrag.com/job/EnderIO-Modules/job/EnderIO-Hourly/badge/icon)](https://ci.tterrag.com/job/EnderIO-Modules/job/EnderIO-Hourly/)
 
-On macOS, there is a [cask](https://github.com/Homebrew/homebrew-cask/blob/master/Casks/ripme.rb).
+Ender IO is a full-featured tech mod. It has armor, tools, weapons, machines, conduits, inventory management, mobs, etc.
+
+Ender IO has been rewritten from the ground-up to support the latest version of Minecraft.
+Some features may be missing or work differently, however we are working to re-implement everything we know and love about the original.
+
+<!-- PARTNER BANNER -->
+## Looking for a Server?
+
+[![Akliz Official Partner](doc/img/akliz_banner_enderio.png)](https://www.akliz.net/enderio)
+
+The Ender IO Team are official Akliz partners! Akliz provides high-performance game hosting for games like Minecraft, Valheim, Satisfactory, ARK and more! Use our [coupon code](https://www.akliz.net/enderio) for 20% off your first month!
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### For Players
+
+Download the latest JAR file from GitHub releases or from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ender-io) and drop it into your `mods` folder.
+
+### For Mod Developers
+
+EnderIO is available via our maven.
+Update your `build.gradle` to contain the following:
+
+```groovy
+repositories {
+    maven { url 'https://maven.tterrag.com' }
+}
+
+dependencies {
+    // Include Ender IO API for compilation
+    compileOnly fg.deobf("com.enderio:EnderIO:<VERSION>:api")
+    
+    // Use EnderIO at runtime
+    runtimeOnly fg.deobf("com.enderio.EnderIO:<VERSION>")
+}
 ```
-brew install --cask ripme && xattr -d com.apple.quarantine /Applications/ripme.jar
-```
+If you need any feature in the api, contact us.
 
-## Changelog
+<!-- CONTRIBUTING -->
+## Contributing
 
-[Changelog](/ripme.json) **(ripme.json)**
+> **Note**
+> Before selecting a task from the tracker to do, make sure to comment to say that you are working on it so other's don't do the same thing!
+> If you are planning on contributing something that isn't tracked, consider either making an issue to discuss your proposal, or pushing a very early draft PR for discussion
 
-# Features
+1. Ensure you meet the [Forge prerequisites](https://docs.minecraftforge.net/en/latest/gettingstarted/#prerequisites).
+1. Fork this repository under your own profile, this will mean you can push your changes to GitHub for Pull Requests later.
+1. Clone down the forked repository using a git client or cli.
+1. Open the project in your preferred IDE and wait for the gradle import.
+1. Follow any other relevant Forge setup [for your IDE](https://docs.minecraftforge.net/en/latest/gettingstarted/#from-zero-to-modding).
+1. Work on your feature or fix, try to commit for each major thing you do.
+1. Create a draft pull request early for big changes to receive early feedback.
 
-* Quickly downloads all images in an online album. [See supported sites](https://github.com/ripmeapp/ripme/wiki/Supported-Sites)
-* Easily re-rip albums to fetch new content
-* Built in updater
-* Skips already downloaded images by default
-* Can auto skip e-hentai and nhentai albums containing certain tags. [See here for how to enable](https://github.com/RipMeApp/ripme/wiki/Config-options#nhentaiblacklisttags)
-* Download a range of urls. [See here for how](https://github.com/RipMeApp/ripme/wiki/How-To-Run-RipMe#downloading-a-url-range)
 
-## List of Supported Sites
+<!-- LICENSE -->
+## License
 
-* imgur
-* twitter
-* tumblr
-* instagram
-* flickr
-* photobucket
-* reddit
-* gonewild
-* motherless
-* imagefap
-* imagearn
-* seenive
-* vinebox
-* 8muses
-* deviantart
-* xhamster
-* [(more)](https://github.com/ripmeapp/ripme/wiki/Supported-Sites)
+All code (excluding the bundled APIs from other mods, which are covered by their respective licenses) are released without restriction into the public domain under the CC0 1.0 license (http://creativecommons.org/publicdomain/zero/1.0/legalcode) FAQ (https://wiki.creativecommons.org/CC0_FAQ).
+Do what you want with it, as long as you smile while doing so. While it is not a requirement, it would be nice to know if it is being used and how, so send me hello to **crazypants.mc at gmail.com**.
 
-## Not Supported?
+Certain parts of the source code may be under a different license due to being part of other projects. Notice for the same can be found along with the said source files in the same directory. In addition to this, further licensing considerations are available to view [here](doc/license).
 
-Request support for more sites by adding a comment to [this Github issue](https://github.com/RipMeApp/ripme/issues/38).
+### Credits
+- CrazyPants
+- tterrag
+- HenryLoenwind
+- MatthiasM
+- CyanideX
+- EpicSquid
+- Rover656
+- HypherionSA
+- agnor99
+- ferriarnus
+- mystchonky
+- and our Contributors
 
-If you're a developer, you can add your own Ripper by following the wiki guide:
-[How To Create A Ripper for HTML Websites](https://github.com/ripmeapp/ripme/wiki/How-To-Create-A-Ripper-for-HTML-websites).
+### Sound Credits
 
-# Compiling & Building
+Below sounds are used under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) or [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)
 
-The project uses [Gradle](https://gradle.org). To build the .jar file,
-navigate to the root project directory and run at least the test you 
-change, e.g. Xhamster. test execution can also excluded completely:
+- https://freesound.org/people/Glaneur%20de%20sons/
+- https://freesound.org/people/luffy/
+- https://freesound.org/people/Anton/
+- https://freesound.org/people/pj1s/
+- https://freesound.org/people/Syna-Max/
+- https://freesound.org/people/Robinhood76/
+- https://freesound.org/people/zimbot/
+- https://freesound.org/people/LiamG_SFX/
+- https://freesound.org/people/kuchenanderung1/
+- https://freesound.org/people/170048@virtualwindow.co.za/
 
-```bash
-./gradlew clean build testAll --tests XhamsterRipperTest.testXhamster2Album
-./gradlew clean build -x test --warning-mode all
-```
 
-The generated JAR (java archive) in build/libs will include all
-dependencies.
 
-# Running Tests
-
-Tests can be tagged as beeing slow, or flaky. The gradle build reacts to
-the following combinations of tags:
-
-- default is to run all tests without tag.
-- testAll runs all tests.
-- testFlaky runs tests with tag "flaky".
-- testSlow runs tests with tag "slow".
-- tests can be run by test class, or single test. Use "testAll" so it does
-  not matter if a test is tagged or not.
-
-```bash
-./gradlew test
-./gradlew testAll
-./gradlew testFlaky
-./gradlew testSlow
-./gradlew testAll --tests XhamsterRipperTest
-./gradlew testAll --tests XhamsterRipperTest.testXhamster2Album
-```
-
-Please note that some tests may fail as sites change and our rippers
-become out of date. Start by building and testing a released version
-of RipMe and then ensure that any changes you make do not cause more
-tests to break.
-
-# New GUI - compose-jb
-As Java Swing will go away in future, a new GUI technology should be used. One of the
-candidates is [Jetpack Compose for Desktop](https://github.com/JetBrains/compose-jb/).
-
-The library leverages the compose library for android and provides it for android, 
-desktop and web. The navigation library is not available for desktop, so Arkadii Ivanov
-implemented 
-[decompose](https://proandroiddev.com/a-comprehensive-hundred-line-navigation-for-jetpack-desktop-compose-5b723c4f256e).
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

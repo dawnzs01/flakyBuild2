@@ -1,156 +1,133 @@
-<!-- Template credit: https://github.com/othneildrew/Best-README-Template -->
+Taketoday Tutorial4j
+==============
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/Rover656/EnderIO-Rewrite">
-    <img src="doc/img/enderface.png" alt="Logo" width="80" height="80">
-  </a>
+[![Java 17](https://img.shields.io/badge/java-17-green)](https://img.shields.io/badge/java-17-blue)
+![example workflow](https://github.com/tu-yucheng/taketoday-tutorial4j/actions/workflows/maven-ci.yml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tu-yucheng_taketoday-tutorial4j&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tu-yucheng_taketoday-tutorial4j)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tu-yucheng_taketoday-tutorial4j&metric=coverage)](https://sonarcloud.io/dashboard?id=tu-yucheng_taketoday-tutorial4j)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=tu-yucheng_taketoday-tutorial4j&metric=ncloc)](https://sonarcloud.io/project/overview?id=tu-yucheng_taketoday-tutorial4j)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=tu-yucheng_taketoday-tutorial4j&metric=bugs)](https://sonarcloud.io/summary/new_code?id=tu-yucheng_taketoday-tutorial4j)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
-  <h3 align="center">EnderIO</h3>
+这个项目是**一个小型和重点教程的集合**，每个教程都涵盖了Java生态系统中一个明确定义的开发领域。当然，其中一个重点在于Spring框架、Spring Data、Spring Boot、Spring Cloud和Spring Security。除了Spring之外，这里的模块还涵盖了Java的许多方面。
 
-  <p align="center">
-    The full-fat tech mod for Minecraft 1.20.1
-    <br />
-    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/wiki"><strong>Browse the Wiki »</strong></a>
-    <br />
-    <br />
-    <a href="https://www.curseforge.com/minecraft/mc-mods/ender-io">Curseforge</a>
-    ·
-    <a href="https://modrinth.com/mod/enderio">Modrinth</a>
-    ·
-    <a href="https://discord.gg/sgYk3Jr">Discord</a>
-    ·
-    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+Short+problem+description">Report Bug</a>
-    ·
-    <a href="https://github.com/SleepyTrousers/EnderIO-Rewrite/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
-  </p>
-</p>
+**项目博客**：[tu-yucheng.github.io](https://tu-yucheng.github.io/)。
 
+## 多版本JDK构建
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-      <li>
-      <a href="#looking-for-a-server">Looking for a Server?</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#for-players">For Players</a></li>
-        <li><a href="#for-mod-developers">For Mod Developers</a></li>
-      </ul>
-    </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-  </ol>
-</details>
+就目前而言，大多数模块都是基于JDK 17(JAVA_HOME)才能正确构建和运行。此外，还有一些模块基于JDK 8/19，我们通过Maven工具链来保证这些模块能够使用单独的JDK构建。
 
+首先，你需要同时下载这些版本的JDK。然后配置Maven工具链，在你用户目录下的.m2文件夹中创建一个toolchains.xml文件：
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<img src=".mvn/img.png" align="left">
 
-[![EnderIO Logo](doc/img/logo.png)](https://www.curseforge.com/minecraft/mc-mods/ender-io)
+在该文件中添加以下内容(务必将每个工具链的<jdkHome\>指向你本地该JDK版本的位置)：
 
-[![Build Status](https://ci.tterrag.com/job/EnderIO-Modules/job/EnderIO-Hourly/badge/icon)](https://ci.tterrag.com/job/EnderIO-Modules/job/EnderIO-Hourly/)
-
-Ender IO is a full-featured tech mod. It has armor, tools, weapons, machines, conduits, inventory management, mobs, etc.
-
-Ender IO has been rewritten from the ground-up to support the latest version of Minecraft.
-Some features may be missing or work differently, however we are working to re-implement everything we know and love about the original.
-
-<!-- PARTNER BANNER -->
-## Looking for a Server?
-
-[![Akliz Official Partner](doc/img/akliz_banner_enderio.png)](https://www.akliz.net/enderio)
-
-The Ender IO Team are official Akliz partners! Akliz provides high-performance game hosting for games like Minecraft, Valheim, Satisfactory, ARK and more! Use our [coupon code](https://www.akliz.net/enderio) for 20% off your first month!
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-### For Players
-
-Download the latest JAR file from GitHub releases or from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ender-io) and drop it into your `mods` folder.
-
-### For Mod Developers
-
-EnderIO is available via our maven.
-Update your `build.gradle` to contain the following:
-
-```groovy
-repositories {
-    maven { url 'https://maven.tterrag.com' }
-}
-
-dependencies {
-    // Include Ender IO API for compilation
-    compileOnly fg.deobf("com.enderio:EnderIO:<VERSION>:api")
-    
-    // Use EnderIO at runtime
-    runtimeOnly fg.deobf("com.enderio.EnderIO:<VERSION>")
-}
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains xmlns="http://maven.apache.org/TOOLCHAINS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 http://maven.apache.org/xsd/toolchains-1.1.0.xsd">
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>17</version>
+            <vendor>adopt</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>D:\\xxx\\jdk-17.0.5</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>8</version>
+            <vendor>adopt</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>D:\\xxx\\jdk-8</jdkHome>
+        </configuration>
+    </toolchain>
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>19</version>
+            <vendor>adopt</vendor>
+        </provides>
+        <configuration>
+            <jdkHome>D:\\xxx\\jdk-19.0.1</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>
 ```
-If you need any feature in the api, contact us.
 
-<!-- CONTRIBUTING -->
-## Contributing
+## Maven Profile
 
-> **Note**
-> Before selecting a task from the tracker to do, make sure to comment to say that you are working on it so other's don't do the same thing!
-> If you are planning on contributing something that isn't tracked, consider either making an issue to discuss your proposal, or pushing a very early draft PR for discussion
+我们使用Maven profile来隔离各种测试(单元测试、集成测试、实时测试...)的执行，不同类型的测试类名必须以指定后缀结尾：
 
-1. Ensure you meet the [Forge prerequisites](https://docs.minecraftforge.net/en/latest/gettingstarted/#prerequisites).
-1. Fork this repository under your own profile, this will mean you can push your changes to GitHub for Pull Requests later.
-1. Clone down the forked repository using a git client or cli.
-1. Open the project in your preferred IDE and wait for the gradle import.
-1. Follow any other relevant Forge setup [for your IDE](https://docs.minecraftforge.net/en/latest/gettingstarted/#from-zero-to-modding).
-1. Work on your feature or fix, try to commit for each major thing you do.
-1. Create a draft pull request early for big changes to receive early feedback.
+| Profile     | 启用的测试类型                     |
+|-------------|-----------------------------|
+| unit        | *UnitTest                   |
+| integration | *IntegrationTest            |
+| all         | *IntegrationTest、\*UnitTest |
+| live        | *LiveTest                   |
+| parents     |         None                    |
 
+> **实时(live)测试是指需要与外部系统进行交互的测试，例如数据库、消息代理、文件系统等**。
 
-<!-- LICENSE -->
-## License
+## 构建项目
 
-All code (excluding the bundled APIs from other mods, which are covered by their respective licenses) are released without restriction into the public domain under the CC0 1.0 license (http://creativecommons.org/publicdomain/zero/1.0/legalcode) FAQ (https://wiki.creativecommons.org/CC0_FAQ).
-Do what you want with it, as long as you smile while doing so. While it is not a requirement, it would be nice to know if it is being used and how, so send me hello to **crazypants.mc at gmail.com**.
+不需要经常一次构建整个仓库，因为我们通常关注特定的模块。
 
-Certain parts of the source code may be under a different license due to being part of other projects. Notice for the same can be found along with the said source files in the same directory. In addition to this, further licensing considerations are available to view [here](doc/license).
+但是，如果我们想在仅启用单元测试的情况下构建整个仓库，我们可以从仓库的根目录调用以下命令：
 
-### Credits
-- CrazyPants
-- tterrag
-- HenryLoenwind
-- MatthiasM
-- CyanideX
-- EpicSquid
-- Rover656
-- HypherionSA
-- agnor99
-- ferriarnus
-- mystchonky
-- and our Contributors
+`mvn clean install -Punit`
 
-### Sound Credits
+或者，如果我们想在启用集成测试的情况下构建整个仓库，我们可以执行以下操作：
 
-Below sounds are used under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) or [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)
+`mvn clean install -Pintegration`
 
-- https://freesound.org/people/Glaneur%20de%20sons/
-- https://freesound.org/people/luffy/
-- https://freesound.org/people/Anton/
-- https://freesound.org/people/pj1s/
-- https://freesound.org/people/Syna-Max/
-- https://freesound.org/people/Robinhood76/
-- https://freesound.org/people/zimbot/
-- https://freesound.org/people/LiamG_SFX/
-- https://freesound.org/people/kuchenanderung1/
-- https://freesound.org/people/170048@virtualwindow.co.za/
+## 构建单个模块
 
+要构建特定模块，请在模块目录中运行命令：`mvn clean install`。
 
+你的模块可能是父模块的一部分，例如`parent-boot-2`，`parent-spring-5`等，然后你需要先构建父模块，这样才能构建你的模块。我们创建了一个`parents` profile，你可以使用它来构建父模块，只需按以下方式运行profile：`mvn clean install -Pparents`。
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+## 从仓库的根目录构建模块
+
+要从仓库的根目录构建特定模块，请在根目录中运行命令：`mvn clean install --pl ddd,annotations -Punit`。
+
+这里的ddd和annotations是我们要构建的模块，unit是要执行的测试类型的Maven profile。
+
+## 运行Spring Boot模块
+
+要运行Spring Boot模块，请在模块目录中运行命令：
+
+`mvn spring-boot:run`
+
+## 导入到IDE
+
+该仓库包含大量模块，当你使用单个模块时，无需导入所有模块(或构建所有模块) - 你只需在Eclipse或IntelliJ中导入该特定模块即可。
+
+当你将项目导入到Intellij IDEA中时，默认不会加载任何子模块。你需要在IDE中转到Maven -> Profiles，然后选择你想要构建的子模块所属的profile，最后刷新等待IDE索引构建完成：
+
+<img src=".mvn/img_1.png">
+
+## 运行测试
+
+模块中的命令`mvn clean install`将运行该模块中的单元测试。对于Spring模块，这也将运行`SpringContextTest`(如果存在)。
+
+要同时运行单元和集成测试，请使用以下命令：
+
+`mvn clean install -Pall`
+
+## 贡献人员
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/tu-yucheng"><img src="https://avatars.githubusercontent.com/u/88582540?v=4s=100" width="100px;" alt=""/><br /><sub><b>tuyucheng</b></sub></a><br /><a href="#projectManagement-tuyucheng" title="Project Management">📆</a> <a href="#maintenance-tuyucheng" title="Maintenance">🚧</a> <a href="#content-tuyucheng" title="Content">🖋</a></td>
+    <td align="center"><a href="https://github.com/take-today"><img src="https://avatars.githubusercontent.com/u/116951809?v=4s=100" width="100px;" alt=""/><br /><sub><b>taketoday</b></sub></a><br /><a href="#content-taketoday" title="Content">🖋</a></td>
+  </tr>
+</table>
